@@ -1,0 +1,57 @@
+<%= form_for(@experience) do |f| %>
+  <% if @experience.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@experience.errors.count, "error") %> prohibited this experience from being saved:</h2>
+
+      <ul>
+      <% @experience.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :duration %><br>
+    <%= f.text_field :duration %>
+  </div>
+  <div class="field">
+    <%= f.label :is_halal %><br>
+    <%= f.check_box :is_halal %>
+  </div>
+  <div class="field">
+    <%= f.label :cuisine %><br>
+    <%= f.text_field :cuisine %>
+  </div>
+  <div class="field">
+    <%= f.label :max_group_size %><br>
+    <%= f.number_field :max_group_size %>
+  </div>
+  <div class="field">
+    <%= f.label :host_style %><br>
+    <%= f.text_area :host_style %>
+  </div>
+  <div class="field">
+    <%= f.label :available_days %><br>
+    <%= f.text_field :available_days %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :host_id %><br>
+    <%= f.number_field :host_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

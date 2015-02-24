@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @experience.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @experience.description %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @experience.duration %>
+</p>
+
+<p>
+  <strong>Is halal:</strong>
+  <%= @experience.is_halal %>
+</p>
+
+<p>
+  <strong>Cuisine:</strong>
+  <%= @experience.cuisine %>
+</p>
+
+<p>
+  <strong>Max group size:</strong>
+  <%= @experience.max_group_size %>
+</p>
+
+<p>
+  <strong>Host style:</strong>
+  <%= @experience.host_style %>
+</p>
+
+<p>
+  <strong>Available days:</strong>
+  <%= @experience.available_days %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @experience.price %>
+</p>
+
+<p>
+  <strong>Host:</strong>
+  <%= @experience.host_id %>
+</p>
+
+<%= link_to 'Edit', edit_experience_path(@experience) %> |
+<%= link_to 'Back', experiences_path %>

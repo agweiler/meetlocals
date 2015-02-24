@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :experiences
+
+  resources :bookings
+
+  resources :images
+
+  resources :hosts
+
+  resources :testimonials
+
+  resources :guests
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
