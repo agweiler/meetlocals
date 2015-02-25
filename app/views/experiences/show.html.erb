@@ -47,7 +47,12 @@
 
 <p>
   <strong>Host:</strong>
-  <%= @experience.host_id %>
+  <%= link_to @experience.host_id, '#' %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @experience.images.first.image_file.url(:medium) %>
 </p>
 
 <%= link_to 'Edit', edit_experience_path(@experience) %> |
