@@ -2,8 +2,13 @@ class DeviseCreateHosts < ActiveRecord::Migration
   def change
     create_table(:hosts) do |t|
       ## Database authenticatable
+      t.string :username,           null: false, default: ""
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      t.date :DOB                   
+      t.string :country,            null: false, default: ""
+      t.string :state,              null: false, default: ""
+      t.string :suburb,             null: false, default: ""
 
       ## Recoverable
       t.string   :reset_password_token
