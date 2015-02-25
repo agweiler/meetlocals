@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  
   root 'static_pages#home'
 
   get 'how_it_works' => 'static_pages#how_it_works'
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   #   sessions: "guests/sessions",
   #   passwords: "guests/passwords"
   # }
-  # devise_for :admins, controllers: {
+  devise_for :admins #, controllers: {
   #   registrations: "admins/registrations",
   #   sessions: "admins/sessions",
   #   passwords: "admins/passwords"
