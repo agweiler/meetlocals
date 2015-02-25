@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  
   root 'static_pages#home'
 
   get 'how_it_works' => 'static_pages#how_it_works'
@@ -16,8 +17,23 @@ Rails.application.routes.draw do
 
   get 'terms_of_service' => 'static_pages#terms_of_service'
 
-  devise_for :hosts
-  devise_for :guests
+  devise_for :hosts#, controllers: {
+    # registrations: "hosts/registrations"
+    # sessions: "hosts/sessions",
+    # passwords: "hosts/passwords"
+  # }
+  devise_for :guests#, controllers: {
+  #   registrations: "guests/registrations",
+  #   sessions: "guests/sessions",
+  #   passwords: "guests/passwords"
+  # }
+  devise_for :admins #, controllers: {
+  #   registrations: "admins/registrations",
+  #   sessions: "admins/sessions",
+  #   passwords: "admins/passwords"
+  # }
+
+
   resources :experiences
 
   resources :bookings
@@ -25,6 +41,7 @@ Rails.application.routes.draw do
   resources :images
 
   resources :testimonials
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

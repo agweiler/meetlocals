@@ -37,7 +37,6 @@ class ExperiencesController < ApplicationController
         @experience.images.create(image_file: @image_file)
       else
         format.html { render :new }
-        format.json { render json: @experience.errors, status: :unprocessable_entity }
       end
     end
   end
