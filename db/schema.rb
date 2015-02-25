@@ -113,8 +113,12 @@ ActiveRecord::Schema.define(version: 20150225093351) do
     t.string   "alt_text"
     t.string   "imageable_type"
     t.integer  "imageable_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "image_file_file_name"
+    t.string   "image_file_content_type"
+    t.integer  "image_file_file_size"
+    t.datetime "image_file_updated_at"
   end
 
   create_table "languages", force: :cascade do |t|

@@ -24,11 +24,17 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
-    @experience = Experience.new(experience_params)
+    @image_file = experience_params.delete(:image_file)
+    @experience = Experience.new(experience_params.except(:image_file))
+    # @experience = current_host.experiences.new(experience_params.except(:image_file))
 
     respond_to do |format|
       if @experience.save
         format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
+        format.json { render :show, status: :created, location: @experience }
+
+        #create image after parent-experience is saved
+        @experience.images.create(image_file: @image_file)
       else
         format.html { render :new }
       end
@@ -38,10 +44,15 @@ class ExperiencesController < ApplicationController
   # PATCH/PUT /experiences/1
   # PATCH/PUT /experiences/1.json
   def update
+    @image_file = experience_params.delete(:image_file)
+
     respond_to do |format|
-      if @experience.update(experience_params)
+      if @experience.update(experience_params.except(:image_file))
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
         format.json { render :show, status: :ok, location: @experience }
+
+        #update image after parent-experience is save
+        @experience.images.first.update_attributes(image_file: @image_file)
       else
         format.html { render :edit }
         format.json { render json: @experience.errors, status: :unprocessable_entity }
@@ -67,6 +78,6 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :host_id)
+      params.require(:experience).permit(:title, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :image_file, :host_id)
     end
 end
