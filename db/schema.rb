@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225093351) do
+ActiveRecord::Schema.define(version: 20150226072520) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150225093351) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "about"
   end
 
   add_index "guests", ["email"], name: "index_guests_on_email", unique: true
