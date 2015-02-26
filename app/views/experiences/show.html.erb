@@ -15,7 +15,7 @@
 
 <p>
   <strong>Is halal:</strong>
-  <%= @experience.is_halal %>
+  <%= @experience.is_halal ? "Yes" : "No" %>
 </p>
 
 <p>
@@ -45,7 +45,7 @@
 
 <p>
   <strong>Host:</strong>
-  <%= link_to @experience.host_id, "/hosts/" + @experience.host_id.to_s  %>
+  <%= link_to @experience.host.username, "/hosts/" + @experience.host_id.to_s  %>
 </p>
 
 <p>

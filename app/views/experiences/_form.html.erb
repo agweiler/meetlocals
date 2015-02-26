@@ -45,13 +45,9 @@
     <!-- <br> -->
 
     <%= f.fields_for :days do |d| %>
-      <%= d.check_box "0", @experience.available_days[0] == "1" ? {checked: true} : {checked: false} %><%= f.label :sun %>
-      <%= d.check_box "1", @experience.available_days[1] == "1" ? {checked: true} : {checked: false} %><%= f.label :mon %>
-      <%= d.check_box "2", @experience.available_days[2] == "1" ? {checked: true} : {checked: false} %><%= f.label :tue %>
-      <%= d.check_box "3", @experience.available_days[3] == "1" ? {checked: true} : {checked: false} %><%= f.label :wed %>
-      <%= d.check_box "4", @experience.available_days[4] == "1" ? {checked: true} : {checked: false} %><%= f.label :thu %>
-      <%= d.check_box "5", @experience.available_days[5] == "1" ? {checked: true} : {checked: false} %><%= f.label :fri %>
-      <%= d.check_box "6", @experience.available_days[6] == "1" ? {checked: true} : {checked: false} %><%= f.label :sat %>
+      <% [:sun, :mon, :tue, :wed, :thu, :fri, :sat].each_with_index do |w, i| %>
+        <%= d.check_box i.to_s, @experience.available_days[i] == "1" ? {checked: true} : {checked: false} %><%= f.label w %>
+      <% end %>
     <% end %>
 
   </div>
