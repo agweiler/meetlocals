@@ -29,14 +29,12 @@ class ExperiencesController < ApplicationController
     @image_file = experience_params.delete(:image_file)
     @days = experience_params.delete(:days)
     default = "0000000"
-    (0..6).each do |num|
-      if experience_params[:days][num.to_s] == "1"
-        default[num] =  "1"
-      end
-    end
-    experience_params[:available_days].replace(default)
-    byebug
 
+    (0..6).each do |num|
+        default[num] =  "1" if experience_params[:days][num.to_s] == "1"
+    end
+
+    experience_params[:available_days].replace(default)
 
     @experience = Experience.new(experience_params.except(:image_file, :days))
     # @experience = current_host.experiences.new(experience_params.except(:image_file))
