@@ -4,9 +4,9 @@
 		<nav>
 			<ul class ="nav navbar-nav navbar-right">
 				<% if current_guest %>
-				<li><%= link_to "#{current_guest.email}", "#add_profile_page" %></li>
+				<li><%= link_to "#{current_guest.username}", edit_guest_registration_path %></li>
 				<% elsif current_host %>
-				<li><%= link_to "#{current_host.email}", "#add_profile_page" %></li>
+				<li><%= link_to "#{current_host.username}", edit_host_registrationn_path %></li>
 				<% end %>
 				<li><%= link_to "Home", root_path %></li>
 				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
