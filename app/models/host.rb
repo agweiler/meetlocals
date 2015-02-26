@@ -7,4 +7,8 @@ class Host < ActiveRecord::Base
   has_and_belongs_to_many :languages
   has_many :images, as: :imageable
 
+  def email_to_username
+  	email.gsub(/@.*/, "")
+  end
+
 end
