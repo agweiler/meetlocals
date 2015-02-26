@@ -14,6 +14,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/new
   def new
+    redirect_to '/hosts/sign_in' unless host_signed_in?
     @experience = Experience.new
     @experience.available_days = "0000000"
   end
@@ -25,7 +26,7 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
-    # redurect to '/hosts/sign_in' unless host_signed_in?
+
     @days = experience_params.delete(:days)
     default = "0000000"
 
@@ -36,9 +37,8 @@ class ExperiencesController < ApplicationController
     experience_params[:available_days].replace(default)
 
     @image_files = experience_params.delete(:images_array)
-    @experience = Experience.new(experience_params.except(:images_array, :days))
 
-    # @experience = current_host.experiences.new(experience_params.except(:image_file))
+    @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
 
     respond_to do |format|
       if @experience.save
@@ -52,7 +52,7 @@ class ExperiencesController < ApplicationController
         # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
           new_img.caption = img.original_filename
           new_img.save!
-        end
+        end unless @image_files.nil?
       else
         format.html { render :new }
       end
@@ -62,10 +62,20 @@ class ExperiencesController < ApplicationController
   # PATCH/PUT /experiences/1
   # PATCH/PUT /experiences/1.json
   def update
+
+    @days = experience_params.delete(:days)
+    default = "0000000"
+
+    (0..6).each do |num|
+        default[num] =  "1" if experience_params[:days][num.to_s] == "1"
+    end
+
+    experience_params[:available_days].replace(default)
+
     @image_files = experience_params.delete(:images_array)
 
     respond_to do |format|
-      if @experience.update(experience_params.except(:images_array))
+      if @experience.update(experience_params.except(:images_array, :days))
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
         # format.json { render :show, status: :ok, location: @experience }
 
