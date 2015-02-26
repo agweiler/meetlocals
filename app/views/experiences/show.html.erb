@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @experience.title %>
@@ -51,8 +49,10 @@
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= image_tag @experience.images.first.image_file.url(:medium) %>
+  <strong>Image(s):</strong></br>
+  <%  @experience.images.each do |image| %>
+  <%=   image_tag image.image_file.url(:medium) %></br>
+  <%  end %>
 </p>
 
 <%= link_to 'Edit', edit_experience_path(@experience) %> |
