@@ -53,7 +53,7 @@
   </div> -->
   <div class="field">
     <%= f.label :image %><br>
-    <%= f.file_field :image_file %>
+    <%= f.file_field(:images_array, multiple: true) %>
   </div>
   <div class="actions">
     <%= f.submit %>
