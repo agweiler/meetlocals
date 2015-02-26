@@ -25,9 +25,7 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
-<<<<<<< HEAD
     # redurect to '/hosts/sign_in' unless host_signed_in?
-    @image_file = experience_params.delete(:image_file)
     @days = experience_params.delete(:days)
     default = "0000000"
 
@@ -37,11 +35,9 @@ class ExperiencesController < ApplicationController
 
     experience_params[:available_days].replace(default)
 
-    @experience = Experience.new(experience_params.except(:image_file, :days))
-=======
     @image_files = experience_params.delete(:images_array)
-    @experience = Experience.new(experience_params.except(:images_array))
->>>>>>> dd1a08ce648567237d84f0d0b4f83b07a71e895e
+    @experience = Experience.new(experience_params.except(:images_array, :days))
+
     # @experience = current_host.experiences.new(experience_params.except(:image_file))
 
     respond_to do |format|
@@ -110,7 +106,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :images_array => []
+      params.require(:experience).permit(:title, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end

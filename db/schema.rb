@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150226072520) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "about"
+    t.text     "about",                  default: ""
   end
 
   add_index "guests", ["email"], name: "index_guests_on_email", unique: true
