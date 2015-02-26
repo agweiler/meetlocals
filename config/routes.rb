@@ -17,22 +17,15 @@ Rails.application.routes.draw do
 
   get 'terms_of_service' => 'static_pages#terms_of_service'
 
-  devise_for :hosts#, controllers: {
-    # registrations: "hosts/registrations"
-    # sessions: "hosts/sessions",
-    # passwords: "hosts/passwords"
-  # }
-  devise_for :guests#, controllers: {
-  #   registrations: "guests/registrations",
-  #   sessions: "guests/sessions",
-  #   passwords: "guests/passwords"
-  # }
-  devise_for :admins #, controllers: {
-  #   registrations: "admins/registrations",
-  #   sessions: "admins/sessions",
-  #   passwords: "admins/passwords"
-  # }
+  get 'users/:id' => 'users#show'
 
+
+  devise_for :hosts
+
+  devise_for :guests
+  resources :guests, :only => [:show, :index]
+
+  devise_for :admins
 
   resources :experiences
 
