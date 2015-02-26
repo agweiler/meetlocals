@@ -1,0 +1,34 @@
+<h2> Thanks for signing up, please create a profile </h2>
+
+<div>
+<%= form_for @host, url: { action: "update_host_profile" } do |f| %>
+	<p>
+		<%= f.label :username %>
+		<%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
+	</p>
+
+  <p> 
+    <label for="host_D.O.B">D.O.B</label>
+    <%= f.date_field :DOB, class: "form-control" %>
+  </p>
+
+	<p>
+	<%= f.label :country_of_residence %>
+	<%= f.select :country, [["Malaysia","Malaysia"]], class: "form-control"%>
+	</p>
+
+	<p>
+	<%= f.label :state %>
+	<%= f.select :state, [["Kuala Lumpur", "Kuala Lumpur"], ["Selangor","Selangor"], ["Penang","Penang"], ["Johor","Johor"]], class: "form-control" %>
+	</p>
+
+	<p>
+		<%= f.label :suburb %>
+    <%= f.text_field :suburb, class: "form-control" %>
+	</p>
+	</div>
+	<input type="submit" value="Submit">
+<% end %>
+
+
+

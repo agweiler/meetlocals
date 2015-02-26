@@ -1,10 +1,26 @@
 Rails.application.routes.draw do
+  devise_for :hosts, controllers: {
+    registrations: "hosts/registrations"
+    # sessions: "hosts/sessions",
+    # passwords: "hosts/passwords"
+  }
+  devise_for :guests#, controllers: {
+  #   registrations: "guests/registrations",
+  #   sessions: "guests/sessions",
+  #   passwords: "guests/passwords"
+  # }
 
   root 'static_pages#home'
+
 
   get 'how_it_works' => 'static_pages#how_it_works'
 
   get 'how_to_be_a_host' => 'static_pages#how_to_be_a_host'
+
+  resources :hosts
+
+  get 'hosts/:id/edit_profile' => 'hosts#edit_host_profile', as: :edit_host_profile
+  patch 'hosts/:id/update_profile' => 'hosts#update_host_profile', as: :update_host_profile
 
   get 'contact' => 'static_pages#contact'
 
@@ -16,16 +32,10 @@ Rails.application.routes.draw do
 
   get 'terms_of_service' => 'static_pages#terms_of_service'
 
-  devise_for :hosts#, controllers: {
-    # registrations: "hosts/registrations"
-    # sessions: "hosts/sessions",
-    # passwords: "hosts/passwords"
-  # }
-  devise_for :guests#, controllers: {
-  #   registrations: "guests/registrations",
-  #   sessions: "guests/sessions",
-  #   passwords: "guests/passwords"
-  # }
+  post 'complete_profile' => 'hosts#show'
+
+
+
   # devise_for :admins, controllers: {
   #   registrations: "admins/registrations",
   #   sessions: "admins/sessions",
