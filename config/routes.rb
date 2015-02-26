@@ -17,11 +17,19 @@ Rails.application.routes.draw do
 
   get 'terms_of_service' => 'static_pages#terms_of_service'
 
+  get 'users/:id' => 'users#show'
+
+
+
   devise_for :hosts
+
   devise_for :guests
+  resources :guests, :only => [:show, :index]
+
   devise_for :admins
   resources :admins, only: [:index]
- 
+  
+  
 
   resources :experiences
 
