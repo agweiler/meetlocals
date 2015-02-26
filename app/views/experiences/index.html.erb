@@ -12,7 +12,7 @@
     <p>Host_style: <%= experience.host_style %></p>
     <p>Available Days: <%= experience.available_days %></p>
     <p>Price: <%= experience.price %></p>
-
+    <p>Host: <%= link_to experience.host_id,  "/hosts/" + experience.host_id.to_s %></p>
     <p><%= link_to 'Show', experience %>
        <%= link_to 'Edit', edit_experience_path(experience) %>
        <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
