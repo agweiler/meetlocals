@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   #   sessions: "guests/sessions",
   #   passwords: "guests/passwords"
   # }
-  devise_for :admins #, controllers: {
+  devise_for :admins
+  resources :admins, only: [:index]
+   #, controllers: {
   #   registrations: "admins/registrations",
   #   sessions: "admins/sessions",
   #   passwords: "admins/passwords"
