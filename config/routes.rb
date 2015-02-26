@@ -20,12 +20,16 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show'
 
 
+
   devise_for :hosts
 
   devise_for :guests
   resources :guests, :only => [:show, :index]
 
   devise_for :admins
+  resources :admins, only: [:index]
+  
+  
 
   resources :experiences
 
