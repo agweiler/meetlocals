@@ -27,6 +27,7 @@
     <%= f.label :guest_id %><br>
     <%= f.number_field :guest_id %>
   </div> -->
+  <%= f.hidden_field :guest_id, value:current_guest.id %>
   <!-- <div class="field">
     <%= f.label :experience_id %><br>
     <%= f.number_field :experience_id %>

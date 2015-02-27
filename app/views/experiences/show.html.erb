@@ -14,7 +14,7 @@
 </p>
 
 <p>
-  <strong>Is halal:</strong>
+  <strong>Is halal?:</strong>
   <%= @experience.is_halal ? "Yes" : "No" %>
 </p>
 
@@ -58,8 +58,9 @@
   <%=   image_tag image.image_file.url(:medium) %></br>
   <%  end %>
 </p>
-
-<%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+<% if guest_signed_in? %>
+  <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+<% end %>
 <% if current_host == @experience.host %>
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>
