@@ -1,19 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @host.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @host.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @host.password %>
-</p>
+<% if @host == current_host %>
+<h3>Your account</h3>
+<% end %>
+<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
 <p>
   <strong>Dob:</strong>
@@ -21,13 +10,8 @@
 </p>
 
 <p>
-  <strong>Country:</strong>
-  <%= @host.country %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @host.state %>
+  <strong>Area:</strong>
+  <%= @host.state %>, <%= @host.country %>
 </p>
 
 <p>
@@ -35,5 +19,7 @@
   <%= @host.suburb %>
 </p>
 
-<%= link_to 'Edit', edit_host_path(@host) %> |
+<% if @host == current_host %>
+<%= link_to 'Edit Profile', edit_host_path(@host) %>
+<% end %>
 
