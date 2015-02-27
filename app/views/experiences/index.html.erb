@@ -10,7 +10,12 @@
     <p>Cuisine: <%= experience.cuisine %></p>
     <p>Max Group Size: <%= experience.max_group_size %></p>
     <p>Host_style: <%= experience.host_style %></p>
-    <p>Available Days: <%= experience.available_days %></p>
+    <p>Available Days:
+      <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
+      <% experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
+        <%= days[num.to_i].upcase %>
+      <% end %>
+    </p>
     <p>Price: <%= experience.price %></p>
     <p>Host: <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
     <p><%= link_to 'Show', experience %>

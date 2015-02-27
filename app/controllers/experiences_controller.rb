@@ -16,7 +16,6 @@ class ExperiencesController < ApplicationController
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
     @experience = Experience.new
-    @experience.available_days = "0000000"
   end
 
   # GET /experiences/1/edit
@@ -28,10 +27,10 @@ class ExperiencesController < ApplicationController
   def create
 
     @days = experience_params.delete(:days)
-    default = "0000000"
+    default = "-------"
 
     (0..6).each do |num|
-        default[num] =  "1" if experience_params[:days][num.to_s] == "1"
+        default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     end
 
     experience_params[:available_days].replace(default)
@@ -64,10 +63,10 @@ class ExperiencesController < ApplicationController
   def update
 
     @days = experience_params.delete(:days)
-    default = "0000000"
+    default = "-------"
 
     (0..6).each do |num|
-        default[num] =  "1" if experience_params[:days][num.to_s] == "1"
+        default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     end
 
     experience_params[:available_days].replace(default)

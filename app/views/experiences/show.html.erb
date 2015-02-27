@@ -35,7 +35,12 @@
 
 <p>
   <strong>Available days:</strong>
-  <%= @experience.available_days %>
+  <!-- <%= @experience.available_days %> -->
+  <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
+  <% @experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
+    <%= days[num.to_i].upcase %>
+  <% end %>
+
 </p>
 
 <p>

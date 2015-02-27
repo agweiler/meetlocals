@@ -1,0 +1,16 @@
+<header class - "navbar navbar-fixed-top navbar inverse">
+	<div class = "container">
+
+		<nav>
+			<ul class ="nav navbar-nav navbar-right">
+				<li><%= link_to "#{current_guest.username}", edit_guest_registration_path %></li>
+				<li><%= link_to "Home", root_path %></li>
+				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
+				<li><%= link_to "Find a Host", experiences_path %></li>
+				<li><%= link_to "How it Works", how_it_works_path %></li>
+				<li><%= link_to "Blog", "#blog" %></li>
+				<li><%= link_to "Log out", destroy_guest_session_path, method: :delete %></li>
+			</ul>
+		</nav>
+	</div>
+</header>

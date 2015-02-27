@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226072520) do
+ActiveRecord::Schema.define(version: 20150227005158) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(version: 20150226072520) do
     t.string   "cuisine"
     t.integer  "max_group_size"
     t.text     "host_style"
-    t.string   "available_days"
+    t.string   "available_days", default: "-------"
     t.float    "price"
     t.integer  "host_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "guests", force: :cascade do |t|
