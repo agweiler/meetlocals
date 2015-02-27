@@ -40,11 +40,7 @@ class HostsController < ApplicationController
   # PATCH/PUT /hosts/1.json
   def update
     respond_to do |format|
-      if @host.update(host_params)
-        format.html { redirect_to @host, notice: 'host was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+      format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
     end
   end
 
