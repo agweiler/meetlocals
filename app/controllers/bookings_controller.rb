@@ -4,9 +4,8 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @experiences = current_host.experiences.includes(:bookings)
     @bookings = []
-    @experiences.each do |experience|
+    current_host.experiences.each do |experience|
       @bookings << experience.bookings
     end
     @bookings.flatten!
