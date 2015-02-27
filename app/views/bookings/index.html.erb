@@ -13,7 +13,6 @@
       <th>Status</th>
       <th>Group size</th>
       <th>Is private</th>
-      <th>Rating</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -29,7 +28,6 @@
         <td><%= booking.status %></td>
         <td><%= booking.group_size %></td>
         <td><%= booking.is_private %></td>
-        <td><%= booking.rating %></td>
         <td><%= link_to 'Show', booking %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
         <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>

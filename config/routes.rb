@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
   resources :admins, only: [:index]
-  
+
   root 'static_pages#home'
 
 
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   get 'how_to_be_a_host' => 'static_pages#how_to_be_a_host'
 
-  
+
 
   get 'hosts/:id/edit_profile' => 'hosts#edit_host_profile', as: :edit_host_profile
   patch 'hosts/:id/update_profile' => 'hosts#update_host_profile', as: :update_host_profile
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   get 'users/:id' => 'users#show'
 
-  
+  get 'experiences/:id/bookings/new' => 'bookings#new'
 
   resources :experiences
 

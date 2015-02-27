@@ -23,18 +23,20 @@
     <%= f.label :date %><br>
     <%= f.date_select :date %>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :guest_id %><br>
     <%= f.number_field :guest_id %>
-  </div>
-  <div class="field">
+  </div> -->
+  <%= f.hidden_field :guest_id, value:current_guest.id %>
+  <!-- <div class="field">
     <%= f.label :experience_id %><br>
     <%= f.number_field :experience_id %>
-  </div>
-  <div class="field">
+  </div> -->
+  <%= f.hidden_field :experience_id, value:@experience.id %>
+  <!-- <div class="field">
     <%= f.label :status %><br>
     <%= f.text_field :status %>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :group_size %><br>
     <%= f.number_field :group_size %>
@@ -43,10 +45,7 @@
     <%= f.label :is_private %><br>
     <%= f.check_box :is_private %>
   </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.number_field :rating %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
