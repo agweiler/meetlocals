@@ -46,7 +46,7 @@
 
     <%= f.fields_for :days do |d| %>
       <% [:sun, :mon, :tue, :wed, :thu, :fri, :sat].each_with_index do |w, i| %>
-        <%= d.check_box i.to_s, @experience.available_days[i] == "1" ? {checked: true} : {checked: false} %><%= f.label w %>
+        <%= d.check_box i.to_s, @experience.available_days[i] != "-" ? {checked: true} : {checked: false} %><%= f.label w %>
       <% end %>
     <% end %>
 
