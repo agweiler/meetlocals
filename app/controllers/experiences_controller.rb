@@ -89,7 +89,7 @@ class ExperiencesController < ApplicationController
         # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
           new_img.caption = img.original_filename
           new_img.save!
-        end
+        end unless @image_files.nil?
       else
         format.html { render :edit }
         # format.json { render json: @experience.errors, status: :unprocessable_entity }
