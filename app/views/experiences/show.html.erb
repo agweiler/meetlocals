@@ -14,7 +14,7 @@
 </p>
 
 <p>
-  <strong>Is halal:</strong>
+  <strong>Is halal?:</strong>
   <%= @experience.is_halal ? "Yes" : "No" %>
 </p>
 
@@ -35,7 +35,6 @@
 
 <p>
   <strong>Available days:</strong>
-  <!-- <%= @experience.available_days %> -->
   <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
   <% @experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
     <%= days[num.to_i].upcase %>
@@ -59,6 +58,10 @@
   <%=   image_tag image.image_file.url(:medium) %></br>
   <%  end %>
 </p>
-
-<%= link_to 'Edit', edit_experience_path(@experience) %> |
+<% if guest_signed_in? %>
+  <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+<% end %>
+<% if current_host == @experience.host %>
+  <%= link_to 'Edit', edit_experience_path(@experience) %> |
+<% end %>
 <%= link_to 'Back', experiences_path %>
