@@ -1,7 +1,7 @@
 <h2> Thanks for signing up, please create a profile </h2>
 
 <div>
-<%= form_for @host, url: { action: "update_host_profile" } do |f| %>
+<%= form_for @host, url: { action: "update_host_profile" }, html: {multipart: true} do |f| %>
 	<p>
 		<%= f.label :username %>
 		<%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>

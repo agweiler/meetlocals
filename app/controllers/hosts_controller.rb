@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-	  before_action :set_host, only: [:show, :edit, :update, :destroy]
+	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile]
 
   # GET /bookings
   # GET /bookings.json
@@ -25,19 +25,11 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    byebug
-    @image_file = host_detail_params.delete(:image_file)
-    @host = Host.new(host_detail_params.except(:image_file))
+    @host = Host.new(host_params)
 
     # respond_to do |format|
       if @host.save
         format.html { redirect_to create_host_profile_path, notice: 'host was successfully created.' }
-        #ADRIAN_20150226 - added to support host image upload
-        new_img = @host.image.new
-        new_img.image_file = @image_file
-        new_img.caption = @image_file.original_filename
-        new_img.save!
-        #ADRIAN_20150226 - end
     #   else
     #     format.html { render :new }
     #   end
@@ -66,33 +58,29 @@ class HostsController < ApplicationController
     end
   end
 
-  def edit_host_profile
-    @image_file = host_detail_params.delete(:image_file)
+  def edit_host_profile #this is actually show
     @host = Host.find(params[:id])
-    #ADRIAN_20150226 - added to support host image upload
-    new_img = @host.image.new
-    new_img.image_file = @image_file
-    new_img.caption = @image_file.original_filename
-    new_img.save!
-    #ADRIAN_20150226 - end
   end
 
-  def update_host_profile
+  def update_host_profile #this is actually create and edit
+    byebug
     @image_file = host_detail_params.delete(:image_file)
-    @host = Host.find(params[:id])
+    
     # @host.update()
     @host.update(host_detail_params.except(:image_file))
     #ADRIAN_20150226 - added to support host image upload
-    if @host.image.present?
-      @host.image.delete_all
+    if @host.images.present?
+      @host.images.delete_all
     end
-    new_img = @host.image.new
+    new_img = @host.images.new
     new_img.image_file = @image_file
     new_img.caption = @image_file.original_filename
     new_img.save!
     #ADRIAN_20150226 - end
     if @host.save
-      redirect_to host_path(@host)
+      respond_to do |format|
+        format.html { redirect_to edit_host_profile, notice: 'Host profile was successfully updated.' }
+      end
     end
   end
 

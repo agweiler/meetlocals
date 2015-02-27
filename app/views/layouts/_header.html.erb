@@ -6,17 +6,21 @@
 				<% if current_guest %>
 					<li><%= link_to "#{current_guest.username}", edit_guest_registration_path %></li>
 				<% elsif current_host %>
-				<li><%= link_to "#{current_host.username}", edit_host_registration_path %></li>
+					<li><%= link_to "#{current_host.username}", edit_host_registration_path %></li>
+				<% elsif current_admin %>
+					<li><%= link_to "Admin #{current_admin.id}", edit_admin_registration_path %></li>
 				<% end %>
+
 				<li><%= link_to "Home", root_path %></li>
 				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
 				<li><%= link_to "Find a Host", experiences_path %></li>
 				<li><%= link_to "How it Works", how_it_works_path %></li>
-				<li><%= link_to "Blog", "#blog" %></li>				
+				<li><%= link_to "Blog", "#blog" %></li>
+
 				<% if current_guest %>
 					<li><%= link_to "Log out", destroy_guest_session_path, method: :delete %></li>
 				<% elsif current_admin %>
-					<li><%= link_to "Show All Guests", admins_path %></li> 
+					<li><%= link_to "Show All Users", admins_path %></li> 
 					<li><%= link_to "Log out", destroy_admin_session_path, method: :delete %></li>
 				<% elsif current_host %>
 					<li><%= link_to "Log out", destroy_host_session_path, method: :delete %></li>

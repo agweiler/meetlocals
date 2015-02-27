@@ -18,7 +18,6 @@
         <td><%= guest.encrypted_password %></td>
         <td><%= guest.email %></td>
         <td><%= link_to 'Show', guest %></td>
-        <td><%= link_to 'Edit', edit_guest_path(guest) %></td>
         <td><%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -59,7 +58,6 @@
         <td><%= host.state %></td>
         <td><%= host.suburb %></td>
         <td><%= link_to 'Show', host %></td>
-        <td><%= link_to 'Edit', edit_host_path(host) %></td>
         <td><%= link_to 'Destroy', host, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

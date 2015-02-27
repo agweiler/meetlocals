@@ -41,7 +41,15 @@
   </div>
   <div class="field">
     <%= f.label :available_days %><br>
-    <%= f.text_field :available_days %>
+    <%= f.hidden_field :available_days%>
+    <!-- <br> -->
+
+    <%= f.fields_for :days do |d| %>
+      <% [:sun, :mon, :tue, :wed, :thu, :fri, :sat].each_with_index do |w, i| %>
+        <%= d.check_box i.to_s, @experience.available_days[i] == "1" ? {checked: true} : {checked: false} %><%= f.label w %>
+      <% end %>
+    <% end %>
+
   </div>
   <div class="field">
     <%= f.label :price %><br>
@@ -54,6 +62,7 @@
   <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field(:images_array, multiple: true) %>
+    <small>supported file types: .jpg .png .gif</small>
   </div>
   <div class="actions">
     <%= f.submit %>

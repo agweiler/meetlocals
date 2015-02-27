@@ -1,10 +1,11 @@
-
+<% if @guest == current_guest %>
+<h3>Your account</h3>
+<% end %>
+<h4><%= @guest.username %><p>(<%= @guest.email %>)</p></h4>
 <p>
-  <strong>Username:</strong>
-  <%= @guest.username %>
+	<strong>About Me:</strong><br />
+	<%= @guest.about %>
 </p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @guest.email %>
-</p>
+<% if @guest == current_guest %>
+	<%= link_to "Edit Profile", edit_guest_registration_path %>
+<% end %>
