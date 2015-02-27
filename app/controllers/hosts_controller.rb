@@ -25,11 +25,19 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    @host = Host.new(host_params)
+    byebug
+    @image_file = host_detail_params.delete(:image_file)
+    @host = Host.new(host_detail_params.except(:image_file))
 
     # respond_to do |format|
       if @host.save
         format.html { redirect_to create_host_profile_path, notice: 'host was successfully created.' }
+        #ADRIAN_20150226 - added to support host image upload
+        new_img = @host.image.new
+        new_img.image_file = @image_file
+        new_img.caption = @image_file.original_filename
+        new_img.save!
+        #ADRIAN_20150226 - end
     #   else
     #     format.html { render :new }
     #   end
@@ -59,15 +67,32 @@ class HostsController < ApplicationController
   end
 
   def edit_host_profile
+    @image_file = host_detail_params.delete(:image_file)
     @host = Host.find(params[:id])
+    #ADRIAN_20150226 - added to support host image upload
+    new_img = @host.image.new
+    new_img.image_file = @image_file
+    new_img.caption = @image_file.original_filename
+    new_img.save!
+    #ADRIAN_20150226 - end
   end
 
   def update_host_profile
+    @image_file = host_detail_params.delete(:image_file)
     @host = Host.find(params[:id])
     # @host.update()
-    @host.update(host_detail_params)
+    @host.update(host_detail_params.except(:image_file))
+    #ADRIAN_20150226 - added to support host image upload
+    if @host.image.present?
+      @host.image.delete_all
+    end
+    new_img = @host.image.new
+    new_img.image_file = @image_file
+    new_img.caption = @image_file.original_filename
+    new_img.save!
+    #ADRIAN_20150226 - end
     if @host.save
-    redirect_to host_path(@host)
+      redirect_to host_path(@host)
     end
   end
 
@@ -78,12 +103,11 @@ class HostsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def host_params
-      params.require(:host).permit(:start_time, :end_time, :date, :guest_id, :experience_id, :status, :group_size, :is_private, :rating)
-    end
+    # def host_params
+    #   params.require(:host).permit(:start_time, :end_time, :date, :guest_id, :experience_id, :status, :group_size, :is_private, :rating)
+    # end
 
     def host_detail_params
-      params.require(:host).permit(:username, :email, :password,
-                                 :password_confirmation, :DOB, :country, :state, :suburb)
+      params.require(:host).permit(:username, :email, :password, :password_confirmation, :DOB, :country, :state, :image_file, :suburb)
     end
 end
