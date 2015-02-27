@@ -35,7 +35,6 @@
 
 <p>
   <strong>Available days:</strong>
-  <!-- <%= @experience.available_days %> -->
   <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
   <% @experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
     <%= days[num.to_i].upcase %>
@@ -60,5 +59,8 @@
   <%  end %>
 </p>
 
-<%= link_to 'Edit', edit_experience_path(@experience) %> |
+<%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+<% if current_host == @experience.host %>
+  <%= link_to 'Edit', edit_experience_path(@experience) %> |
+<% end %>
 <%= link_to 'Back', experiences_path %>
