@@ -27,16 +27,18 @@
     <%= f.label :guest_id %><br>
     <%= f.number_field :guest_id %>
   </div> -->
-  <%= f.hidden_field :guest_id, value:current_guest.id %>
+  <%= f.hidden_field :guest_id, value:@booking.guest_id %>
   <!-- <div class="field">
     <%= f.label :experience_id %><br>
     <%= f.number_field :experience_id %>
   </div> -->
   <%= f.hidden_field :experience_id, value:@experience.id %>
-  <!-- <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div> -->
+  <% if current_host == @experience.host %>
+    <div class="field">
+      <%= f.label :status %><br>
+      <%= f.text_field :status %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :group_size %><br>
     <%= f.number_field :group_size %>

@@ -4,7 +4,12 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @experiences = current_host.experiences.includes(:bookings)
+    @bookings = []
+    @experiences.each do |experience|
+      @bookings << experience.bookings
+    end
+    @bookings.flatten!
   end
 
   # GET /bookings/1
@@ -14,6 +19,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    redirect_to '/guests/sign_in' unless guest_signed_in?
     @booking = Booking.new
     @experience = Experience.find(params[:id])
   end
@@ -26,6 +32,7 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
+    booking_params[:guest_id].replace(current_guest.id.to_s)
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
