@@ -8,12 +8,19 @@
 </head>
 <body>
 	<div class ='container'>
-		<%= render 'layouts/header' %>
+		<% if current_admin %>
+			<%= render 'layouts/header_admin' %>
+		<% elsif current_host %>
+			<%= render 'layouts/header_host' %>
+		<% elsif current_guest %>
+			<%= render 'layouts/header_guest' %>
+		<% else %>
+			<%= render 'layouts/header_default' %>
+		<% end %>
 		<p id="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
 		<%= yield %>
 		<%= render 'layouts/footer' %>
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
 </div>
 </body>
 </html>
