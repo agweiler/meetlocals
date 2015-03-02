@@ -1,66 +1,31 @@
-<p>
-  <strong>Title:</strong>
-  <%= @experience.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @experience.description %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @experience.duration %>
-</p>
-
-<p>
-  <strong>Is halal?:</strong>
-  <%= @experience.is_halal ? "Yes" : "No" %>
-</p>
-
-<p>
-  <strong>Cuisine:</strong>
-  <%= @experience.cuisine %>
-</p>
-
-<p>
-  <strong>Max group size:</strong>
-  <%= @experience.max_group_size %>
-</p>
-
-<p>
-  <strong>Host style:</strong>
-  <%= @experience.host_style %>
-</p>
-
-<p>
-  <strong>Available days:</strong>
-  <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
+<h2><%= @experience.title %>
+  <p><%= @experience.is_halal ? "(halal)" : "" %></p>
+</h2>
+<p>Hosted by <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
+<h4><%= @experience.description %></h4>
+<% duration = @experience.duration.divmod(60) %>
+<p>Cuisine: <%= @experience.cuisine %></p>
+<p>Max Group Size: <%= @experience.max_group_size %></p>
+<% if @experience.host_style %>
+  <p>Host_style: <%= @experience.host_style %></p>
+<% end %>
+<p>Available on
+  <% days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] %>
   <% @experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
-    <%= days[num.to_i].upcase %>
+    <%= days[num.to_i] %>
   <% end %>
-
 </p>
+<p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @experience.price %>
-</p>
-
-<p>
-  <strong>Host:</strong>
-  <%= link_to @experience.host.username, "/hosts/" + @experience.host_id.to_s  %>
-</p>
-
+<p><%= @experience.price %>$</p>
 <p>
   <strong>Image(s):</strong></br>
   <%  @experience.images.each do |image| %>
   <%=   image_tag image.image_file.url(:medium) %></br>
   <%  end %>
 </p>
-<% if guest_signed_in? %>
-  <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
-<% end %>
+
+<%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
 <% if current_host == @experience.host %>
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>
