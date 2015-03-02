@@ -7,12 +7,12 @@
             <% if @booking.date.nil? %>
               defaultDate: false,
             <% else %>
-            defaultDate: moment([<%= @booking.date.year %>,
-                                  <%= @booking.date.month %>,
-                                  <%= @booking.date.day %>,
-                                  <%= @booking.start_time.hour %>,
-                                  <%= @booking.start_time.min %>
-                                ]),
+              defaultDate: moment([<%= @booking.date.year %>,
+                                    <%= @booking.date.month %>,
+                                    <%= @booking.date.day %>,
+                                    <%= @booking.start_time.hour %>,
+                                    <%= @booking.start_time.min %>
+                                  ]),
             <% end %>
         });
         $

@@ -1,37 +1,75 @@
-<p id="notice"><%= notice %></p>
-<% if @host == current_host %>
-<h3>Your account</h3>
-<% end %>
-<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+<div class="rows">
+	<p id="notice"><%= notice %></p>
+	<% if @host == current_host %>
+	<h3>Your account</h3>
+	<% end %>
+	<h4><%= image_tag @host.images.first.image_file.url(:medium) %><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
-<p>
-  <strong>Dob:</strong>
-  <%= @host.DOB %>
-</p>
+	<p>
+	  <strong>Dob:</strong>
+	  <%= @host.DOB %>
+	</p>
 
-<p>
-  <strong>Area:</strong>
-  <%= @host.state %>, <%= @host.country %>
-</p>
+	<p>
+	  <strong>Area:</strong>
+	  <%= @host.state %>, <%= @host.country %>
+	</p>
 
-<p>
-  <strong>Suburb:</strong>
-  <%= @host.suburb %>
-</p>
+	<p>
+	  <strong>Suburb:</strong>
+	  <%= @host.suburb %>
+	</p>
 
-<p>
-  <strong>Profile image:</strong></br>
-  <%=   image_tag @host.images.first.image_file.url(:medium) %></br>
-</p>
 
-<%= button_to "Create New Experience", new_experience_path, :class => "inbox-sf-add-btn tip", :method => :get %>
+	<%= button_to "Create New Experience", new_experience_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
-<%= button_to "Edit Profile" , edit_host_path, :class => "inbox-sf-add-btn tip", :method => :get %>
+	<%= button_to "Edit Profile" , edit_host_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
-<%= button_to "Account Settings" , edit_host_registration_path, :class => "inbox-sf-add-btn tip", :method => :get %>
+	<%= button_to "Account Settings" , edit_host_registration_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
-<% if @host == current_host %>
-<%= link_to 'Edit Profile', edit_host_path(@host) %>
-<% end %>
+	<% if @host == current_host %>
+	<%= link_to 'Edit Profile', edit_host_path(@host) %>
+	<% end %>
+</div>
+<h1>Listing Experiences</h1>
+
+<div class="row">
+  <% @experiences.each do |experience| %>
+
+    <div class="col-sm-4">
+      <div class="highlight">
+        <h2><%= truncate(experience.title, length: 20) %>
+          <p><%= experience.is_halal ? "(halal)" : "" %></p>
+        </h2>
+        <p>Hosted by <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
+        <h4><%= truncate(experience.description, length: 100) %></h4>
+        <% duration = experience.duration.divmod(60) %>
+        <p>Cuisine: <%= experience.cuisine %></p>
+        <p>Max Group Size: <%= experience.max_group_size %></p>
+        <% if experience.host_style %>
+          <p>Host_style: <%= truncate(experience.host_style, length: 44) %></p>
+        <% end %>
+        <p>Available on
+          <% days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] %>
+          <% experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
+            <%= days[num.to_i] %>
+          <% end %>
+        </p>
+        <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
+
+        <p><%= experience.price %>$</p>
+        <p><%= link_to 'Show', experience %>
+          <% if current_host == experience.host %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+          <% if current_admin %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 
