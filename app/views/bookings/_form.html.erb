@@ -36,7 +36,7 @@
   <% if current_host == @experience.host %>
     <div class="field">
       <%= f.label :status %><br>
-      <%= f.select :status, options_for_select(["Invite", "Reject", "Complete"]) %>
+      <%= f.select :status, options_for_select(Booking.statuses) %>
       <!-- <%= f.text_field :status %> -->
     </div>
   <% end %>
