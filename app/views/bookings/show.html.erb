@@ -15,19 +15,19 @@
   <%= @booking.date %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Guest:</strong>
   <%= @booking.guest_id %>
-</p>
+</p> -->
 
 <p>
   <strong>Experience:</strong>
-  <%= @booking.experience_id %>
+  <%= @booking.experience_id %> "<%= @booking.experience.title %>"
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @booking.status %>
+  <%= @booking.status.capitalize %>
 </p>
 
 <p>
@@ -36,13 +36,13 @@
 </p>
 
 <p>
-  <strong>Is private:</strong>
-  <%= @booking.is_private %>
+  <strong>Is private?:</strong>
+  <%= @booking.is_private ? "Yes" : "No"%>
 </p>
 
 <p>
-  <strong>Rating:</strong>
-  <%= @booking.rating %>
+  <strong>Host:</strong>
+  <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
 </p>
 
 <%= link_to 'Edit', edit_booking_path(@booking) %> |

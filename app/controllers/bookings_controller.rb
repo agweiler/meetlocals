@@ -15,6 +15,7 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     @booking = Booking.new
+    @experience = Experience.find(params[:id])
   end
 
   # GET /bookings/1/edit
@@ -24,6 +25,7 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
@@ -63,6 +65,7 @@ class BookingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_booking
       @booking = Booking.find(params[:id])
+      @experience = Experience.find(@booking.experience_id) unless @booking.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

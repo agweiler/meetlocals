@@ -8,7 +8,7 @@ class Host < ActiveRecord::Base
   has_many :images, as: :imageable
 
   def email_to_username
-  	email.gsub(/@.*/, "")
+  	email.gsub(/@.*/, "").capitalize
   end
 
 end

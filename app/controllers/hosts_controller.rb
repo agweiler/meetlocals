@@ -24,7 +24,7 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    @host = Host.new(host_params)
+    @host = Host.new(host_detail_params)
 
     # respond_to do |format|
       if @host.save
@@ -38,6 +38,17 @@ class HostsController < ApplicationController
   # PATCH/PUT /hosts/1
   # PATCH/PUT /hosts/1.json
   def update
+    @host = Host.find(params[:id])
+    @image_file = host_detail_params.delete(:image_file)
+    @host.update(host_detail_params.except(:image_file))
+    if @host.images.present?
+      @host.images.delete_all
+    end
+    new_img = @host.images.new
+    new_img.image_file = @image_file
+    new_img.caption = @image_file.original_filename
+    new_img.save!
+
     respond_to do |format|
       format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
     end

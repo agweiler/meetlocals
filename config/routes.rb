@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
   resources :admins, only: [:index]
-  
+
   root 'static_pages#home'
 
   get 'how_it_works' => 'static_pages#how_it_works'
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   post 'complete_profile' => 'hosts#show'
 
   # get 'users/:id' => 'users#show'
+
+  get 'experiences/:id/bookings/new' => 'bookings#new'
 
 
   resources :experiences

@@ -2,30 +2,36 @@
 
 <div class="row">
   <% @experiences.each do |experience| %>
-  <div class="col-sm-4">
-    <p>Title: <%= experience.title %></p>
-    <p>Description: <%= experience.description %></p>
-    <p>Duration: <%= experience.duration %></p>
-    <p>Halal? <%= experience.is_halal ? "Yes" : "No" %></p>
-    <p>Cuisine: <%= experience.cuisine %></p>
-    <p>Max Group Size: <%= experience.max_group_size %></p>
-    <p>Host_style: <%= experience.host_style %></p>
-    <p>Available Days:
-      <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
-      <% experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
-        <%= days[num.to_i].upcase %>
-      <% end %>
-    </p>
-    <p>Price: <%= experience.price %></p>
-    <p>Host: <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
-    <p><%= link_to 'Show', experience %>
-       <%= link_to 'Edit', edit_experience_path(experience) %>
-       <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-    <br>
-  </div>
+
+    <div class="col-sm-4" >
+      <div class="highlight">
+        <p>Title: <%= experience.title %></p>
+        <p>Description: <%= experience.description %></p>
+        <p>Duration: <%= experience.duration %></p>
+        <p>Halal? <%= experience.is_halal ? "Yes" : "No" %></p>
+        <p>Cuisine: <%= experience.cuisine %></p>
+        <p>Max Group Size: <%= experience.max_group_size %></p>
+        <p>Host_style: <%= experience.host_style %></p>
+        <p>Available Days:
+          <% days = [:sun, :mon, :tue, :wed, :thu, :fri, :sat] %>
+          <% experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
+            <%= days[num.to_i].upcase %>
+          <% end %>
+        </p>
+        <p>Price: <%= experience.price %></p>
+        <p>Host: <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
+        <p><%= link_to 'Show', experience %>
+          <% if current_host == experience.host %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+          <% if current_admin %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<br>
 
-<%= link_to 'New Experience', new_experience_path %>
