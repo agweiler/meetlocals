@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
+  post 'experiences_search' => 'experiences#index'
+
 
   resources :experiences
 
@@ -48,4 +50,5 @@ Rails.application.routes.draw do
   resources :images
 
   resources :testimonials
+
 end

@@ -8,8 +8,10 @@ class Host < ActiveRecord::Base
   has_many :images, as: :imageable
   validates_uniqueness_of :username
 
+
   def email_to_username
   	email.gsub(/@.*/, "").capitalize
   end
 
+ 
 end

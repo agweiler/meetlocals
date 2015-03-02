@@ -1,5 +1,17 @@
 <h1>Listing Experiences</h1>
 
+
+<div>
+
+  <%= form_tag '/experiences_search' do %>
+  <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }) %>
+  <%= submit_tag "Filter" %>
+  <% end %>
+ 
+</div>
+
+
+
 <div class="row">
   <% @experiences.each do |experience| %>
 
