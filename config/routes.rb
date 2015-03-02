@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
+  post 'experiences_search' => 'experiences#index'
+
   resources :experiences
 
   resources :bookings
@@ -45,21 +47,5 @@ Rails.application.routes.draw do
 
   resources :testimonials
 
-  resources :messages do
-  member do
-    post :new
-  end
-end
-resources :conversations do
-  member do
-    post :reply
-    post :trash
-    post :untrash
-  end
- collection do
-    get :trashbin
-    post :empty_trash
- end
-end
 
 end

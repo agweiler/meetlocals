@@ -4,7 +4,11 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.json
   def index
-    @experiences = Experience.all
+      if params[:experience] == nil || params[:experience] == "All"
+        @experiences = Experience.all
+      else
+        @experiences = Experience.where(location: params[:experience][:location])
+      end   
   end
 
   # GET /experiences/1
@@ -36,8 +40,9 @@ class ExperiencesController < ApplicationController
     experience_params[:available_days].replace(default)
 
     @image_files = experience_params.delete(:images_array)
-
+ 
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
+    @experience.location = current_host.state
 
     respond_to do |format|
       if @experience.save
@@ -70,7 +75,7 @@ class ExperiencesController < ApplicationController
     end
 
     experience_params[:available_days].replace(default)
-
+ 
     @image_files = experience_params.delete(:images_array)
 
     respond_to do |format|
@@ -107,6 +112,8 @@ class ExperiencesController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_experience
@@ -115,7 +122,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :images_array => [],
+      params.require(:experience).permit(:title, :location, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end
