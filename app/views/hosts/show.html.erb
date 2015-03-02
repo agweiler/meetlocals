@@ -1,17 +1,8 @@
-<p>
-  <strong>Username:</strong>
-  <%= @host.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @host.email %>
-</p>
-
-<!-- <p>
-  <strong>Password:</strong>
-  <%= @host.password %>
-</p> -->
+<p id="notice"><%= notice %></p>
+<% if @host == current_host %>
+<h3>Your account</h3>
+<% end %>
+<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
 <p>
   <strong>Dob:</strong>
@@ -19,13 +10,8 @@
 </p>
 
 <p>
-  <strong>Country:</strong>
-  <%= @host.country %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @host.state %>
+  <strong>Area:</strong>
+  <%= @host.state %>, <%= @host.country %>
 </p>
 
 <p>
@@ -38,30 +24,16 @@
   <%=   image_tag @host.images.first.image_file.url(:medium) %></br>
 </p>
 
-<%= link_to 'Edit', edit_host_path(@host) %> 
-
 <%= button_to "Create New Experience", new_experience_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
 <%= button_to "Edit Profile" , edit_host_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
 <%= button_to "Account Settings" , edit_host_registration_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
-Send a message to
- 
- <%= @host.username %>
- <%= form_tag({controller: "messages", action: "create", method: :post}) do %>
-  <%= label_tag :subject %>
-  <%= text_field_tag :subject %>
-  <%= label :body, "Message text" %><br>
-  <%= text_area_tag :body %>
-  <%= hidden_field_tag(:host, "#{@host.id}") %>
-  <%= submit_tag 'Send message', class: "btn btn-primary" %>
+
+<% if @host == current_host %>
+<%= link_to 'Edit Profile', edit_host_path(@host) %>
 <% end %>
-
-
-
-
-
 
 
 
