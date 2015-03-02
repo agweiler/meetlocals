@@ -4,7 +4,11 @@ class BookingsController < ApplicationController
   # GET /bookings
   # GET /bookings.json
   def index
-    @bookings = Booking.all
+    @bookings = []
+    current_host.experiences.each do |experience|
+      @bookings << experience.bookings
+    end
+    @bookings.flatten!
   end
 
   # GET /bookings/1
@@ -14,6 +18,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/new
   def new
+    redirect_to '/guests/sign_in' unless guest_signed_in?
     @booking = Booking.new
     @experience = Experience.find(params[:id])
   end
@@ -26,6 +31,29 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
+    booking_params[:guest_id].replace(current_guest.id.to_s)
+
+    starttime = Time.parse( params[:datetime] )
+    booking_params['date(1i)'].replace( starttime.strftime('%Y') )
+    booking_params['date(2i)'].replace( starttime.strftime('%m') )
+    booking_params['date(3i)'].replace( starttime.strftime('%d') )
+
+    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+
+    endtime = starttime + @booking.experience.duration.hour
+
+    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
@@ -40,6 +68,28 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
+    starttime = Time.parse( params[:datetime] )
+    booking_params['date(1i)'].replace( starttime.strftime('%Y') )
+    booking_params['date(2i)'].replace( starttime.strftime('%m') )
+    booking_params['date(3i)'].replace( starttime.strftime('%d') )
+
+    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+
+    endtime = starttime + @booking.experience.duration.hour
+
+    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+
     respond_to do |format|
       if @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
