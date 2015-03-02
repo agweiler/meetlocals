@@ -51,3 +51,4 @@ Rails.application.routes.draw do
 
   resources :testimonials
 
+end

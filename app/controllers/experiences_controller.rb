@@ -4,7 +4,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   # GET /experiences.json
   def index
-      if params[:experience] == nil || params[:experience] == "All"
+      if params[:experience] == nil || params[:experience][:location] == "All"
         @experiences = Experience.all
       else
         @experiences = Experience.where(location: params[:experience][:location])
