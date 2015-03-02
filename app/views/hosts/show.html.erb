@@ -46,3 +46,22 @@
 
 <%= button_to "Account Settings" , edit_host_registration_path, :class => "inbox-sf-add-btn tip", :method => :get %>
 
+Send a message to
+ 
+ <%= @host.username %>
+ <%= form_tag({controller: "messages", action: "create", method: :post}) do %>
+  <%= label_tag :subject %>
+  <%= text_field_tag :subject %>
+  <%= label :body, "Message text" %><br>
+  <%= text_area_tag :body %>
+  <%= hidden_field_tag(:host, "#{@host.id}") %>
+  <%= submit_tag 'Send message', class: "btn btn-primary" %>
+<% end %>
+
+
+
+
+
+
+
+
