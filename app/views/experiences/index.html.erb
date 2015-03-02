@@ -21,10 +21,14 @@
         <p>Price: <%= experience.price %></p>
         <p>Host: <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
         <p><%= link_to 'Show', experience %>
-           <% if current_host == experience.host %>
-             <%= link_to 'Edit', edit_experience_path(experience) %>
-             <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-           <% end %>
+          <% if current_host == experience.host %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
+          <% if current_admin %>
+            | <%= link_to 'Edit', edit_experience_path(experience) %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+          <% end %>
       </div>
     </div>
   <% end %>
