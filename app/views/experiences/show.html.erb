@@ -24,9 +24,8 @@
   <%=   image_tag image.image_file.url(:medium) %></br>
   <%  end %>
 </p>
-<% if guest_signed_in? %>
-  <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
-<% end %>
+
+<%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
 <% if current_host == @experience.host %>
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>
