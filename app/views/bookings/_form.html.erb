@@ -1,3 +1,24 @@
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker11').datetimepicker({
+            <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
+
+            daysOfWeekDisabled: <%= days %>,
+            <% if @booking.date.nil? %>
+              defaultDate: false,
+            <% else %>
+            defaultDate: moment([<%= @booking.date.year %>,
+                                  <%= @booking.date.month %>,
+                                  <%= @booking.date.day %>,
+                                  <%= @booking.start_time.hour %>,
+                                  <%= @booking.start_time.min %>
+                                ]),
+            <% end %>
+        });
+        $
+    });
+</script>
+
 <%= form_for(@booking) do |f| %>
   <% if @booking.errors.any? %>
     <div id="error_explanation">
@@ -11,17 +32,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.time_select :start_time %>
-  </div>
-  <div class="field">
-    <%= f.label :end_time %><br>
-    <%= f.time_select :end_time %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :start_time %><br> -->
+    <% f.time_select :start_time %>
+  <!-- </div> -->
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :end_time %><br> -->
+    <% f.time_select :end_time %>
+  <!-- </div> -->
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :date %><br> -->
+    <% f.date_select :date %>
+  <!-- </div> -->
+  <div class='input-group date' id='datetimepicker11'>
+    <input type='text' class="form-control" name="datetime" />
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
   </div>
   <!-- <div class="field">
     <%= f.label :guest_id %><br>
