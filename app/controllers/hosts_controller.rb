@@ -10,6 +10,8 @@ class HostsController < ApplicationController
   # GET /hosts/1
   # GET /hosts/1.json
   def show
+    @host = Host.find(params[:id])
+    @experiences = @host.experiences
   end
 
   # GET /hosts/new
