@@ -41,8 +41,18 @@ class GuestsController < ApplicationController
 
   # PATCH/PUT /guests/1
   def update
+  	@image_file = guest_params.delete(:image_file)
+    @guest.update(guest_params.except(:image_file))
+    if @guest.images.present?
+      @guest.images.delete_all
+    end
+    new_img = @guest.images.new
+    new_img.image_file = @image_file
+    new_img.caption = @image_file.original_filename
+    new_img.save!
+
     respond_to do |format|
-      format.html { redirect_to edit_guest_profile }
+      format.html { redirect_to edit_guest_profile, notice: 'Your guest profile was successfully updated.' }
     end
   end
 
