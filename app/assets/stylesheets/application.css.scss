@@ -1,0 +1,48 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "agency";
+
+
+body {
+  background-image: url("/assets/nasi_head_placeholder.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: #000000;
+}
+
+ table *{
+ 	padding-left:10px;
+ 	padding-right:10px;
+ }
+
+ /* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+  background-color: #A0A0A0;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
