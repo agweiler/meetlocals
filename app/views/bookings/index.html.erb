@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <h1>Listing Bookings</h1>
 
@@ -20,8 +20,8 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.start_time %></td>
-        <td><%= booking.end_time %></td>
+        <td><%= booking.start_time.strftime('%r') %></td>
+        <td><%= booking.end_time.strftime('%r') %></td>
         <td><%= booking.date %></td>
         <td><%= booking.guest_id %></td>
         <td><%= booking.experience_id %></td>
@@ -38,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Booking', new_booking_path %>
+<!-- <%= link_to 'New Booking', new_booking_path %> -->

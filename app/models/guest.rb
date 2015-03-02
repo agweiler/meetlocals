@@ -5,5 +5,7 @@ class Guest < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings
   has_many :images, as: :imageable
-  acts_as_messageable
+  validates_uniqueness_of :username
+
+
 end

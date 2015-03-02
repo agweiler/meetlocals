@@ -3,20 +3,23 @@ Rails.application.routes.draw do
     registrations: "hosts/registrations"
   }
   resources :hosts
-  devise_for :guests
-  resources :guests, :only => [:show, :index]
+  
+  devise_for :guests, controllers: {
+    registrations: "guests/registrations"
+  }
+  resources :guests
 
   devise_for :admins
   resources :admins, only: [:index]
 
   root 'static_pages#home'
 
-
   get 'how_it_works' => 'static_pages#how_it_works'
 
   get 'how_to_be_a_host' => 'static_pages#how_to_be_a_host'
 
-
+  get 'guests/:id/edit_profile' => 'guests#edit_guest_profile', as: :edit_guest_profile
+  patch 'guests/:id/update_profile' => 'guests#update_guest_profile', as: :update_guest_profile
 
   get 'hosts/:id/edit_profile' => 'hosts#edit_host_profile', as: :edit_host_profile
   patch 'hosts/:id/update_profile' => 'hosts#update_host_profile', as: :update_host_profile
@@ -33,11 +36,12 @@ Rails.application.routes.draw do
 
   post 'complete_profile' => 'hosts#show'
 
-  get 'users/:id' => 'users#show'
+  # get 'users/:id' => 'users#show'
 
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
   post 'experiences_search' => 'experiences#index'
+
 
   resources :experiences
 
@@ -47,5 +51,3 @@ Rails.application.routes.draw do
 
   resources :testimonials
 
-
-end

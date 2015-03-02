@@ -9,8 +9,8 @@ class CreateExperiences < ActiveRecord::Migration
       t.integer :max_group_size
       t.text :host_style
       t.string :available_days
-      t.float :price
-      t.integer :host_id
+      t.float :price,            default: "0"
+      t.integer :host_id,        null: false
 
       t.timestamps null: false
     end
