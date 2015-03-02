@@ -46,6 +46,15 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+    case(booking_params[:status])
+    when "Invite"
+      booking_params[:status].replace("invited")
+    when "Reject"
+      booking_params[:status].replace("rejected")
+    when "Complete"
+      booking_params[:status].replace("completed")
+    end
+
     respond_to do |format|
       if @booking.update(booking_params)
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
