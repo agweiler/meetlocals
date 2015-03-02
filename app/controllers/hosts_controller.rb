@@ -10,7 +10,6 @@ class HostsController < ApplicationController
   # GET /hosts/1
   # GET /hosts/1.json
   def show
-    @host = Host.find(params[:id])
   end
 
   # GET /hosts/new
@@ -70,7 +69,6 @@ class HostsController < ApplicationController
   end
 
   def update_host_profile #this is actually create and edit
-
     @image_file = host_detail_params.delete(:image_file)
     
     # @host.update()

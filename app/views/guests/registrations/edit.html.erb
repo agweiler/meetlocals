@@ -1,6 +1,6 @@
 <h2>Editing <%= current_guest.username %>'s account</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
   <%= devise_error_messages! %>
 
 
@@ -31,6 +31,11 @@
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :image %><br>
+      <%= f.file_field(:image_file) %>
   </div>
 
   <div class="actions">
