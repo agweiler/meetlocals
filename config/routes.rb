@@ -40,15 +40,22 @@ Rails.application.routes.draw do
 
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
+  get '/blog' => 'posts#index'
+
   post 'experiences_search' => 'experiences#index'
 
   get 'bookings/:id/testimonials/new' => 'testimonials#new'
 
+
+
+  
   resources :experiences
 
   resources :bookings
 
   resources :images
+
+  resources :posts
 
   resources :testimonials
 

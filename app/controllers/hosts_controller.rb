@@ -27,13 +27,14 @@ class HostsController < ApplicationController
   # POST /hosts.json
   def create
     @host = Host.new(host_detail_params)
-
+   
     # respond_to do |format|
       if @host.save
         format.html { redirect_to create_host_profile_path, notice: 'host was successfully created.' }
     #   else
     #     format.html { render :new }
     #   end
+
     end
   end
 
@@ -66,13 +67,13 @@ class HostsController < ApplicationController
     end
   end
 
-  def edit_host_profile #this is actually show
+  def edit_host_profile #this is actually shows
     @host = Host.find(params[:id])
+
   end
 
   def update_host_profile #this is actually create and edit
     @image_file = host_detail_params.delete(:image_file)
-    
     # @host.update()
     @host.update(host_detail_params.except(:image_file))
     #ADRIAN_20150226 - added to support host image upload
