@@ -1,11 +1,16 @@
 <body id="host">
-<h1>How to be a host</h1>
-<p>*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id.
-
-*</p>
+  <div class="container">
+    <div class="col-sm-8">
+    <h1 style="color:#ffffff">How to be a host</h1>
+      <p style="color:#ffffff">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id.
+      </p>
+      </div>
+  </div>
 
 <% unless current_host %>
 	<p><%= link_to "Sign up as a host", new_host_registration_path %> | <%= link_to "Sign in as a host", new_host_session_path %></p>  
 <% end %>
 </body>
+
+<div style="clear:both;"></div>
 
