@@ -24,6 +24,11 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1/edit
   def edit
+    if host_signed_in?
+      redirect_to '/' unless current_host.id == @experience.host_id
+    else
+      redirect_to '/hosts/sign_in'
+    end
   end
 
   # POST /experiences
