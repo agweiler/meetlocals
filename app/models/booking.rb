@@ -5,6 +5,7 @@ class Booking < ActiveRecord::Base
 
 	def self.update_status(status)
 		case status
+		# when "Requested" #default
 		when "Invite"
 			status.replace("invited")
 		when "Reject"

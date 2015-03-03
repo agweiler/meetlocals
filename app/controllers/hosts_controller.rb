@@ -65,8 +65,9 @@ class HostsController < ApplicationController
     end
   end
 
-  def edit_host_profile #this is actually show
+  def edit_host_profile #this is actually shows
     @host = Host.find(params[:id])
+
   end
 
   def update_host_profile #this is actually create and edit

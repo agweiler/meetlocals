@@ -45,5 +45,8 @@
   <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
 </p>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
+<% if @booking.status == "completed" && @booking.testimonial.nil? %>
+<%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new" %> |
+<% end %>
 <%= link_to 'Back', bookings_path %>

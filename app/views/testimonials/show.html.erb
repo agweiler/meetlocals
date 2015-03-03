@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <p>
   <strong>Title:</strong>
@@ -15,5 +15,12 @@
   <%= @testimonial.booking_id %>
 </p>
 
+<p>
+  <strong>Image(s):</strong></br>
+  <%  @testimonial.images.each do |image| %>
+  <%=   image_tag image.image_file.url(:medium) %></br>
+  <%  end %>
+</p>
+
 <%= link_to 'Edit', edit_testimonial_path(@testimonial) %> |
-<%= link_to 'Back', testimonials_path %>
+<%= link_to 'Back', booking_path(@booking) %>

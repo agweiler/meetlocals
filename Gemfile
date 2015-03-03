@@ -7,6 +7,8 @@ gem "therubyracer"
 gem "twitter-bootstrap-rails"
 gem "less-rails"
 gem 'bootstrap-sass', '3.2.0'
+gem 'autoprefixer-rails'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets

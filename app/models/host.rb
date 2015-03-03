@@ -7,7 +7,7 @@ class Host < ActiveRecord::Base
   has_and_belongs_to_many :languages
   has_many :images, as: :imageable
   # removed uniqueness constraint
-  # validates_uniqueness_of :username
+  # validates_uniqueness_of :username - not needed because of devise validatable
 
 
   def email_to_username
