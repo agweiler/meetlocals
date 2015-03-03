@@ -38,7 +38,8 @@ class BookingsController < ApplicationController
     byebug
     booking_params[:guest_id].replace(current_guest.id.to_s)
 
-    starttime = Time.parse( params[:datetime] )
+    # starttime = Time.parse( params[:datetime] )
+    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )
@@ -50,7 +51,7 @@ class BookingsController < ApplicationController
     booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
     # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
 
-    endtime = starttime + @booking.experience.duration.hour
+    endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
 
     booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
     booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
@@ -73,8 +74,10 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   # PATCH/PUT /bookings/1.json
   def update
+
     booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
-    starttime = Time.parse( params[:datetime] )
+    # starttime = Time.parse( params[:datetime] )
+    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )

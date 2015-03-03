@@ -18,11 +18,16 @@
 
 <p><%= @experience.price %>$</p>
 <p>
-  <strong>Image(s):</strong></br>
   <%  @experience.images.each do |image| %>
   <%=   image_tag image.image_file.url(:medium) %></br>
   <%  end %>
 </p>
+
+<p>Testimonials:</p>
+<% @testimonials.each do |testimonial| %>
+  <h6><%= testimonial.title %></h6>
+  <p><%= testimonial.body %></p>
+<% end %>
 
 <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
 <% if current_host == @experience.host %>

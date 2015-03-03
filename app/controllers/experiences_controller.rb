@@ -8,12 +8,13 @@ class ExperiencesController < ApplicationController
         @experiences = Experience.all
       else
         @experiences = Experience.where(location: params[:experience][:location])
-      end   
+      end
   end
 
   # GET /experiences/1
   # GET /experiences/1.json
   def show
+    @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
   end
 
   # GET /experiences/new
@@ -45,7 +46,7 @@ class ExperiencesController < ApplicationController
     experience_params[:available_days].replace(default)
 
     @image_files = experience_params.delete(:images_array)
- 
+
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
     @experience.location = current_host.state
 
@@ -80,7 +81,7 @@ class ExperiencesController < ApplicationController
     end
 
     experience_params[:available_days].replace(default)
- 
+
     @image_files = experience_params.delete(:images_array)
 
     respond_to do |format|
