@@ -32,6 +32,7 @@ class HostsController < ApplicationController
         new_img.image_file = @image_file
         new_img.caption = @image_file.original_filename
         new_img.save!
+        new_img.update(imageable:@host)
       else
         format.html { render :new }
       end
@@ -40,13 +41,16 @@ class HostsController < ApplicationController
 
   # PATCH/PUT /hosts/1
   def update
+    byebug
     @image_file = params[:host].delete(:image_file)
-    @host.update(host_params)
+    @host.update(host_params.except(:image_file))
     if params[:host][:image_file].present?  
       if @host.images.present?
         @host.images.delete_all
       end
-      @host.images.create(image_file: @image_file, caption: @image_file.original_filename)
+      puts "HIIII THEEEREEEE"
+      byebug
+      Image.create(image_file: @image_file, caption: @image_file.original_filename, imageable: @host)
     end
     respond_to do |format|
       format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
@@ -73,12 +77,14 @@ class HostsController < ApplicationController
   def update_host_profile #this is actually create and edit
     byebug
     @image_file = host_params.delete(:image_file)
-    @host.update(host_params)
+    @host.update(host_params.except(:image_file))
     if params[:host][:image_file].present?  
       if @host.images.present?
         @host.images.delete_all
       end
-      @host.images.create(image_file: @image_file, caption: @image_file.original_filename)
+      puts "HIIII THEEEREEEE"
+      byebug
+      Image.create(image_file: @image_file, caption: @image_file.original_filename, imageable: @host)
     end
     if @host.save
       respond_to do |format| 
