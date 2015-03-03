@@ -4,7 +4,7 @@ class Booking < ActiveRecord::Base
 	has_one :testimonial
 
 	def self.update_status(status)
-		case(status)
+		case status
 		when "Invite"
 			status.replace("invited")
 		when "Reject"
