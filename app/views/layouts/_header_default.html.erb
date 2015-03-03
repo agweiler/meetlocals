@@ -1,13 +1,15 @@
-<header class - "navbar navbar-fixed-top navbar inverse">
-	<div class = "container">
+<!-- <header class - "navbar navbar-fixed-top navbar inverse">
+	<div class = "container"> -->
 
 		<nav>
+		<ul class ="nav navbar-nav navbar-left">
+				<li><%= link_to "Project NASI", root_path %></li>			
+			</ul>
 			<ul class ="nav navbar-nav navbar-right">
-				<li><%= link_to "Home", root_path %></li>
 				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
 				<li><%= link_to "Find a Host", experiences_path %></li>
 				<li><%= link_to "How it Works", how_it_works_path %></li>
-				<li><%= link_to "Blog", "#blog" %></li>
+				<li><%= link_to "Blog", blog_path %></li>
 				<li><%= link_to "Sign up", new_guest_registration_path %></li>
 				<li><%= link_to "Log in", new_guest_session_path %></li>
 			</ul>
