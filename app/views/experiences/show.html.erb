@@ -23,9 +23,15 @@
   <%  end %>
 </p>
 
+<p>
+  Average Rating:
+  <%= @average_rating %>
+</p>
+
 <p>Testimonials:</p>
 <% @testimonials.each do |testimonial| %>
   <h6><%= testimonial.title %></h6>
+  <p>Rating: <%= testimonial.rating %></p>
   <p><%= testimonial.body %></p>
 <% end %>
 
