@@ -57,7 +57,7 @@ class TestimonialsController < ApplicationController
   def update
 
     @image_files = testimonial_params.delete(:images_array)
-byebug
+
     respond_to do |format|
       if @testimonial.update(testimonial_params.except(:images_array))
         format.html { redirect_to @testimonial, notice: 'Testimonial was successfully updated.' }

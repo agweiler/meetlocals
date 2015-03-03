@@ -28,6 +28,10 @@
     <%= f.file_field(:images_array, multiple: true) %>
     <small>supported file types: .jpg .png .gif</small>
   </div>
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :booking_id %><br> -->
+    <%= f.hidden_field :booking_id, value:@booking.id %>
+  <!-- </div> -->
   <div class="actions">
     <%= f.submit %>
   </div>
