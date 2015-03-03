@@ -33,18 +33,21 @@
     </div>
   <% end %>
 
-  <!-- <div class="field"> -->
-    <!-- <%= f.label :start_time %><br> -->
-    <% f.time_select :start_time %>
-  <!-- </div> -->
-  <!-- <div class="field"> -->
-    <!-- <%= f.label :end_time %><br> -->
-    <% f.time_select :end_time %>
-  <!-- </div> -->
-  <!-- <div class="field"> -->
-    <!-- <%= f.label :date %><br> -->
-    <% f.date_select :date %>
-  <!-- </div> -->
+  <div hidden>
+    <!-- <div class="field"> -->
+      <!-- <%= f.label :start_time %><br> -->
+      <%= f.time_select :start_time %>
+    <!-- </div> -->
+    <!-- <div class="field"> -->
+      <!-- <%= f.label :end_time %><br> -->
+      <%= f.time_select :end_time %>
+    <!-- </div> -->
+    <!-- <div class="field"> -->
+      <!-- <%= f.label :date %><br> -->
+      <%= f.date_select :date %>
+    <!-- </div> -->
+  </div>
+
   <div class='input-group date' id='datetimepicker11'>
     <input type='text' class="form-control" name="datetime" />
     <span class="input-group-addon">
@@ -66,6 +69,10 @@
       <%= f.label :status %><br>
       <%= f.select :status, options_for_select(Booking.statuses) %>
       <!-- <%= f.text_field :status %> -->
+    </div>
+  <% else %>
+    <div hidden>
+      <%= f.text_field :status, value:@booking.status %>
     </div>
   <% end %>
   <div class="field">
