@@ -2,6 +2,7 @@ class Experience < ActiveRecord::Base
 	belongs_to :host
 	has_many :bookings
 	has_many :images, as: :imageable, dependent: :destroy
+	has_many :testimonials, through: :bookings
 
 
 	def self.get_location
