@@ -19,8 +19,10 @@
         <td><%= testimonial.body %></td>
         <td><%= testimonial.booking_id %></td>
         <td><%= link_to 'Show', testimonial %></td>
-        <td><%= link_to 'Edit', edit_testimonial_path(testimonial) %></td>
-        <td><%= link_to 'Destroy', testimonial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_admin %>
+          <td><%= link_to 'Edit', edit_testimonial_path(testimonial) %></td>
+          <td><%= link_to 'Destroy', testimonial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Testimonial', new_testimonial_path %>
+<!-- <%= link_to 'New Testimonial', new_testimonial_path %> -->

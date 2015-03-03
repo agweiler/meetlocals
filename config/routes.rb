@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     registrations: "hosts/registrations"
   }
   resources :hosts
-  
+
   devise_for :guests, controllers: {
     registrations: "guests/registrations"
   }
@@ -42,6 +42,11 @@ Rails.application.routes.draw do
 
   get '/blog' => 'posts#index'
 
+  post 'experiences_search' => 'experiences#index'
+
+  get 'bookings/:id/testimonials/new' => 'testimonials#new'
+
+
 
   
   resources :experiences
@@ -53,4 +58,5 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :testimonials
+
 end

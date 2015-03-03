@@ -1,19 +1,18 @@
 <h2><%= @experience.title %>
   <p><%= @experience.is_halal ? "(halal)" : "" %></p>
 </h2>
-<p>Hosted by <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
+<p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
 <h4><%= @experience.description %></h4>
-<% duration = @experience.duration.divmod(60) %>
+<% duration = (@experience.duration*60).divmod(60) %>
 <p>Cuisine: <%= @experience.cuisine %></p>
 <p>Max Group Size: <%= @experience.max_group_size %></p>
 <% if @experience.host_style %>
-  <p>Host_style: <%= @experience.host_style %></p>
+  <p>Host Style: <%= @experience.host_style %></p>
 <% end %>
-<p>Available on
-  <% days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] %>
-  <% @experience.available_days.split(//).select {|num| num != "-"}.each do |num| %>
-    <%= days[num.to_i] %>
-  <% end %>
+<p>Available on:
+  <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+  <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+  <%= avail_days.to_sentence %>
 </p>
 <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
 

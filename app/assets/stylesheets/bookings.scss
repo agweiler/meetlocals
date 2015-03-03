@@ -6,6 +6,7 @@
 //! version : 4.0.0-beta
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
+ 
 .bootstrap-datetimepicker-widget.dropdown-menu {
   margin: 2px 0;
   padding: 4px;
@@ -193,6 +194,12 @@
   height: 2.5em;
   width: 100%;
 }
+.bootstrap-datetimepicker-widget .picker-switch td span:hover {
+  background: #eeeeee;
+}
+.bootstrap-datetimepicker-widget .picker-switch td a {
+  background: none;
+}
 .bootstrap-datetimepicker-widget table {
   width: 100%;
   margin: 0;
@@ -307,6 +314,9 @@
   margin: 2px 1.5px;
   cursor: pointer;
   border-radius: 4px;
+}
+.bootstrap-datetimepicker-widget td a {
+  background: none;
 }
 .bootstrap-datetimepicker-widget td span:hover {
   background: #eeeeee;

@@ -7,4 +7,5 @@ class Guest < ActiveRecord::Base
   has_many :images, as: :imageable
   validates_uniqueness_of :username
 
+
 end
