@@ -4,8 +4,8 @@
             <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
 
             daysOfWeekDisabled: <%= days %>,
+            minDate: moment(),
             <% if @booking.date.nil? %>
-              minDate: moment(),
               defaultDate: false,
             <% else %>
               defaultDate: moment([<%= @booking.date.year %>,

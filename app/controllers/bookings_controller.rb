@@ -5,10 +5,14 @@ class BookingsController < ApplicationController
   # GET /bookings.json
   def index
     @bookings = []
+
     current_host.experiences.each do |experience|
       @bookings << experience.bookings
-    end
-    @bookings.flatten!
+    end if host_signed_in?
+
+    @bookings = current_guest.bookings if guest_signed_in?
+
+    @bookings.flatten! if @booking.respond_to?(:flatten!)
   end
 
   # GET /bookings/1
