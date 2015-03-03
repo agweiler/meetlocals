@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150227062833) do
     t.integer  "max_group_size"
     t.text     "host_style"
     t.string   "available_days", default: "-------"
-    t.float    "price"
-    t.integer  "host_id"
+    t.float    "price",          default: 0.0
+    t.integer  "host_id",                            null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
