@@ -5,6 +5,7 @@
 
             daysOfWeekDisabled: <%= days %>,
             <% if @booking.date.nil? %>
+              minDate: moment(),
               defaultDate: false,
             <% else %>
               defaultDate: moment([<%= @booking.date.year %>,
