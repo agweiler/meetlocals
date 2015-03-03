@@ -10,15 +10,18 @@ class TestimonialsController < ApplicationController
   # GET /testimonials/1
   # GET /testimonials/1.json
   def show
+    @booking = @testimonial.booking
   end
 
   # GET /testimonials/new
   def new
     @testimonial = Testimonial.new
+    @booking = Booking.find(params[:id])
   end
 
   # GET /testimonials/1/edit
   def edit
+    @booking = Booking.find(params[:id])
   end
 
   # POST /testimonials
