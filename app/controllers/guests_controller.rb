@@ -42,7 +42,7 @@ class GuestsController < ApplicationController
   def update
     @image_file = params[:guest].delete(:image_file)
     @guest.update(guest_params)
-    if params[:guest][:image_file].present?  
+    if @image_file.present?  
       if @guest.images.present?
         @guest.images.delete_all
       end
@@ -72,7 +72,7 @@ class GuestsController < ApplicationController
   def update_guest_profile #this is actually create and complete guest profile
     @image_file = guest_params.delete(:image_file)
     @guest.update(guest_params)
-    if params[:guest][:image_file].present?  
+    if @image_file.present?  
       if @guest.images.present?
         @guest.images.delete_all
       end

@@ -35,7 +35,6 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
-    byebug
     booking_params[:guest_id].replace(current_guest.id.to_s)
 
     # starttime = Time.parse( params[:datetime] )

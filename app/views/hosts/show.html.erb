@@ -6,7 +6,7 @@
 	<% end %>
 	<h4>
     <% if @host.images.present? %>
-      <%= image_tag @host.images.first.image_file.url(:medium) %>
+      <%= image_tag @host.images.first.image_file.url(:thumb) %>
     <% end %>
     <%= @host.username %><p>(<%= @host.email %>)</p></h4>
 	<p>
