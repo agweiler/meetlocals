@@ -71,6 +71,7 @@ class HostsController < ApplicationController
   end
 
   def update_host_profile #this is actually create and edit
+    byebug
     @image_file = host_params.delete(:image_file)
     @host.update(host_params)
     if params[:host][:image_file].present?  
@@ -93,7 +94,7 @@ class HostsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def host_detail_params
+    def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :DOB, :country, :state, :image_file, :suburb)
     end
 end
