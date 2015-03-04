@@ -33,6 +33,7 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
+    color: #fec503;
 }
 
 /*a {
@@ -52,7 +53,7 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
