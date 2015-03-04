@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150303133543) do
+=======
+ActiveRecord::Schema.define(version: 20150303034659) do
+>>>>>>> d93ea30160bc77e25bdfcb806c422d65a2bcacd6
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -137,6 +141,20 @@ ActiveRecord::Schema.define(version: 20150303133543) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
+=======
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+>>>>>>> d93ea30160bc77e25bdfcb806c422d65a2bcacd6
   create_table "testimonials", force: :cascade do |t|
     t.string   "title"
     t.string   "body"

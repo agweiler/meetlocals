@@ -8,12 +8,16 @@ class ExperiencesController < ApplicationController
         @experiences = Experience.all
       else
         @experiences = Experience.where(location: params[:experience][:location])
-      end   
+      end
   end
 
   # GET /experiences/1
   # GET /experiences/1.json
   def show
+    # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
+    @testimonials = @experience.testimonials #associate Experience-Testimonials
+    # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
+    @average_rating = @experience.testimonials.average(:rating).round(2)
   end
 
   # GET /experiences/new
@@ -24,6 +28,11 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1/edit
   def edit
+    if host_signed_in?
+      redirect_to '/' unless current_host.id == @experience.host_id
+    else
+      redirect_to '/hosts/sign_in'
+    end
   end
 
   # POST /experiences
@@ -40,7 +49,7 @@ class ExperiencesController < ApplicationController
     experience_params[:available_days].replace(default)
 
     @image_files = experience_params.delete(:images_array)
- 
+
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
     @experience.location = current_host.state
 
@@ -75,9 +84,9 @@ class ExperiencesController < ApplicationController
     end
 
     experience_params[:available_days].replace(default)
- 
+    byebug
     @image_files = experience_params.delete(:images_array)
-
+    byebug
     respond_to do |format|
       if @experience.update(experience_params.except(:images_array, :days))
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
