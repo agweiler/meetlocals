@@ -6,6 +6,7 @@ class Host < ActiveRecord::Base
   has_many :experiences
   has_and_belongs_to_many :languages
   has_many :images, as: :imageable
+  # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
 
 
