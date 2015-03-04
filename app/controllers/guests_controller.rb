@@ -22,7 +22,7 @@ class GuestsController < ApplicationController
     @guest = Guest.new
 
     @image_file = guest_params.delete(:image_file)
-
+    byebug
     respond_to do |format|
       if @guest.save
         format.html { redirect_to guest, notice: 'Guest was successfully created.' }
@@ -70,7 +70,7 @@ class GuestsController < ApplicationController
   end
 
   def update_guest_profile #this is actually create and complete guest profile
-    @image_file = guest_params.delete(:image_file)
+    @image_file = params[:guest].delete(:image_file)
     @guest.update(guest_params)
     if @image_file.present?  
       if @guest.images.present?

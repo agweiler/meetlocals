@@ -21,7 +21,7 @@ class HostsController < ApplicationController
   def create
     @host = Host.new(host_detail_params)
 
-    @image_file = host_params.delete(:image_file)
+    @image_file = params[:host].delete(:image_file)
 
     respond_to do |format|
       if @host.save
@@ -72,19 +72,16 @@ class HostsController < ApplicationController
   end
 
   def update_host_profile #this is actually create and edit
-    byebug
-    @image_file = host_params.delete(:image_file)
-    byebug
+    @image_file = params[:host].delete(:image_file)
     if @image_file.present? 
-      byebug
       if @host.images.present?
         @host.images.delete_all
       end
-      puts "HIIII THEEEREEEE"
-      byebug
       Image.create(image_file: @image_file, caption: @image_file.original_filename, imageable: @host)
     end
+    puts "preparing for host update"
     if @host.update(host_params.except(:image_file))
+      puts "updating host"
       respond_to do |format| 
         format.html { redirect_to edit_host_profile, notice: 'host profile was successfully updated.' }
       end
