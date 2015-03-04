@@ -17,7 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :rating %><br>
-    <%= f.text_field :rating %>
+    <span>Poor</span>
+    <%= f.radio_button :rating, 1 %>
+    <%= f.radio_button :rating, 2 %>
+    <%= f.radio_button :rating, 3 %>
+    <%= f.radio_button :rating, 4 %>
+    <%= f.radio_button :rating, 5 %>
+    <span>Great!</span>
   </div>
   <div class="field">
     <%= f.label :body %><br>
