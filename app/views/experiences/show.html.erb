@@ -25,7 +25,7 @@
 
 <p>
   Average Rating:
-  <%= @average_rating %>
+  <%= @average_rating.nil? ? '-' : @average_rating %>
 </p>
 
 <p>Testimonials:</p>
