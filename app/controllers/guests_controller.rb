@@ -18,24 +18,24 @@ class GuestsController < ApplicationController
   end
 
   # POST /guests
+  # We don't seem to be using this...
   def create
-    @guest = Guest.new
+    # @guest = Guest.new
 
-    @image_file = guest_params.delete(:image_file)
-    byebug
-    respond_to do |format|
-      if @guest.save
-        format.html { redirect_to guest, notice: 'Guest was successfully created.' }
+    # @image_file = params[:guest].delete(:image_file)
+    # respond_to do |format|
+    #   if @guest.save
+    #     format.html { redirect_to guest, notice: 'Guest was successfully created.' }
         
-        # Create image after parent-guest is saved
-        new_img = @guest.images.new
-        new_img.image_file = @image_file
-        new_img.caption = @image_file.original_filename
-        new_img.save!
-      else
-        format.html { render :new }
-      end
-    end
+    #     # Create image after parent-guest is saved
+    #     new_img = @guest.images.new
+    #     new_img.image_file = @image_file
+    #     new_img.caption = @image_file.original_filename
+    #     new_img.save!
+    #   else
+    #     format.html { render :new }
+    #   end
+    # end
   end
 
   # PATCH/PUT /guests/1
@@ -65,11 +65,11 @@ class GuestsController < ApplicationController
     end
   end
 
-  def edit_guest_profile #this is actually show
+  def edit_guest_profile # Edit profile page
     @guest = Guest.find(params[:id])
   end
 
-  def update_guest_profile #this is actually create and complete guest profile
+  def update_guest_profile # Create and Edit guest profile
     @image_file = params[:guest].delete(:image_file)
     @guest.update(guest_params)
     if @image_file.present?  
