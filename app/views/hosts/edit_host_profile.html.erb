@@ -1,6 +1,8 @@
-<h2> Thanks for signing up as a host, please complete your profile </h2>
+<div class="container">
+<h2 style="text-align: center"> Thanks for signing up as a host, please complete your profile </h2>
+</div>
 
-<div>
+<div class="container">
 <%= form_for @host, url: { action: "update_host_profile" }, html: {multipart: true} do |f| %>
 	<p>
 		<%= f.label :username %>
@@ -28,12 +30,15 @@
 	</p>
 </div>
 
-<div class="field">
+<div class="container">
     <%= f.label :image %><br>
-    <%= f.file_field(:image_file) %>
+    <%= f.file_field(:image_file) %></br>
 </div>
+<div style="text-align: center"> 
 <input type="submit" value="Submit">
+</div>
 <% end %>
+
 
 
 

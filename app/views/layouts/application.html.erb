@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Nasi</title>
+  <head>
+  <!-- Nav bar --> 
+    <title>Nasi</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-	<div class ='container'>
-		<% if current_admin %>
-			<%= render 'layouts/header_admin' %>
-		<% elsif current_host %>
-			<%= render 'layouts/header_host' %>
-		<% elsif current_guest %>
-			<%= render 'layouts/header_guest' %>
-		<% else %>
-			<%= render 'layouts/header_default' %>
-		<% end %>
+  </head>
+  <body>
+  <header class = "navbar navbar-fixed-top navbar-inverse">
+	  <div class ='container'>
+
+	  <% if current_admin %>
+  			<%= render 'layouts/header_admin' %>
+  		  <% elsif current_host %>
+  			<%= render 'layouts/header_host' %>
+  		  <% elsif current_guest %>
+  			<%= render 'layouts/header_guest' %>
+  		  <% else %>
+  			<%= render 'layouts/header_default' %>
+  		<% end %> 
+
+    <br></br><br>
 		<p id="notice"><%= notice %></p>
 		<p class="alert"><%= alert %></p>
 		<%= yield %>
 		<%= render 'layouts/footer' %>
-</div>
-</body>
+    </div>
+  </body>
 </html>
