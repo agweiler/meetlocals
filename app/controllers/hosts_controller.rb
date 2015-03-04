@@ -18,25 +18,26 @@ class HostsController < ApplicationController
   end
 
   # POST /hosts
+  # We don't seem to be using this...
   def create
-    @host = Host.new(host_detail_params)
+    # @host = Host.new(host_detail_params)
 
-    @image_file = params[:host].delete(:image_file)
+    # @image_file = params[:host].delete(:image_file)
 
-    respond_to do |format|
-      if @host.save
-        format.html { redirect_to host, notice: 'host was successfully created.' }
+    # respond_to do |format|
+    #   if @host.save
+    #     format.html { redirect_to host, notice: 'host was successfully created.' }
         
-        # Create image after parent-host is saved
-        new_img = @host.images.new
-        new_img.image_file = @image_file
-        new_img.caption = @image_file.original_filename
-        new_img.save!
-        new_img.update(imageable:@host)
-      else
-        format.html { render :new }
-      end
-    end
+    #     # Create image after parent-host is saved
+    #     new_img = @host.images.new
+    #     new_img.image_file = @image_file
+    #     new_img.caption = @image_file.original_filename
+    #     new_img.save!
+    #     new_img.update(imageable:@host)
+    #   else
+    #     format.html { render :new }
+    #   end
+    # end
   end
 
   # PATCH/PUT /hosts/1
@@ -66,12 +67,11 @@ class HostsController < ApplicationController
     end
   end
 
-  def edit_host_profile #this is actually shows
+  def edit_host_profile # Edit profile page
     @host = Host.find(params[:id])
-
   end
 
-  def update_host_profile #this is actually create and edit
+  def update_host_profile # Create and Edit host profile
     @image_file = params[:host].delete(:image_file)
     if @image_file.present? 
       if @host.images.present?

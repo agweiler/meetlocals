@@ -2,13 +2,14 @@
 <body id="guest">
 <div class="rows">
 	<% if @host == current_host %>
-	<h3>Your account</h3>
+    <h3>Your account</h3>
 	<% end %>
-	<h4>
-    <% if @host.images.present? %>
-      <%= image_tag @host.images.first.image_file.url(:thumb) %>
-    <% end %>
-    <%= @host.username %><p>(<%= @host.email %>)</p></h4>
+  <% if @host.images.present? %>
+    <%= image_tag @host.images.first.image_file.url(:medium) %></br>
+  <% else %>
+    <%= image_tag "box.jpeg" %>
+  <% end %>
+	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 	<p>
 	  <strong>Dob:</strong>
 	  <%= @host.DOB %>
