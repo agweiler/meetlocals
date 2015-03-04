@@ -4,7 +4,7 @@ class Guest < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings
-  has_one :image, as: :imageable
+  has_many :images, as: :imageable
   validates_uniqueness_of :username
 
 
