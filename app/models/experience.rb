@@ -3,6 +3,8 @@ class Experience < ActiveRecord::Base
 	has_many :bookings
 	has_many :images, as: :imageable, dependent: :destroy
 
+	has_many :testimonials, through: :bookings
+
 
 	def self.get_location
     	return ["All","Kuala Lumpur", "Selangor", "Penang","Johor"]

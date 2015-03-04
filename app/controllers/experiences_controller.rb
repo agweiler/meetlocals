@@ -14,8 +14,10 @@ class ExperiencesController < ApplicationController
   # GET /experiences/1
   # GET /experiences/1.json
   def show
-    @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
-    @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
+    # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
+    @testimonials = @experience.testimonials #associate Experience-Testimonials
+    # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
+    @average_rating = @experience.testimonials.average(:rating).round(2)
   end
 
   # GET /experiences/new
