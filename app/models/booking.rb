@@ -2,7 +2,8 @@ class Booking < ActiveRecord::Base
 	belongs_to :guest
 	belongs_to :experience
 	has_one :testimonial
-
+	has_many :messages
+	
 	def self.update_status(status)
 		case status
 		# when "Requested" #default
