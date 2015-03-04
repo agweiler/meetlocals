@@ -1,6 +1,5 @@
 <h2>Thanks for signing up, <%= current_guest.username %>(<%= @guest.email %>).</br>Please complete your guest profile</h2>
 
-<body>
 <%= form_for @guest, url: { action: "update_guest_profile" }, html: {multipart: true} do |f| %>
   
   <div class="field">
@@ -21,4 +20,3 @@
 
 <%= link_to "Back", :back %>
 
-</body>
