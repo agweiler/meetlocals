@@ -20,6 +20,7 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
+
         <td><%= booking.start_time.strftime('%r') %></td>
         <td><%= booking.end_time.strftime('%r') %></td>
         <td><%= booking.date %></td>

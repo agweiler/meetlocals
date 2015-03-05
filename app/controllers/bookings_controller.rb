@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
 
     @bookings = current_guest.bookings if guest_signed_in?
 
-    @bookings.flatten! if @booking.respond_to?(:flatten!)
+    @bookings.flatten! if @bookings.respond_to?(:flatten!)
   end
 
   # GET /bookings/1
@@ -60,10 +60,12 @@ class BookingsController < ApplicationController
     # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
     @booking = Booking.new(booking_params)
-
     respond_to do |format|
       if @booking.save
+        host = @booking.experience.host
+        receive_booking_request(host)
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+
       else
         format.html { render :new }
       end

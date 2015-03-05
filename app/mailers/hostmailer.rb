@@ -10,4 +10,6 @@ class Hostmailer < ApplicationMailer
     @host = host
     mail(to: @host.email, subject: "Payment has been completed!!!")
   end
+
+  
 end
