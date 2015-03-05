@@ -35,7 +35,7 @@
         </div>
         <div class="field">
           <%= f.label :max_group_size %> (Don't want a hundred guests now do we?)<br>
-          <%= f.number_field :max_group_size %>
+          <%= f.number_field :max_group_size, in: 1..10, required: true %>
         </div>
         <div class="field">
           <%= f.label :host_style %><br>
@@ -46,7 +46,7 @@
     <div class="col-md-6">
         <div class="field">
           <%= f.label :time, value: 'Preferred Time' %><br>
-          <%= f.time_select :time %>
+          <%= f.time_select :time, {minute_step: 15, ampm: true} %>
         </div>
 
         <div class="field">

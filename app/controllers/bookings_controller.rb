@@ -16,10 +16,9 @@ class BookingsController < ApplicationController
   end
 
   # GET /bookings/1
-<<<<<<< HEAD
   def show # Limited to only certain people
     if host_signed_in?
-      unless current_host.id == @experience.host_id 
+      unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
     elsif guest_signed_in?
@@ -31,11 +30,9 @@ class BookingsController < ApplicationController
     else
       redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
-=======
-  def show
+
     @messages = @booking.messages.all
     @message = Message.new
->>>>>>> db89f2589b733ebae261cb2672f7c47f5abfb560
   end
 
   # GET /bookings/new
@@ -101,7 +98,7 @@ class BookingsController < ApplicationController
 
     # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
-    
+
     #moment.js foramt MMMM DD, YYYY
     starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
 
