@@ -44,9 +44,9 @@ Rails.application.routes.draw do
   get "/hook" => "bookings#hook"
 
   post "/bookings/:id" => "bookings#show"
+  post 'messages' => 'messages#new'
 
 
-  
   resources :experiences
 
   resources :bookings

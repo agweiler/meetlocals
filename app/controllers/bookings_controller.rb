@@ -16,6 +16,7 @@ class BookingsController < ApplicationController
   end
 
   # GET /bookings/1
+<<<<<<< HEAD
   def show # Limited to only certain people
     if host_signed_in?
       unless current_host.id == @experience.host_id 
@@ -30,6 +31,11 @@ class BookingsController < ApplicationController
     else
       redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
+=======
+  def show
+    @messages = @booking.messages.all
+    @message = Message.new
+>>>>>>> db89f2589b733ebae261cb2672f7c47f5abfb560
   end
 
   # GET /bookings/new
@@ -72,11 +78,16 @@ class BookingsController < ApplicationController
 
     @booking = Booking.new(booking_params)
 
+    respond_to do |format|
+      if @booking.save
+        host = @booking.experience.host
+        Hostmailer.receive_booking_request(host).deliver_now
+        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
 
-    if @booking.save
-      redirect_to @booking.paypal_url(booking_path(@booking))
-    else
-      render :new
+      else
+        format.html { render :new }
+      end
+
     end
   end
 
@@ -108,9 +119,12 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.update(booking_params)
+        guest = @booking.guest
+        Guestmailer.receive_invitation(guest,@booking).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
+        byebug
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end

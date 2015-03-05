@@ -10,6 +10,10 @@ class Experience < ActiveRecord::Base
     	return ["All","Kuala Lumpur", "Selangor", "Penang","Johor"]
 	end
 
+  def max_number_in_group
+    return (1..self.max_group_size).to_a
+  end
+
 	validates :title, presence: true
 	validate :available_days_must_have_minimum_one_day
 

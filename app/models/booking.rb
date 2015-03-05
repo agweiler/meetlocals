@@ -2,13 +2,15 @@ class Booking < ActiveRecord::Base
 	belongs_to :guest
 	belongs_to :experience
 	has_one :testimonial
+	has_many :messages
+	
 	validates :guest_id, :experience_id, :date, presence: true
 	validate :group_size_must_not_exceed_maximum
 
 	def group_size_must_not_exceed_maximum
 		max = self.experience.max_group_size
 		unless (max >= 0 && max == nil)
-			if self.group_size >= self.experience.max_group_size
+			if self.group_size > self.experience.max_group_size
 				errors.add(:group_size, "cannot exceed maximum (#{max} people)")
 			end
 		end

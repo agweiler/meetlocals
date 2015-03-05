@@ -1,60 +1,61 @@
-<% if host_signed_in? %>
-  <h1>Listing bookings to your experiences</h1> 
-<% elsif guest_signed_in? %>
-  <h1>Listing your bookings</h1>
-<% elsif admin_signed_in? %>
-  <h1>Listing all bookings</h1>
-<% else %>
-  <h1>Log in to display your bookings</h1>
-<% end %>
-
-
-<% if @bookings.empty? %>
-  <h2>Nothing was found D:</h2>
-<% else %>
-<table>
-  <thead>
-    <tr>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Date</th>
-      <% if guest_signed_in? %>
-        <th>Host</th>
-      <% elsif host_signed_in? %>
-        <th>Guest</th>
-      <% else %>
-        <th>Host</th>
-        <th>Guest</th>
-      <% end %>
-      <th>Experience</th>
-      <th>Status</th>
-      <th>Group size</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <% experience = Experience.find(booking.experience_id)%>
-      <tr>
-        <td><%= booking.start_time.strftime('%r') %></td>
-        <td><%= booking.end_time.strftime('%r') %></td>
-        <td><%= booking.date %></td>
-        <% if guest_signed_in? %>
-          <td><%= link_to "#{experience.host.username}", experience.host %></td>
-        <% elsif host_signed_in? %>
-          <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
-        <% else %>
-          <td><%= link_to "#{experience.host.username}", experience.host %></td>
-          <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
+<div class="container" style="text-align:center">
+  <% if host_signed_in? %>
+    <h1>Listing bookings to your experiences</h1> 
+  <% elsif guest_signed_in? %>
+    <h1>Listing your bookings</h1>
+  <% elsif admin_signed_in? %>
+    <h1>Listing all bookings</h1>
+  <% else %>
+    <h1>Log in to display your bookings</h1>
+  <% end %>
+  <% if @bookings.empty? %>
+    <h2>Nothing was found D:</h2>
+  <% else %>
+  </br>
+  <div class="col-md-8" style="border: 2px solid; border-radius: 25px; border-color: #000000">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Date</th>
+          <% if guest_signed_in? %>
+            <th>Host</th>
+          <% elsif host_signed_in? %>
+            <th>Guest</th>
+          <% else %>
+            <th>Host</th>
+            <th>Guest</th>
+          <% end %>
+          <th>Experience</th>
+          <th>Status</th>
+          <th>Group size</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <% experience = Experience.find(booking.experience_id)%>
+          <tr>
+            <td><%= booking.start_time.strftime('%r') %></td>
+            <td><%= booking.end_time.strftime('%r') %></td>
+            <td><%= booking.date %></td>
+            <% if guest_signed_in? %>
+              <td><%= link_to "#{experience.host.username}", experience.host %></td>
+            <% elsif host_signed_in? %>
+              <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
+            <% else %>
+              <td><%= link_to "#{experience.host.username}", experience.host %></td>
+              <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
+            <% end %>
+            <td><%= booking.experience.title %></td>
+            <td><%= booking.status %></td>
+            <td><%= booking.group_size %></td>
+            <td><%= link_to 'Show', booking %></td>
+          </tr>
         <% end %>
-        <td><%= booking.experience.title %></td>
-        <td><%= booking.status %></td>
-        <td><%= booking.group_size %></td>
-        <td><%= link_to 'Show', booking %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% end %>
-<br>
+      </tbody>
+    </table>
+    <br>
+  </div>
+</div>  

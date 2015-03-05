@@ -77,7 +77,7 @@
   <% end %>
   <div class="field">
     <%= f.label :group_size %><br>
-    <%= f.number_field :group_size %>
+   <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
   </div>
   <div class="field">
     <%= f.label :is_private %><br>

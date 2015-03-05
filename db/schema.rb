@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150305070528) do
+=======
+ActiveRecord::Schema.define(version: 20150304091249) do
+>>>>>>> db89f2589b733ebae261cb2672f7c47f5abfb560
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -137,6 +141,15 @@ ActiveRecord::Schema.define(version: 20150305070528) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "booking_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "posts", force: :cascade do |t|
