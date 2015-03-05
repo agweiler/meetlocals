@@ -18,6 +18,8 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
+    @messages = @booking.messages.all
+    @message = Message.new
   end
 
   # GET /bookings/new
