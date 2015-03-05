@@ -60,11 +60,16 @@ class BookingsController < ApplicationController
 
     @booking = Booking.new(booking_params)
 
+    respond_to do |format|
+      if @booking.save
+        host = @booking.experience.host
+        Hostmailer.receive_booking_request(host).deliver_now
+        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
 
-    if @booking.save
-      redirect_to @booking.paypal_url(booking_path(@booking))
-    else
-      render :new
+      else
+        format.html { render :new }
+      end
+
     end
   end
 
@@ -96,9 +101,12 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.update(booking_params)
+        guest = @booking.guest
+        Guestmailer.receive_invitation(guest,@booking).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
+        byebug
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end

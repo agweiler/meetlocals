@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150304091249) do
     t.integer  "max_group_size"
     t.text     "host_style"
     t.string   "available_days", default: "-------"
-    t.float    "price"
-    t.integer  "host_id"
+    t.float    "price",          default: 0.0
+    t.integer  "host_id",                            null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "location"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20150304091249) do
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
-    t.date     "DOB"
     t.string   "country",                default: "", null: false
     t.string   "state",                  default: "", null: false
     t.string   "suburb",                 default: "", null: false

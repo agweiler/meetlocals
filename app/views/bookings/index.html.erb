@@ -20,25 +20,27 @@
         </tr>
       </thead>
 
-      <tbody>
-        <% @bookings.each do |booking| %>
-          <tr>
-            <td><%= booking.start_time.strftime('%r') %></td>
-            <td><%= booking.end_time.strftime('%r') %></td>
-            <td><%= booking.date %></td>
-            <td><%= booking.guest.username %></td>
-            <td><%= booking.experience_id %></td>
-            <td><%= booking.status %></td>
-            <td><%= booking.group_size %></td>
-            <td><%= booking.is_private %></td>
-            <td><%= link_to 'Show', booking %></td>
-            <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-            <!-- <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+
+        <td><%= booking.start_time.strftime('%r') %></td>
+        <td><%= booking.end_time.strftime('%r') %></td>
+        <td><%= booking.date %></td>
+        <td><%= booking.guest.username %></td>
+        <td><%= booking.experience_id %></td>
+        <td><%= booking.status %></td>
+        <td><%= booking.group_size %></td>
+        <td><%= booking.is_private %></td>
+        <td><%= link_to 'Show', booking %></td>
+        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+        <!-- <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
     <br>
 
