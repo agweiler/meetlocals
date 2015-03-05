@@ -38,7 +38,7 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   # POST /experiences.json
   def create
-byebug
+
     @days = experience_params.delete(:days)
     default = "-------"
 
