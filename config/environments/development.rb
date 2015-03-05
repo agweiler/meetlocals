@@ -50,7 +50,7 @@ Rails.application.configure do
     :port => "587",
     :domain => "gmail.com",
     :user_name => "thenasiproject@gmail.com",
-    :password => ENV['GMAIL']
+    :password => ENV['GMAIL'],
     :authentication => "plain",
     :enable_starttls_auto => true
   }
