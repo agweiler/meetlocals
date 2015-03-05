@@ -1,41 +1,47 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<h1>Listing Bookings</h1>
+<div class="container" style="text-align:center">
+    <h1>Listing Bookings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Date</th>
-      <th>Guest</th>
-      <th>Experience</th>
-      <th>Status</th>
-      <th>Group size</th>
-      <th>Is private</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+</br>
+  <div class="col-md-8" style="border: 2px solid; border-radius: 25px; border-color: #000000">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Start time</th>
+          <th>End time</th>
+          <th>Date</th>
+          <th>Guest</th>
+          <th>Experience</th>
+          <th>Status</th>
+          <th>Group size</th>
+          <th>Is private</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.start_time.strftime('%r') %></td>
-        <td><%= booking.end_time.strftime('%r') %></td>
-        <td><%= booking.date %></td>
-        <td><%= booking.guest.username %></td>
-        <td><%= booking.experience_id %></td>
-        <td><%= booking.status %></td>
-        <td><%= booking.group_size %></td>
-        <td><%= booking.is_private %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <!-- <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.start_time.strftime('%r') %></td>
+            <td><%= booking.end_time.strftime('%r') %></td>
+            <td><%= booking.date %></td>
+            <td><%= booking.guest.username %></td>
+            <td><%= booking.experience_id %></td>
+            <td><%= booking.status %></td>
+            <td><%= booking.group_size %></td>
+            <td><%= booking.is_private %></td>
+            <td><%= link_to 'Show', booking %></td>
+            <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
+            <!-- <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<br>
+    <br>
+
+</div>
 
 <!-- <%= link_to 'New Booking', new_booking_path %> -->
