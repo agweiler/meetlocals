@@ -2,6 +2,8 @@ class Booking < ActiveRecord::Base
 	belongs_to :guest
 	belongs_to :experience
 	has_one :testimonial
+	has_many :messages
+
 	validates :guest_id, :experience_id, :date, presence: true
 	validate :group_size_must_not_exceed_maximum
 
