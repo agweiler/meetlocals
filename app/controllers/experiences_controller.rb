@@ -84,9 +84,7 @@ class ExperiencesController < ApplicationController
     end
 
     experience_params[:available_days].replace(default)
-    byebug
     @image_files = experience_params.delete(:images_array)
-    byebug
     respond_to do |format|
       if @experience.update(experience_params.except(:images_array, :days))
         format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
