@@ -4,6 +4,7 @@
             <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
 
             daysOfWeekDisabled: <%= days %>,
+            format: 'MMMM DD, YYYY h:mm a',
             minDate: moment(),
             <% if @booking.date.nil? %>
               defaultDate: false,
@@ -11,12 +12,19 @@
               defaultDate: moment([<%= @booking.date.year %>,
                                     <%= @booking.date.month %>,
                                     <%= @booking.date.day %>,
-                                    <%= @booking.start_time.hour %>,
-                                    <%= @booking.start_time.min %>
+                                    <%= @experience.time.hour %>,
+                                    <%= @experience.time.min %>
                                   ]),
             <% end %>
         });
-        $
+
+      if( $("input[name*=datetime]").val() == "" )
+        $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
+
+      $('div.input-group').on("click", "span.input-group-addon", function(event){
+        $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
+      });
+
     });
 </script>
 
@@ -34,18 +42,9 @@
   <% end %>
 
   <div hidden>
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :start_time %><br> -->
-      <%= f.time_select :start_time %>
-    <!-- </div> -->
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :end_time %><br> -->
-      <%= f.time_select :end_time %>
-    <!-- </div> -->
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :date %><br> -->
-      <%= f.date_select :date %>
-    <!-- </div> -->
+    <%= f.time_select :start_time %>
+    <%= f.time_select :end_time %>
+    <%= f.date_select :date %>
   </div>
 
   <div class='input-group date' id='datetimepicker11'>
@@ -54,21 +53,14 @@
       <span class="glyphicon glyphicon-calendar"></span>
     </span>
   </div>
-  <!-- <div class="field">
-    <%= f.label :guest_id %><br>
-    <%= f.number_field :guest_id %>
-  </div> -->
+
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
-  <!-- <div class="field">
-    <%= f.label :experience_id %><br>
-    <%= f.number_field :experience_id %>
-  </div> -->
   <%= f.hidden_field :experience_id, value:@experience.id %>
+
   <% if current_host == @experience.host %>
     <div class="field">
       <%= f.label :status %><br>
       <%= f.select :status, options_for_select(Booking.statuses) %>
-      <!-- <%= f.text_field :status %> -->
     </div>
   <% else %>
     <div hidden>
