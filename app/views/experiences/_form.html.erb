@@ -1,5 +1,3 @@
-
-
 <%= form_for @experience, html: {multipart: true} do |f| %>
   <% if @experience.errors.any? %>
     <div id="error_explanation">
@@ -47,6 +45,11 @@
     </div>
     <div class="col-md-6">
         <div class="field">
+          <%= f.label :time, value: 'Preferred Time' %><br>
+          <%= f.time_select :time %>
+        </div>
+
+        <div class="field">
           <%= f.label :available_days %> (Check at least one)<br>
           <%= f.hidden_field :available_days%>
           <%= f.fields_for :days do |d| %>
@@ -79,4 +82,3 @@
  <!--  <div class ="field">
    Wasn't doing anything
   </div> -->
-  
