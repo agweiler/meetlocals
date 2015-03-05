@@ -17,13 +17,13 @@ class Booking < ActiveRecord::Base
 	end
 
 	def self.update_status(status)
-		case status
+		case status.downcase
 		# when "Requested" #default
-		when "Invite"
+		when "invite"
 			status.replace("invited")
-		when "Reject"
+		when "reject"
 			status.replace("rejected")
-		when "Complete"
+		when "complete"
 			status.replace("completed")
 		end
 		status

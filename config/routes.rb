@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :hosts, controllers: {
-    registrations: "hosts/registrations"
-  }
+  devise_for :hosts, controllers: { registrations: "hosts/registrations" }
   resources :hosts
 
-  devise_for :guests, controllers: {
-    registrations: "guests/registrations"
-  }
+  devise_for :guests, controllers: { registrations: "guests/registrations" }
   resources :guests
 
   devise_for :admins
@@ -36,8 +32,6 @@ Rails.application.routes.draw do
 
   post 'complete_profile' => 'hosts#show'
 
-  # get 'users/:id' => 'users#show'
-
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
   get '/blog' => 'posts#index'
@@ -46,6 +40,10 @@ Rails.application.routes.draw do
 
   get 'bookings/:id/testimonials/new' => 'testimonials#new'
 
+  post "/hook" => "bookings#hook"
+  get "/hook" => "bookings#hook"
+
+  post "/bookings/:id" => "bookings#show"
   post 'messages' => 'messages#new'
 
 
@@ -58,5 +56,4 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :testimonials
-
 end
