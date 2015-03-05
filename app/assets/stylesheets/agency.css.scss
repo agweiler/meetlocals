@@ -21,6 +21,7 @@ body {
 p {
     font-size: 14px;
     line-height: 1.75;
+    color: #000000;
 }
 
 p.large {
@@ -53,9 +54,10 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: capitalize;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+/*    text-transform: capitalize;
+*/  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
+    color: #000000;
 }
 
 .img-centered {

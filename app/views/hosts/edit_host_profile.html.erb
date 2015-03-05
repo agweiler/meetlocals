@@ -1,17 +1,15 @@
 <div class="container">
-<h2 style="text-align: center"> Thanks for signing up as a host, please complete your profile </h2>
+<h2 style="text-align: center"> Thanks for signing up as a host,</h2>
+<h2 style="text-align: center"> please complete your profile </h2>
 </div>
-
+</br>
 <div class="container">
+<div class="row">
+<div class="col-md-4 col-md-offset-4">
 <%= form_for @host, url: { action: "update_host_profile" }, html: {multipart: true} do |f| %>
 	<p>
 		<%= f.label :username %>
 		<%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
-	</p>
-
-	<p> 
-		<label for="host_D.O.B">D.O.B</label>
-		<%= f.date_field :DOB, class: "form-control" %>
 	</p>
 
 	<p>
@@ -28,16 +26,15 @@
 		<%= f.label :suburb %>
 	    <%= f.text_field :suburb, class: "form-control" %>
 	</p>
-</div>
 
-<div class="container">
     <%= f.label :image %><br>
     <%= f.file_field(:image_file) %></br>
-</div>
+
 <div style="text-align: center"> 
 <input type="submit" value="Submit">
 </div>
 <% end %>
+</div>
 
 
 

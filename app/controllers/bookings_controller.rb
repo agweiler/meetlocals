@@ -2,7 +2,6 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
   # GET /bookings
-  # GET /bookings.json
   def index
     @bookings = []
 
@@ -12,12 +11,13 @@ class BookingsController < ApplicationController
 
     @bookings = current_guest.bookings if guest_signed_in?
 
-    @bookings.flatten! if @booking.respond_to?(:flatten!)
+    @bookings.flatten! if @bookings.respond_to?(:flatten!)
   end
 
   # GET /bookings/1
-  # GET /bookings/1.json
   def show
+    @messages = @booking.messages.all
+    @message = Message.new
   end
 
   # GET /bookings/new
@@ -32,7 +32,6 @@ class BookingsController < ApplicationController
   end
 
   # POST /bookings
-  # POST /bookings.json
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
     booking_params[:guest_id].replace(current_guest.id.to_s)
@@ -63,15 +62,18 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
+        host = @booking.experience.host
+        Hostmailer.receive_booking_request(host).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+
       else
         format.html { render :new }
       end
+
     end
   end
 
   # PATCH/PUT /bookings/1
-  # PATCH/PUT /bookings/1.json
   def update
 
     booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
@@ -99,9 +101,12 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.update(booking_params)
+        guest = @booking.guest
+        Guestmailer.receive_invitation(guest,@booking).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
+        byebug
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
@@ -116,6 +121,24 @@ class BookingsController < ApplicationController
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # Paypal sends this
+  protect_from_forgery except: [:hook]
+  def hook
+    puts "THIS IS A PAYPAL REQUEST REACHING HOOK "*5
+    byebug
+    puts "IT IS SUPPOSED TO HAPPEN ASYNCHRONOUSLY "*5
+    byebug
+    puts "REMOVE IT IF IT IS OF NO USE YET "*5
+    byebug
+    params.permit! # Permit all Paypal input params
+    status = params[:payment_status]
+    if status == "Completed"
+      @registration = Registration.find params[:invoice]
+      @registration.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+    end
+    render nothing: true
   end
 
   private

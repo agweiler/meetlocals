@@ -1,6 +1,14 @@
-<h1>Editing <%= @experience.title %></h1>
+<div class="container">
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @experience %> |
-<%= link_to 'Back', experiences_path %>
+    <h1 style="margin-left:15px">Editing <%= @experience.title %></h1>
+
+    <%= render 'form' %>
+
+    <p style="text-align:center">
+
+    <%= link_to 'Show', @experience %> |
+    <%= link_to 'Back', experiences_path %>
+    </p>
+
+</div>
