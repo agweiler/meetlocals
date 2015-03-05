@@ -9,11 +9,6 @@
 		<%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
 	</p>
 
-	<p> 
-		<label for="host_D.O.B">D.O.B</label>
-		<%= f.date_field :DOB, class: "form-control" %>
-	</p>
-
 	<p>
 		<%= f.label :country_of_residence %>
 		<%= f.select :country, [["Malaysia","Malaysia"]], class: "form-control"%>

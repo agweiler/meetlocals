@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303133543) do
+ActiveRecord::Schema.define(version: 20150305070528) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -37,11 +37,14 @@ ActiveRecord::Schema.define(version: 20150303133543) do
     t.date     "date"
     t.integer  "guest_id"
     t.integer  "experience_id"
-    t.string   "status",        default: "requested"
+    t.string   "status",              default: "requested"
     t.integer  "group_size"
     t.boolean  "is_private"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.text     "notification_params"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
   end
 
   create_table "experiences", force: :cascade do |t|
@@ -88,7 +91,6 @@ ActiveRecord::Schema.define(version: 20150303133543) do
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
-    t.date     "DOB"
     t.string   "country",                default: "", null: false
     t.string   "state",                  default: "", null: false
     t.string   "suburb",                 default: "", null: false

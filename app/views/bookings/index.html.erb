@@ -1,41 +1,60 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<% if host_signed_in? %>
+  <h1>Listing bookings to your experiences</h1> 
+<% elsif guest_signed_in? %>
+  <h1>Listing your bookings</h1>
+<% elsif admin_signed_in? %>
+  <h1>Listing all bookings</h1>
+<% else %>
+  <h1>Log in to display your bookings</h1>
+<% end %>
 
-<h1>Listing Bookings</h1>
 
+<% if @bookings.empty? %>
+  <h2>Nothing was found D:</h2>
+<% else %>
 <table>
   <thead>
     <tr>
       <th>Start time</th>
       <th>End time</th>
       <th>Date</th>
-      <th>Guest</th>
+      <% if guest_signed_in? %>
+        <th>Host</th>
+      <% elsif host_signed_in? %>
+        <th>Guest</th>
+      <% else %>
+        <th>Host</th>
+        <th>Guest</th>
+      <% end %>
       <th>Experience</th>
       <th>Status</th>
       <th>Group size</th>
-      <th>Is private</th>
       <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @bookings.each do |booking| %>
+      <% experience = Experience.find(booking.experience_id)%>
       <tr>
         <td><%= booking.start_time.strftime('%r') %></td>
         <td><%= booking.end_time.strftime('%r') %></td>
         <td><%= booking.date %></td>
-        <td><%= booking.guest.username %></td>
-        <td><%= booking.experience_id %></td>
+        <% if guest_signed_in? %>
+          <td><%= link_to "#{experience.host.username}", experience.host %></td>
+        <% elsif host_signed_in? %>
+          <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
+        <% else %>
+          <td><%= link_to "#{experience.host.username}", experience.host %></td>
+          <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
+        <% end %>
+        <td><%= booking.experience.title %></td>
         <td><%= booking.status %></td>
         <td><%= booking.group_size %></td>
-        <td><%= booking.is_private %></td>
         <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <!-- <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
-
-<!-- <%= link_to 'New Booking', new_booking_path %> -->
