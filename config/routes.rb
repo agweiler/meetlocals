@@ -46,9 +46,9 @@ Rails.application.routes.draw do
 
   get 'bookings/:id/testimonials/new' => 'testimonials#new'
 
+  post 'messages' => 'messages#new'
 
 
-  
   resources :experiences
 
   resources :bookings
