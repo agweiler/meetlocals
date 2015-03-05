@@ -61,20 +61,13 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
-        receive_booking_request(host)
+        Hostmailer.receive_booking_request(host).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
 
       else
         format.html { render :new }
       end
 
-
-
-    if @booking.save
-      redirect_to @booking.paypal_url(booking_path(@booking))
-    else
-      render :new
->>>>>>> 7485f5aac9ec6143a726799a4709cfc37793fb0b
     end
   end
 
@@ -106,9 +99,12 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.update(booking_params)
+        guest = @booking.guest
+        Guestmailer.receive_invitation(guest,@booking).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
+        byebug
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end

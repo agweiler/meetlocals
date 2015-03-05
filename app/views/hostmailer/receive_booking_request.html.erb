@@ -4,10 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You have received a booking <%= @host.name %></h1>
+    <h1>You have received a booking <%= @host.username %></h1>
     <p>
       Your fame has spread! You have recieved a booking request,
     </p>
+
+    <p> Check out your path to obscene amount of riches here! 
+      <%= link_to 'The Nasi Project' , new_host_session_url %>
+
     <p>Thanks for using Project Nasi and have a great day!</p>
   </body>
 </html>

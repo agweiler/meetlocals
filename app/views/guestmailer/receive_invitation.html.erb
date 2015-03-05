@@ -4,10 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You have received an invitation <%= @guest.name %></h1>
+    <h1>Hello <%= @guest.username %></h1>
     <p>
-      You're really popular! You have recieved an invitation
+      You're really popular! Your booking status for <strong><%= @booking.experience.title%></strong> has been changed to  <strong><%= @booking.status %></strong>
     </p>
+
+    <p> Build your anticipation by looking at the experience again by going to <%= link_to 'The Nasi Project' , new_guest_session_url %> </p>
     <p>Thanks for using Project Nasi and have a great day!</p>
   </body>
 </html>

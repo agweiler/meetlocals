@@ -1,9 +1,9 @@
 class Guestmailer < ApplicationMailer
 
-  def receive_invitation(guest)
+  def receive_invitation(guest,booking)
     @guest = guest
-
-    mail(to: @guest.email, subject: "They like you! You have received an invitation")
+    @booking = booking
+    mail(to: @guest.email, subject: "They like you! Your booking status has been changed")
   end
 
   def payment_confirmed(guest)
