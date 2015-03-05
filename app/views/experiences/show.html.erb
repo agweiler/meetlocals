@@ -3,11 +3,42 @@
 <h2><%= @experience.title %>
   <p><%= @experience.is_halal ? "(halal)" : "" %></p>
 </h2>
-<p>
-  <%  @experience.images.each do |image| %>
-  <%=   image_tag image.image_file.url(:medium) %></br>
-  <%  end %>
-</p>
+
+<!-- Carousel experiment (it works!) -->
+
+<div class="col-sm-3">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <% @experience.images.each_with_index do |image, index| %>
+        <div class="item <%= "active" if index == 0 %>">
+          <%= image_tag image.image_file.url(:medium) %></br>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Left and right controls -->
+
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+  </div>
+</div>
+<!-- Carousel experiment end -->
 <p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
 <h4><%= @experience.description %></h4>
 <% duration = (@experience.duration*60).divmod(60) %>
@@ -36,8 +67,8 @@
   <p>Rating: <%= testimonial.rating %></p>
   <p><%= testimonial.body %></p>
 <% end %>
-
-<%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+<!-- 
+<%=link_to 'Book', "#{@experience.id}/bookings/new" %> | -->
 <% if current_host == @experience.host %>
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>

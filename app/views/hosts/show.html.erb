@@ -7,7 +7,7 @@
               <h3>Your account</h3>
           	<% end %>
             <% if @host.images.present? %>
-              <%= image_tag @host.images.first.image_file.url(:medium) %></br>
+              <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle" %></br>
             <% else %>
               <%= image_tag "box.jpeg" %>
             <% end %>
@@ -35,12 +35,13 @@
 
 
         <h1 style="text-align:center">Experiences belonging to <%= @host.username %></h1>
+        </br>
 
-        <div class="row">
-          <% @experiences.each do |experience| %>
+<!--         <div class="row">
+ -->          <% @experiences.each do |experience| %>
 
-            <div class="col-sm-4">
-              <div class="highlight">
+            <div class="col-sm-8">
+              <div style="text-align: center; border: 2px solid; border-color: #000000; border-radius: 25px">
                 <h2><%= truncate(experience.title, length: 20) %>
                   <p><%= experience.is_halal ? "(halal)" : "" %></p>
                 </h2>
@@ -70,7 +71,7 @@
                     | <%= link_to 'Edit', edit_experience_path(experience) %> |
                     <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
                   <% end %>
-              </div>
+              </div></br>
             </div>
           <% end %>
 
