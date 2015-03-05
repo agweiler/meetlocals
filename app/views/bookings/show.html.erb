@@ -2,12 +2,15 @@
 
 <p>
   <strong>Start time:</strong>
-  <%= @booking.start_time.strftime('%r') %> <small>(Local Time)</small>
+  <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
+  <!-- <%= @booking.start_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @booking.end_time.strftime('%r') %> <small>(Local Time)</small>
+  <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
+  <small>(Local Time)</small>
+  <!-- <%= @booking.end_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>

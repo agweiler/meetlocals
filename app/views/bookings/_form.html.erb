@@ -4,16 +4,16 @@
             <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
 
             daysOfWeekDisabled: <%= days %>,
-            format: 'MMMM DD, YYYY h:mm a',
+            format: 'MMMM DD, YYYY',
             minDate: moment(),
             <% if @booking.date.nil? %>
               defaultDate: false,
             <% else %>
               defaultDate: moment([<%= @booking.date.year %>,
                                     <%= @booking.date.month %>,
-                                    <%= @booking.date.day %>,
-                                    <%= @experience.time.hour %>,
-                                    <%= @experience.time.min %>
+                                    <%= @booking.date.day %>
+                                    // <%= @experience.time.hour %>,
+                                    // <%= @experience.time.min %>
                                   ]),
             <% end %>
         });

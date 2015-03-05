@@ -46,7 +46,7 @@
     <div class="col-md-6">
         <div class="field">
           <%= f.label :time, value: 'Preferred Time' %><br>
-          <%= f.time_select :time %>
+          <%= f.time_select :time, {minute_step: 15, ampm: true} %>
         </div>
 
         <div class="field">
