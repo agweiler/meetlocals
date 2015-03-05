@@ -11,11 +11,26 @@ class BookingsController < ApplicationController
 
     @bookings = current_guest.bookings if guest_signed_in?
 
+    @bookings = Booking.all if current_admin
     @bookings.flatten! if @bookings.respond_to?(:flatten!)
   end
 
   # GET /bookings/1
-  def show
+  def show # Limited to only certain people
+    if host_signed_in?
+      unless current_host.id == @experience.host_id
+        redirect_to '/bookings', notice: "You are not logged in as the booking's host"
+      end
+    elsif guest_signed_in?
+      unless current_guest.id == @booking.guest_id
+        redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
+      end
+    elsif admin_signed_in?
+      puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
+    else
+      redirect_to '/bookings', notice: "You must be logged in to view your bookings"
+    end
+
     @messages = @booking.messages.all
     @message = Message.new
   end
@@ -83,7 +98,7 @@ class BookingsController < ApplicationController
 
     # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
-    
+
     #moment.js foramt MMMM DD, YYYY
     starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
 
@@ -126,7 +141,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to bookings_url, notice: 'Booking was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -134,17 +149,12 @@ class BookingsController < ApplicationController
   # Paypal sends this
   protect_from_forgery except: [:hook]
   def hook
-    puts "THIS IS A PAYPAL REQUEST REACHING HOOK "*5
-    byebug
-    puts "IT IS SUPPOSED TO HAPPEN ASYNCHRONOUSLY "*5
-    byebug
-    puts "REMOVE IT IF IT IS OF NO USE YET "*5
     byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
     if status == "Completed"
-      @registration = Registration.find params[:invoice]
-      @registration.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+      @booking = Booking.find params[:invoice]
+      @booking.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
     end
     render nothing: true
   end

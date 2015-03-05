@@ -35,7 +35,7 @@
         </div>
         <div class="field">
           <%= f.label :max_group_size %> (Don't want a hundred guests now do we?)<br>
-          <%= f.number_field :max_group_size %>
+          <%= f.number_field :max_group_size, in: 1..20, required: true %>
         </div>
         <div class="field">
           <%= f.label :host_style %><br>

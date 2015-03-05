@@ -37,11 +37,14 @@ ActiveRecord::Schema.define(version: 20150305081251) do
     t.date     "date"
     t.integer  "guest_id"
     t.integer  "experience_id"
-    t.string   "status",        default: "requested"
+    t.string   "status",              default: "requested"
     t.integer  "group_size"
     t.boolean  "is_private"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.text     "notification_params"
+    t.string   "transaction_id"
+    t.datetime "purchased_at"
   end
 
   create_table "experiences", force: :cascade do |t|
