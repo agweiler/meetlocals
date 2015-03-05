@@ -11,11 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150305070528) do
-=======
-ActiveRecord::Schema.define(version: 20150304091249) do
->>>>>>> db89f2589b733ebae261cb2672f7c47f5abfb560
+
+ActiveRecord::Schema.define(version: 20150305081251) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -60,11 +57,12 @@ ActiveRecord::Schema.define(version: 20150304091249) do
     t.integer  "max_group_size"
     t.text     "host_style"
     t.string   "available_days", default: "-------"
-    t.float    "price",          default: 0.0
-    t.integer  "host_id",                            null: false
+    t.float    "price"
+    t.integer  "host_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.string   "location"
+    t.time     "time"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -95,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150304091249) do
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.date     "DOB"
     t.string   "country",                default: "", null: false
     t.string   "state",                  default: "", null: false
     t.string   "suburb",                 default: "", null: false

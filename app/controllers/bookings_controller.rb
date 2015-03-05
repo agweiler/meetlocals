@@ -55,26 +55,31 @@ class BookingsController < ApplicationController
     booking_params[:guest_id].replace(current_guest.id.to_s)
 
     # starttime = Time.parse( params[:datetime] )
-    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
+
+    #moment.js foramt MMMM DD, YYYY
+    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )
 
-    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-
-    endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
-
-    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+    # @experience = Experience.find(booking_params[:experience_id])
+    #
+    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+    #
+    # endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
+    #
+    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
     @booking = Booking.new(booking_params)
 
@@ -94,28 +99,31 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   def update
 
-    booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
+    # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
-    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
+    
+    #moment.js foramt MMMM DD, YYYY
+    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )
 
-    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-
-    endtime = starttime + @booking.experience.duration.hour
-
-    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+    #
+    # endtime = starttime + @booking.experience.duration.hour
+    #
+    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
     respond_to do |format|
       if @booking.update(booking_params)
