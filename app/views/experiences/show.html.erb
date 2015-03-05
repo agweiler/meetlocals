@@ -1,6 +1,13 @@
+<div class="container">
+
 <h2><%= @experience.title %>
   <p><%= @experience.is_halal ? "(halal)" : "" %></p>
 </h2>
+<p>
+  <%  @experience.images.each do |image| %>
+  <%=   image_tag image.image_file.url(:medium) %></br>
+  <%  end %>
+</p>
 <p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
 <h4><%= @experience.description %></h4>
 <% duration = (@experience.duration*60).divmod(60) %>
@@ -17,15 +24,10 @@
 <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
 
 <p><%= @experience.price %>$</p>
-<p>
-  <%  @experience.images.each do |image| %>
-  <%=   image_tag image.image_file.url(:medium) %></br>
-  <%  end %>
-</p>
 
 <p>
   Average Rating:
-  <%= @average_rating %>
+  <%= @average_rating.nil? ? '-' : @average_rating %>
 </p>
 
 <p>Testimonials:</p>
@@ -40,3 +42,5 @@
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>
 <%= link_to 'Back', experiences_path %>
+
+<div>

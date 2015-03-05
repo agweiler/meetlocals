@@ -9,11 +9,15 @@
           <%= form_tag '/experiences_search' do %>
             <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control") %></br>
             <div style="text-align:center">
-            <%= submit_tag "Filter" %>
+            <%= submit_tag "Filter", class: "btn btn-default", style: "background-color: #fed136" %>
             </div>
           <% end %>
          
         </div>
+    </div>
+  </div>
+
+  <hr>
 
 
 
@@ -21,7 +25,8 @@
           <% @experiences.each do |experience| %>
 
             <div class="col-sm-4">
-              <div class="highlight">
+              <div class="highlight" style="text-align:center; background-color: #ffffff
+; border: 2px solid; border-radius: 25px; border-color: #000000">
                 <h2><%= truncate(experience.title, length: 20) %>
                   <p><%= experience.is_halal ? "(halal)" : "" %></p>
                 </h2>

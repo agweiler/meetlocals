@@ -5,7 +5,6 @@ class DeviseCreateHosts < ActiveRecord::Migration
       t.string :username,           null: false, default: ""
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.date   :DOB,                default: "Not Given"
 
       t.string :country,            null: false, default: ""
       t.string :state,              null: false, default: ""
