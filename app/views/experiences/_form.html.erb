@@ -16,15 +16,11 @@
 
         <div class="field">
           <%= f.label :title %><br>
-          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch" %>
+          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true %>
         </div>
         <div class="field">
           <%= f.label :description %><br>
-          <%= f.text_area :description, placeholder: "Let people know what it's about" %>
-        </div>
-        <div class="field">
-          <%= f.label :duration %> (hours)<br>
-          <%= f.text_field :duration, placeholder: "Estimate" %>
+          <%= f.text_area :description, placeholder: "Let people know what it's about", required: true %>
         </div>
         <div class="field">
           <%= f.check_box :is_halal %> <%= f.label :is_halal %>?
@@ -46,7 +42,12 @@
     <div class="col-md-6">
         <div class="field">
           <%= f.label :time, value: 'Preferred Time' %><br>
-          <%= f.time_select :time, {minute_step: 15, ampm: true} %>
+          <%= f.time_select :time, {minute_step: 15, ampm: true, default:{hour:00,min:00}} %>
+        </div>
+
+        <div class="field">
+          <%= f.label :duration %> (hours)<br>
+          <%= f.text_field :duration, placeholder: "Estimate", required: true %>
         </div>
 
         <div class="field">
@@ -61,7 +62,7 @@
         </div>
         <div class="field">
           <%= f.label :price %> (USD)<br>
-          <%= f.text_field :price, placeholder: "Feeling generous are we?" %> $
+          <%= f.number_field :price, placeholder: "Feeling generous are we?", min: 0, required: true %> $
         </div>
 
         <div class="field">
