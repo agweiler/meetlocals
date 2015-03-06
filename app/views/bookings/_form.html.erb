@@ -18,12 +18,12 @@
             <% end %>
         });
 
-      if( $("input[name*=datetime]").val() == "" )
-        $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
-
-      $('div.input-group').on("click", "span.input-group-addon", function(event){
-        $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
-      });
+      // if( $("input[name*=datetime]").val() == "" )
+      //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
+      //
+      // $('div.input-group').on("click", "span.input-group-addon", function(event){
+      //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
+      // });
 
     });
 </script>
@@ -48,7 +48,8 @@
   </div>
 
   <div class='input-group date' id='datetimepicker11'>
-    <input type='text' class="form-control" name="datetime" />
+    <!-- <input type='text' class="form-control" name="datetime" /> -->
+    <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: true %>
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar"></span>
     </span>
