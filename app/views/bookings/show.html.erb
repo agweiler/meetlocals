@@ -70,7 +70,7 @@
 
 <%= form_for @message do |m| %>
   <%= m.label :message, value:'New Message'%><br>
-  <%= m.text_area :text %><br>
+  <%= m.text_area :text, required: true, title:nil %><br>
   <%= m.hidden_field :booking_id, value: @booking.id %>
 
   <% if guest_signed_in? %>
