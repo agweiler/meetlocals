@@ -7,12 +7,14 @@ class MessagesController < ApplicationController
                     booking_id: @message[:booking_id]  )
 
     booking = new_message.booking
-    if new_message.sender_type = "host"
+    if new_message.sender_type == "host"
+
       guest = Guest.find(booking.guest_id)
       Guestmailer.guest_get_mail(guest,booking).deliver_now
-    elsif new_message.sender_type = "guest"
+    elsif new_message.sender_type == "guest"
+     
       host = Host.find(booking.experience.host_id)
-      Hostmailer..host_get_mail(host,booking).deliver_now
+      Hostmailer.host_get_mail(host,booking).deliver_now
     end
 
     redirect_to "/bookings/#{@message[:booking_id]}"
