@@ -149,11 +149,14 @@ class BookingsController < ApplicationController
   # Paypal sends this
   protect_from_forgery except: [:hook]
   def hook
-    byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
     if status == "Completed"
       @booking = Booking.find params[:invoice]
+      guest = @booking.guest
+      host = @booking.experience.host
+      Guestmailer.payment_confirmed(guest, @booking).deliver_now
+      Hostmailer.payment_completion(host, @booking).deliver_now
       @booking.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
     end
     render nothing: true

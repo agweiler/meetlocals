@@ -6,7 +6,7 @@ class Guestmailer < ApplicationMailer
     mail(to: @guest.email, subject: "They like you! Your booking status has been changed")
   end
 
-  def payment_confirmed(guest)
+  def payment_confirmed(guest,booking)
     @guest = guest
 
     mail(to: @guest.email, subject: "You have confirmed payment by paying us")
