@@ -31,10 +31,10 @@
 <%= form_for(@booking) do |f| %>
   <% if @booking.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+      <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
 
       <ul>
-      <% @booking.errors.full_messages.each do |message| %>
+      <small><% @booking.errors.full_messages.each do |message| %></small>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -42,8 +42,8 @@
   <% end %>
 
   <div hidden>
-    <%= f.time_select :start_time %>
-    <%= f.time_select :end_time %>
+    <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
+    <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
     <%= f.date_select :date %>
   </div>
 
@@ -58,22 +58,21 @@
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
   <%= f.hidden_field :experience_id, value:@experience.id %>
 
-  <% if current_host == @experience.host %>
-    <div class="field">
+  <div class="field">
+    <% if current_host == @experience.host %>
       <%= f.label :status %><br>
       <%= f.select :status, options_for_select(Booking.statuses) %>
-    </div>
-  <% else %>
-    <div hidden>
-      <%= f.text_field :status, value:@booking.status %>
-    </div>
-  <% end %>
+    <% else %>
+      <%= f.text_field :status, value:@booking.status, hidden: true %>
+    <% end %>
+  </div>
+
   <div class="field">
     <%= f.label :group_size %><br>
    <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
   </div>
   <div class="field">
-    <%= f.label :is_private %><br>
+    <%= f.label :is_private, value:'private event?' %>
     <%= f.check_box :is_private %>
   </div>
 

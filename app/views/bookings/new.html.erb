@@ -1,4 +1,4 @@
-<h1>New Booking <small><%= @experience.title %></small></h1>
+<h1>New Booking <small><%= "#{@experience.title} (#{@experience.time.strftime("%I:%M %p")}~)" %></small></h1>
 <%= render 'form' %>
 
 <%= link_to 'Back', bookings_path %>
