@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
       guest = Guest.find(booking.guest_id)
       Guestmailer.guest_get_mail(guest,booking).deliver_now
     elsif new_message.sender_type == "guest"
-     
+      
       host = Host.find(booking.experience.host_id)
       Hostmailer.host_get_mail(host,booking).deliver_now
     end

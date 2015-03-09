@@ -14,7 +14,7 @@ class Experience < ActiveRecord::Base
     return (1..self.max_group_size).to_a
   end
 
-	validates :title, presence: true
+	validates :title, :description, :cuisine, :max_group_size, :duration, :price, presence: true
 	validate :available_days_must_have_minimum_one_day
 
 	def available_days_must_have_minimum_one_day
