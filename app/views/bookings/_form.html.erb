@@ -25,6 +25,13 @@
       //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
       // });
 
+      $('#new_booking').submit(function(event){
+        if( $("input[name*=datetime]").val() == "" ){
+          event.preventDefault();
+          $('small#date_error').text("Please specify booking date.");
+        }
+      });
+
     });
 </script>
 
@@ -49,11 +56,12 @@
 
   <div class='input-group date' id='datetimepicker11'>
     <!-- <input type='text' class="form-control" name="datetime" /> -->
-    <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: true %>
+    <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar"></span>
     </span>
   </div>
+  <small id="date_error"></small>
 
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
   <%= f.hidden_field :experience_id, value:@experience.id %>

@@ -50,7 +50,7 @@
 
 <h5>Messages</h5>
 <% @messages.each do |message| %>
-  <div>
+  <div id="messages">
     <p><%= message.text %></p>
     <p>
       <% if message.sender_type == "host" %>
@@ -70,7 +70,7 @@
 
 <%= form_for @message do |m| %>
   <%= m.label :message, value:'New Message'%><br>
-  <%= m.text_area :text, required: true, title:nil %><br>
+  <%= m.text_area :text, required: false, title:nil %><br>
   <%= m.hidden_field :booking_id, value: @booking.id %>
 
   <% if guest_signed_in? %>
