@@ -1,0 +1,20 @@
+<% @messages = Message.where(booking_id: params[:id]) %>
+<% @messages = Message.where(booking_id: params[:message][:booking_id]) if @messages.empty? && params[:message].present? %>
+
+<% @messages.each do |message| %>
+
+    <p><%= message.text %></p>
+    <p>
+      <% if message.sender_type == "host" %>
+        <% sender = Host.find(message.sender_id) %>
+      <% elsif message.sender_type == "guest" %>
+        <% sender = Guest.find(message.sender_id) %>
+      <% end %>
+
+      <%= sender.username %>
+      <% if sender.images.present? %>
+        <%= image_tag sender.images.first.image_file.url(:medium) %>
+      <% end %>
+      <span><%= message.created_at %></span>
+    </p>
+<% end %>

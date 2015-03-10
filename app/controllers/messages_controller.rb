@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def new
     @message = params[:message]
     new_message = Message.create(text: @message[:text],
@@ -12,12 +13,16 @@ class MessagesController < ApplicationController
       guest = Guest.find(booking.guest_id)
       Guestmailer.guest_get_mail(guest,booking).deliver_now
     elsif new_message.sender_type == "guest"
-      
+
       host = Host.find(booking.experience.host_id)
       Hostmailer.host_get_mail(host,booking).deliver_now
     end
 
-    redirect_to "/bookings/#{@message[:booking_id]}"
+    # redirect_to booking_path new_message.booking_id
+    respond_to do |format|
+      format.html {redirect_to booking_path new_message.booking_id}
+      format.js
+    end
   end
 
 end
