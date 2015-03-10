@@ -31,6 +31,9 @@
 <p>
   <strong>Status:</strong>
   <%= @booking.status.capitalize %>
+  <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+    <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+  <% end %>
 </p>
 
 <p>
