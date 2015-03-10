@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
   def new
     @message = params[:message]
     new_message = Message.create(text: @message[:text],
@@ -15,9 +16,11 @@ class MessagesController < ApplicationController
       Hostmailer.host_get_mail(host.id, booking.id).deliver_later
     end
 
+    respond_to do |format|
+      format.html {redirect_to booking_path new_message.booking_id}
+      format.js
+    end
 
-
-    redirect_to "/bookings/#{@message[:booking_id]}"
   end
 
 end
