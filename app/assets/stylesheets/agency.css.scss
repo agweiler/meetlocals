@@ -4,6 +4,8 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+/*background-attachment: fixed gives parralax effects
+*/
 body {
     overflow-x: hidden;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -951,3 +953,8 @@ body {
     webkit-tap-highlight-color: #fed136;
 }
 
+.signup-notice {
+    background: #fed136;
+    font-weight: bold;
+    color: #000000;
+}

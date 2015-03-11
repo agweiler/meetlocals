@@ -1,25 +1,21 @@
 class EmailapiController < ApplicationController
+  include EmailapiHelper
 
-  validates :email 
-    
-
-    def subscribe
-
-
+  def subscribe
+    email = params[:email][:address]
+    respond_to do |format|
+      if is_a_valid_email?(email)
         @list_id = "682ba11451"
         gb = Gibbon::API.new
 
-        if gb.lists.subscribe({
+        gb.lists.subscribe({
           :id => @list_id,
-          :email => {:email => params[:email][:address]}
-          })
-          flash[:success] = "Please check the supplied email to confirm your subscription!"
-          # redirect_to root_path, :flash => { :success => "Message" }
-          redirect_to "/"
-        else 
-          redirect_to "/"
-        end
-
+          :email => {:email => email}
+        })
+        format.json { render json: {msg: "Please check your supplied email to confirm subscription!" }}
+      else
+        format.json { render json: {msg: "Invalid email" }}
+      end
     end
-
+  end
 end

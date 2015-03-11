@@ -15,9 +15,9 @@
         <div class="row">
 
           <div class="col-md-4">      
-            <ul style="float: left">
+            <ul id="email-form" style="float: left">
                 <li>
-                    <%= form_tag('/emailapi/subscribe', method: "post", id: "subscribe", remote: "true") do -%>
+                    <%= form_tag('emailapi/subscribe', method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
                        <%= email_field(:email, :address, {id: "email", placeholder: "email address"})%>
                        <%= submit_tag("Sign me up!") %>
 
@@ -49,3 +49,14 @@
           
   </div> 
 </footer>
+
+<script>
+  $(document).ready(function(){
+    $("#subscribe").on("ajax:success", function(e, data, status, xhr) {
+      $('#email-form').append("<li class='signup-notice'>" + xhr.responseJSON.msg + "</li>")
+      // alert(xhr.responseJSON.msg);
+    });
+
+  });
+
+</script>
