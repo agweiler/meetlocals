@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150305081251) do
     t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.date     "DOB"
     t.string   "country",                default: "", null: false
     t.string   "state",                  default: "", null: false
     t.string   "suburb",                 default: "", null: false
