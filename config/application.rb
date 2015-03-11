@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 module Nasi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -22,7 +24,8 @@ module Nasi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-
+    # Using font-awesome
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
   end
 end

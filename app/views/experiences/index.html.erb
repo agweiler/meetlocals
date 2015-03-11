@@ -17,43 +17,49 @@
     </div>
   </div>
 
+
   <hr>
 
+<!-- need to use each with index to make sure a new row starts every 3 experience boxes (i.e. where %3 == 0) -->
 
+        <% @experiences.in_groups_of(3, false).each do |group| %>
 
-        <div class="row">
-          <% @experiences.each do |experience| %>
+          <div class="row">
+            <% group.each do |experience| %>
 
-            <div class="col-sm-4">
-              <div class="highlight" style="text-align:center; background-color: #ffffff
-; border: 2px solid; border-radius: 25px; border-color: #000000">
-                <h2><%= truncate(experience.title, length: 20) %>
-                  <p><%= experience.is_halal ? "(halal)" : "" %></p>
-                </h2>
-                <p>Hosted by <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
-                <h4><%= truncate(experience.description, length: 100) %></h4>
-                <% duration = (experience.duration*60).divmod(60) %>
-                <p>Cuisine: <%= experience.cuisine %></p>
-                <p>Max Group Size: <%= experience.max_group_size %></p>
-                <% if experience.host_style %>
-                  <p>Host Style: <%= truncate(experience.host_style, length: 44) %></p>
-                <% end %>
-                <p>Available on:
-                  <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-                  <% avail_days = experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-                  <%= avail_days.to_sentence %>
-                </p>
-                <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
-                <p><%= experience.price %>$</p>
-                <p><%= link_to 'Show', experience %>
-                <% if current_host == experience.host || current_admin %>
-                  | <%= link_to 'Edit', edit_experience_path(experience) %> |
-                  <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-                <% end %>
+              <div class="col-md-4">
+                <div class="highlight" style="text-align:center; background-color: #ffffff; border: 2px solid; border-radius: 25px; border-color: #000000">
+                  <h2><%= truncate(experience.title, length: 20) %>
+                    <p><%= experience.is_halal ? "(halal)" : "" %></p>
+                  </h2>
+                  <p>Hosted by <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
+                  <h4><%= truncate(experience.description, length: 100) %></h4>
+                  <% duration = (experience.duration*60).divmod(60) %>
+                  <p>Cuisine: <%= experience.cuisine %></p>
+                  <p>Max Group Size: <%= experience.max_group_size %></p>
+                  <% if experience.host_style %>
+                    <p>Host Style: <%= truncate(experience.host_style, length: 44) %></p>
+                  <% end %>
+                  <p>Available on:
+                    <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                    <% avail_days = experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                    <%= avail_days.to_sentence %>
+                  </p>
+                  <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
+                  <p><%= experience.price %>$</p>
+                  <p><%= link_to 'Show', experience %>
+                  <% if current_host == experience.host || current_admin %>
+                    | <%= link_to 'Edit', edit_experience_path(experience) %> |
+                    <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                  <% end %>
+                </div>
               </div>
-            </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
+
+        <% end %>
       </div>
     </div>
 </div>
+
+

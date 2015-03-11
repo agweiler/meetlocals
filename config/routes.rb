@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   post "/bookings/:id" => "bookings#show"
   post 'messages' => 'messages#new'
 
+  # root 'emailapi#index'
+  post 'emailapi/subscribe' => 'emailapi#subscribe'
 
   resources :experiences
 

@@ -3,8 +3,10 @@
   <head>
   <!-- Nav bar --> 
     <title>Nasi</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="/app/assets/stylesheets/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 
@@ -39,5 +41,7 @@
     </div>
 		  <%= render 'layouts/footer' %>
     </div>
+<!--       <%= debug(params) if Rails.env.development? %>
+ -->
   </body> 
 </html>
