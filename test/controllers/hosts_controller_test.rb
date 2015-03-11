@@ -18,7 +18,7 @@ class HostsControllerTest < ActionController::TestCase
 
   test "should create host" do
     assert_difference('Host.count') do
-      post :create, host: { DOB: @host.DOB, country: @host.country, email: @host.email, password: @host.password, state: @host.state, suburb: @host.suburb, username: @host.username }
+      post :create, host: { country: @host.country, email: @host.email, password: @host.password, state: @host.state, suburb: @host.suburb, username: @host.username }
     end
 
     assert_redirected_to host_path(assigns(:host))
@@ -35,7 +35,7 @@ class HostsControllerTest < ActionController::TestCase
   end
 
   test "should update host" do
-    patch :update, id: @host, host: { DOB: @host.DOB, country: @host.country, email: @host.email, password: @host.password, state: @host.state, suburb: @host.suburb, username: @host.username }
+    patch :update, id: @host, host: { country: @host.country, email: @host.email, password: @host.password, state: @host.state, suburb: @host.suburb, username: @host.username }
     assert_redirected_to host_path(assigns(:host))
   end
 

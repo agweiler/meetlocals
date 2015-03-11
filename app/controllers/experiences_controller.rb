@@ -2,17 +2,15 @@ class ExperiencesController < ApplicationController
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
 
   # GET /experiences
-  # GET /experiences.json
   def index
-      if params[:experience] == nil || params[:experience][:location] == "All"
-        @experiences = Experience.all
-      else
-        @experiences = Experience.where(location: params[:experience][:location])
-      end
+    if (params[:experience] == nil || params[:experience][:location] == "All")
+      @experiences = Experience.all
+    else
+      @experiences = Experience.where(location: params[:experience][:location])
+    end
   end
 
   # GET /experiences/1
-  # GET /experiences/1.json
   def show
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
@@ -36,7 +34,6 @@ class ExperiencesController < ApplicationController
   end
 
   # POST /experiences
-  # POST /experiences.json
   def create
 
     @days = experience_params.delete(:days)
@@ -53,27 +50,22 @@ class ExperiencesController < ApplicationController
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
     @experience.location = current_host.state
 
-    respond_to do |format|
-      if @experience.save
-        format.html { redirect_to @experience, notice: 'Experience was successfully created.' }
-        # format.json { render :show, status: :created, location: @experience }
-
-        #create image after parent-experience is saved
-        @image_files.each do |img|
-          new_img = @experience.images.new
-          new_img.image_file = img
-        # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
-          new_img.caption = img.original_filename
-          new_img.save!
-        end unless @image_files.nil?
-      else
-        format.html { render :new }
-      end
+    if @experience.save
+      redirect_to @experience, notice: 'Experience was successfully created.'
+      #create image after parent-experience is saved
+      @image_files.each do |img|
+        new_img = @experience.images.new
+        new_img.image_file = img
+      # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
+        new_img.caption = img.original_filename
+        new_img.save!
+      end unless @image_files.nil?
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /experiences/1
-  # PATCH/PUT /experiences/1.json
   def update
 
     @days = experience_params.delete(:days)
@@ -87,8 +79,7 @@ class ExperiencesController < ApplicationController
     @image_files = experience_params.delete(:images_array)
     respond_to do |format|
       if @experience.update(experience_params.except(:images_array, :days))
-        format.html { redirect_to @experience, notice: 'Experience was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @experience }
+        redirect_to @experience, notice: 'Experience was successfully updated.'
 
         #reset image(s) after parent-experience is save
         if @experience.images.present?
@@ -103,20 +94,15 @@ class ExperiencesController < ApplicationController
           new_img.save!
         end unless @image_files.nil?
       else
-        format.html { render :edit }
-        # format.json { render json: @experience.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
   end
 
   # DELETE /experiences/1
-  # DELETE /experiences/1.json
   def destroy
     @experience.destroy
-    respond_to do |format|
-      format.html { redirect_to experiences_url, notice: 'Experience was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to experiences_url, notice: 'Experience was successfully destroyed.'
   end
 
 
@@ -129,7 +115,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :images_array => [],
+      params.require(:experience).permit(:title, :location, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :time, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have mail <%= @host.username %>! </h1>
+    <p>
+      Humans are social creatures, thus we need other humans to communicate wtih. Luckily for you,
+      you have a new message regarding the <%= @booking.experience.title %>
+    </p>
+    <p>
+      Go check it out and satisfy your basic human need for social activity at <%= link_to 'The Nasi Project' , new_host_session_url %>
+    </p>
+    <p>Thanks for using Project Nasi and have a great day!</p>
+  </body>
+</html>
