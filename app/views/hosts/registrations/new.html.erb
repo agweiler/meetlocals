@@ -1,10 +1,5 @@
-<script type="text/javascript" src="/app/javascripts/jquery.fancybox-1.3.4.pack.js"></script>
-
 <script>
-
   $(document).ready(function() {
-    $("a#inline").fancybox();
-
     console.log($("#current_guest").text());
     console.log($("#current_host").text());
 
@@ -13,12 +8,10 @@
 
     if (current_guest != "") {
       $("#new_host").attr("hidden", "true");
-      $("#header_text").append("</br><div id=\"fancybox\">You are currently signed in as a guest. If you really want to be a host, please return to the main page and log out before coming back here</div>");
-
-      
+      $("#header_text").append("</br><div id=\"fancymessage\">You are currently signed in as a guest. If you really want to be a host, please return to the main page and log out before coming back here</div>");
+      $("div#fancymessage").fancybox();  
     }
   });
-
 </script>
 
 <div class="container">
@@ -47,22 +40,18 @@
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
           </div>
         </br>
-        <div id="center_align" style="text-align: center"> 
+        <div id="center_align" style="text-align: center">
           <div class="actions">
             <%= f.submit "Sign up" %></br></br>
             <%= render "hosts/shared/links" %>
-            <% end %>
+            
           </div>
         </div>
+        <% end %>
     </div>
   </div>
 </div>
 
 <label id="current_guest" hidden><%= current_guest%></label>
 <label id="current_host" hidden><%= current_host%></label>
-
-<a id="inline" href="#data">This shows content of element who has id="data"</a>
-
-<div style="display:none"><div id="data">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div></div>
-
 
