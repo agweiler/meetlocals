@@ -1,6 +1,8 @@
 </br>
 <div class="container">
-
+    <div class="row">
+      <div class="col-md-4" id="map-canvas" min-height="500px"></div>
+    </div>
     <div class="row">
           <div class="col-md-4">
           	<% if @host == current_host %>
@@ -15,13 +17,8 @@
 
 
           	<p>
-          	  <strong>Region:</strong>
-          	  <%= @host.state %>, <%= @host.country %>
-          	</p>
-
-          	<p>
-          	  <strong>Suburb:</strong>
-          	  <%= @host.suburb %>
+          	  <strong>Location:</strong>
+          	  <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
           	</p>
 
             <% if @host == current_host %>
@@ -33,6 +30,12 @@
           	<% end %>
           </div>
 
+          <div id="mapLat" style="display: none;">
+            <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
+          </div>
+          <div id="mapLng" style="display: none;">
+            <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
+          </div>
 
 
         <h1 style="text-align:center">Experiences belonging to <%= @host.username %></h1>
