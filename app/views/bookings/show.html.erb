@@ -1,27 +1,18 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <p>
   <strong>Start time:</strong>
   <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
-  <!-- <%= @booking.start_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>
   <strong>End time:</strong>
   <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
   <small>(Local Time)</small>
-  <!-- <%= @booking.end_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>
   <strong>Date:</strong>
   <%= @booking.date.strftime('%d %b %Y')  %>
 </p>
-
-<!-- <p>
-  <strong>Guest:</strong>
-  <%= @booking.guest_id %>
-</p> -->
 
 <p>
   <strong>Experience:</strong>

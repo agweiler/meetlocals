@@ -85,7 +85,6 @@ class BookingsController < ApplicationController
         host = @booking.experience.host
         Hostmailer.receive_booking_request(host).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-
       else
         format.html { render :new }
       end
