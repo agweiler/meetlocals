@@ -48,6 +48,9 @@ Rails.application.routes.draw do
 
   post 'messages' => 'messages#new'
 
+  # root 'emailapi#index'
+  post '/emailapi/subscribe' => 'emailapi#subscribe'
+
 
   resources :experiences
 
