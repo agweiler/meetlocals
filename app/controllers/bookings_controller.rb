@@ -11,11 +11,26 @@ class BookingsController < ApplicationController
 
     @bookings = current_guest.bookings if guest_signed_in?
 
+    @bookings = Booking.all if current_admin
     @bookings.flatten! if @bookings.respond_to?(:flatten!)
   end
 
   # GET /bookings/1
-  def show
+  def show # Limited to only certain people
+    if host_signed_in?
+      unless current_host.id == @experience.host_id
+        redirect_to '/bookings', notice: "You are not logged in as the booking's host"
+      end
+    elsif guest_signed_in?
+      unless current_guest.id == @booking.guest_id
+        redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
+      end
+    elsif admin_signed_in?
+      puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
+    else
+      redirect_to '/bookings', notice: "You must be logged in to view your bookings"
+    end
+
     @messages = @booking.messages.all
     @message = Message.new
   end
@@ -37,26 +52,31 @@ class BookingsController < ApplicationController
     booking_params[:guest_id].replace(current_guest.id.to_s)
 
     # starttime = Time.parse( params[:datetime] )
-    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
+
+    #moment.js foramt MMMM DD, YYYY
+    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )
 
-    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-
-    endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
-
-    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+    # @experience = Experience.find(booking_params[:experience_id])
+    #
+    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+    #
+    # endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
+    #
+    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
     @booking = Booking.new(booking_params)
 
@@ -76,28 +96,31 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   def update
 
-    booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
+    # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
-    starttime = DateTime.strptime(params[:datetime], '%m/%d/%Y %I:%M %p')
+
+    #moment.js foramt MMMM DD, YYYY
+    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
     booking_params['date(3i)'].replace( starttime.strftime('%d') )
 
-    booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-
-    endtime = starttime + @booking.experience.duration.hour
-
-    booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
+    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
+    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
+    #
+    # endtime = starttime + @booking.experience.duration.hour
+    #
+    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
+    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
+    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
+    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
+    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
+    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
     respond_to do |format|
       if @booking.update(booking_params)
@@ -118,7 +141,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to bookings_url, notice: 'Booking was successfully removed.' }
       format.json { head :no_content }
     end
   end
@@ -126,17 +149,15 @@ class BookingsController < ApplicationController
   # Paypal sends this
   protect_from_forgery except: [:hook]
   def hook
-    puts "THIS IS A PAYPAL REQUEST REACHING HOOK "*5
-    byebug
-    puts "IT IS SUPPOSED TO HAPPEN ASYNCHRONOUSLY "*5
-    byebug
-    puts "REMOVE IT IF IT IS OF NO USE YET "*5
-    byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
     if status == "Completed"
-      @registration = Registration.find params[:invoice]
-      @registration.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+      @booking = Booking.find params[:invoice]
+      guest = @booking.guest
+      host = @booking.experience.host
+      Guestmailer.payment_confirmed(guest, @booking).deliver_now
+      Hostmailer.payment_completion(host, @booking).deliver_now
+      @booking.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
     end
     render nothing: true
   end

@@ -1,5 +1,3 @@
-
-
 <%= form_for @experience, html: {multipart: true} do |f| %>
   <% if @experience.errors.any? %>
     <div id="error_explanation">
@@ -18,15 +16,11 @@
 
         <div class="field">
           <%= f.label :title %><br>
-          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch" %>
+          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false %>
         </div>
         <div class="field">
           <%= f.label :description %><br>
-          <%= f.text_area :description, placeholder: "Let people know what it's about" %>
-        </div>
-        <div class="field">
-          <%= f.label :duration %> (hours)<br>
-          <%= f.text_field :duration, placeholder: "Estimate" %>
+          <%= f.text_area :description, placeholder: "Let people know what it's about", required: false %>
         </div>
         <div class="field">
           <%= f.check_box :is_halal %> <%= f.label :is_halal %>?
@@ -36,8 +30,8 @@
           <%= f.text_field :cuisine %>
         </div>
         <div class="field">
-          <%= f.label :max_group_size %> (Don't want a hundred guests now do we?)<br>
-          <%= f.number_field :max_group_size %>
+          <%= f.label :max_group_size %> <small>(Don't want a hundred guests now do we?)</small><br>
+          <%= f.number_field :max_group_size, in: 1..10, required: false %>
         </div>
         <div class="field">
           <%= f.label :host_style %><br>
@@ -47,7 +41,17 @@
     </div>
     <div class="col-md-6">
         <div class="field">
-          <%= f.label :available_days %> (Check at least one)<br>
+          <%= f.label :time, value: 'Preferred Time' %><br>
+          <%= f.time_select :time, {minute_step: 15, ampm: true, default:{hour:00,min:00}} %>
+        </div>
+
+        <div class="field">
+          <%= f.label :duration %> <small>(hours)</small><br>
+          <%= f.text_field :duration, placeholder: "Estimate", required: false %>
+        </div>
+
+        <div class="field">
+          <%= f.label :available_days %> <small>(Check at least one)</small><br>
           <%= f.hidden_field :available_days%>
           <%= f.fields_for :days do |d| %>
             <% [:sun, :mon, :tue, :wed, :thu, :fri, :sat].each_with_index do |w, i| %>
@@ -58,11 +62,12 @@
         </div>
         <div class="field">
           <%= f.label :price %> (USD)<br>
-          <%= f.text_field :price, placeholder: "Feeling generous are we?" %> $
+          <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?" %> $
         </div>
 
         <div class="field">
-          <%= f.label :image %> ([ctrl + click] to select more than one image)<br>
+          <%= f.label :image %>
+          <small>([ctrl + click] to select more than one image)</small><br>
           <%= f.file_field(:images_array, multiple: true) %>
           <small>supported file types: .jpg .png .gif</small>
         </div>
@@ -79,4 +84,3 @@
  <!--  <div class ="field">
    Wasn't doing anything
   </div> -->
-  

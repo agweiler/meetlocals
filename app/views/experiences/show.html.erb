@@ -16,6 +16,9 @@
 <% if @experience.host_style %>
   <p>Host Style: <%= @experience.host_style %></p>
 <% end %>
+<p>Preferred Time:
+  <%= @experience.time.strftime('%I:%M %p') %>
+</p>
 <p>Available on:
   <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
   <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>

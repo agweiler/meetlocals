@@ -4,29 +4,44 @@
             <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
 
             daysOfWeekDisabled: <%= days %>,
+            format: 'MMMM DD, YYYY',
             minDate: moment(),
             <% if @booking.date.nil? %>
               defaultDate: false,
             <% else %>
               defaultDate: moment([<%= @booking.date.year %>,
                                     <%= @booking.date.month %>,
-                                    <%= @booking.date.day %>,
-                                    <%= @booking.start_time.hour %>,
-                                    <%= @booking.start_time.min %>
+                                    <%= @booking.date.day %>
+                                    // <%= @experience.time.hour %>,
+                                    // <%= @experience.time.min %>
                                   ]),
             <% end %>
         });
-        $
+
+      // if( $("input[name*=datetime]").val() == "" )
+      //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
+      //
+      // $('div.input-group').on("click", "span.input-group-addon", function(event){
+      //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
+      // });
+
+      $('#new_booking').submit(function(event){
+        if( $("input[name*=datetime]").val() == "" ){
+          event.preventDefault();
+          $('small#date_error').text("Please specify booking date.");
+        }
+      });
+
     });
 </script>
 
 <%= form_for(@booking) do |f| %>
   <% if @booking.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+      <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
 
       <ul>
-      <% @booking.errors.full_messages.each do |message| %>
+      <small><% @booking.errors.full_messages.each do |message| %></small>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -34,53 +49,38 @@
   <% end %>
 
   <div hidden>
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :start_time %><br> -->
-      <%= f.time_select :start_time %>
-    <!-- </div> -->
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :end_time %><br> -->
-      <%= f.time_select :end_time %>
-    <!-- </div> -->
-    <!-- <div class="field"> -->
-      <!-- <%= f.label :date %><br> -->
-      <%= f.date_select :date %>
-    <!-- </div> -->
+    <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
+    <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
+    <%= f.date_select :date %>
   </div>
 
   <div class='input-group date' id='datetimepicker11'>
-    <input type='text' class="form-control" name="datetime" />
+    <!-- <input type='text' class="form-control" name="datetime" /> -->
+    <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
     <span class="input-group-addon">
       <span class="glyphicon glyphicon-calendar"></span>
     </span>
   </div>
-  <!-- <div class="field">
-    <%= f.label :guest_id %><br>
-    <%= f.number_field :guest_id %>
-  </div> -->
+  <small id="date_error"></small>
+
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
-  <!-- <div class="field">
-    <%= f.label :experience_id %><br>
-    <%= f.number_field :experience_id %>
-  </div> -->
   <%= f.hidden_field :experience_id, value:@experience.id %>
-  <% if current_host == @experience.host %>
-    <div class="field">
+
+  <div class="field">
+    <% if current_host == @experience.host %>
       <%= f.label :status %><br>
       <%= f.select :status, options_for_select(Booking.statuses) %>
-      <!-- <%= f.text_field :status %> -->
-    </div>
-  <% else %>
-    <div hidden>
-      <%= f.text_field :status, value:@booking.status %>
-    </div>
-  <% end %>
+    <% else %>
+      <%= f.text_field :status, value:@booking.status, hidden: true %>
+    <% end %>
+  </div>
+
   <div class="field">
     <%= f.label :group_size %><br>
    <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
   </div>
   <div class="field">
-    <%= f.label :is_private %><br>
+    <%= f.label :is_private, value:'private event?' %>
     <%= f.check_box :is_private %>
   </div>
 
