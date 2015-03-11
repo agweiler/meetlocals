@@ -48,7 +48,7 @@
   <p>Host Style: <%= @experience.host_style %></p>
 <% end %>
 <p>Preferred Time:
-  <%= @experience.time.strftime('%I:%M%p') %>
+  <%= @experience.time.strftime('%I:%M %p') %>
 </p>
 <p>Available on:
   <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>

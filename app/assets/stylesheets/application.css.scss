@@ -1,9 +1,23 @@
+/*
+ *= require_self
+ *= require fancybox
+ *= require_tree .
+ */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "agency";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "hosts";
+@import "bookings";
+@import "experiences";
+@import "custom";
+@import "scaffolds";
+@import "static_pages";
 
+/*//Import any stylesheets we need
+*/
 #social:hover {
           -webkit-transform:scale(1.1); 
 -moz-transform:scale(1.1); 
