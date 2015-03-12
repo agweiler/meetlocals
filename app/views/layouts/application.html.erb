@@ -16,32 +16,30 @@
   <% else %>
     <body data-no-turbolink = "false">
   <% end %>
-    <header class = "navbar navbar-fixed-top navbar-inverse">
-	  <div class ='container'>
+  <header class = "navbar navbar-fixed-top navbar-inverse">
+	<div class ='container'>
 
-	  <% if current_admin %>
-  			<%= render 'layouts/header_admin' %>
-  		  <% elsif current_host %>
-  			<%= render 'layouts/header_host' %>
-  		  <% elsif current_guest %>
-  			<%= render 'layouts/header_guest' %>
-  		  <% else %>
-  			<%= render 'layouts/header_default' %>
-  		<% end %> 
+  	<% if current_admin %>
+    	<%= render 'layouts/header_admin' %>
+    <% elsif current_host %>
+    	<%= render 'layouts/header_host' %>
+    <% elsif current_guest %>
+    	<%= render 'layouts/header_guest' %>
+    <% else %>
+    	<%= render 'layouts/header_default' %>
+    <% end %> 
 
     <div style="height: 50px"></div>
-    <% if notice %>
-		  <p id="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-		  <p class="alert"><%= alert %></p>
-    <% end %>
-    <div class="container-fluid no-padding"> <!-- this is doubled up in some pages, should refactor -->
-		<%= yield %>
+      <% if notice %>
+    		<p id="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+    		<p class="alert"><%= alert %></p>
+      <% end %>
+        <div class="container-fluid no-padding"> <!-- this is doubled up in some pages, should refactor -->
+    	<%= yield %>
     </div>
-		  <%= render 'layouts/footer' %>
-    </div>
-<!--       <%= debug(params) if Rails.env.development? %>
- -->
+  	<%= render 'layouts/footer' %>
+  </div>
   </body> 
 </html>
