@@ -1,6 +1,4 @@
 class Hostmailer < ApplicationMailer
-  # include Sidekiq::Mailer
-  # include Sidekiq::Worker
 
   def receive_booking_request(host_id,booking_id)
     @host = Host.find host_id
