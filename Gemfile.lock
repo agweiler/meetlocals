@@ -234,13 +234,13 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-<<<<<<< HEAD
+
   devise-async
-=======
+
   font-awesome-sass
   gibbon!
   fancybox2-rails
->>>>>>> 6c08810a9466a6ad879285c5de8df35e04367284
+
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
