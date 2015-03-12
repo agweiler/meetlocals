@@ -36,7 +36,7 @@
     <% if alert %>
 		  <p class="alert"><%= alert %></p>
     <% end %>
-    <div class="container-fluid no-padding"> <!-- this is doubled up in some pages, should refactor -->
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px"> <!-- this is doubled up in some pages, should refactor -->
 		<%= yield %>
     </div>
 		  <%= render 'layouts/footer' %>

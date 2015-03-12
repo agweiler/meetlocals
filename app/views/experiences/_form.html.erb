@@ -16,18 +16,19 @@
 
         <div class="field">
           <%= f.label :title %><br>
-          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false %>
+          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false, class: 'form-control', style: 'width: 50%' %>
         </div>
         <div class="field">
           <%= f.label :description %><br>
-          <%= f.text_area :description, placeholder: "Let people know what it's about", required: false %>
+          <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', style: 'width: 75%'  %>
         </div>
         <div class="field">
-          <%= f.check_box :is_halal %> <%= f.label :is_halal %>?
+          <%= f.label :is_halal %>?
+          <%= f.check_box :is_halal %> 
         </div>
         <div class="field">
           <%= f.label :cuisine %><br>
-          <%= f.text_field :cuisine %>
+          <%= f.text_field :cuisine, class: 'form-control', style: 'width: 50%' %>
         </div>
         <div class="field">
           <%= f.label :max_group_size %> <small>(Don't want a hundred guests now do we?)</small><br>
