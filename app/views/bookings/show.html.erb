@@ -1,27 +1,18 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <p>
   <strong>Start time:</strong>
   <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
-  <!-- <%= @booking.start_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>
   <strong>End time:</strong>
   <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
   <small>(Local Time)</small>
-  <!-- <%= @booking.end_time.strftime('%r') %> <small>(Local Time)</small> -->
 </p>
 
 <p>
   <strong>Date:</strong>
-  <%= @booking.date %>
+  <%= @booking.date.strftime('%d %b %Y')  %>
 </p>
-
-<!-- <p>
-  <strong>Guest:</strong>
-  <%= @booking.guest_id %>
-</p> -->
 
 <p>
   <strong>Experience:</strong>
@@ -31,6 +22,9 @@
 <p>
   <strong>Status:</strong>
   <%= @booking.status.capitalize %>
+  <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+    <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+  <% end %>
 </p>
 
 <p>
@@ -50,7 +44,22 @@
 
 <h5>Messages</h5>
 <div id="messages">
-  <%= render 'messages/index' %>
+  <% @messages.each do |message| %>
+  <p><%= message.text %></p>
+  <p>
+    <% if message.sender_type == "host" %>
+      <% sender = Host.find(message.sender_id) %>
+    <% elsif message.sender_type == "guest" %>
+      <% sender = Guest.find(message.sender_id) %>
+    <% end %>
+
+    <%= sender.username %>
+    <% if sender.images.present? %>
+      <%= image_tag sender.images.first.image_file.url(:medium) %>
+    <% end %>
+    <span><%= message.created_at %></span>
+  </p>
+  <% end %>
 </div>
 
 <%= form_for @message, remote: true do |m| %>

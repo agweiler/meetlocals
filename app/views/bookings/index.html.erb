@@ -16,8 +16,9 @@
     <table class="table-striped">
       <thead>
         <tr>
-          <th>Start time</th>
           <th>Date</th>
+          <th>Time</th>
+          <!-- <th>End time</th> -->
           <% if guest_signed_in? %>
             <th>Host</th>
           <% elsif host_signed_in? %>
@@ -36,8 +37,11 @@
         <% @bookings.each do |booking| %>
           <% experience = Experience.find(booking.experience_id)%>
           <tr>
+
+            <td><%= booking.date.strftime('%d %b %Y') %></td>
             <td><%= experience.time.strftime('%I:%M %p') %></td>
-            <td><%= booking.date %></td>
+            <!-- <td><%= booking.end_time.strftime('%r') %></td> -->
+
             <% if guest_signed_in? %>
               <td><%= link_to "#{experience.host.username}", experience.host %></td>
             <% elsif host_signed_in? %>

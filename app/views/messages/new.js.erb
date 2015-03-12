@@ -1,3 +1,4 @@
 $("textarea#message_text").val('');
-$("div#messages").html("<%= j render('messages/index') %>");
-// j means escape javascript
+
+$("div#messages").append("<%= j render('messages/index') %>");
+
