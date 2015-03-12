@@ -1,5 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Lato:400,900);
-    @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 .highlight {
   padding: 9px 14px;
@@ -27,7 +27,7 @@
   .info-card {
     width: 400px;
    /* height: 375px;*/
-    border: 1px solid rgb(215, 215, 215);
+    border: 3px solid #000;
     position: relative;
     font-family: 'Lato', sans-serif;
     margin-bottom: 20px;

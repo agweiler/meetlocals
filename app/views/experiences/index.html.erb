@@ -1,4 +1,4 @@
-<!-- <div class="container"> -->
+
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <h1 style="text-align:center">Experiences await</h1>
@@ -18,12 +18,14 @@
   </div>
   <hr>
 
+
+
         <% @experiences.in_groups_of(3, false).each do |group| %>
 
-          <div class="row">
+          <div class="row" style="padding-right: 40px; margin-left: -5px">
             <% group.each do |experience| %>
 
-              <div class="col-md-4">
+              <div class="col-md-4" style="margin-left: -5px">
               
                   <div class=" col-md-4 ">
                     <div class="[ info-card ]">
@@ -67,7 +69,7 @@
               </div>
             <% end %>
           </div>
-
+        <% end %>
 
 
 
@@ -77,9 +79,9 @@
 <!-- need to use each with index to make sure a new row starts every 3 experience boxes (i.e. where %3 == 0) -->
 
 
-        <% end %>
-      </div>
+         
+    <!--   </div>
     </div>
-<!-- </div>
- -->
+  -->
+
 
