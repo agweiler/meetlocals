@@ -5,8 +5,8 @@
     <title>Nasi</title>
   <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
+<!--   <link rel="stylesheet" href="fonts/font-awesome.min.css">
+ -->
   <%= csrf_meta_tags %>
   <link rel="stylesheet" href="/app/assets/stylesheets/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
 
@@ -30,14 +30,14 @@
     <% end %> 
 
     <div style="height: 50px"></div>
-      <% if notice %>
-    		<p id="notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-    		<p class="alert"><%= alert %></p>
-      <% end %>
-        <div class="container-fluid no-padding"> <!-- this is doubled up in some pages, should refactor -->
-    	<%= yield %>
+    <% if notice %>
+		  <p id="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+		  <p class="alert"><%= alert %></p>
+    <% end %>
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px"> <!-- this is doubled up in some pages, should refactor -->
+		<%= yield %>
     </div>
   	<%= render 'layouts/footer' %>
   </div>
