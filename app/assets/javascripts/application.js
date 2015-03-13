@@ -19,4 +19,3 @@
 //= require google
 //= require hosts
 //= require experiences
-//= require fancybox
