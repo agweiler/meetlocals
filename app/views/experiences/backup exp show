@@ -1,0 +1,26 @@
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+  
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item slides active">
+      <div class="carousel-inner"  role="listbox">
+        <% @experience.images.each_with_index do |image, index| %>
+          <div class="item <%= "active" if index == 0 %>">
+            <%= image_tag image.image_file.url(:large) %></br>
+          </div>
+        <% end %>
+      </div>
+
+      
+    </div>
+  </div> 
+</div>
