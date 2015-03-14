@@ -87,9 +87,11 @@ footer {
   padding-right: 70px;
  /* border-top: 1px solid #eaeaea;*/
   color: #777;
-  background-color: #fff;
-  margin-bottom: 0px;
-  /*height: 100px;*/
+  background-color: #1A1A1A;
+  margin-bottom: -100px;
+  height: 220px;
+  /*border-top: 2px;
+  border-top-color: #000;*/
 
 }
 
@@ -122,7 +124,7 @@ footer ul li {
 /*!
  * Datetimepicker for Bootstrap 3
 //! version : 4.0.0-beta
- * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ * https://github.com/Eoh sdan/bootstrap-datetimepicker/
  */
 
 .bootstrap-datetimepicker-widget.dropdown-menu {
