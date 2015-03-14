@@ -1,5 +1,10 @@
 <div class="container">
   <div class="row">
+    <% if current_host %>
+      <div class="col-md-8 col-md-offset-2">
+        <%= render 'no_host_login' %>
+      </div>
+    <% else %>
     <div class="col-md-4 col-md-offset-4">
         <h2 style="text-align:center">Guest Login</h2>
 
@@ -29,7 +34,8 @@
             <%= render "guests/shared/links" %>
           </div>
         <% end %>
-
+      <!-- ending else statement -->
     </div>
+  <% end %>
   </div>
 </div>
