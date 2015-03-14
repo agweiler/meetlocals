@@ -1,18 +1,24 @@
-<footer class = "footer" style="padding-top: 50px">
+
+<footer class= "footer">
+</br>
+</br>
   
   <div class="container">
     <div class="row">
       <div class="col-md-4">
         <div class="row">
-          <p> Get Meet the Danes' newsletter </p>
+          <p style="color: #777"> Get Meet the Danes' newsletter </p>
         </div>
               <div class="row">
                 <ul id="email-form" style="float: left">
                         <li>
-                            <%= form_tag('emailapi/subscribe', method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
-                               <%= email_field(:email, :address, {id: "email", placeholder: "email address"})%>
-                               <%= submit_tag("Sign me up!") %>
-
+                            <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
+                            <div class="form-group">
+                               <%= email_field(:email, :address, {class: "form-control", id: "email", placeholder: "email address"})%>
+                            </div>
+<!--                                <%= submit_tag("Sign me up!") %>
+ -->                         <%= button_tag(type: 'submit', class: "btn btn-primary") do %> Sign me up!
+<% end %>
                             <% end %></li>
                 </ul>
              </div>
@@ -42,10 +48,10 @@
 
       <div class="col-md-4">
           <div class="row">
-            <p style="margin-right: -60px"> Connect with us on Social & Email </p>
+            <p style="margin-right: 60px"> Connect with us on Social & Email </p>
           </div>
           <div class="row">
-                  <ul class="list-inline social-buttons">
+                  <ul class="list-inline social-buttons" style="margin-right: 50px">
                    <li><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
                 <li><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
                 <li><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
@@ -57,6 +63,7 @@
       </div>
     </div>         
   </div> 
+</div>
 </footer>
 
 <script>

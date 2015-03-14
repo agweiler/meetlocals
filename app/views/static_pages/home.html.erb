@@ -24,7 +24,8 @@
             <h1>Meet the Danes</h1>        
             <h3>Authentic meals with good company</h3>
         </hgroup>
-        <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
+<!--         <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
+ -->       <%= link_to "Find a Host", experiences_path, class: "btn btn-hero btn-lg" %>
       </div>
     </div>
     <div class="item slides">
@@ -34,7 +35,8 @@
             <h1>Become a Host</h1>        
             <h3>Wow guests with your food</h3>
         </hgroup>       
-        <button class="btn btn-hero btn-lg" role="button">Find out how</button>
+<!--         <button class="btn btn-hero btn-lg" role="button">Find out how</button>
+ -->        <%= link_to "Be a Host", how_to_be_a_host_path, class: "btn btn-hero btn-lg"%>
       </div>
     </div>
     <div class="item slides">
@@ -44,7 +46,8 @@
             <h1>Find out how it works</h1>        
             <h3>Learn about the benefits</h3>
         </hgroup>
-        <button class="btn btn-hero btn-lg" role="button">More info</button>
+<!--         <button class="btn btn-hero btn-lg" role="button">More info</button>
+ -->         <%= link_to "Learn more", how_it_works_path, class: "btn btn-hero btn-lg" %>
       </div>
     </div>
   </div> 
@@ -187,7 +190,7 @@
   <div style="background-image:url('assets/greg.jpg'); background-repeat: repeat;" id="pre_foot">
     <div class="col-md-12" style="text-align:center; margin-top:150px">
       
-        <div class="row">
+        
           <div class="col-md-6" style="">
           <%= link_to "Sign up as a guest", new_guest_registration_path, class: "btn-xl", style: "background-color:#1abc9c; color:#f5f5f5" %> 
           </div> 
@@ -195,7 +198,6 @@
             <div class="col-md-6" style="">
               <%= link_to "Sign up as a host", new_host_registration_path, class: "btn-xl", style: "color:#660A0A"%>
             </div>
-
         </div>
     </div>
   </div>

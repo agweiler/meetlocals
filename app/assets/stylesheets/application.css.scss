@@ -48,22 +48,22 @@ body {
 }
 
 #home {
-  background-image: url("/assets/nasi_head_placeholder.jpg");
-  background-size: 100% 95%;
+/*  background-image: url("/assets/nasi_head_placeholder.jpg");
+*/  background-size: 100% 95%;
   background-repeat: no-repeat;
   color: #ffffff;
 }
 
 #host {
-  background-image: url("/assets/thai_stirfry.jpg");
-  background-size: 100% 100%;
+/*  background-image: url("/assets/thai_stirfry.jpg");
+*/  background-size: 100% 100%;
   background-repeat: no-repeat;
   color: #ffffff;
 }
 
 #guest {
-  background-image: url("/assets/food-collection-gray.png");
-  background-size: 100% 100%;
+/*  background-image: url("/assets/food-collection-gray.png");
+*/  background-size: 100% 100%;
   background-repeat: no-repeat;
   color: #ffffff;
 }
@@ -82,12 +82,14 @@ body {
  /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 20px;
+  margin-top: 0px;
+  padding-top: 30px;
   padding-right: 70px;
-  border-top: 1px solid #eaeaea;
+ /* border-top: 1px solid #eaeaea;*/
   color: #777;
   background-color: #fff;
+  margin-bottom: 0px;
+  /*height: 100px;*/
 
 }
 
