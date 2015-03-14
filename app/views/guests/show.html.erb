@@ -1,0 +1,24 @@
+<div class="container">
+<% if @guest == current_guest %>
+	<h3>Your guest account</h3>
+<% end %>
+<% if @guest.images.present? %>
+	<%= image_tag @guest.images.first.image_file.url(:medium) %></br>
+<% else %>
+	<%= image_tag "box.jpeg" %>
+<% end %>
+<h4><%= @guest.username %><p>(<%= @guest.email %>)</p></h4>
+<p>
+	<strong>About Me:</strong><br />
+	<%= @guest.about %>
+</p>
+
+<% if @guest == current_guest %>
+<%= button_to "Browse Experiences", experiences_path, :class => "btn btn-default", :method => :get %>
+
+<%= button_to "Edit Profile" , edit_guest_path, :class => "btn btn-default", :method => :get %>
+
+<%= button_to "Account Settings" , edit_guest_registration_path, :class => "btn btn-default", :method => :get %>
+<% end %>
+
+</div>

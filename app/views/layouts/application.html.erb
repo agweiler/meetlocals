@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>MTD</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <head>
+  <!-- Nav bar --> 
+    <title>Nasi</title>
+  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+
+<!--   <link rel="stylesheet" href="fonts/font-awesome.min.css">
+ -->
   <%= csrf_meta_tags %>
-</head>
-<body>
+  </head>
+  <% if controller_name == "static_pages" && action_name == "how_to_be_a_host" %>
+    <body data-no-turbolink = "true">
+  <% else %>
+    <body data-no-turbolink = "false">
+  <% end %>
 
-<%= yield %>
+    <header class = "navbar navbar-fixed-top navbar-inverse">
+      <div class ='container-fluid'>
 
-</body>
+      <% if current_admin %>
+    			<%= render 'layouts/header_admin' %>
+    		  <% elsif current_host %>
+    			<%= render 'layouts/header_host' %>
+    		  <% elsif current_guest %>
+    			<%= render 'layouts/header_guest' %>
+    		  <% else %>
+    			<%= render 'layouts/header_default' %>
+    		<% end %> 
+      </div>
+    </header>
+
+    <% if notice || alert %>
+      <div style="height: 50px"></div>
+  		  <p id="notice"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+  		  <p class="alert"><%= alert %></p>
+      <% end %>
+    </div>
+    
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px"> <!-- this is doubled up in some pages, should refactor -->
+		  <%= yield %>
+    </div>
+
+
+    <div>
+		  <%= render 'layouts/footer' %>
+    </div>
+<!--       <%= debug(params) if Rails.env.development? %>
+ -->
+
+  </body> 
 </html>

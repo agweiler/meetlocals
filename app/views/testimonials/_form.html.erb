@@ -1,0 +1,48 @@
+<%= form_for(@testimonial, html: {multipart: true}) do |f| %>
+  <% if @testimonial.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@testimonial.errors.count, "error") %> prohibited this testimonial from being saved:</h2>
+
+      <ul>
+      <% @testimonial.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br>
+    <span>Poor</span>
+    <%= f.radio_button :rating, 1 %>
+    <%= f.radio_button :rating, 2 %>
+    <%= f.radio_button :rating, 3 %>
+    <%= f.radio_button :rating, 4 %>
+    <%= f.radio_button :rating, 5 %>
+    <span>Great!</span>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </div>
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :booking_id %><br> -->
+    <%= f.hidden_field :booking_id, value:@booking.id %>
+  <!-- </div> -->
+  <div class="field">
+    <%= f.label :image %> ([ctrl + click] to select more than one image)<br>
+    <%= f.file_field(:images_array, multiple: true) %>
+    <small>supported file types: .jpg .png .gif</small>
+  </div>
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :booking_id %><br> -->
+    <%= f.hidden_field :booking_id, value:@booking.id %>
+  <!-- </div> -->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

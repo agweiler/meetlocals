@@ -1,0 +1,25 @@
+<div class="container">
+
+    <% @posts.each do |post| %>
+    	<div class="post_wrapper">
+    		<h2 class="title"><%= link_to post.title, post %></h2>
+
+        <p><%= image_tag post.image.url(:medium) %></p>
+
+    		<p class="date"><%= post.created_at.strftime("%B %d, %Y") %></p>
+    	</div>
+    <% end %>
+
+
+    <% if admin_signed_in? %>
+        <div class="buttons">
+          <button class="button"><%= link_to "New Post", new_post_path %></button>
+          <button class="button">Log Out</button>
+        </div>
+    <%end%>
+    </div>
+
+
+
+</div>
+

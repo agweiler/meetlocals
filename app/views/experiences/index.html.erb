@@ -1,0 +1,115 @@
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h1 style="text-align:center">Experiences await</h1>
+        </br>
+
+        <div class="row">
+
+          <%= form_tag '/experiences_search', :class => "form-inline" do %>
+            <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control", style: "width:82%") %>
+            
+            <%= submit_tag "Filter", class: "btn btn-default", style: "background-color: #fed136" %>
+            
+          <% end %>
+         
+        </div>
+    </div>
+  </div>
+  </br>
+  </br>
+  </br>
+  <hr>
+
+        <% @experiences.in_groups_of(3, false).each do |group| %>
+
+          <div class="row" style="padding-right: 40px; margin-left: -5px">
+            <% group.each do |experience| %>
+
+              <div class="col-md-4" style="margin-left: -5px">
+              
+                  <div class=" col-md-4 ">
+                    <div class="[ info-card ]">
+                     <%= image_tag experience.images.first.image_file.url(:medium), style: "width:400px; height:350px"%>
+                      <div class="[ info-card-details ] animate">
+                        <div class="[ info-card-header ]">
+                          <h1> <%= truncate(experience.title, length: 20) %></h1>
+                          <h3>Hosted by <%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></h3>
+                      </div>
+
+                        <div class="[ info-card-detail ]">
+                        <!-- Description -->
+
+                            <h4 style="text-align:center"><%= truncate(experience.description, length: 100) %></h4>
+                            <% duration = (experience.duration*60).divmod(60) %>
+                            <div class="container-fluid">
+                              <table class ="table-striped">
+                                <thread>
+                                <tr>
+                                  <th> Cuisine: </th>
+                                  <th><%= experience.cuisine %></th>
+                                </tr>
+                                </thread>
+                                <tbody>
+                                  <tr>
+                                    <td>Halal</td>
+                                    <td><%= experience.is_halal ? "Yes" : "No" %></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Max Group Size:</td>
+                                    <td><%= experience.max_group_size %></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Host Style:<% if experience.host_style %>
+                                    </td>
+                                    <td><%= truncate(experience.host_style, length: 44) %></td>
+                                    </tr>
+                                  <% end %>
+                                  <tr>
+                                    <td>Available on:</td>
+                                    <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                                    <% avail_days = experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                                    <%= avail_days.to_sentence %></td>
+                                  </tr>
+                                  <tr>
+                                  <td>Estimated Duration:</td>
+                                  <td><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Price per person:</td>
+                                    <td><%= experience.price %> US$</td>
+                                  </tr>
+
+                                </tbody>
+                                </table>
+                                </div>
+                                </br>
+                                    <p style="text-align: center"><%= link_to 'Find out more', experience, class: "btn btn-default", style: "background-color:#fed136" %>
+                                    <% if current_host == experience.host || current_admin %>
+                                      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-default", style: "background-color:#fed136" %> |
+                                      <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default", style: "background-color:#fed136" %></p>
+                                    <% end %>
+                                </div>
+                      </div>
+                  
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+
+
+
+
+
+<!-- need to use each with index to make sure a new row starts every 3 experience boxes (i.e. where %3 == 0) -->
+
+
+         
+    <!--   </div>
+    </div>
+  -->
+
+

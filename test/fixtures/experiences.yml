@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  duration: 1.5
+  is_halal: false
+  cuisine: MyString
+  max_group_size: 1
+  host_style: MyText
+  available_days: MyString
+  price: 1.5
+  host_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  duration: 1.5
+  is_halal: false
+  cuisine: MyString
+  max_group_size: 1
+  host_style: MyText
+  available_days: MyString
+  price: 1.5
+  host_id: 1
