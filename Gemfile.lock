@@ -84,8 +84,6 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.3.0)
-    fancybox2-rails (0.2.8)
-      railties (>= 3.1.0, < 5.0)
     font-awesome-sass (4.3.1)
       sass (~> 3.2)
     globalid (0.3.3)
@@ -217,7 +215,6 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-  fancybox2-rails
   font-awesome-sass
   gibbon!
   jbuilder (~> 2.0)
