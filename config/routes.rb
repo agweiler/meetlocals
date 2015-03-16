@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   post "/bookings/:id" => "bookings#show"
   post 'messages' => 'messages#new'
 
+  post 'bookings/:id/complete' => 'bookings#mark_completion', as: :mark_booking_completion
+
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 

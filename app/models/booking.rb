@@ -3,7 +3,7 @@ class Booking < ActiveRecord::Base
 	belongs_to :experience
 	has_one :testimonial
 	has_many :messages
-	
+
 	validates :guest_id, :experience_id, :date, presence: true
 	validate :group_size_must_not_exceed_maximum
 
@@ -27,6 +27,15 @@ class Booking < ActiveRecord::Base
 			status.replace("completed")
 		end
 		status
+	end
+
+	def mark_as_complete
+		status.replace("completed")
+		save
+	end
+
+	def check_finished?
+		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour
 	end
 
 	def self.statuses
