@@ -4,9 +4,9 @@
 /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
+  margin-top: 0px;
+ /* padding-top: 5px;
+  border-top: 1px solid #eaeaea;*/
   color: #777;
 }
 
@@ -31,4 +31,12 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+
+#rembor {
+  border-color:#fff;
+}
+
+#menutab {
+   table-layout: fixed;
 }

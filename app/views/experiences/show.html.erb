@@ -65,9 +65,9 @@
               
                 <div class="row" id="mealframe">
 
-                  <h2><%= @experience.title %>
+                   <h2><%= @experience.title %>
 <!--                   <p><%= @experience.is_halal ? "(halal)" : "" %></p>
- -->                </h2>
+ -->              <!--   </h2>
                     <h4><%= @experience.description %></h4>
                     <% duration = (@experience.duration*60).divmod(60) %>
                     <p>Cuisine: <%= @experience.cuisine %></p>
@@ -90,12 +90,71 @@
                     <p>
                       Average Rating:
                       <%= @average_rating.nil? ? '-' : @average_rating %>
-                    </p>
+                    </p> -->
                 </div>
 
-                <div class="row" id="menuframe">
-                 <h1>Menu</h1>
+                <div class="row" style="" id="menuframe">
+                   <h1>Menu</h1>
+
+
+                    <table class="table" id="menutab">
+                      <thead>
+                        <tr>
+                          <th id="rembor">Meal Type</th>
+                          <th id="rembor">Cuisine</th>
+                          <th id="rembor">Beverages</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td id="rembor">John</td>
+                          <td id="rembor"><%= @experience.cuisine %></td>
+                          <td id="rembor">john@example.com</td>
+                        </tr>
+                      </tbody>
+
+                       <thead>
+                        <tr>
+                          <th id="rembor">Halal</th>
+                          <th id="rembor">Availability</th>
+                          <th id="rembor">Group Size</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                         <td id="rembor"><%= @experience.is_halal ? "Yes" : "No" %></td>
+                          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                      <%= avail_days.to_sentence %></td>
+                          <td id="rembor"><%= @experience.max_group_size %> pax</td>
+                        </tr>
+                      </tbody>   
+
+                       <thead>
+                        <tr>
+                          <th id="rembor">Host Style</th>
+                          <th id="rembor">Duration</th>
+                          <th id="rembor">Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                           <td id="rembor"><% if @experience.host_style %>
+                      <%= @experience.host_style %>
+                    <% end %></td>
+                           <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
+                           <td id="rembor"><%= @experience.price %> $US</td>
+                        </tr>
+                      </tbody>   
+
+
+                    </table>
+
+                    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
+                    <%= @experience.description %>
+                    </div> 
                  </div>
+
 
       
             
@@ -119,7 +178,7 @@
 
 
                 <div class="row" id="specframe">
-                  <h1>Meal Format</h1>
+                <h1>Meal Format</h1>
                  </div>
 
                 <div class="row" id="ratingsframe">
@@ -148,4 +207,5 @@
 
 
               </div>
+             
           </div>
