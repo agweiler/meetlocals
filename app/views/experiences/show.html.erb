@@ -7,7 +7,7 @@
 
         <div class="row" style="height:500px">
               
-              <div class="col-md-6">
+          <div class="col-md-6">
               </br>
                 <% @host = @experience.host %>
                 <% if @host.images.present? %>
@@ -15,6 +15,7 @@
                 <% else %>
                   <%= image_tag "box.jpeg", class: "img-circle" %>
                 <% end %>
+                </br>
                 <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
 
@@ -24,31 +25,8 @@
                 </p>
 
                 <p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
-                <h4><%= @experience.description %></h4>
-                <% duration = (@experience.duration*60).divmod(60) %>
-                <p>Cuisine: <%= @experience.cuisine %></p>
-                <p>Max Group Size: <%= @experience.max_group_size %></p>
-                <% if @experience.host_style %>
-                  <p>Host Style: <%= @experience.host_style %></p>
-                <% end %>
-                <p>Preferred Time:
-                  <%= @experience.time.strftime('%I:%M %p') %>
-                </p>
-                <p>Available on:
-                  <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-                  <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-                  <%= avail_days.to_sentence %>
-                </p>
-                <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
-
-                <p><%= @experience.price %>$</p>
-
-      <p>
-        Average Rating:
-        <%= @average_rating.nil? ? '-' : @average_rating %>
-      </p>
-
-              </div>
+                
+        </div>
 
 <!-- Carousel experiment (it works!) -->
         
@@ -83,12 +61,39 @@
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                       </a>
+                  </div>
                 </div>
-      </div>
 </div>
 <!-- Carousel experiment end -->
-<div class="row">
-      
+<div class="col-md-12">
+                <h4><%= @experience.description %></h4>
+                <% duration = (@experience.duration*60).divmod(60) %>
+                <p>Cuisine: <%= @experience.cuisine %></p>
+                <p>Max Group Size: <%= @experience.max_group_size %></p>
+                <% if @experience.host_style %>
+                  <p>Host Style: <%= @experience.host_style %></p>
+                <% end %>
+                <p>Preferred Time:
+                  <%= @experience.time.strftime('%I:%M %p') %>
+                </p>
+                <p>Available on:
+                  <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                  <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                  <%= avail_days.to_sentence %>
+                </p>
+                <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
+
+                <p><%= @experience.price %>$</p>
+
+                <p>
+                  Average Rating:
+                  <%= @average_rating.nil? ? '-' : @average_rating %>
+                </p>
+
+</div>
+
+<div class="col-md-12">
+      <hr>
 
       <p>Testimonials:</p>
       <% @testimonials.each do |testimonial| %>
@@ -103,4 +108,5 @@
       <% end %>
       <%= link_to 'Back', experiences_path %>
 
-<div>
+
+</div>

@@ -28,12 +28,20 @@
 	</p>
     <%= f.label :image %><br>
     <%= f.file_field(:image_file) %></br>
-	<%= f.text_field :latitude, class: "form-control", style:"display: none" %>
+
+ <div class="actions">
+   <%= f.submit %>
+   </div>
+
+
+<!-- 	<%= f.text_field :latitude, class: "form-control", style:"display: none" %>
 	<%= f.hidden_field :longitude, class: "form-control" %>
-<div style="text-align: center"> 
-<input type="submit" name="commit" value="Submit" style="display: none">
-<input type="button" onclick="geocode()" value="Complete Profile"></input>
-</div>
+	<div style="text-align: center"> 
+	<input type="submit" name="commit" value="Submit" style="display: none">
+	<input type="button" onclick="geocode()" value="Complete Profile"></input>
+	</div>
+ -->
+
 <% end %>
 </div>
 
