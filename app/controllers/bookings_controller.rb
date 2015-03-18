@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion]
 
   # GET /bookings
   def index
@@ -142,6 +142,12 @@ class BookingsController < ApplicationController
       format.html { redirect_to bookings_url, notice: 'Booking was successfully removed.' }
       format.json { head :no_content }
     end
+  end
+
+  def mark_completion
+    @booking.mark_as_complete
+
+    respond_to :js
   end
 
   # Paypal sends this

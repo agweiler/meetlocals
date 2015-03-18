@@ -1,52 +1,61 @@
 <footer class = "footer" style="padding-top: 20px">
+  
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-      <p> Get Project NASI's Newsletter </p>
-      </div>
-        <div class="col-md-4">
-        <p> Quick Links </p>
-        </div>
-          <div class="col-md-4">
-          <p style="margin-right: -60px"> Connect with us on Social </p>
-          </div>
-    </div>   
-
         <div class="row">
+          <p> Get Project NASI's Newsletter </p>
+        </div>
+              <div class="row">
+                <ul id="email-form" style="float: left">
+                        <li>
+                            <%= form_tag('emailapi/subscribe', method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
+                               <%= email_field(:email, :address, {id: "email", placeholder: "email address"})%>
+                               <%= submit_tag("Sign me up!") %>
 
-          <div class="col-md-4">      
-            <ul id="email-form" style="float: left">
-                <li>
-                    <%= form_tag('emailapi/subscribe', method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
-                       <%= email_field(:email, :address, {id: "email", placeholder: "email address"})%>
-                       <%= submit_tag("Sign me up!") %>
+                            <% end %></li>
+                </ul>
+             </div>
+      </div>
 
-                    <% end %></li>
-            </ul>
+
+
+        <div class="col-md-4">
+          <div class="row">
+             <p> Quick Links </p>
           </div>
+          <div class="row">
+                <ul style="float: left">
+                    <li><%= link_to "About", about_path %></li>
+                    <li><%= link_to "Find a Host", experiences_path %></li>
+                    <li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
+                </ul>
+                </div>
+          <div class="row">
+                <ul style="float: left">
+                    <li><%= link_to "Terms of Service", terms_of_service_path %></li>
+                </ul>
+          </div>
+        </div>
 
-            <div class="col-md-4">
-              <!-- 	<nav>
-               --><ul>
-              			<li><%= link_to "About", about_path %></li>
-              			<li><%= link_to "Find a Host", experiences_path %></li>
-              			<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
-              			<li><%= link_to "Terms of Service", terms_of_service_path %></li>
-              		</ul>
-              <!-- 	</nav> -->
-            </div>
 
-              <div class="col-md-4">
-                <ul class="list-inline social-buttons">
-                 <li><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
-              <li><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
-              <!-- <li><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"> --></i></a></li>
-              <li><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a><li>
-               
-                  </ul>
 
-        </div>  
-          
+      <div class="col-md-4">
+          <div class="row">
+            <p style="margin-right: -60px"> Connect with us on Social & Email </p>
+          </div>
+          <div class="row">
+                  <ul class="list-inline social-buttons">
+                   <li><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
+                <li><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
+                <li><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
+                <li><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a></li>
+                 
+                    </ul>
+
+            </div>   
+      </div>
+    </div>         
   </div> 
 </footer>
 
