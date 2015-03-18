@@ -25,6 +25,9 @@
   <% if @booking.status != "completed" && current_host == @booking.experience.host %>
     <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
   <% end %>
+  <% if current_guest && @booking.status == "invited" %>
+    <%= link_to 'Pay Here', @booking.paypal_url(booking_path(@booking)) %>
+  <% end %>
 </p>
 
 <p>
@@ -79,9 +82,13 @@
     <p>Sign in to send message</p>
   <% end %>
 <% end %>
-
-<%= link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
+<% if current_guest && @booking.status == "invite" %>
+  <%= link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
+<% end %>
 <% if @booking.status == "completed" && @booking.testimonial.nil? %>
-<%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new" %> |
+  <%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new" %> |
+<% end %>
+<% if @booking.check_finished? %>
+  <button id="complete">Complete</button>
 <% end %>
 <%= link_to 'Back', bookings_path %>

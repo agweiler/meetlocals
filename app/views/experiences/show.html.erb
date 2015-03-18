@@ -70,11 +70,13 @@
   <p>Rating: <%= testimonial.rating %></p>
   <p><%= testimonial.body %></p>
 <% end %>
-<!-- 
-<%=link_to 'Book', "#{@experience.id}/bookings/new" %> | -->
+<% if current_guest %>
+  <%=link_to 'Book', "#{@experience.id}/bookings/new" %> | 
+<% end %>
 <% if current_host == @experience.host %>
   <%= link_to 'Edit', edit_experience_path(@experience) %> |
 <% end %>
 <%= link_to 'Back', experiences_path %>
+
 
 <div>

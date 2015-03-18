@@ -52,4 +52,9 @@ class Booking < ActiveRecord::Base
 	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
 	end
 
+	def check_finished?
+
+		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour 
+	end
+
 end

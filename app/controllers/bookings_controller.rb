@@ -95,7 +95,7 @@ class BookingsController < ApplicationController
   # PATCH/PUT /bookings/1
   def update
 
-    # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
+    booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
 
     #moment.js foramt MMMM DD, YYYY
@@ -149,13 +149,16 @@ class BookingsController < ApplicationController
   def hook
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
+    
     if status == "Completed"
       @booking = Booking.find params[:invoice]
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-      @booking.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+      @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+    else
+      puts "FAILED!!!"
     end
     render nothing: true
   end
