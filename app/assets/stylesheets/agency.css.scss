@@ -7,7 +7,8 @@
 /*background-attachment: fixed gives parralax effects
 */
 body {
-    overflow-x: hidden;
+    background-color: #000;
+    overflow-x: visible;
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
 
 }
@@ -848,7 +849,7 @@ ul.social-buttons li a {
 ul.social-buttons li a:hover,
 ul.social-buttons li a:focus,
 ul.social-buttons li a:active {
-    background-color: #000;
+    background-color: #1A1A1A;
 }
 
 ul.social-buttons li a:disabled{
@@ -1091,3 +1092,7 @@ Image credits: unsplash.com
     .hero h1 { font-size: 4em; }    
 }
 
+/*#avataro {
+height:60px; width:60px
+
+}*/
