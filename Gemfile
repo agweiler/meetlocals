@@ -52,10 +52,7 @@ gem 'gibbon', git: 'git://github.com/amro/gibbon.git'
 gem 'font-awesome-rails'
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 3930b4dc3258dfee99a851e50e48555cbda4058d
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
