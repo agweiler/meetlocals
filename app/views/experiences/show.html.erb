@@ -1,81 +1,211 @@
-<div class="container-fluid">
+<!-- !if we follow design mockups, we will have to require that hosts upload at least 3 images with resolutions of atleast 600*600px -->
 
-<h2><%= @experience.title %>
-  <p><%= @experience.is_halal ? "(halal)" : "" %></p>
-</h2>
+  <div class="row" id="mealpanel">
+            
+                
+                <!--     <% @experience.images.each_with_index do |image, index| %>
+                      <div class="item <%= "active" if index == 0 %>">
+                        <%= image_tag image.image_file.url(:medium) %></br>
+                      </div>
+                    <% end %> -->
+                        <% @experience.images.each_with_index do |image, index| %>
+<!--                         Needs index < 3 fix
+ -->                         <div class="col-md-4" style="padding:0px">
+                    
+                        <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px" %></br>
+                      </div>
+                    <% end %>
+                    </div>
+                
+                </div>
+  </div>
+
+
+
+        
+  <div class="row">            
+          <div class="col-md-4" style="height:400px">
+              </br>
+
+              
+
+       <div style="margin-left: 70px; margin-top: 30px">
+                <% @host = @experience.host %>
+                <% if @host.images.present? %>
+                  <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle" %></br>
+                <% else %>
+                  <%= image_tag "box.jpeg", class: "img-circle" %>
+                <% end %>
+                </br>
+                <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+
+
+                <p>
+                  <strong>Location:</strong>
+                  <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
+                </p>
+
+                <p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
+<!--                 <hr>
+ -->
+            </div>
+      </div>
+          
+
 
 <!-- Carousel experiment (it works!) -->
-<div class="row">
-  <div class="col-md-12">
-    <div id="myCarousel" class="carousel slide" style="width:100%" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-      </ol>
+        
+              
 
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner"  role="listbox">
-        <% @experience.images.each_with_index do |image, index| %>
-          <div class="item <%= "active" if index == 0 %>">
-            <%= image_tag image.image_file.url(:full), styles: "height: 300px" %></br>
-          </div>
-        <% end %>
-      </div>
 
-      <!-- Left and right controls -->
-
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-    </div>
-  </div>
-</div>
 <!-- Carousel experiment end -->
-<p>Hosted by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
-<h4><%= @experience.description %></h4>
-<% duration = (@experience.duration*60).divmod(60) %>
-<p>Cuisine: <%= @experience.cuisine %></p>
-<p>Max Group Size: <%= @experience.max_group_size %></p>
-<% if @experience.host_style %>
-  <p>Host Style: <%= @experience.host_style %></p>
-<% end %>
-<p>Preferred Time:
-  <%= @experience.time.strftime('%I:%M %p') %>
-</p>
-<p>Available on:
-  <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-  <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-  <%= avail_days.to_sentence %>
-</p>
-<p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
+      <div class="col-md-8" style="background-color:#777">
+                
+              
+                <div class="row" id="mealframe">
 
-<p><%= @experience.price %>$</p>
+                   <h2><%= @experience.title %>
+<!--                   <p><%= @experience.is_halal ? "(halal)" : "" %></p>
+ -->              <!--   </h2>
+                    <h4><%= @experience.description %></h4>
+                    <% duration = (@experience.duration*60).divmod(60) %>
+                    <p>Cuisine: <%= @experience.cuisine %></p>
+                    <p>Max Group Size: <%= @experience.max_group_size %></p>
+                    <% if @experience.host_style %>
+                      <p>Host Style: <%= @experience.host_style %></p>
+                    <% end %>
+                    <p>Preferred Time:
+                      <%= @experience.time.strftime('%I:%M %p') %>
+                    </p>
+                    <p>Available on:
+                      <% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                      <%= avail_days.to_sentence %>
+                    </p>
+                    <p><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</p>
 
-<p>
-  Average Rating:
-  <%= @average_rating.nil? ? '-' : @average_rating %>
-</p>
+                    <p><%= @experience.price %>$</p>
 
-<p>Testimonials:</p>
-<% @testimonials.each do |testimonial| %>
-  <h6><%= testimonial.title %></h6>
-  <p>Rating: <%= testimonial.rating %></p>
-  <p><%= testimonial.body %></p>
-<% end %>
-<!-- 
-<%=link_to 'Book', "#{@experience.id}/bookings/new" %> | -->
-<% if current_host == @experience.host %>
-  <%= link_to 'Edit', edit_experience_path(@experience) %> |
-<% end %>
-<%= link_to 'Back', experiences_path %>
+                    <p>
+                      Average Rating:
+                      <%= @average_rating.nil? ? '-' : @average_rating %>
+                    </p> -->
+                </div>
 
-<div>
+                <div class="row" style="" id="menuframe">
+                   <h1>Menu</h1>
+
+
+                    <table class="table" id="menutab">
+                      <thead>
+                        <tr>
+                          <th id="rembor">Meal Type</th>
+                          <th id="rembor">Cuisine</th>
+                          <th id="rembor">Beverages</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td id="rembor">John</td>
+                          <td id="rembor"><%= @experience.cuisine %></td>
+                          <td id="rembor">john@example.com</td>
+                        </tr>
+                      </tbody>
+
+                       <thead>
+                        <tr>
+                          <th id="rembor">Halal</th>
+                          <th id="rembor">Availability</th>
+                          <th id="rembor">Group Size</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                         <td id="rembor"><%= @experience.is_halal ? "Yes" : "No" %></td>
+                          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+                      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+                      <%= avail_days.to_sentence %></td>
+                          <td id="rembor"><%= @experience.max_group_size %> pax</td>
+                        </tr>
+                      </tbody>   
+
+                       <thead>
+                        <tr>
+                          <th id="rembor">Host Style</th>
+                          <th id="rembor">Duration</th>
+                          <th id="rembor">Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                           <td id="rembor"><% if @experience.host_style %>
+                      <%= @experience.host_style %>
+                    <% end %></td>
+                           <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
+                           <td id="rembor"><%= @experience.price %> $US</td>
+                        </tr>
+                      </tbody>   
+
+
+                    </table>
+
+                    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
+                    <%= @experience.description %>
+                    </div> 
+                 </div>
+
+
+      
+            
+
+                <div class="row" id="specframe">
+<!--                  <hr>
+ -->                 <h1>Special Events</h1>
+                 </div>
+
+                    <div class="row" id="menuframe">
+                     
+                     <h1>Video Presentation</h1>
+                     </div>
+
+
+                 <div class="row" id="menuframe">
+                   
+                   <h1>Map</h1>
+                 </div>
+
+
+
+                <div class="row" id="specframe">
+                <h1>Meal Format</h1>
+                 </div>
+
+                <div class="row" id="ratingsframe">
+                  <h1>Ratings</h1>
+                </div>
+
+                  
+
+
+                    <div class="row" id="testiframe">
+
+                      <h1>Testimonials:</h1>
+                      <% @testimonials.each do |testimonial| %>
+                        <h6><%= testimonial.title %></h6>
+                        <p>Rating: <%= testimonial.rating %></p>
+                        <p><%= testimonial.body %></p>
+                      <% end %>
+                      <% if current_host %>
+                      <%=link_to 'Book', "#{@experience.id}/bookings/new" %> |
+                      <% if current_host == @experience.host %>
+                        <%= link_to 'Edit', edit_experience_path(@experience) %> |
+                      <% end %>
+                      <%= link_to 'Back', experiences_path %>
+                    </div>
+
+
+
+              </div>
+             
+          </div>

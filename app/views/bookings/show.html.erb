@@ -21,10 +21,18 @@
 
 <p>
   <strong>Status:</strong>
+
   <%= @booking.status.capitalize %>
   <% if @booking.status != "completed" && current_host == @booking.experience.host %>
     <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
   <% end %>
+
+  <span id="status"><%= @booking.status.capitalize %>
+    <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+      <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+    <% end %>
+  </span>
+
 </p>
 
 <p>
@@ -41,6 +49,11 @@
   <strong>Host:</strong>
   <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
 </p>
+
+
+<% if @booking.check_finished? && @booking.status == 'confirmed' %>
+  <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
+<% end %>
 
 <h5>Messages</h5>
 <div id="messages">

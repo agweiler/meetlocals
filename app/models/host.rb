@@ -14,5 +14,5 @@ class Host < ActiveRecord::Base
   	email.gsub(/@.*/, "").capitalize
   end
 
- 
+
 end

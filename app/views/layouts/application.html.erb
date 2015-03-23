@@ -2,7 +2,10 @@
 <html>
   <head>
   <!-- Nav bar --> 
-    <title>Nasi</title>
+    <title>Meet The Danes</title>
+
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+
   <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
@@ -17,7 +20,7 @@
     <body data-no-turbolink = "false">
   <% end %>
 
-    <header class = "navbar navbar-fixed-top navbar-inverse">
+    <header class = "navbar navbar-fixed-top navbar-inverse" style="height:71px; border-color:#222">
       <div class ='container-fluid'>
 
       <% if current_admin %>
@@ -30,18 +33,61 @@
     			<%= render 'layouts/header_default' %>
     		<% end %> 
       </div>
-    </header>
 
-    <% if notice || alert %>
-      <div style="height: 50px"></div>
-  		  <p id="notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-  		  <p class="alert"><%= alert %></p>
-      <% end %>
+  <!--   <% if notice || alert %>
+      <div class="col-md-12">
+        <div class="alert alert-success-alt alert-dismissable">
+          <span class="glyphicon glyphicon-certificate"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+              ×</button>
+              <%= notice %>
+              <% end %>
+        
+        <% if alert %>
+
+        <div class="alert alert-danger-alt alert-dismissable">
+            <span class="glyphicon glyphicon-certificate"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                ×</button>
+                <%= alert %>
+                <% end %>
+
+      </div>   -->
+
+
     </div>
+
+
+
+
+
+
     
-    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px"> <!-- this is doubled up in some pages, should refactor -->
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px; background-color:#222"> 
+      <% if notice || alert %>
+      <div class="col-md-12">
+        <div class="alert alert-success-alt alert-dismissable">
+          <span class="glyphicon glyphicon-certificate"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+              ×</button>
+              <%= notice %>
+              <% end %>
+              </div>
+        
+        <% if alert %>
+
+        <div class="alert alert-danger-alt alert-dismissable">
+            <span class="glyphicon glyphicon-certificate"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                ×</button>
+                <%= alert %>
+                <% end %>
+                </div>
+
+      </div>  
+
+
+    <!-- this is doubled up in some pages, should refactor -->
 		  <%= yield %>
     </div>
 

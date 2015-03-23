@@ -11,6 +11,7 @@
 
 .or {
 	display: inline;
+
 }
 /*
 Fade content bs-carousel with hero headers
@@ -158,14 +159,14 @@ height:350px; margin-top: -20px;
 }
 
 #pre_foot {
-  background-color: #000;
-  height:330px; 
+  background-color: #777;
+  height:335px; 
   width:100%;
-  background-image:url('assets/smorrebrod.jpg');
-   z-index: 1;
+   z-index: 3;
     background-color: #080d15;
-    opacity: .9;
-    margin-bottom: -44px;
+    opacity: 1;
+/*    margin-bottom: -46px;
+*/    
 
 }
 
@@ -178,3 +179,4 @@ height:350px; margin-top: -20px;
     background-color: #080d15;
     opacity: .7;
 }*/
+

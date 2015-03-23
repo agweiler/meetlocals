@@ -7,6 +7,7 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "hosts";
+@import "agency";
 @import "bookings";
 @import "experiences";
 @import "custom";
@@ -50,22 +51,25 @@ body {
 #home {
 /*  background-image: url("/assets/nasi_head_placeholder.jpg");
 */  background-size: 100% 95%;
-  background-repeat: no-repeat;
-  color: #ffffff;
+/*  background-image: url("/assets/nasi_head_placeholder.jpg");
+*/  background-repeat: no-repeat;
+    color: #ffffff;
 }
 
 #host {
 /*  background-image: url("/assets/thai_stirfry.jpg");
 */  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: #ffffff;
+/*  background-image: url("/assets/thai_stirfry.jpg");
+*/  background-repeat: no-repeat;
+    color: #ffffff;
 }
 
 #guest {
 /*  background-image: url("/assets/food-collection-gray.png");
 */  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  color: #ffffff;
+/*    background-image: url("/assets/food-collection-gray.png");
+*/  background-repeat: no-repeat;
+    color: #ffffff;
 }
 
 
@@ -87,10 +91,11 @@ footer {
   padding-right: 70px;
  /* border-top: 1px solid #eaeaea;*/
   color: #777;
-  background-color: #fff;
-  margin-bottom: 0px;
-  /*height: 100px;*/
-
+  background-color: #1A1A1A;
+  margin-bottom: -100px;
+  height: 220px;
+  /*border-top: 2px;
+  border-top-color: #000;*/
 }
 
 footer a {
@@ -122,6 +127,7 @@ footer ul li {
 /*!
  * Datetimepicker for Bootstrap 3
 //! version : 4.0.0-beta
+
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
 
