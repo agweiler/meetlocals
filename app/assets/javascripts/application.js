@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require moment
 //= require bootstrap-datetimepicker
+
 //= require google
+
 //= require hosts
 //= require experiences

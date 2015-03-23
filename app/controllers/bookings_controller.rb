@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion]
+
 
   # GET /bookings
   def index
@@ -94,8 +95,8 @@ class BookingsController < ApplicationController
 
   # PATCH/PUT /bookings/1
   def update
+    booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
 
-    # booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
     # starttime = Time.parse( params[:datetime] )
 
     #moment.js foramt MMMM DD, YYYY
@@ -144,6 +145,14 @@ class BookingsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+  def mark_completion
+    @booking.mark_as_complete
+
+    respond_to :js
+  end
+
 
   # Paypal sends this
   protect_from_forgery except: [:hook]

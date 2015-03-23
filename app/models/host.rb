@@ -14,6 +14,5 @@ class Host < ActiveRecord::Base
   	email.gsub(/@.*/, "").capitalize
   end
 
- # geocoded_by :address
- # after_validation :geocode
+
 end

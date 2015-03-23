@@ -1,6 +1,7 @@
 <div class="container">
 <% if @guest == current_guest %>
 	<h3>Your guest account</h3>
+
   </br>
 <% end %>
 <% if @guest.images.present? %>
@@ -17,11 +18,13 @@
 </p>
 
 <% if @guest == current_guest %>
+
 <%= button_to "Browse Experiences", experiences_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %>
 
 <%= button_to "Edit Profile" , edit_guest_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %>
 
 <%= button_to "Account Settings" , edit_guest_registration_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %>
+
 <% end %>
 
 </div>
