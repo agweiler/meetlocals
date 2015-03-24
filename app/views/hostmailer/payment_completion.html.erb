@@ -6,7 +6,7 @@
   <body>
     <h1>You have received a payment<%= @host.username %></h1>
     <p>
-      Congratulations! You are now rich(er) as you have recieved payment. Please consider sharing some of that new earned cash by clicking the "Donate" button at <%= link_to 'The Nasi Project', new_host_session_url %> 
+      Congratulations! You are now rich(er) as you have recieved payment for the <%= @booking.experience.title %> event. Please consider sharing some of that easily earned cash by clicking the "Donate" button at <%= link_to 'The Nasi Project', new_host_session_url %> 
     </p>
     <p>Thanks for using Project Nasi and have a great day!</p>
   </body>
