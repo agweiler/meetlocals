@@ -6,8 +6,10 @@
   <body>
     <h1>You have mail <%= @host.username %>! </h1>
     <p>
-      Humans are social creatures, thus we need other humans to communicate with. Luckily for you,
-      you have a new message regarding the <%= @booking.experience.title %>
+
+      Humans are social creatures, thus we need other humans to communicate wtih. Luckily for you,
+      you have a new message regarding the <%= @booking.experience.title %> event
+
     </p>
     <p>
       Check it out and satisfy your basic human need for social activity at <%= link_to 'The Nasi Project' , new_host_session_url %>
