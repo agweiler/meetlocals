@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309090845) do
+ActiveRecord::Schema.define(version: 20150324110845) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.datetime "updated_at",                         null: false
     t.string   "location"
     t.time     "time"
+    t.string   "beverages"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -82,6 +83,13 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "languages"
+    t.string   "nationality"
+    t.string   "country"
+    t.string   "province"
   end
 
   add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true
@@ -110,6 +118,14 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.datetime "confirmation_sent_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "languages"
+    t.string   "street_address"
+    t.text     "intro"
+    t.text     "neighbourhood"
+    t.text     "additional_info"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true

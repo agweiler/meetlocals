@@ -22,3 +22,14 @@ Host.last.experiences.create(
 	host_style: "All Ameristralian Hospitality (Wash your own dishes you lil'- I mean, I'll wash the plates, no problem!)",
 	price: 19.95
 	)
+
+
+
+require 'csv'    
+
+CSV.foreach("config/languages.csv", { encoding: "UTF-8", headers: true }) do |row|
+
+	Language.create!(row.to_hash)
+end
+
+
