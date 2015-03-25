@@ -37,9 +37,11 @@
         <% @bookings.each do |booking| %>
           <% experience = Experience.find(booking.experience_id)%>
           <tr>
+
             <td><%= booking.date.strftime('%d %b %Y') %></td>
             <td><%= experience.time.strftime('%I:%M %p') %></td>
             <!-- <td><%= booking.end_time.strftime('%r') %></td> -->
+
             <% if guest_signed_in? %>
               <td><%= link_to "#{experience.host.username}", experience.host %></td>
             <% elsif host_signed_in? %>

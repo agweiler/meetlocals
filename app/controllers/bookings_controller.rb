@@ -84,7 +84,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
-        Hostmailer.receive_booking_request(host).deliver_now
+        Hostmailer.receive_booking_request(host.id,@booking.id).deliver_later
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
       else
         format.html { render :new }
@@ -125,11 +125,10 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.update(booking_params)
         guest = @booking.guest
-        Guestmailer.receive_invitation(guest,@booking).deliver_now
+        Guestmailer.receive_invitation(guest.id,@booking.id).deliver_later
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
-        byebug
         format.html { render :edit }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
@@ -159,13 +158,16 @@ class BookingsController < ApplicationController
   def hook
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
+    
     if status == "Completed"
       @booking = Booking.find params[:invoice]
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest, @booking).deliver_now
-      Hostmailer.payment_completion(host, @booking).deliver_now
-      @booking.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+      Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_later
+      Hostmailer.payment_completion(host.id, @booking.id).deliver_later
+      @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+    else
+      puts "FAILED!!!"
     end
     render nothing: true
   end

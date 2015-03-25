@@ -38,6 +38,8 @@ class Booking < ActiveRecord::Base
 		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour
 	end
 
+#Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
+
 
 	def self.statuses
 		["Invite", "Reject", "Complete"]
