@@ -38,6 +38,8 @@ class Booking < ActiveRecord::Base
 		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour
 	end
 
+#Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
+
 
 	def self.statuses
 		["Invite", "Reject", "Complete"]
@@ -60,11 +62,6 @@ class Booking < ActiveRecord::Base
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
 	}
 	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
-	end
-
-	def check_finished?
-
-		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour 
 	end
 
 end
