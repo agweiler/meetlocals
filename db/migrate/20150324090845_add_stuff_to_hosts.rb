@@ -8,5 +8,7 @@ class AddStuffToHosts < ActiveRecord::Migration
     add_column :hosts, :intro, :text
     add_column :hosts, :neighbourhood, :text
     add_column :hosts, :additional_info, :text
+    add_column :hosts, :DOB, :date
+    add_column :hosts, :video_url, :string
   end
 end

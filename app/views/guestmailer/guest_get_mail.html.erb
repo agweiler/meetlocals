@@ -6,11 +6,11 @@
   <body>
     <h1>You have mail <%= @guest.username %>! </h1>
     <p>
-      Worried your host was a fictional creation produced from the fumes of overconsumption of beer? (or goat meat if you're muslim) Worry not!  
+      Worried your host was a fictional creation produced from the fumes of Carbon Monoxide? Worry not!  
       For you have a new message regarding the <%= @booking.experience.title %>
     </p>
     <p>
-      Go verify his/her existence at <%= link_to 'The Nasi Project' , new_guest_session_url %>
+      Go verify his/her existence at <%= link_to 'The Nasi Project' , show_booking_url(@booking) %>
     </p>
     <p>Thanks for using Project Nasi and have a great day!</p>
   </body>

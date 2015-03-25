@@ -12,9 +12,9 @@ class Guestmailer < ApplicationMailer
     mail(to: @guest.email, subject: "You have confirmed payment by paying us")
   end
 
-  def experience_completed(guest)
-    @guest = guest
-
+  def experience_completed(booking_id,guest_id)
+    @guest = Guest.find guest_id
+    @booking = Booking.find booking_id
     mail(to: @guest.email, subject: "You just had a wonderful time! Why don't you tell people?")
   end
 

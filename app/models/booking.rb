@@ -31,6 +31,9 @@ class Booking < ActiveRecord::Base
 
 	def mark_as_complete
 		status.replace("completed")
+		@guest = self.guest
+		@booking_id = self.id
+		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_later
 		save
 	end
 
@@ -61,10 +64,4 @@ class Booking < ActiveRecord::Base
 	}
 	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
 	end
-
-	def check_finished?
-
-		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour 
-	end
-
 end

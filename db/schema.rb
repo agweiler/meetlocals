@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324110845) do
+ActiveRecord::Schema.define(version: 20150324110847) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20150324110845) do
     t.text     "notification_params"
     t.string   "transaction_id"
     t.datetime "purchased_at"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iso_two_letter_code"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "experiences", force: :cascade do |t|
@@ -165,6 +172,12 @@ ActiveRecord::Schema.define(version: 20150324110845) do
     t.integer  "booking_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "nationalities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

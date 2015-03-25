@@ -38,12 +38,14 @@ Rails.application.routes.draw do
 
   post 'experiences_search' => 'experiences#index'
 
-  get 'bookings/:id/testimonials/new' => 'testimonials#new'
+  get 'bookings/:id/testimonials/new' => 'testimonials#new', as: :make_testimonial
+
+  get "/bookings/:id" => "bookings#show", as: :show_booking
 
   post "/hook" => "bookings#hook"
   get "/hook" => "bookings#hook"
 
-  post "/bookings/:id" => "bookings#show"
+  post "/bookings/:id" => "bookings#show" 
   post 'messages' => 'messages#new'
 
   post 'bookings/:id/complete' => 'bookings#mark_completion', as: :mark_booking_completion
