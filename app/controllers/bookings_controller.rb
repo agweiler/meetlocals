@@ -29,10 +29,8 @@ class BookingsController < ApplicationController
     elsif admin_signed_in?
       puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
     else
-      deny_access
-      # redirect_to '/bookings', notice: "You must be logged in to view your bookings"
+      redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
-
     @messages = @booking.messages.all
     @message = Message.new
   end

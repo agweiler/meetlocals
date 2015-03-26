@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
   get "/bookings/:id" => "bookings#show", as: :show_booking
 
+  get "/experiences/:id" => "experiences#show", as: :show_experience
+
   post "/hook" => "bookings#hook"
   get "/hook" => "bookings#hook"
 

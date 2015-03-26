@@ -19,7 +19,7 @@ class TestimonialsController < ApplicationController
     @testimonial = Testimonial.new
     @booking = Booking.find(params[:id])
     if current_guest == nil
-      deny_access
+      deny_access_guest
     end
     
   end
