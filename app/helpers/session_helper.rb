@@ -13,4 +13,8 @@ module SessionHelper
 	def store_location
 		session[:forwarding_url] = request.url if request.get?
 	end
+
+	def no_one_signed_in?
+		current_host == nil && current_guest == nil && current_admin == nil
+	end
 end
