@@ -10,13 +10,13 @@
       </ul>
     </div>
   <% end %>
-  <div class="container">
+  <div class="container testimonial_forms">
     <div class="row">
      <div class="col-md-offset-2">
         <h1>Testimonial</h1> 
         <div class="field">
           <%= f.label :title %>
-          <%= f.text_field :title  ,class: "form-control"%>
+          <%= f.text_field :title  ,class: "form-control", style: "width:50%" %>
         </div>
         <div class="field">
           <%= f.label :rating %>
@@ -33,7 +33,7 @@
           <%= f.text_area :body , :cols => "50", :rows => "8", :maxlength=>"300" ,class: "form-control"%>
         </div>
     </div>
-    <div class="col-md-offset-4">
+    <div class="col-md-offset-2">
         <!-- <div class="field"> -->
           <!-- <%= f.label :booking_id %><br> -->
           <%= f.hidden_field :booking_id, value:@booking.id %>
