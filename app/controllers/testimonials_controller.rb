@@ -1,5 +1,6 @@
 class TestimonialsController < ApplicationController
   before_action :set_testimonial, only: [:show, :edit, :update, :destroy]
+  before_action :is_logged_in, only: [:new]
 
   # GET /testimonials
   # GET /testimonials.json
@@ -17,6 +18,10 @@ class TestimonialsController < ApplicationController
   def new
     @testimonial = Testimonial.new
     @booking = Booking.find(params[:id])
+    if current_guest == nil
+      deny_access_guest
+    end
+    
   end
 
   # GET /testimonials/1/edit
@@ -96,6 +101,14 @@ class TestimonialsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_testimonial
       @testimonial = Testimonial.find(params[:id])
+    end
+
+    def is_logged_in
+      if current_guest == false
+        store_location_for(:guest, make_testimonial_path)
+        redirect_to new_guest_session_url
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

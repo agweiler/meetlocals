@@ -1,5 +1,18 @@
-<h1>New Testimonial</h1>
+<div class = "container" >
+	<div class ="row">
+	  <div class="col-md-2">
+		  <%= image_tag "box.jpeg", class: "img-circle" %>
+	  </div>
+	  <div class="col-md-2 testimonial_forms">
+		  <h4> Guest name goes here </h4>
+		  <h4> Name of event </h4>
+		  <h4> Host name </h4>
+	  </div>
+	</div>
+</div>
 
-<%= render 'form' %>
+  
+			<%= render 'form' %>
 
-<%= link_to 'Back', booking_path(@booking) %>
+			<%= link_to 'Back', booking_path(@booking) %>
+ 

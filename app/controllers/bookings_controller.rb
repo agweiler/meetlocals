@@ -31,7 +31,6 @@ class BookingsController < ApplicationController
     else
       redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
-
     @messages = @booking.messages.all
     @message = Message.new
   end
