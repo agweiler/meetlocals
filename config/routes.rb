@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
-  resources :admins, only: [:index]
+  resources :admins
 
   root 'static_pages#home'
 

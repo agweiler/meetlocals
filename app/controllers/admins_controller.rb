@@ -3,6 +3,8 @@ class AdminsController < ApplicationController
 		@admins = Admin.all
 		@guests = Guest.all
 		@hosts = Host.all
-		@bookings = Booking.all
+	end
+
+	def show
 	end
 end
