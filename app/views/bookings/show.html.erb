@@ -1,102 +1,104 @@
-<p>
-  <strong>Start time:</strong>
-  <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
-  <small>(Local Time)</small>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @booking.date.strftime('%d %b %Y')  %>
-</p>
-
-<p>
-  <strong>Experience:</strong>
-  <%= @booking.experience_id %> "<%= @booking.experience.title %>"
-</p>
-
-<p>
-  <strong>Status:</strong>
-
-  <%= @booking.status.capitalize %>
-  <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-    <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
-  <% end %>
-
-  <% if current_guest && @booking.status == "invited" %>
-    <%= link_to 'Pay Here', @booking.paypal_url(booking_path(@booking)) %>
-  <% end %>
-
-</p>
-
-<p>
-  <strong>Group size:</strong>
-  <%= @booking.group_size %>
-</p>
-
-<p>
-  <strong>Is private?:</strong>
-  <%= @booking.is_private ? "Yes" : "No"%>
-</p>
-
-<p>
-  <strong>Host:</strong>
-  <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
-</p>
-
-
-<% if @booking.check_finished? && @booking.status == 'confirmed' %>
-  <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
-<% end %>
-
-<h5>Messages</h5>
-<div id="messages">
-  <% @messages.each do |message| %>
-  <p><%= message.text %></p>
+<div class = "container">
   <p>
-    <% if message.sender_type == "host" %>
-      <% sender = Host.find(message.sender_id) %>
-    <% elsif message.sender_type == "guest" %>
-      <% sender = Guest.find(message.sender_id) %>
-    <% end %>
-
-    <%= sender.username %>
-    <% if sender.images.present? %>
-      <%= image_tag sender.images.first.image_file.url(:medium) %>
-    <% end %>
-    <span><%= message.created_at %></span>
+    <strong>Start time:</strong>
+    <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
   </p>
+
+  <p>
+    <strong>End time:</strong>
+    <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
+    <small>(Local Time)</small>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <%= @booking.date.strftime('%d %b %Y')  %>
+  </p>
+
+  <p>
+    <strong>Experience:</strong>
+    <%= @booking.experience_id %> "<%= @booking.experience.title %>"
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+
+    <%= @booking.status.capitalize %>
+    <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+      <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+    <% end %>
+
+    <% if current_guest && @booking.status == "invited" %>
+      <%= link_to 'Pay Here', @booking.paypal_url(booking_path(@booking)) %>
+    <% end %>
+
+  </p>
+
+  <p>
+    <strong>Group size:</strong>
+    <%= @booking.group_size %>
+  </p>
+
+  <p>
+    <strong>Is private?:</strong>
+    <%= @booking.is_private ? "Yes" : "No"%>
+  </p>
+
+  <p>
+    <strong>Host:</strong>
+    <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
+  </p>
+
+
+  <% if @booking.check_finished? && @booking.status == 'confirmed' %>
+    <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
   <% end %>
+
+  <h5>Messages</h5>
+  <div id="messages">
+    <% @messages.each do |message| %>
+    <p><%= message.text %></p>
+    <p>
+      <% if message.sender_type == "host" %>
+        <% sender = Host.find(message.sender_id) %>
+      <% elsif message.sender_type == "guest" %>
+        <% sender = Guest.find(message.sender_id) %>
+      <% end %>
+
+      <%= sender.username %>
+      <% if sender.images.present? %>
+        <%= image_tag sender.images.first.image_file.url(:medium) %>
+      <% end %>
+      <span><%= message.created_at %></span>
+    </p>
+    <% end %>
+  </div>
+
+  <%= form_for @message, remote: true do |m| %>
+    <%= m.label :message, value:'New Message'%><br>
+    <%= m.text_area :text, required: false, title:nil %><br>
+    <%= m.hidden_field :booking_id, value: @booking.id %>
+
+    <% if guest_signed_in? %>
+      <%= m.hidden_field :sender_id, value: current_guest.id %>
+      <%= m.hidden_field :sender_type, value: 'guest' %>
+      <%= m.submit 'Send Message' %>
+    <% elsif host_signed_in? %>
+      <%= m.hidden_field :sender_id, value: current_host.id %>
+      <%= m.hidden_field :sender_type, value: 'host' %>
+      <%= m.submit 'Send Message' %>
+    <% else %>
+      <p>Sign in to send message</p>
+    <% end %>
+  <% end %>
+  <% if current_guest && @booking.status == "invite" %>
+    <%= link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
+  <% end %>
+  <% if @booking.status == "completed" && @booking.testimonial.nil? %>
+    <%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new" %> |
+  <% end %>
+  <% if @booking.check_finished? %>
+    <button id="complete">Complete</button>
+  <% end %>
+  <%= link_to 'Back', bookings_path %>
 </div>
-
-<%= form_for @message, remote: true do |m| %>
-  <%= m.label :message, value:'New Message'%><br>
-  <%= m.text_area :text, required: false, title:nil %><br>
-  <%= m.hidden_field :booking_id, value: @booking.id %>
-
-  <% if guest_signed_in? %>
-    <%= m.hidden_field :sender_id, value: current_guest.id %>
-    <%= m.hidden_field :sender_type, value: 'guest' %>
-    <%= m.submit 'Send Message' %>
-  <% elsif host_signed_in? %>
-    <%= m.hidden_field :sender_id, value: current_host.id %>
-    <%= m.hidden_field :sender_type, value: 'host' %>
-    <%= m.submit 'Send Message' %>
-  <% else %>
-    <p>Sign in to send message</p>
-  <% end %>
-<% end %>
-<% if current_guest && @booking.status == "invite" %>
-  <%= link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
-<% end %>
-<% if @booking.status == "completed" && @booking.testimonial.nil? %>
-  <%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new" %> |
-<% end %>
-<% if @booking.check_finished? %>
-  <button id="complete">Complete</button>
-<% end %>
-<%= link_to 'Back', bookings_path %>

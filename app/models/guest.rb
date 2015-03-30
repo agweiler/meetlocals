@@ -7,6 +7,4 @@ class Guest < ActiveRecord::Base
   has_many :images, as: :imageable
   # removed uniqueness constraint
   # validates_uniqueness_of :username
-
-
 end

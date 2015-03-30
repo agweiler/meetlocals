@@ -1,6 +1,7 @@
 <div class="container">
 
 <h1>New Booking <small><%= "#{@experience.title} (#{@experience.time.strftime("%I:%M %p")}~)" %></small></h1>
+<div id = "booking_form">
 <%= render 'form' %>
 
 <%= link_to 'Back', bookings_path %>
