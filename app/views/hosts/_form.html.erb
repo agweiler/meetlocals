@@ -31,20 +31,16 @@
     <%= f.label :image %><br>
     <%= f.file_field(:image_file) %>
   </div>
-
-  <div class="actions">
+   <!-- <div class="actions">
    <%= f.submit %>
-   </div>
- <!--  <%= f.hidden_field :latitude, class: "form-control" %>
-=======
+   </div> -->
+ <!--   This makes google maps work DO NOT COMMENT OUT or CHANGE IT -->
   <%= f.hidden_field :latitude, class: "form-control" %>
->>>>>>> 3930b4dc3258dfee99a851e50e48555cbda4058d
+  <%= f.hidden_field :latitude, class: "form-control" %>
   <%= f.hidden_field :longitude, class: "form-control" %>
-  </br></br></br>
   <div class="actions">
     <button type="button" name="geocoder" onclick="geocode()">Update Host</button> 
     <input name="commit" value="Update Host" type="submit" style="display: none">
-<<<<<<< HEAD
-  </div> -->
+  </div>
 
 <% end %>

@@ -46,11 +46,11 @@ Rails.application.configure do
 
   # config.action_mailer.smtp_settings = {address: 'localhost', port: 1025}
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
+    :address => "smtp.mandrillapp.com",
     :port => "587",
-    :domain => "gmail.com",
-    :user_name => "thenasiproject@gmail.com",
-    :password => ENV['GMAIL'],
+    # :domain => "gmail.com",
+    :user_name => "muhdfarisroslan@gmail.com",
+    :password => "e5RktBZFRHhIEthUj8ekUg",
     :authentication => "plain",
     :enable_starttls_auto => true
   }

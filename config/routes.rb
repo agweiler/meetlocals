@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :guests
 
   devise_for :admins
+
   resources :admins, only: [:index]
 
   root 'static_pages#home'
