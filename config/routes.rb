@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   post 'experiences_search' => 'experiences#index'
 
+  get "/bookings/index" => 'bookings#index', as: :booking_index
+
   get 'bookings/:id/testimonials/new' => 'testimonials#new', as: :make_testimonial
 
   get "/bookings/:id" => "bookings#show", as: :show_booking

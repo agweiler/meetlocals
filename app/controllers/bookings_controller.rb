@@ -4,16 +4,20 @@ class BookingsController < ApplicationController
 
   # GET /bookings
   def index
-    @bookings = []
+    if no_one_signed_in?
+      deny_access_host
+    else
+      @bookings = []
 
-    current_host.experiences.each do |experience|
-      @bookings << experience.bookings
-    end if host_signed_in?
+      current_host.experiences.each do |experience|
+        @bookings << experience.bookings
+      end if host_signed_in?
 
-    @bookings = current_guest.bookings if guest_signed_in?
+      @bookings = current_guest.bookings if guest_signed_in?
 
-    @bookings = Booking.all if current_admin
-    @bookings.flatten! if @bookings.respond_to?(:flatten!)
+      @bookings = Booking.all if current_admin
+      @bookings.flatten! if @bookings.respond_to?(:flatten!)
+    end
   end
 
   # GET /bookings/1
