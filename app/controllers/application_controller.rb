@@ -32,9 +32,12 @@ class ApplicationController < ActionController::Base
     case resource_or_scope
     when :guest, Guest
       store_location = session[:forwarding_url]
+      session.delete(:forwarding_url)
       (store_location.nil?) ? "/" : store_location.to_s
+
     when :host, Host
       store_location = session[:forwarding_url]  
+      session.delete(:forwarding_url)
       (store_location.nil?) ? "/" : store_location.to_s
     else
       super
