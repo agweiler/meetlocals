@@ -44,19 +44,18 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  # config.action_mailer.smtp_settings = {address: 'localhost', port: 1025}
-  config.action_mailer.smtp_settings = {
-    :address => "smtp.mandrillapp.com",
-    :port => "587",
-    # :domain => "gmail.com",
-    :user_name => "muhdfarisroslan@gmail.com",
-    :password => "e5RktBZFRHhIEthUj8ekUg",
-    :authentication => "plain",
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.smtp_settings = {address: 'localhost', port: 1025}
+  # config.action_mailer.smtp_settings = {
+  #   :address => "smtp.mandrillapp.com",
+  #   :port => "587",
+  #   # :domain => "gmail.com",
+  #   :user_name => "muhdfarisroslan@gmail.com",
+  #   :password => "e5RktBZFRHhIEthUj8ekUg",
+  #   :authentication => "plain",
+  #   :enable_starttls_auto => true
+  # }
 end
-#This is the configuration for sending emails, to use it you guys have to assign the password as a constant in the terminal (eg GMAIL) and call it using ENV['GMAIL'] 
-#To find out what the password is,ask Adam/Faris
+
 
 Paperclip.options[:command_path] = "/usr/local/bin/"
 
