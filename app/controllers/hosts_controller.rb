@@ -68,7 +68,11 @@ class HostsController < ApplicationController
   end
 
   def edit_host_profile # Edit profile page
-    @host = Host.find(params[:id])
+  	if current_host == nil 
+  	  deny_access_host
+    else
+      @host = Host.find(params[:id])
+    end
   end
 
   def update_host_profile # Create and Edit host profile
