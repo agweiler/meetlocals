@@ -129,6 +129,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pg (0.18.1)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -191,7 +192,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -239,6 +239,7 @@ DEPENDENCIES
   minitest (~> 5.5.1)
   momentjs-rails (>= 2.9.0)
   paperclip (~> 4.2)
+  pg
   rails (= 4.2.0)
   ratyrate
   redis
@@ -246,7 +247,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sidekiq
   spring
-  sqlite3
   therubyracer
   turbolinks
   twitter-bootstrap-rails

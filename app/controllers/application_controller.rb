@@ -12,9 +12,6 @@ class ApplicationController < ActionController::Base
 	  # def after_sign_in_path_for(resource)
    # 		case resource
    # 		when :host, Host
-   #      if current_host.sign_in_count == 1
-   #  		  edit_host_profile_path(resource)
-   #      else
    #        root_path
    #      end  
    #  	when :guest, Guest
@@ -31,9 +28,15 @@ class ApplicationController < ActionController::Base
  def after_sign_in_path_for(resource_or_scope)
     case resource_or_scope
     when :guest, Guest
+      if current_guest.sign_in_count == 1
+        redirect_to edit_guest_profile_path(resource)
+      end	
       store_location = session[:forwarding_url]
       (store_location.nil?) ? "/" : store_location.to_s
     when :host, Host
+      if current_host.sign_in_count == 1
+        redirect_to edit_host_profile_path(resource)
+      end
       store_location = session[:forwarding_url]  
       (store_location.nil?) ? "/" : store_location.to_s
     else
