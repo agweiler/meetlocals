@@ -4,10 +4,10 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @guest.name %>! </h1>
+    <h1>Hi <%= @guest.username %>! </h1>
     <p>
-      Its obvious you enjoyed yourself, so why not give a testimonial to tell people about it? Reliving an experience increases your gratitude, which will than increase your happiness (Emmons et al)
-      At The Nasi Project, we not only care about your gastronomical pleasure but also your happiness, so please leave a testimonial at the <%= link_to 'The Nasi Project' , new_guest_session_url %>
+      Its obvious you enjoyed yourself, so why not give a testimonial to tell people about it? Reliving an experience increases your gratitude, which will in turn increase your happiness (Emmons et al)
+      At The Nasi Project, we not only care about your gastronomical pleasure but also your happiness, so please leave a testimonial at the <%= link_to 'The Nasi Project' , make_testimonial_url(@booking)%>
 
     </p>
     <p>Thanks for using Project Nasi and have a great day!</p>

@@ -580,3 +580,7 @@ Image carousel CSS Stuff starts here*/
         height: 20px;
     }
 }
+
+/* stops textareas from resizing */
+
+textarea { resize: none; }

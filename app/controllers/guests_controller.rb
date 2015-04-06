@@ -66,7 +66,11 @@ class GuestsController < ApplicationController
   end
 
   def edit_guest_profile # Edit profile page
+  	if current_guest == nil 
+      deny_access_guest
+    else
     @guest = Guest.find(params[:id])
+    end
   end
 
   def update_guest_profile # Create and Edit guest profile

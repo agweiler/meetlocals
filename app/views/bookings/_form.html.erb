@@ -34,57 +34,76 @@
 
     });
 </script>
+<div class = "container" >
+  <div class = "row">
+    <div class = "col-md-8">
+      <%= form_for(@booking) do |f| %>
+      <% if @booking.errors.any? %>
+        <div id="error_explanation">
+          <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
 
-<%= form_for(@booking) do |f| %>
-  <% if @booking.errors.any? %>
-    <div id="error_explanation">
-      <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
-
-      <ul>
-      <small><% @booking.errors.full_messages.each do |message| %></small>
-        <li><%= message %></li>
+          <ul>
+          <small><% @booking.errors.full_messages.each do |message| %></small>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+      <div hidden>
+        <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
+        <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
+        <%= f.date_select :date %>
+      </div>
+      <div class = "col-md-4">
+        <div class='input-group date' id='datetimepicker11'>
+          <!-- <input type='text' class="form-control" name="datetime" /> -->
+          <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+        <small id="date_error"></small>
+
+        <%= f.hidden_field :guest_id, value:@booking.guest_id %>
+        <%= f.hidden_field :experience_id, value:@experience.id %>
+
+        <div class="field">
+          <% if current_host == @experience.host %>
+            <%= f.label :status %><br>
+            <%= f.select :status, options_for_select(Booking.statuses) %>
+          <% else %>
+            <%= f.text_field :status, value:@booking.status, hidden: true %>
+          <% end %>
+        </div>
+      </div>
+      <div class = "col-md-3">
+        <div class="field">
+          <%= f.label :group_size %>
+          <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
+        </div>
+      </div>
+      <div class = "col-md-3 ">
+        <div class="field">
+         <%= f.check_box :is_private %>
+         <%= f.label :is_private, value:'private event' %>
+        </div>
+      </div>
+    </div> 
+    <div class ="col-md-4">
     </div>
-  <% end %>
-
-  <div hidden>
-    <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
-    <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
-    <%= f.date_select :date %>
   </div>
-
-  <div class='input-group date' id='datetimepicker11'>
-    <!-- <input type='text' class="form-control" name="datetime" /> -->
-    <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
-    <span class="input-group-addon">
-      <span class="glyphicon glyphicon-calendar"></span>
-    </span>
+  <div class ="row">
+    <div class = "col-md-7 pull-right">
+      <div class="actions" id="booking_create_button">
+        <%= f.submit %>
+      </div>
+    </div>
+    <div class = "col-md-3">
+    </div>
   </div>
-  <small id="date_error"></small>
+</div>    
 
-  <%= f.hidden_field :guest_id, value:@booking.guest_id %>
-  <%= f.hidden_field :experience_id, value:@experience.id %>
-
-  <div class="field">
-    <% if current_host == @experience.host %>
-      <%= f.label :status %><br>
-      <%= f.select :status, options_for_select(Booking.statuses) %>
-    <% else %>
-      <%= f.text_field :status, value:@booking.status, hidden: true %>
     <% end %>
-  </div>
+  
 
-  <div class="field">
-    <%= f.label :group_size %><br>
-   <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
-  </div>
-  <div class="field">
-    <%= f.label :is_private, value:'private event?' %>
-    <%= f.check_box :is_private %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

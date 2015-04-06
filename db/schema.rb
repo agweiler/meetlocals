@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309090845) do
+ActiveRecord::Schema.define(version: 20150330023429) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -26,10 +29,14 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  add_index "admins", ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true, using: :btree
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "bookings", force: :cascade do |t|
     t.time     "start_time"
@@ -47,6 +54,13 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.datetime "purchased_at"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iso_two_letter_code"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "experiences", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -62,6 +76,7 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.datetime "updated_at",                         null: false
     t.string   "location"
     t.time     "time"
+    t.string   "beverages"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -82,11 +97,18 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "languages"
+    t.string   "nationality"
+    t.string   "country"
+    t.string   "province"
   end
 
-  add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true
-  add_index "guests", ["email"], name: "index_guests_on_email", unique: true
-  add_index "guests", ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true
+  add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true, using: :btree
+  add_index "guests", ["email"], name: "index_guests_on_email", unique: true, using: :btree
+  add_index "guests", ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true, using: :btree
 
   create_table "hosts", force: :cascade do |t|
     t.string   "username",               default: "", null: false
@@ -110,11 +132,21 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.datetime "confirmation_sent_at"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.string   "languages"
+    t.string   "street_address"
+    t.text     "intro"
+    t.text     "neighbourhood"
+    t.text     "additional_info"
+    t.date     "DOB"
+    t.string   "video_url"
   end
 
-  add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true
-  add_index "hosts", ["email"], name: "index_hosts_on_email", unique: true
-  add_index "hosts", ["reset_password_token"], name: "index_hosts_on_reset_password_token", unique: true
+  add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree
+  add_index "hosts", ["email"], name: "index_hosts_on_email", unique: true, using: :btree
+  add_index "hosts", ["reset_password_token"], name: "index_hosts_on_reset_password_token", unique: true, using: :btree
 
   create_table "hosts_languages", id: false, force: :cascade do |t|
     t.integer "host_id",     null: false
@@ -149,6 +181,12 @@ ActiveRecord::Schema.define(version: 20150309090845) do
     t.integer  "booking_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "nationalities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
