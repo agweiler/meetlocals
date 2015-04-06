@@ -90,7 +90,7 @@ Image credits: unsplash.com
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: -1;
     background-color: #080d15;
     opacity: .7;
 }
@@ -119,6 +119,8 @@ Image credits: unsplash.com
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  position: relative;
+  z-index: 2;
 }
 .fade-carousel .slides .slide-1 {
 /*  background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818); 
@@ -155,7 +157,8 @@ background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,0.9
 background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,0.93) 47%, rgba(237,237,237,0.89) 71%, rgba(237,237,237,0.89) 100%);
 background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,0.93) 47%, rgba(237,237,237,0.89) 71%, rgba(237,237,237,0.89) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
-height:350px; margin-top: -20px;
+height:100%; margin-top: -30px;
+z-index: 1;
 }
 
 #pre_foot {
@@ -170,13 +173,14 @@ height:350px; margin-top: -20px;
 
 }
 
-/*.overlay2  {
+#big_head {
+  text-align:center; 
+  font-family: reis; 
+  font-size: 50px;
+}
 
-    position: fixed;
-    width: 100%;
-    height: 350px;
-    z-index: 2;
-    background-color: #080d15;
-    opacity: .7;
-}*/
+#small_head {
+  text-align:center; 
+  font-family: novitonova;
+}
 

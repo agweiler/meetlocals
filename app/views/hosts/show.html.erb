@@ -9,7 +9,7 @@
     
     <div class="row">
     <!--    Host Avatar and minor details -->
-          <div class="col-md-4" style="text-align:center">
+          <div class="col-md-4" id="avatar_align">
             	<% if @host == current_host %>
                 <h3>Your account</h3>
             	<% end %>
@@ -57,7 +57,7 @@
   <!-- End of row -->
 
 <!-- Events title-->  
-<div class="row">
+<div class="row" id="host_events_title">
         <h1 style="text-align:center"><%= @host.username %>'s Events</h1>
         </br>
   </div>
