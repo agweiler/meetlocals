@@ -12,6 +12,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1
   def show
+  	  @booking = Booking.new
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average

@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
 		status.replace("completed")
 		@guest = self.guest
 		@booking_id = self.id
-		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_later
+		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_now
 		save
 	end
 
