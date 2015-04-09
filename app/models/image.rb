@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
 
   has_attached_file :image_file,
   styles: { :full=>"1232x466!", :large=> "600x600>",
-  :medium => "300x300>", :thumb => "100x100>" } #you can customise the storage path here using :path
+  :medium => "300x300!", :thumb => "100x100>" } #you can customise the storage path here using :path
   # validates_attachment_content_type :image_file, content_type: /\Aimage\/.*\Z/
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
