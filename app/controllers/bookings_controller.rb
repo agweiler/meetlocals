@@ -87,7 +87,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
-        Hostmailer.receive_booking_request(host.id,@booking.id).deliver_later
+        Hostmailer.receive_booking_request(host.id,@booking.id).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
       else
         format.html { render :new }
@@ -128,7 +128,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.update(booking_params)
         guest = @booking.guest
-        Guestmailer.receive_invitation(guest.id,@booking.id).deliver_later
+        Guestmailer.receive_invitation(guest.id,@booking.id).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
@@ -166,8 +166,8 @@ class BookingsController < ApplicationController
       @booking = Booking.find params[:invoice]
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_later
-      Hostmailer.payment_completion(host.id, @booking.id).deliver_later
+      Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_now
+      Hostmailer.payment_completion(host.id, @booking.id).deliver_now
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
       puts "FAILED!!!"
