@@ -46,13 +46,13 @@ Image credits: unsplash.com
 /********************************/
 .hero {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     z-index: 3;
     color: #fff;
     text-align: center;
     text-transform: uppercase;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+    text-shadow: 2px 2px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
           -ms-transform: translate3d(-50%,-50%,0);
@@ -184,3 +184,21 @@ z-index: 1;
   font-family: novitonova;
 }
 
+/*.maroon {
+  color: #fff;
+  font-family: novitonova; 
+  font-size: 110px;
+  text-shadow: 0px 0px 0 rgba(0,0,0,.75);
+      -webkit-transform: translate3d(-50%,-50%,0);
+         -moz-transform: translate3d(-50%,-50%,0);
+          -ms-transform: translate3d(-50%,-50%,0);
+           -o-transform: translate3d(-50%,-50%,0);
+              transform: translate3d(-50%,-50%,0);
+}*/
+
+
+#logo {
+    font-family: reis; 
+      font-size: 30px;
+
+}
