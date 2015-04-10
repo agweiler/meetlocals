@@ -184,13 +184,21 @@ z-index: 1;
   font-family: novitonova;
 }
 
-.maroon {
-  color: #c0392b;
-  text-shadow: 2px 2px 0 rgba(0,0,0,.75);
+/*.maroon {
+  color: #fff;
+  font-family: novitonova; 
+  font-size: 110px;
+  text-shadow: 0px 0px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
           -ms-transform: translate3d(-50%,-50%,0);
            -o-transform: translate3d(-50%,-50%,0);
               transform: translate3d(-50%,-50%,0);
-}
+}*/
 
+
+#logo {
+    font-family: reis; 
+      font-size: 30px;
+
+}
