@@ -22,11 +22,7 @@
             	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
 
-            	<p>
-            	  <strong>Location:</strong>
-            	  <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-            	</p>
-
+            	
               <% if @host == current_host %>
             	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-default", :method => :get %>
 
@@ -48,9 +44,27 @@
 
     <!-- Host major details -->
           <div class="col-md-8" id="card_container">
-          Placeholderbox For Host-specific info:
 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id.
+          <p><%= @host.first_name%><%=@host.last_name %></p>
+
+
+              <p>
+                <strong>Location:</strong>
+                <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
+              </p>
+
+          <p><%= @host.age %></p> 
+
+          <p><%= @host.title %></p>
+          <p><%= @host.intro %></p>
+          <p>Speaks: <%= @host.languages %></p>
+          <p><%= @host.neighbourhood %></p>
+          <p><%= @host.additional_info %></p>
+
+
+       <!--    Placeholderbox For Host-specific info:
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id. -->
           </div>
     <!-- End host major details -->
   </div>
