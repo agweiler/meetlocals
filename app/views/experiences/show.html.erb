@@ -2,27 +2,15 @@
 
   <div class="row" id="mealpanel">
             
-                
-                <!--     <% @experience.images.each_with_index do |image, index| %>
-                      <div class="item <%= "active" if index == 0 %>">
-                        <%= image_tag image.image_file.url(:medium) %></br>
-                      </div>
-                    <% end %> -->
-                        <% @experience.images.each_with_index do |image, index| %>
+    <% @experience.images.each_with_index do |image, index| %>
 <!--                         Needs index < 3 fix
- -->                         <div class="col-md-4" style="padding:0px">
-                    
-                        <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px" %></br>
-                      </div>
-                    <% end %>
-                    </div>
+ -->  <div class="col-md-4" style="padding:0px">
+      <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px" %></br>
+      </div>
+      <% end %>
+ </div>
                 
-                </div>
-  </div>
-
-
-
-        
+  
   <div class="row">            
           <div class="col-md-4" style="height:400px">
               </br>
@@ -151,23 +139,17 @@
     <div class ="col-md-4">
     </div>
   </div>
-<!--   <div>
-  <% if current_guest %>
-                      <%=link_to 'Book', "#{@experience.id}/bookings/new", class: "btn-xl" %>
-                      <% end %>
-                      </div> -->
   <% if current_guest %>
   <div class ="row">
     <div class = "col-md-4">
       <div class="actions" id="booking_create_button">
-
         <%= f.submit %>
       </div>
     </div>
     <div class = "col-md-3">
     </div>
   </div>
-  <%end%>
+  <% end %>
 </div>    
 
     <% end %>
@@ -293,9 +275,9 @@
                          <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
 
 
-
-                         <% end %>
-                         </div>
+                        </div>
+                    <% end %>
+                         
 
                 <% end %>
 
@@ -336,10 +318,7 @@
                         <h6><%= testimonial.title %></h6>
                         <p>Rating: <%= testimonial.rating %></p>
                         <p><%= testimonial.body %></p>
-                        <% end %>
-                    
-
-                      
+                        <% end %>                      
 
                     </div>
 

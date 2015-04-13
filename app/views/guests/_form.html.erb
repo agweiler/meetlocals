@@ -16,12 +16,46 @@
   <div class="field">
     <%= f.label :username %><br>
     <%= f.text_field :username, class: "form-control" %>
+  </div>
 
+  <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :first_name %><br>
+      <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+   <div class="field">
+      <%= f.label :last_name %><br>
+      <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :languages %><br>
+      <%= f.text_field :languages, class: "form-control" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :nationality %><br>
+      <%= f.collection_select :nationalty, Nationality.all,:name, :name %>
+  </div>
+
+  <div class="field">
+      <%= f.label :country %>
+      <%= f.collection_select :country, Country.all,:name, :name %>
+     
+  </div>
+
+  <div class="field">
+      <%= f.label :province %><br>
+      <%= f.text_field :last_name, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :about %><br />
-
     <%= f.text_area :about , class: "form-control"%>
   </div>
 
