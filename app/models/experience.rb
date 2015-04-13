@@ -7,7 +7,7 @@ class Experience < ActiveRecord::Base
 
 
 	def self.get_location
-    	return ["All","Kuala Lumpur", "Selangor", "Penang","Johor"]
+    	return ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 	end
 
   def max_number_in_group
