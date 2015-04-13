@@ -127,20 +127,21 @@
          <%= f.check_box :is_private %>
          <%= f.label :is_private, value:'private event' %>
         </div>
+</br>
      <!--  </div> -->
      <% if current_host == @experience.host %>
                         <%= link_to 'Edit', edit_experience_path(@experience) %> |
                       <% end %>
                       
-                      <%= link_to 'Back', experiences_path %>
-      </div> 
+<!--                       <%= link_to 'Back', experiences_path %>
+ -->      </div> 
     </div>
     <div class ="col-md-4">
     </div>
   </div>
-   <% if current_guest %>
+  <% if current_guest %>
   <div class ="row">
-    <div class = "col-md-7 pull-left">
+    <div class = "col-md-4">
       <div class="actions" id="booking_create_button">
         <%= f.submit %>
       </div>
@@ -206,7 +207,7 @@
                         <tr>
                           <td id="rembor">John</td>
                           <td id="rembor"><%= @experience.cuisine %></td>
-                          <td id="rembor">john@example.com</td>
+                          <td id="rembor"><%= @experience.beverages %></td>
                         </tr>
                       </tbody>
 
@@ -317,10 +318,7 @@
                         <h6><%= testimonial.title %></h6>
                         <p>Rating: <%= testimonial.rating %></p>
                         <p><%= testimonial.body %></p>
-                        <% end %>
-                     
-
-                      
+                        <% end %>                      
 
                     </div>
 
