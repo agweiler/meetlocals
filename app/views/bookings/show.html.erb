@@ -54,7 +54,7 @@
     <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
   <% end %>
 
-  <h5>Messages</h5>
+  <h5><strong>Messages</strong></h5>
   <div id="messages">
     <% @messages.each do |message| %>
     <p><%= message.text %></p>
@@ -65,10 +65,11 @@
         <% sender = Guest.find(message.sender_id) %>
       <% end %>
 
-      <%= sender.username %>
+    
       <% if sender.images.present? %>
-        <%= image_tag sender.images.first.image_file.url(:medium) %>
+        <%= image_tag sender.images.first.image_file.url(:thumb), class: "img-circle" %>
       <% end %>
+        <strong><%= sender.username %></strong>
       <span><%= message.created_at %></span>
     </p>
     <% end %>
