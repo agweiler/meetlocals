@@ -3,6 +3,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
+    byebug
     if (params[:experience] == nil || params[:experience][:location] == "All")
       @experiences = Experience.all
     else
