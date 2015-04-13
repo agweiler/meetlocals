@@ -3,10 +3,13 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
-
-    if (params[:experience] == nil || params[:experience][:location] == "All")
+    byebug
+    if (params[:experience] == nil || params[:experience][:location] == "All" && params[:dateFR] == "" && params[:dateTO] == "" )
       @experiences = Experience.all
     else
+      datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == ''
+      dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == ''
+      byebug
       @experiences = Experience.where(location: params[:experience][:location])
     end
   end
