@@ -16,12 +16,6 @@
     });
 
 //  Date.strptime('April 13, 2015',"%B %d, %Y")
-    $('#filter').on("click", function(){
-      var dateFR = $('input[name*=dateFR]').val();
-      var dateTO = $('input[name*=dateTO]').val();
-      $('#datefrom').val(dateFR);
-      $('#dateto').val(dateTO);
-    });
   });
 </script>
 
@@ -37,8 +31,20 @@
                 <%= form_tag '/experiences_search', :class => "form-inline" do %>
                   <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control", style: "width:82%") %>
 
-                  <%= text_field_tag "datefrom" %>
-                  <%= text_field_tag "dateto" %>
+                  <div class='input-group date' id='datetimepickerfrom'>
+                      <input type='text' name="dateFR" class="form-control" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+
+                  <div class='input-group date' id='datetimepickerto'>
+                      <input type='text' name="dateTO" class="form-control" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+                  
                   <%= submit_tag "Filter", id:'filter', class: "btn btn-primary", style: "background-color:#1abc9c; color:#f5f5f5; border-color:#1abc9c" %>
 
                 <% end %>
@@ -51,28 +57,7 @@
         </br>
 </div>
 
-<div class="container">
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepickerfrom'>
-                <input type='text' name="dateFR" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepickerto'>
-                <input type='text' name="dateTO" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
+
 
   <div class="container" style="margin-top:40px">
        <% @experiences.in_groups_of(3, false).each do |group| %>

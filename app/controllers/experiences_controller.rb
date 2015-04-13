@@ -3,7 +3,7 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
-    byebug
+
     if (params[:experience] == nil || params[:experience][:location] == "All")
       @experiences = Experience.all
     else
@@ -117,7 +117,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :time, :images_array => [],
+      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :time, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end
