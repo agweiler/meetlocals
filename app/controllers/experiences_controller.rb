@@ -3,14 +3,33 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
-    byebug
-    if (params[:experience] == nil || params[:experience][:location] == "All" && params[:dateFR] == "" && params[:dateTO] == "" )
+    # Date.strptime('April 13, 2015',"%B %d, %Y")
+    datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
+    dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
+
+    unless datefrom.nil? || dateto.nil?
+      datediff = (dateto - datefrom).to_i + 1
+
+      allday = [0,1,2,3,4,5,6]
+      dayfrom = datefrom.strftime('%w').to_i
+      dayto = dateto.strftime('%w').to_i
+    end
+
+    if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else
-      datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == ''
-      dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == ''
+      allday - [dayfrom, dayto]
+
+      arrlike = []
+      (dayfrom .. dayto).map do | day |
+        arrlike << "available_days LIKE '%" + day.to_s + "%'"
+      end
+      strlike = arrlike.join(' OR ')
+      (params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = #{params[:experience][:location]} AND "
       byebug
-      @experiences = Experience.where(location: params[:experience][:location])
+      # @experiences = Experience.where(location: params[:experience][:location])
+      @experiences = Experience.where("#{strloc}" + "#{strlike}")
+      byebug
     end
   end
 
