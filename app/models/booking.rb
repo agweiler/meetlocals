@@ -53,7 +53,7 @@ class Booking < ActiveRecord::Base
 	def paypal_url(return_path)
 	@experience = Experience.find(self.experience_id)
 	values = {
-	    business: "seller@nasi.com",
+	    business: "hewrin-facilitator@hotmail.com ",
 	    cmd: "_xclick",
 	    upload: 1,
 	    return: "#{Rails.application.secrets.app_host}#{return_path}",

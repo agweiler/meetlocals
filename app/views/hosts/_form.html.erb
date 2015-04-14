@@ -33,7 +33,7 @@
 
   <p>
     <%= f.label :languages %>
-    <%= f.select :languages, [["Danish", "Danish"] , ["Swedish", "Swedish"], ["German", "German"], ["English", "English"]] %>
+     <%= collection_select(:languages, 0, Language.all, :id, :name, {:prompt => true, :multiple => true}) %>
   </p>
 
    <p>
@@ -49,7 +49,7 @@
 
   <p>
     <%= f.label :state %>
-    <%= f.text_field :state, class: "form-control" %>
+    <%= f.select :state, Experience.get_location %>
   </p>
 
   <p>

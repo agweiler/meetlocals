@@ -113,7 +113,6 @@ class ExperiencesController < ApplicationController
 
     experience_params[:available_days].replace(default)
     @image_files = experience_params.delete(:images_array)
-    respond_to do |format|
       if @experience.update(experience_params.except(:images_array, :days))
         redirect_to @experience, notice: 'Experience was successfully updated.'
 
@@ -132,7 +131,6 @@ class ExperiencesController < ApplicationController
       else
         render :edit
       end
-    end
   end
 
   # DELETE /experiences/1
