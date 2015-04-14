@@ -21,19 +21,17 @@ class ExperiencesController < ApplicationController
     if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else
-      arrlike = []
-
       if dayfrom > dayto
         from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
       else
         from_to = (dayfrom .. dayto).to_a
       end
 
-      (dayto >= 0 && dayfrom > dayto) ? dayto = 6 :
-      arrlike << "available_days LIKE '%" + '0' + "%'" if dayto == 0
+      # (dayto >= 0 && dayfrom > dayto) ? dayto = 6 :
+      # arrlike << "available_days LIKE '%" + '0' + "%'" if dayto == 0
 
-      from_to.map do | day |
-        arrlike << "available_days LIKE '%" + day.to_s + "%'"
+      arrlike = from_to.map do | day |
+        "available_days LIKE '%" + day.to_s + "%'"
       end
       strlike = arrlike.join(' OR ')
 
