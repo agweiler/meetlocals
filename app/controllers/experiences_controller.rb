@@ -7,10 +7,12 @@ class ExperiencesController < ApplicationController
     datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
-    dateto = datefrom unless params[:dateTO].present?
+    dayto, dayfrom = 0, 0
+    dateto, datefrom, datediff = 0, 0, 0
     datefrom = dateto unless params[:dateFR].present?
+    dateto = datefrom unless params[:dateTO].present?
 
-    unless datefrom.nil? || dateto.nil?
+    unless datefrom == 0 || dateto == 0
       datediff = (dateto - datefrom).to_i + 1
 
       allday = [0,1,2,3,4,5,6]
@@ -21,9 +23,10 @@ class ExperiencesController < ApplicationController
     if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else
-      if dayfrom > dayto
+      from_to = []
+      if dayfrom > dayto && datediff > 0
         from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
-      else
+      elsif datediff > 0
         from_to = (dayfrom .. dayto).to_a
       end
 
@@ -35,7 +38,9 @@ class ExperiencesController < ApplicationController
       end
       strlike = arrlike.join(' OR ')
 
-      (params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = #{params[:experience][:location]} AND "
+      (params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
+
+      strloc += 'AND' if strlike.present?
 
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}")
