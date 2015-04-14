@@ -7,6 +7,9 @@ class ExperiencesController < ApplicationController
     datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
+    dateto = datefrom unless params[:dateTO].present?
+    datefrom = dateto unless params[:dateFR].present?
+
     unless datefrom.nil? || dateto.nil?
       datediff = (dateto - datefrom).to_i + 1
 
@@ -18,18 +21,27 @@ class ExperiencesController < ApplicationController
     if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else
-      allday - [dayfrom, dayto]
-
       arrlike = []
-      (dayfrom .. dayto).map do | day |
+
+      if dayfrom > dayto
+        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
+      else
+        from_to = (dayfrom .. dayto).to_a
+      end
+
+      (dayto >= 0 && dayfrom > dayto) ? dayto = 6 :
+      arrlike << "available_days LIKE '%" + '0' + "%'" if dayto == 0
+
+      from_to.map do | day |
         arrlike << "available_days LIKE '%" + day.to_s + "%'"
       end
       strlike = arrlike.join(' OR ')
+
       (params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = #{params[:experience][:location]} AND "
-      byebug
+
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}")
-      byebug
+
     end
   end
 
