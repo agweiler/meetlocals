@@ -2,14 +2,14 @@
   $(function () {
     $('#datetimepickerfrom').datetimepicker({
       format: 'MMMM DD, YYYY',
-      minDate: moment(),
+      minDate: moment().add(1, 'days'),
       <% if @input_datefrom.present? %>
       defaultDate: moment().add(<%=  (@input_datefrom - Date.new(Time.now.year, Time.now.month, Time.now.day)).to_i %>, 'days'),
       <% end %>
     });
     $('#datetimepickerto').datetimepicker({
       format: 'MMMM DD, YYYY',
-      minDate: moment(),
+      minDate: moment().add(1, 'days'),
       <% if @input_dateto.present? %>
       defaultDate: moment().add(<%=  (@input_dateto - Date.new(Time.now.year, Time.now.month, Time.now.day)).to_i %>, 'days'),
       <% end %>
