@@ -4,34 +4,40 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   def index
     # Date.strptime('April 13, 2015',"%B %d, %Y")
+
     datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
     @location = params[:experience][:location] unless params[:experience].nil?
     @input_datefrom = datefrom
     @input_dateto = dateto
+    @input_datefrom ||= @input_dateto
+    @input_dateto ||= @input_datefrom
 
-    dayto, dayfrom = 0, 0
-    dateto, datefrom, datediff = 0, 0, 0
-    datefrom = dateto unless params[:dateFR].present?
-    dateto = datefrom unless params[:dateTO].present?
+    dayto, dayfrom = -1, -1
+    dateto, datefrom, datediff = -1, -1, -1
+    datefrom = @input_dateto
+    dateto = @input_datefrom
+    dateto ||= datefrom
+    datefrom ||= dateto
 
-    unless datefrom == 0 || dateto == 0
+    unless @input_datefrom.nil? && @input_dateto.nil?
       datediff = (dateto - datefrom).to_i + 1
 
       allday = [0,1,2,3,4,5,6]
-      dayfrom = datefrom.strftime('%w').to_i
-      dayto = dateto.strftime('%w').to_i
+      dayfrom = @input_datefrom.strftime('%w').to_i
+      dayto = @input_dateto.strftime('%w').to_i
     end
-
-    if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
+    if ((params[:experience] == nil || params[:experience][:location] == "All") && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else
+
       from_to = []
       if dayfrom > dayto && datediff > 0
         from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
-      elsif datediff > 0
+      elsif datediff >= 0
         from_to = (dayfrom .. dayto).to_a
+
       end
 
       # (dayto >= 0 && dayfrom > dayto) ? dayto = 6 :
@@ -42,9 +48,9 @@ class ExperiencesController < ApplicationController
       end
       strlike = arrlike.join(' OR ')
 
-      (params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
+      (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
 
-      strloc += 'AND' if strlike.present?
+      strloc += ' AND ' if strloc.present? && strlike.present?
 
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}")
