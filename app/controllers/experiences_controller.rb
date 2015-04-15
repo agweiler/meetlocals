@@ -16,7 +16,7 @@ class ExperiencesController < ApplicationController
     @input_dateto ||= @input_datefrom
 
     dayto, dayfrom = -1, -1
-    dateto, datefrom, datediff = -1, -1, nil
+    dateto, datefrom, datediff = -1, -1, -1
     datefrom = @input_datefrom
     dateto = @input_dateto
     dateto ||= datefrom
@@ -30,8 +30,13 @@ class ExperiencesController < ApplicationController
       dayfrom = @input_datefrom.strftime('%w').to_i
       dayto = @input_dateto.strftime('%w').to_i
     end
-    if ((params[:experience] == nil || params[:experience][:location] == "All") && (params[:dateFR].nil? && params[:dateTO].nil?) ||  datediff >= 7)
+
+    if ( (params[:experience] == nil || @location == "All") && datediff >= 7 )
       @experiences = Experience.all
+    elsif ( (params[:experience] == nil || @location == "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
+      @experiences = Experience.all
+    elsif ( (params[:experience] != nil && @location != "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
+      @experiences = Experience.where(location: @location)
     else
       from_to = []
       if dayfrom > dayto && datediff > 0
