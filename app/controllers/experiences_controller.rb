@@ -16,7 +16,7 @@ class ExperiencesController < ApplicationController
     @input_dateto ||= @input_datefrom
 
     dayto, dayfrom = -1, -1
-    dateto, datefrom, datediff = -1, -1, -1
+    dateto, datefrom, datediff = -1, -1, nil
     datefrom = @input_datefrom
     dateto = @input_dateto
     dateto ||= datefrom
@@ -24,6 +24,7 @@ class ExperiencesController < ApplicationController
 
     unless @input_datefrom.nil? && @input_dateto.nil?
       datediff = (dateto - datefrom).to_i + 1 if dateto >= datefrom
+      datediff ||= (datefrom - dateto).to_i + 1 if datefrom > dateto
 
       # allday = [0,1,2,3,4,5,6]
       dayfrom = @input_datefrom.strftime('%w').to_i
@@ -33,20 +34,14 @@ class ExperiencesController < ApplicationController
       @experiences = Experience.all
     else
       from_to = []
-      if dayto > dayfrom && datediff > 0
-        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
-      elsif datediff >= 0
-        from_to = (dayfrom .. dayto).to_a
-      elsif datefrom > dateto
-        datediff = (datefrom - dateto).to_i + 1
-        from_to = (dayfrom .. dayto).to_a
-        from_to = (dayto .. dayfrom).to_a unless from_to.present?
-
-        from_to = (0 .. dayfrom).to_a + (dayto .. 6).to_a if dayto > dayfrom
-        from_to = (0 .. dayfrom).to_a + (dayto .. 6).to_a if !from_to.present? && dayto < dayfrom
+      if dayfrom > dayto && datediff > 0
+        from_to = (dayto .. dayfrom).to_a if datefrom > dateto
+        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a unless from_to.present?
+      elsif dayto >= dayfrom
+        from_to = (dayfrom .. dayto).to_a unless datefrom > dateto
+        from_to = (dayto .. 6).to_a + (0..dayfrom).to_a unless from_to.present?
       end
-      # (dayto >= 0 && dayfrom > dayto) ? dayto = 6 :
-      # arrlike << "available_days LIKE '%" + '0' + "%'" if dayto == 0
+
       arrlike = from_to.map do | day |
         "available_days LIKE '%" + day.to_s + "%'"
       end
