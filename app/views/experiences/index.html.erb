@@ -21,12 +21,11 @@
         $('#datetimepickerfrom').data("DateTimePicker").maxDate(e.date);
     });
 
-    $('#experience_location').val('<%= @location %>');
+    $('#experience_location').val('<%= @location ||= 'All' %>');
 
-    <% if @input_datefrom.present? || @location != 'All' %>
+    <% if @input_datefrom.present? || @location != 'All'%>
       location.hash = '#view'
     <% end %>
-
 //  Date.strptime('April 13, 2015',"%B %d, %Y")
   });
 </script>
