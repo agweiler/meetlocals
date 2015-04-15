@@ -53,7 +53,7 @@ class ExperiencesController < ApplicationController
       strloc += ' AND ' if strloc.present? && strlike.present?
 
       # @experiences = Experience.where(location: params[:experience][:location])
-      @experiences = Experience.where("#{strloc}" + "#{strlike}")
+      @experiences = Experience.where("#{strloc}" + "#{strlike}").order(available_days: :desc)
 
     end
   end
