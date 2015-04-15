@@ -24,7 +24,7 @@
         </div>
         <div class="field">
           <%= f.label :is_halal %>?
-          <%= f.check_box :is_halal %> 
+          <%= f.check_box :is_halal %>
         </div>
         <div class="field">
           <%= f.label :cuisine %><br>
@@ -67,10 +67,15 @@
           <%= f.text_field :duration, placeholder: "Estimate", required: false, class: 'form-control', style: "width:75%" %>
         </div>
 
+        <div class="field">
+          <%= f.label :region %> <br>
+          <%= f.select :location, Experience.get_location, selected: current_host.state, required: false, class: 'form-control' %>
+        </div>
+
         <div>
         </div>
 
-     
+
 
         </div>
         <div class="field">
@@ -87,7 +92,7 @@
         </div>
 
         Please upload 3 images with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results.
-        
+
         <div class="field">
           <%= f.label :image %></br>
           <small>([ctrl + click] to select more than one image)</small><br>

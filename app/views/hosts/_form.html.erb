@@ -48,7 +48,7 @@
   </p>
 
   <p>
-    <%= f.label :state %>
+    <%= f.label :region %>
     <%= f.select :state, Experience.get_location %>
   </p>
 
@@ -94,7 +94,7 @@
   <%= f.hidden_field :latitude, class: "form-control" %>
   <%= f.hidden_field :longitude, class: "form-control" %>
   <div class="actions">
-    <button type="button" name="geocoder" onclick="geocode()">Update Host</button> 
+    <button type="button" name="geocoder" onclick="geocode()">Update Host</button>
     <input name="commit" value="Update Host" type="submit" style="display: none">
   </div>
 

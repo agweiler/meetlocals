@@ -45,6 +45,11 @@
   </p>
 
   <p>
+    <strong>Location:</strong>
+    <%= @booking.experience.location %>
+  </p>
+
+  <p>
     <strong>Host:</strong>
     <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
   </p>
@@ -65,7 +70,7 @@
         <% sender = Guest.find(message.sender_id) %>
       <% end %>
 
-    
+
       <% if sender.images.present? %>
         <%= image_tag sender.images.first.image_file.url(:thumb), class: "img-circle" %>
       <% end %>
