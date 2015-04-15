@@ -5,7 +5,6 @@
       minDate: moment(),
       <% if @input_datefrom.present? %>
       defaultDate: moment().add(<%=  (@input_datefrom - Date.new(Time.now.year, Time.now.month, Time.now.day)).to_i %>, 'days'),
-      <% byebug %>
       <% end %>
     });
     $('#datetimepickerto').datetimepicker({
@@ -21,6 +20,8 @@
     $("#datetimepickerto").on("dp.change", function (e) {
         $('#datetimepickerfrom').data("DateTimePicker").maxDate(e.date);
     });
+
+    $('#experience_location').val('<%= @location %>');
 
 //  Date.strptime('April 13, 2015',"%B %d, %Y")
   });
