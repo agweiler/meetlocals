@@ -23,6 +23,10 @@
 
     $('#experience_location').val('<%= @location %>');
 
+    <% if @input_datefrom.present? || @location != 'All' %>
+      location.hash = '#view'
+    <% end %>
+
 //  Date.strptime('April 13, 2015',"%B %d, %Y")
   });
 </script>
@@ -67,7 +71,7 @@
 
 
 
-  <div class="container" style="margin-top:40px">
+  <div class="container" style="margin-top:40px" id="view">
        <% @experiences.in_groups_of(3, false).each do |group| %>
 
           <div class="row">
