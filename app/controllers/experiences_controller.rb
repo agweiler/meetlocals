@@ -9,16 +9,14 @@ class ExperiencesController < ApplicationController
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
     @location = params[:experience][:location] unless params[:experience].nil?
-    @input_datefrom = datefrom
-    @input_dateto = dateto
+    @input_datefrom, @input_dateto = datefrom, dateto
 
     @input_datefrom ||= @input_dateto
     @input_dateto ||= @input_datefrom
 
     dayto, dayfrom = -1, -1
     dateto, datefrom, datediff = -1, -1, -1
-    datefrom = @input_datefrom
-    dateto = @input_dateto
+    datefrom, dateto = @input_datefrom, @input_dateto
     dateto ||= datefrom
     datefrom ||= dateto
 
@@ -40,17 +38,17 @@ class ExperiencesController < ApplicationController
     else # date(s) + with/without @location
       from_to = []
       if dayfrom > dayto
-        from_to = (dayto .. dayfrom).to_a if datefrom > dateto
-        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a if from_to.empty?
+        datefrom > dateto ? from_to = (dayto .. dayfrom).to_a : from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
+        # from_to = (dayto .. dayfrom).to_a if datefrom > dateto
+        # from_to = (dayfrom .. 6).to_a + (0..dayto).to_a if from_to.empty?
       elsif dayto >= dayfrom
-        from_to = (dayfrom .. dayto).to_a unless datefrom > dateto
-        from_to = (dayto .. 6).to_a + (0..dayfrom).to_a if from_to.empty?
+        datefrom < dateto ? from_to = (dayfrom .. dayto).to_a : from_to = (dayto .. 6).to_a + (0..dayfrom).to_a
+        # from_to = (dayfrom .. dayto).to_a unless datefrom > dateto
+        # from_to = (dayto .. 6).to_a + (0..dayfrom).to_a if from_to.empty?
       end
 
-      arrlike = from_to.map do | day |
-        "available_days LIKE '%" + day.to_s + "%'"
-      end
-      strlike = arrlike.join(' OR ')
+      strlike = "(" + from_to.map { | day | "available_days LIKE '%" + day.to_s + "%'" }.join(' OR ') + ")"
+      # strlike = "(" + arrlike.join(' OR ') + ")"
 
       (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
 
