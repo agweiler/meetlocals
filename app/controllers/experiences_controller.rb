@@ -37,14 +37,14 @@ class ExperiencesController < ApplicationController
       @experiences = Experience.all
     elsif ( (params[:experience] != nil && @location != "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
       @experiences = Experience.where(location: @location)
-    else
+    else # date(s) + with/without @location
       from_to = []
-      if dayfrom > dayto && datediff > 0
+      if dayfrom > dayto
         from_to = (dayto .. dayfrom).to_a if datefrom > dateto
-        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a unless from_to.present?
+        from_to = (dayfrom .. 6).to_a + (0..dayto).to_a if from_to.empty?
       elsif dayto >= dayfrom
         from_to = (dayfrom .. dayto).to_a unless datefrom > dateto
-        from_to = (dayto .. 6).to_a + (0..dayfrom).to_a unless from_to.present?
+        from_to = (dayto .. 6).to_a + (0..dayfrom).to_a if from_to.empty?
       end
 
       arrlike = from_to.map do | day |
