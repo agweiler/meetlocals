@@ -54,6 +54,7 @@ class ExperiencesController < ApplicationController
 
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}").order(available_days: :desc)
+      @location ||= 'All' unless @location.present?
 
     end
   end
