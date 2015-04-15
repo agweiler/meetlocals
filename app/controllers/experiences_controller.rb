@@ -7,6 +7,9 @@ class ExperiencesController < ApplicationController
     datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
+    @input_datefrom = datefrom
+    @input_dateto = dateto
+
     dayto, dayfrom = 0, 0
     dateto, datefrom, datediff = 0, 0, 0
     datefrom = dateto unless params[:dateFR].present?
@@ -19,7 +22,7 @@ class ExperiencesController < ApplicationController
       dayfrom = datefrom.strftime('%w').to_i
       dayto = dateto.strftime('%w').to_i
     end
-
+# byebug
     if (params[:experience] == nil || params[:experience][:location] == "All" && (params[:dateFR] == "" && params[:dateTO] == "") ||  datediff >= 7)
       @experiences = Experience.all
     else

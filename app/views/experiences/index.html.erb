@@ -3,10 +3,17 @@
     $('#datetimepickerfrom').datetimepicker({
       format: 'MMMM DD, YYYY',
       minDate: moment(),
+      <% if @input_datefrom.present? %>
+      defaultDate: moment().add(<%=  (@input_datefrom - Date.new(Time.now.year, Time.now.month, Time.now.day)).to_i %>, 'days'),
+      <% byebug %>
+      <% end %>
     });
     $('#datetimepickerto').datetimepicker({
       format: 'MMMM DD, YYYY',
       minDate: moment(),
+      <% if @input_dateto.present? %>
+      defaultDate: moment().add(<%=  (@input_dateto - Date.new(Time.now.year, Time.now.month, Time.now.day)).to_i %>, 'days'),
+      <% end %>
     });
     $("#datetimepickerfrom").on("dp.change", function (e) {
         $('#datetimepickerto').data("DateTimePicker").minDate(e.date);
@@ -44,7 +51,7 @@
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
-                  
+
                   <%= submit_tag "Filter", id:'filter', class: "btn btn-primary", style: "background-color:#1abc9c; color:#f5f5f5; border-color:#1abc9c" %>
 
                 <% end %>
