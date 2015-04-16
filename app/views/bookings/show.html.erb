@@ -1,7 +1,7 @@
 <div class = "container col-md-offset-3">
   <p>
     <strong>Experience:</strong>
-    "<%= link_to @booking.experience.title, '/experiences/' + @booking.experience.id.to_s %>"
+    "<%= link_to @booking.experience.title, experience_path(@booking.experience.id) %>"
     <strong>Host by:</strong>
     <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
   </p>
@@ -102,7 +102,7 @@
       <% end %>
 
       <% if @booking.status == "completed" && @booking.testimonial.nil? %>
-        <%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new", class:'btn btn-success btn-xs', style:"color:#fff"  %>
+        <%= link_to 'Create Testimonial', make_testimonial_path(@booking.id), class:'btn btn-success btn-xs', style:"color:#fff"  %>
       <% end %>
 
       <% if @booking.check_finished? %>
