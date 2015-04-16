@@ -1,7 +1,7 @@
 <!-- !if we follow design mockups, we will have to require that hosts upload at least 3 images with resolutions of atleast 600*600px -->
 
   <div class="row" id="mealpanel">
-            
+
     <% @experience.images.each_with_index do |image, index| %>
 <!--                         Needs index < 3 fix
  -->  <div class="col-md-4" style="padding:0px">
@@ -9,13 +9,13 @@
       </div>
       <% end %>
  </div>
-                
-  
-  <div class="row">            
+
+
+  <div class="row">
           <div class="col-md-4" style="height:400px">
               </br>
 
-              
+
 
        <div style="margin-left: 70px; margin-top: 30px">
                 <% @host = @experience.host %>
@@ -130,11 +130,12 @@
 </br>
      <!--  </div> -->
      <% if current_host == @experience.host %>
-                        <%= link_to 'Edit', edit_experience_path(@experience) %> |
-                      <% end %>
-                      
+        <%= link_to 'Edit', edit_experience_path(@experience),
+        class: "btn btn-warning btn-xs btn_admins" %> |
+    <% end %>
+
 <!--                       <%= link_to 'Back', experiences_path %>
- -->      </div> 
+ -->      </div>
     </div>
     <div class ="col-md-4">
     </div>
@@ -150,24 +151,24 @@
     </div>
   </div>
   <% end %>
-</div>    
+</div>
 
     <% end %>
             </div>
       </div>
-          
+
 
 
 <!-- Carousel experiment (it works!) -->
-        
-              
+
+
 
 
 
 <!-- Carousel experiment end -->
       <div class="col-md-8" style="background-color:#777">
-                
-              
+
+
                 <div class="row" id="mealframe">
 
                    <h2><%= @experience.title %></h2>
@@ -180,7 +181,7 @@
                 <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
               </p>
 
-          <p><%= @host.age %></p> 
+          <p><%= @host.age %></p>
 
           <p><%= @host.title %></p>
           <p><%= @host.intro %></p>
@@ -226,7 +227,7 @@
                       <%= avail_days.to_sentence %></td>
                           <td id="rembor"><%= @experience.max_group_size %> pax</td>
                         </tr>
-                      </tbody>   
+                      </tbody>
 
                        <thead>
                         <tr>
@@ -243,41 +244,41 @@
                            <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
                            <td id="rembor"><%= @experience.price %> $US</td>
                         </tr>
-                      </tbody>   
+                      </tbody>
 
 
                     </table>
 
                     <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
                     <%= @experience.description %>
-                    </div> 
+                    </div>
                  </div>
 
 
-      
-            
+
+
 
                 <div class="row" id="specframe">
 <!--                  <hr>
  -->                 <h1>Special Events</h1>
-                
+
                 </div>
 
                 <% if true %>
 
-                    <%if @host.video_url.present?%> 
+                    <%if @host.video_url.present?%>
 
                         <div class="row" id="menuframe">
-                         
+
                          <h1>Video Presentation</h1>
 
-                        
+
                          <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
 
 
                         </div>
                     <% end %>
-                         
+
 
                 <% end %>
 
@@ -285,7 +286,7 @@
 
 
                  <div class="row" id="menuframe">
-                   
+
                    <h1>Map</h1>
                          <div id="map-canvas" style="max-width: 600px"></div>
                  </div>
@@ -308,7 +309,7 @@
                   <h1>Ratings</h1>
                 </div>
 
-                  
+
 
 
                     <div class="row" id="testiframe">
@@ -318,12 +319,12 @@
                         <h6><%= testimonial.title %></h6>
                         <p>Rating: <%= testimonial.rating %></p>
                         <p><%= testimonial.body %></p>
-                        <% end %>                      
+                        <% end %>
 
                     </div>
 
 
 
               </div>
-             
+
           </div>
