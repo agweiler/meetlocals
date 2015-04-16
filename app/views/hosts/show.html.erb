@@ -103,8 +103,8 @@
                          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
                           <p style="text-align: left"><%= link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
                                     <% if current_host == experience.host || current_admin %>
-                                      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs", style: "background-color:#fed136" %> |
-                                      <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "background-color:#fed136" %></p>
+                                      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs btn_admins" %> |
+                                      <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %></p>
                         <% end %>
 
 
