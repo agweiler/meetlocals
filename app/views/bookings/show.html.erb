@@ -1,4 +1,4 @@
-<div class = "container col-md-offset-3">
+<div class = "col-md-offset-3">
   <h3>
     "<%= link_to @booking.experience.title, experience_path(@booking.experience.id) %>"
   </h3>
@@ -19,28 +19,25 @@
   </p>
 
   <p>
-    <strong>Status:</strong>
-
-    <%= @booking.status.capitalize %>
-    <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-      <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
-    <% end %>
-
-    <% if current_guest && @booking.status == "invited" %>
-      <%= link_to 'Pay Here', @booking.paypal_url(booking_path(@booking)) %>
-    <% end %>
-
-  </p>
-
-  <p>
     <strong>Group size:</strong>
-    <%= @booking.group_size %>
-  </p>
-
-  <p>
+    <%= @booking.group_size %> &nbsp;
     <strong>Is private?:</strong>
     <%= @booking.is_private ? "Yes" : "No"%>
   </p>
+
+  <p>
+    <strong>Status:</strong>
+
+    <span class="btn btn-primary btn-xs disabled"> <%= @booking.status.capitalize %> </span>
+    <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+      <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+    <% end %>
+  </p>
+
+
+  <% if current_guest && @booking.status != "invited" %>
+    <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %>
+  <% end %>
 
   <% if @booking.check_finished? && @booking.status == 'confirmed' %>
     <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
