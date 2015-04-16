@@ -90,7 +90,10 @@
                             Rating:
                             <%= @average_rating.nil? ? '-' : @average_rating %>
                           </p>
-                          <h3><%= truncate(experience.title, length: 20) %></h3>
+
+                          <h3>
+                            <%= link_to truncate(experience.title, length: 20), experience_path(experience.id) %>
+                          </h3>
 
                          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
                           <p style="text-align: left"><%= link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
