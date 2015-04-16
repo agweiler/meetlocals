@@ -55,7 +55,7 @@ class ExperiencesController < ApplicationController
       (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
 
       strloc += ' AND ' if strloc.present? && strlike.present?
-byebug
+
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}").order(available_days: :desc)
       @location ||= 'All' unless @location.present?
