@@ -1,5 +1,5 @@
 <% message = Message.where(booking_id: params[:message][:booking_id]).last %>
-<p><%= message.text %></p>
+
 <p>
   <% if message.sender_type == "host" %>
     <% sender = Host.find(message.sender_id) %>
@@ -8,8 +8,19 @@
   <% end %>
 
   <% if sender.images.present? %>
-    <%= image_tag sender.images.first.image_file.url(:thumb), class: "img-circle" %>
+    <% image_tag sender.images.first.image_file.url(:thumb), class: "img-circle" %>
   <% end %>
-  <strong><%= sender.username %></strong>
-  <span><%= message.created_at %></span>
+
+  <% if message.sender_type == "host" %>
+    <div class="alert alert-info" role="alert">
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+  <% end %>
+
+  <p style:"float:left"><%= message.text %></p>
+    <small style="float:right">
+      <strong><%= sender.username %></strong>
+      <%= message.created_at.strftime('@%b %d, %Y') %>
+    </small>
+  </div>
 </p>
