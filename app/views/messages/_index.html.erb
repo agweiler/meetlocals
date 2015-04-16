@@ -12,9 +12,9 @@
   <% end %>
 
   <% if message.sender_type == "host" %>
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info" role="alert" style="margin-bottom:5px">
   <% else %>
-    <div class="alert alert-warning" role="alert">
+    <div class="alert alert-warning" role="alert" style="margin-bottom:5px">
   <% end %>
 
   <p style:"float:left"><%= message.text %></p>

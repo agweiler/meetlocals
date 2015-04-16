@@ -1,13 +1,9 @@
 <div class = "container">
   <p>
-    <strong>Start time:</strong>
-    <%= @booking.experience.time.strftime('%I:%M %p') %><small>(Local Time)</small>
-  </p>
-
-  <p>
-    <strong>End time:</strong>
-    <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
-    <small>(Local Time)</small>
+    <strong>Experience:</strong>
+    <%= @booking.experience_id %> "<%= @booking.experience.title %>"
+    <strong>Host by:</strong>
+    <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
   </p>
 
   <p>
@@ -16,8 +12,10 @@
   </p>
 
   <p>
-    <strong>Experience:</strong>
-    <%= @booking.experience_id %> "<%= @booking.experience.title %>"
+    <strong>Time:</strong>
+    <%= @booking.experience.time.strftime('%I:%M %p') %> ~
+    <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
+    <small>(Local Time)</small>
   </p>
 
   <p>
@@ -44,17 +42,11 @@
     <%= @booking.is_private ? "Yes" : "No"%>
   </p>
 
-  <p>
-    <strong>Host:</strong>
-    <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
-  </p>
-
-
   <% if @booking.check_finished? && @booking.status == 'confirmed' %>
     <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
   <% end %>
 
-  <h5><strong>Messages</strong></h5>
+  <h5><strong>Messages:</strong></h5>
   <div class="row">
     <div id="messages" class="col-md-6">
       <% @messages.each do |message| %>
@@ -71,9 +63,9 @@
 
         </p>
         <% if message.sender_type == "host" %>
-          <div class="alert alert-info" role="alert">
+          <div class="alert alert-info" role="alert" style="margin-bottom:5px">
         <% else %>
-          <div class="alert alert-warning" role="alert">
+          <div class="alert alert-warning" role="alert" style="margin-bottom:5px">
         <% end %>
 
         <p style:"float:left"><%= message.text %></p>
