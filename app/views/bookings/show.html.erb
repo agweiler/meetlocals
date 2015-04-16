@@ -34,7 +34,6 @@
     <% end %>
   </p>
 
-
   <% if current_guest && @booking.status != "invited" %>
     <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %>
   <% end %>
@@ -57,56 +56,52 @@
           <% if sender.images.present? %>
             <% image_tag sender.images.first.image_file.url(:thumb), class: "img-circle", style: "" %>
           <% end %>
-
         </p>
         <% if message.sender_type == "host" %>
           <div class="alert alert-info" role="alert" style="margin-bottom:5px">
         <% else %>
           <div class="alert alert-warning" role="alert" style="margin-bottom:5px">
         <% end %>
+          <p style:"float:left"><%= message.text %></p>
+            <small style="float:right">
+              <strong><%= sender.username %></strong>
+              <%= message.created_at.strftime('@%b %d, %Y') %>
+            </small>
+            </div>
+        <% end %>
 
-        <p style:"float:left"><%= message.text %></p>
-          <small style="float:right">
-            <strong><%= sender.username %></strong>
-            <%= message.created_at.strftime('@%b %d, %Y') %>
-          </small>
-        </div>
+    <div class="row col-md-6">
+      <%= form_for @message, remote: true do |m| %>
+
+        <%= m.label :message, value:'New Message'%><br>
+        <%= m.text_area :text, required: true, title:nil, class:"form-control" %><br>
+        <%= m.hidden_field :booking_id, value: @booking.id %>
+
+        <% if guest_signed_in? %>
+          <%= m.hidden_field :sender_id, value: current_guest.id %>
+          <%= m.hidden_field :sender_type, value: 'guest' %>
+          <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
+        <% elsif host_signed_in? %>
+          <%= m.hidden_field :sender_id, value: current_host.id %>
+          <%= m.hidden_field :sender_type, value: 'host' %>
+          <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
+        <% else %>
+          <p>Sign in to send message</p>
+        <% end %>
+
+        <% if current_guest && @booking.status != "invite" && @booking.status != 'completed' %>
+          <%= link_to 'Edit', edit_booking_path(@booking), class:"btn btn-xs btn-warning", style:"color:#fff" %>
+        <% end %>
+
+        <% if @booking.status == "completed" && @booking.testimonial.nil? %>
+          <%= link_to 'Create Testimonial', make_testimonial_path(@booking.id), class:'btn btn-success btn-xs', style:"color:#fff"  %>
+        <% end %>
+
+        <% if @booking.check_finished? %>
+          <button id="complete" class="btn btn-success btn-xs">Complete</button>
+        <% end %>
+      <!-- <% link_to 'Back', bookings_path, class:"btn btn-warning btn-xs" %> -->
       <% end %>
     </div>
-  </div>
-
-  <div class="row col-md-6">
-    <%= form_for @message, remote: true do |m| %>
-
-      <%= m.label :message, value:'New Message'%><br>
-      <%= m.text_area :text, required: true, title:nil, class:"form-control" %><br>
-      <%= m.hidden_field :booking_id, value: @booking.id %>
-
-      <% if guest_signed_in? %>
-        <%= m.hidden_field :sender_id, value: current_guest.id %>
-        <%= m.hidden_field :sender_type, value: 'guest' %>
-        <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
-      <% elsif host_signed_in? %>
-        <%= m.hidden_field :sender_id, value: current_host.id %>
-        <%= m.hidden_field :sender_type, value: 'host' %>
-        <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
-      <% else %>
-        <p>Sign in to send message</p>
-      <% end %>
-
-      <% if current_guest && @booking.status != "invite" && @booking.status != 'completed' %>
-        <%= link_to 'Edit', edit_booking_path(@booking), class:"btn btn-xs btn-warning", style:"color:#fff" %>
-      <% end %>
-
-      <% if @booking.status == "completed" && @booking.testimonial.nil? %>
-        <%= link_to 'Create Testimonial', make_testimonial_path(@booking.id), class:'btn btn-success btn-xs', style:"color:#fff"  %>
-      <% end %>
-
-      <% if @booking.check_finished? %>
-        <button id="complete" class="btn btn-success btn-xs">Complete</button>
-      <% end %>
-
-    <% end %>
-    <!-- <% link_to 'Back', bookings_path, class:"btn btn-warning btn-xs" %> -->
   </div>
 </div>
