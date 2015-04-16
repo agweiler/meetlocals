@@ -1,7 +1,7 @@
 <div class = "container col-md-offset-3">
   <p>
     <strong>Experience:</strong>
-    <%= @booking.experience_id %> "<%= @booking.experience.title %>"
+    "<%= link_to @booking.experience.title, '/experiences/' + @booking.experience.id.to_s %>"
     <strong>Host by:</strong>
     <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
   </p>
