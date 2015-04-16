@@ -37,7 +37,9 @@ class ExperiencesController < ApplicationController
       @experiences = Experience.where(location: @location)
     else # date(s) + with/without @location
       from_to = []
-      if dayfrom > dayto
+      if dayfrom == dayto
+        from_to = (dayfrom .. dayto).to_a
+      elsif dayfrom > dayto
         datefrom > dateto ? from_to = (dayto .. dayfrom).to_a : from_to = (dayfrom .. 6).to_a + (0..dayto).to_a
         # from_to = (dayto .. dayfrom).to_a if datefrom > dateto
         # from_to = (dayfrom .. 6).to_a + (0..dayto).to_a if from_to.empty?
