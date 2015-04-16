@@ -24,11 +24,19 @@
 
 
               <% if @host == current_host %>
-            	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-default", :method => :get %>
-
-            	<%= button_to "Edit Profile" , edit_host_path, :class => "btn btn-default", :method => :get %>
-
-            	<%= button_to "Account Settings" , edit_host_registration_path, :class => "btn btn-default", :method => :get %>
+              <div class="row">
+                <div class="col-xs-1">
+              	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-1">
+              	   <%= button_to "Edit Profile" , edit_host_path, :class => "btn btn-default btn-xs", :method => :get %>
+                </div>
+                <div>
+              	   <%= button_to "Account Settings" , edit_host_registration_path, :class => "btn btn-default btn-xs", :method => :get %>
+                 </div>
+              </div>
             	<% end %>
           </div>
     <!-- End of host avatar and minor details -->
