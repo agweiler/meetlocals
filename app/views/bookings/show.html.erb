@@ -1,4 +1,4 @@
-<div class = "container">
+<div class = "container col-md-offset-3">
   <p>
     <strong>Experience:</strong>
     <%= @booking.experience_id %> "<%= @booking.experience.title %>"
@@ -8,7 +8,7 @@
 
   <p>
     <strong>Date:</strong>
-    <%= @booking.date.strftime('%d %b %Y')  %>
+    <%= @booking.date.strftime('%b %d, %Y')  %>
   </p>
 
   <p>
@@ -80,8 +80,9 @@
 
   <div class="row col-md-6">
     <%= form_for @message, remote: true do |m| %>
+
       <%= m.label :message, value:'New Message'%><br>
-      <%= m.text_area :text, required: false, title:nil, class:"form-control" %><br>
+      <%= m.text_area :text, required: true, title:nil, class:"form-control" %><br>
       <%= m.hidden_field :booking_id, value: @booking.id %>
 
       <% if guest_signed_in? %>
@@ -96,18 +97,19 @@
         <p>Sign in to send message</p>
       <% end %>
 
+      <% if current_guest && @booking.status != "invite" && @booking.status != 'completed' %>
+        <%= link_to 'Edit', edit_booking_path(@booking), class:"btn btn-xs btn-warning", style:"color:#fff" %>
+      <% end %>
+
       <% if @booking.status == "completed" && @booking.testimonial.nil? %>
         <%= link_to 'Create Testimonial', "/bookings/" + @booking.id.to_s + "/testimonials/new", class:'btn btn-success btn-xs', style:"color:#fff"  %>
       <% end %>
+
       <% if @booking.check_finished? %>
         <button id="complete" class="btn btn-success btn-xs">Complete</button>
       <% end %>
+
     <% end %>
-
-    <!-- <% if current_guest && @booking.status == "invite" %>
-      <% link_to_if( @booking.status != "completed", 'Edit', edit_booking_path(@booking) ) %> |
-    <% end %> -->
-
     <!-- <% link_to 'Back', bookings_path, class:"btn btn-warning btn-xs" %> -->
   </div>
 </div>
