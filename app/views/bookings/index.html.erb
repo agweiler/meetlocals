@@ -12,7 +12,7 @@
     <h2>Nothing was found D:</h2>
   <% else %>
   </br>
-  <div class="col-md-8" style="border: 2px solid; border-radius: 25px; border-color: #000000">
+  <div class="col-sm-11" style="border: 2px solid; border-radius: 10px; border-color: #000000">
     <table class="table-striped">
       <thead>
         <tr>
@@ -27,9 +27,9 @@
             <th>Host</th>
             <th>Guest</th>
           <% end %>
-          <th>Experience</th>
+          <th colspan="3">Experience</th>
           <th>Status</th>
-          <th>Group size</th>
+          <th>Size</th>
           <th colspan="2"></th>
         </tr>
       </thead>
@@ -38,7 +38,7 @@
           <% experience = Experience.find(booking.experience_id)%>
           <tr>
 
-            <td><%= booking.date.strftime('%d %b %Y') %></td>
+            <td><%= booking.date.strftime('%b %d, %Y') %></td>
             <td><%= experience.time.strftime('%I:%M %p') %></td>
             <!-- <td><%= booking.end_time.strftime('%r') %></td> -->
 
@@ -50,10 +50,10 @@
               <td><%= link_to "#{experience.host.username}", experience.host %></td>
               <td><%= link_to "#{booking.guest.username}", booking.guest %></td>
             <% end %>
-            <td><%= booking.experience.title %></td>
+            <td colspan="3"><%= booking.experience.title %></td>
             <td><%= booking.status %></td>
             <td><%= booking.group_size %></td>
-            <td><%= link_to 'Show', booking %></td>
+            <td colspan="2"><%= link_to 'Show', booking %></td>
           </tr>
         <% end %>
       </tbody>
