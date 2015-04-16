@@ -65,7 +65,7 @@
         <% sender = Guest.find(message.sender_id) %>
       <% end %>
 
-    
+
       <% if sender.images.present? %>
         <%= image_tag sender.images.first.image_file.url(:thumb), class: "img-circle" %>
       <% end %>
@@ -83,11 +83,11 @@
     <% if guest_signed_in? %>
       <%= m.hidden_field :sender_id, value: current_guest.id %>
       <%= m.hidden_field :sender_type, value: 'guest' %>
-      <%= m.submit 'Send Message' %>
+      <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
     <% elsif host_signed_in? %>
       <%= m.hidden_field :sender_id, value: current_host.id %>
       <%= m.hidden_field :sender_type, value: 'host' %>
-      <%= m.submit 'Send Message' %>
+      <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
     <% else %>
       <p>Sign in to send message</p>
     <% end %>
