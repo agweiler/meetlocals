@@ -1,7 +1,7 @@
 <!-- <div class = "container" > -->
 	<div class ="row">
 	  <div class="col-md-offset-4 col-sm-offset-2 col-xs-offset-2">
-			<h2>New Testimonial</h2>
+			<h3>New Testimonial</h3>
 		  <!-- <div class="testimonial_forms"> -->
 		  <h3> <%= link_to @booking.experience.title, experience_path(@booking.experience.id)%></h3>
 	  	<h5><strong>Hosted by: </strong><%= link_to @booking.experience.host.username,  host_path(@booking.experience.host_id.to_s) %>
@@ -20,4 +20,4 @@
 	</div>
 </div>
 
-			<%= link_to 'Back', booking_path(@booking) %>
+<% link_to 'Back', booking_path(@booking) %>
