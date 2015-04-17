@@ -1,3 +1,30 @@
+<script type="text/javascript">
+  <% if @testimonial.rating.present? %>
+    var default_score = <%= @testimonial.rating.to_i %>;
+  <% else %>
+    var default_score = 0;
+  <% end %>
+
+  $(function(){
+    $('#star').raty({
+    score     : default_score,
+    cancel    : false,
+    cancelOff : 'cancel-off.png',
+    cancelOn  : 'cancel-on.png',
+    half      : false,
+    size      : 24,
+    starHalf  : 'star-half.png',
+    starOff   : 'star-off.png',
+    starOn    : 'star-on.png',
+    path      : '/assets/'
+    });
+
+    $(".field").on("click", function(){
+      $("#testimonial_rating_" + $('input[name*=score]').val()).attr('checked', 'checked');
+    });
+
+  });
+</script>
 
 <%= form_for(@testimonial, html: {multipart: true}) do |f| %>
   <% if @testimonial.errors.any? %>
@@ -11,37 +38,40 @@
       </ul>
     </div>
   <% end %>
+
   <div class="container testimonial_forms">
     <div class="row">
-     <div class="col-md-offset-2">
-        <h1>Testimonial</h1> 
+     <div class="col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
         <div class="field">
           <%= f.label :title %>
-          <%= f.text_field :title  ,class: "form-control", style: "width:50%" %>
+          <%= f.text_field :title, required: true, class: "form-control", style: "width:50%" %>
         </div>
         <div class="field">
-          <%= f.label :rating %>
-          <span>Poor</span>
-            <%= f.radio_button :rating, 1 %>
-            <%= f.radio_button :rating, 2 %>
-            <%= f.radio_button :rating, 3 %>
-            <%= f.radio_button :rating, 4 %>
-            <%= f.radio_button :rating, 5 %>
-          <span>Great!</span>
+          <strong>Rating: </strong>
+          <div id="star"></div>
+          <% f.radio_button :rating, 1 %>
+          <% f.radio_button :rating, 2 %>
+          <% f.radio_button :rating, 3 %>
+          <% f.radio_button :rating, 4 %>
+          <% f.radio_button :rating, 5 %>
         </div>
-        <div class="field">
-          <%= f.label :body %>
-          <%= f.text_area :body , :cols => "50", :rows => "8", :maxlength=>"300" ,class: "form-control"%>
-        </div>
+        <!-- <div class="field col-sm-6"> -->
+          <% f.label :body %>
+          <%= f.text_area :body , :cols => "40", :rows => "8", :maxlength=>"500", class: "col-md-6 col-sm-6 col-xs-6", required:true, style:"border-radius: 5px; border-color: #CCCCCC" %>
+        <!-- </div> -->
+      </div>
     </div>
-    <div class="col-md-offset-2">
+
+    <div class="row">
+      <div class="col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
         <!-- <div class="field"> -->
           <!-- <%= f.label :booking_id %><br> -->
           <%= f.hidden_field :booking_id, value:@booking.id %>
         <!-- </div> -->
         <div class="field">
-          <%= f.label :image %> ([ctrl + click] to select more than one image)
-          <%= f.file_field(:images_array, multiple: true) %>
+          <%= f.label :image %>
+          <small>([ctrl + click] to select more than one image)</small>
+          <%= f.file_field(:images_array, multiple: true, class:"") %>
           <small>supported file types: .jpg .png .gif</small>
         </div>
         <!-- <div class="field"> -->
@@ -49,10 +79,10 @@
           <%= f.hidden_field :booking_id, value:@booking.id %>
         <!-- </div> -->
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit class:"btn btn-success btn-md" %>
         </div>
           <% end %>
+      </div>
     </div>
   </div>
-  </div>
-
+<!-- </div> -->

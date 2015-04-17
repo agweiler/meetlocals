@@ -1,29 +1,54 @@
-<p>
-  <strong>Title:</strong>
-  <%= @testimonial.title %>
-</p>
+<div class="container col-md-offset-4 col-sm-offset-3">
+  <h3>
+    <strong><%= @testimonial.title %></strong>
+  </h3>
 
-<p>
-  <strong>Body:</strong>
-  <%= @testimonial.body %>
-</p>
+  <p>
+    <strong>Experience</strong>
+    <%= link_to @testimonial.booking.experience.title, experience_path(@testimonial.booking.experience.id) %>
+  </p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @testimonial.rating %>
-</p>
+  <p>
+    <strong>Host by:</strong>
+    <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
+  </p>
 
-<p>
-  <strong>Booking:</strong>
-  <%= @testimonial.booking_id %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @testimonial.booking.date.strftime('%b %d, %Y (%A)')  %>
+  </p>
 
-<p>
-  <strong>Image(s):</strong></br>
-  <%  @testimonial.images.each do |image| %>
-  <%=   image_tag image.image_file.url(:medium) %></br>
-  <%  end %>
-</p>
+  <p>
+    <strong>Time:</strong>
+    <%= @testimonial.booking.experience.time.strftime('%I:%M %p') %> ~
+    <%= (@testimonial.booking.experience.time + @testimonial.booking.experience.duration.hour).strftime('%I:%M %p') %>
+    <small>(Local Time)</small>
+  </p>
 
-<%= link_to 'Edit', edit_testimonial_path(@testimonial) %> |
-<%= link_to 'Back', booking_path(@booking) %>
+  <p>
+    <strong>Rating:</strong>
+    <% @testimonial.rating.to_i.times do %>
+      <img src="/assets/star-on.png" />
+    <% end %>
+  </p>
+
+  <!-- <p>
+    <strong>Booking:</strong>
+    <%= @testimonial.booking_id %>
+  </p> -->
+
+  <p>
+    <strong>Image(s):</strong></br>
+    <%  @testimonial.images.each do |image| %>
+    <%=   image_tag image.image_file.url(:medium) %></br>
+    <%  end %>
+  </p>
+
+  <p>
+    <strong>Body:</strong>
+    <%= simple_format(@testimonial.body) %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_testimonial_path(@testimonial), class:"btn btn-xs btn-warning", style:"color:#fff" %>
+</div>

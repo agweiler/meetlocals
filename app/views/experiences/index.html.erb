@@ -85,10 +85,10 @@
                       <%= image_tag experience.host.images.first.image_file.url(:thumb), class: "img-circle"%>
                         </div>
 
-                          <p><%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
-                           <p>
+                          <p><%= link_to experience.host.username,  host_path(experience.host_id.to_s) %></p>
+                          <p>
                             Rating:
-                            <%= @average_rating.nil? ? '-' : @average_rating %>
+                            <%= experience.testimonials.present? ? experience.avg_rating.to_s + " / " + pluralize(experience.testimonials.count, "review") + "": '-'%>
                           </p>
 
                           <h3>

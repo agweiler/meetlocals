@@ -23,4 +23,8 @@ class Experience < ActiveRecord::Base
     	end
  	end
 
+	def avg_rating
+		self.testimonials.average(:rating).round(2)
+	end
+
 end
