@@ -44,7 +44,7 @@
 
             daysOfWeekDisabled: <%= days %>,
             format: 'MMMM DD, YYYY',
-            minDate: moment(),
+            minDate: moment().add(5, 'days'),
             <% if @booking.date.nil? %>
               defaultDate: false,
             <% else %>
