@@ -3,13 +3,12 @@
 	  <div class="col-md-offset-4 col-sm-offset-2 col-xs-offset-2">
 			<h2>New Testimonial</h2>
 		  <!-- <div class="testimonial_forms"> -->
-			  <h3> <%= link_to @booking.experience.title, experience_path(@booking.experience.id)%></h3>
-		  	<h5><strong>Hosted by: </strong><%= link_to @booking.experience.host.username,  host_path(@booking.experience.host_id.to_s) %>
-					<% image_tag @booking.experience.host.images.first.image_file.url(:thumb), class: "img-circle col-offset-5"%></h5>
+		  <h3> <%= link_to @booking.experience.title, experience_path(@booking.experience.id)%></h3>
+	  	<h5><strong>Hosted by: </strong><%= link_to @booking.experience.host.username,  host_path(@booking.experience.host_id.to_s) %>
+				<% image_tag @booking.experience.host.images.first.image_file.url(:thumb), class: "img-circle col-offset-5"%></h5>
 
-				<h5><strong>Time: </strong><%= @booking.date.strftime("%d %b, %Y") %>
-						<%= @booking.start_time.strftime("%I:%M %p") %></h5>
-
+			<h5><strong>Time: </strong><%= @booking.date.strftime("%d %b, %Y") %>
+					<%= @booking.start_time.strftime("%I:%M %p") %></h5>
 		  <!-- </div> -->
 		</div>
 	</div>
