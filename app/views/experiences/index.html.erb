@@ -86,9 +86,9 @@
                         </div>
 
                           <p><%= link_to experience.host.username,  host_path(experience.host_id.to_s) %></p>
-                           <p>
+                          <p>
                             Rating:
-                            <%= @average_rating.nil? ? '-' : @average_rating %>
+                            <%= experience.testimonials.present? ? experience.avg_rating.to_s + " / " + pluralize(experience.testimonials.count, "review") + "": '-'%>
                           </p>
 
                           <h3>
