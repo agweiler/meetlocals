@@ -11,13 +11,13 @@
       </ul>
     </div>
   <% end %>
+
   <div class="container testimonial_forms">
     <div class="row">
-     <div class="col-md-offset-2">
-        <h1>Testimonial</h1> 
+     <div class="col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
         <div class="field">
           <%= f.label :title %>
-          <%= f.text_field :title  ,class: "form-control", style: "width:50%" %>
+          <%= f.text_field :title, class: "form-control", style: "width:50%" %>
         </div>
         <div class="field">
           <%= f.label :rating %>
@@ -29,19 +29,23 @@
             <%= f.radio_button :rating, 5 %>
           <span>Great!</span>
         </div>
-        <div class="field">
-          <%= f.label :body %>
-          <%= f.text_area :body , :cols => "50", :rows => "8", :maxlength=>"300" ,class: "form-control"%>
-        </div>
+        <!-- <div class="field col-sm-6"> -->
+          <% f.label :body %>
+          <%= f.text_area :body , :cols => "40", :rows => "8", :maxlength=>"500", class: "col-md-6 col-sm-6 col-xs-6", required:true, style:"border-radius: 5px; border-color: #CCCCCC" %>
+        <!-- </div> -->
+      </div>
     </div>
-    <div class="col-md-offset-2">
+
+    <div class="row">
+      <div class="col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
         <!-- <div class="field"> -->
           <!-- <%= f.label :booking_id %><br> -->
           <%= f.hidden_field :booking_id, value:@booking.id %>
         <!-- </div> -->
         <div class="field">
-          <%= f.label :image %> ([ctrl + click] to select more than one image)
-          <%= f.file_field(:images_array, multiple: true) %>
+          <%= f.label :image %>
+          <small>([ctrl + click] to select more than one image)</small>
+          <%= f.file_field(:images_array, multiple: true, class:"") %>
           <small>supported file types: .jpg .png .gif</small>
         </div>
         <!-- <div class="field"> -->
@@ -49,10 +53,10 @@
           <%= f.hidden_field :booking_id, value:@booking.id %>
         <!-- </div> -->
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit class:"btn btn-success btn-md" %>
         </div>
           <% end %>
+      </div>
     </div>
   </div>
-  </div>
-
+<!-- </div> -->
