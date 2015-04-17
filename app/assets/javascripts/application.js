@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require moment
 //= require bootstrap-datetimepicker
-
+//= require jquery.raty.js
 
 //= require hosts
 //= require experiences

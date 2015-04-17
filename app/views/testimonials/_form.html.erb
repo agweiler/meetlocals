@@ -1,3 +1,30 @@
+<script type="text/javascript">
+  <% if @testimonial.rating.present? %>
+    var default_score = <%= @testimonial.rating.to_i %>;
+  <% else %>
+    var default_score = 0;
+  <% end %>
+
+  $(function(){
+    $('#star').raty({
+    score     : default_score,
+    cancel    : false,
+    cancelOff : 'cancel-off.png',
+    cancelOn  : 'cancel-on.png',
+    half      : false,
+    size      : 24,
+    starHalf  : 'star-half.png',
+    starOff   : 'star-off.png',
+    starOn    : 'star-on.png',
+    path      : '/assets/'
+    });
+
+    $(".field").on("click", function(){
+      $("#testimonial_rating_" + $('input[name*=score]').val()).attr('checked', 'checked');
+    });
+
+  });
+</script>
 
 <%= form_for(@testimonial, html: {multipart: true}) do |f| %>
   <% if @testimonial.errors.any? %>
@@ -17,17 +44,16 @@
      <div class="col-md-offset-4 col-sm-offset-3 col-xs-offset-2">
         <div class="field">
           <%= f.label :title %>
-          <%= f.text_field :title, class: "form-control", style: "width:50%" %>
+          <%= f.text_field :title, required: true, class: "form-control", style: "width:50%" %>
         </div>
         <div class="field">
-          <%= f.label :rating %>
-          <span>Poor</span>
-            <%= f.radio_button :rating, 1 %>
-            <%= f.radio_button :rating, 2 %>
-            <%= f.radio_button :rating, 3 %>
-            <%= f.radio_button :rating, 4 %>
-            <%= f.radio_button :rating, 5 %>
-          <span>Great!</span>
+          <strong>Rating: </strong>
+          <div id="star"></div>
+          <% f.radio_button :rating, 1 %>
+          <% f.radio_button :rating, 2 %>
+          <% f.radio_button :rating, 3 %>
+          <% f.radio_button :rating, 4 %>
+          <% f.radio_button :rating, 5 %>
         </div>
         <!-- <div class="field col-sm-6"> -->
           <% f.label :body %>

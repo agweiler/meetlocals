@@ -54,7 +54,6 @@ class BookingsController < ApplicationController
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
     booking_params[:guest_id].replace(current_guest.id.to_s)
-
     # starttime = Time.parse( params[:datetime] )
 
     #moment.js foramt MMMM DD, YYYY
@@ -161,7 +160,7 @@ class BookingsController < ApplicationController
   def hook
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
-    
+
     if status == "Completed"
       @booking = Booking.find params[:invoice]
       guest = @booking.guest

@@ -21,7 +21,7 @@ class TestimonialsController < ApplicationController
     if current_guest == nil
       deny_access_guest
     end
-    
+
   end
 
   # GET /testimonials/1/edit
@@ -32,10 +32,10 @@ class TestimonialsController < ApplicationController
   # POST /testimonials
   # POST /testimonials.json
   def create
-
     @image_files = testimonial_params.delete(:images_array)
 
     @testimonial = Testimonial.new(testimonial_params.except(:images_array))
+    @testimonial.rating = params[:score]
 
     respond_to do |format|
       if @testimonial.save
@@ -60,7 +60,7 @@ class TestimonialsController < ApplicationController
   # PATCH/PUT /testimonials/1
   # PATCH/PUT /testimonials/1.json
   def update
-
+    @testimonial.rating = params[:score]
     @image_files = testimonial_params.delete(:images_array)
 
     respond_to do |format|
