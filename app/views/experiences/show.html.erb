@@ -44,7 +44,7 @@
 
             daysOfWeekDisabled: <%= days %>,
             format: 'MMMM DD, YYYY',
-            minDate: moment(),
+            minDate: moment().add(5, 'days'),
             <% if @booking.date.nil? %>
               defaultDate: false,
             <% else %>
@@ -144,7 +144,7 @@
   <div class ="row">
     <div class = "col-md-4">
       <div class="actions" id="booking_create_button">
-        <%= f.submit %>
+        <%= f.submit "Book Now!", class:"btn btn-warning btn-md" %>
       </div>
     </div>
     <div class = "col-md-3">
