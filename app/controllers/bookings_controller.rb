@@ -42,12 +42,13 @@ class BookingsController < ApplicationController
   # GET /bookings/new
   def new
     redirect_to '/guests/sign_in' unless guest_signed_in?
-    @booking = Booking.new
     @experience = Experience.find(params[:id])
+    @booking = @experience.bookings.new
   end
 
   # GET /bookings/1/edit
   def edit
+    @booking = @experience.bookings.find(params[:id])
   end
 
   # POST /bookings
@@ -81,13 +82,14 @@ class BookingsController < ApplicationController
     # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
     # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
-    @booking = Booking.new(booking_params)
+    @experience = Experience.find(params[:booking][:experience_id])
+    @booking = @experience.bookings.new(booking_params)
 
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
-        Hostmailer.receive_booking_request(host.id,@booking.id).deliver_now
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+        # Hostmailer.receive_booking_request(host.id,@booking.id).deliver_now
+        format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
         format.html { render :new }
       end
@@ -123,12 +125,13 @@ class BookingsController < ApplicationController
     # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
     # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
     # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
+    @experience = Experience.find(params[:booking][:experience_id])
 
     respond_to do |format|
       if @booking.update(booking_params)
         guest = @booking.guest
         Guestmailer.receive_invitation(guest.id,@booking.id).deliver_now
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
+        format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
         format.html { render :edit }
