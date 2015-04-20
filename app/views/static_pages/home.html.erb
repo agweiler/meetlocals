@@ -14,14 +14,14 @@
     <li data-target="#bs-carousel" data-slide-to="1"></li>
     <li data-target="#bs-carousel" data-slide-to="2"></li>
   </ol>
-  
+
   <!-- Wrapper for slides -->
   <div class="carousel-inner" style="height: 600px">
     <div class="item slides active">
       <div class="slide-1"></div>
       <div class="hero">
         <hgroup>
-            <h1><span class="maroon">Meet the Danes</span></h1>        
+            <h1><span class="maroon">Meet the Danes</span></h1>
             <h3>Authentic meals with good company</h3>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
@@ -30,41 +30,41 @@
     </div>
     <div class="item slides">
       <div class="slide-2"></div>
-      <div class="hero">        
+      <div class="hero">
         <hgroup>
-            <h1><span class="maroon">Become a Host</span></h1>        
+            <h1><span class="maroon">Become a Host</span></h1>
             <h3>Wow guests with your food</h3>
-        </hgroup>       
+        </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find out how</button>
- -->        <%= link_to "Be a Host", how_to_be_a_host_path, class: "btn btn-hero btn-lg"%>
+ -->    <%= link_to "Be a Host", how_to_be_a_host_path, class: "btn btn-hero btn-lg"%>
       </div>
     </div>
     <div class="item slides">
       <div class="slide-3"></div>
-      <div class="hero">        
+      <div class="hero">
         <hgroup>
-            <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1>        
+            <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1>
             <h3>Learn about the benefits</h3>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">More info</button>
  -->         <%= link_to "Learn more", how_it_works_path, class: "btn btn-hero btn-lg" %>
       </div>
     </div>
-  </div> 
+  </div>
 </div>
 
 </br>
 </div>
 
-<div class="col-md-12" id="gradio">
+<div class="col-md-12 col-sm-12 col-xs-12" id="gradio">
     </br>
     </br>
-      
-      <div class="col-md-6 col-md-offset-1">
+
+      <div class="col-md-6 col-md-offset-1 col-sm-12">
         <h1 id="big_head">AWARD WINNING AGENCY</h1>
         <h2 id="small_head">COME MEET THE DANES</h2>
         </br>
-          <p style="text-align:center">Many nationalities visit Denmark every year. To give 
+          <p style="text-align:center">Many nationalities visit Denmark every year. To give
           our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
           </p>
         </br>
@@ -73,7 +73,7 @@
       </div>
  <!--  </div>
  -->
-  <div class="col-md-4">
+  <div class="col-md-4 hidden-xs hidden-sm">
         <img class="img-circle" src="assets/denmark_dock.jpg" style="width:250px; height:250px; margin-top:20px; margin-bottom: 0px; margin-left: 90px">
       </div>
 
@@ -84,24 +84,24 @@
   <div class='row'>
   </br>
   </br>
-   <div class="col-md-4">
+   <div class="col-md-4 hidden-xs hidden-sm">
         <img class="img-circle" src="assets/111jjunkfood.jpg" style="width:350px; height:300px; margin-top:0px; margin-bottom: 10px; margin-left: 60px">
       </div>
-    <div class='col-md-7' style="margin-left: 0px">
+    <div class='col-md-7 col-xs-12' style="margin-left: 0px">
     <h2 style="text-align:center">What people are saying...</h2>
     </br>
-    
-      <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+
+      <div class="row carousel slide" data-ride="carousel" id="quote-carousel">
         <!-- Bottom Carousel Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
           <li data-target="#quote-carousel" data-slide-to="1"></li>
           <li data-target="#quote-carousel" data-slide-to="2"></li>
         </ol>
-        
+
         <!-- Carousel Slides / Quotes -->
         <div class="carousel-inner">
-        
+
           <!-- Quote 1 -->
           <div class="item active">
             <blockquote>
@@ -145,13 +145,13 @@
             </blockquote>
           </div>
         </div>
-        
+
         <!-- Carousel Buttons Next/Prev -->
         <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
         <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
-      </div>                          
+      </div>
     </div>
-     
+
   </div>
 
 </div>
@@ -159,17 +159,14 @@
 </br>
 <!-- <div class="overlay2"></div> -->
   <div style="background-image:url('assets/greg22.jpg'); background-attachment: fixed" id="pre_foot">
-    <div class="col-md-12" style="text-align:center; margin-top:150px">
-      
-        
-          <div class="col-md-6" style="">
-          <%= link_to "Sign up as a guest", new_guest_registration_path, class: "btn-xl", style: "background-color:#1abc9c; color:#f5f5f5; margin-left: 200px" %> 
-          </div> 
+    <div class="col-md-12" style="text-align:center; margin-top:100px">
+      <div class="col-md-6 col-xs-12" style="height:80px;margin-top:40px">
+        <%= link_to "Sign up as a guest", new_guest_registration_path, class: "btn-xl", style: "background-color:#1abc9c; color:#f5f5f5; margin-right: 0px" %>
+      </div>
 
-            <div class="col-md-6">
-              <%= link_to "Sign up as a host", new_host_registration_path, class: "btn-xl", style: "background-color:#660A0A; margin-right: 200px; border: 1px solid; border-color: #660A0A; color: #f5f5f5 "%>
-            </div>
-        </div>
+      <div class="col-md-6 col-xs-12" style="height:80px;margin-top:40px">
+        <%= link_to "Sign up as a host", new_host_registration_path, class: "btn-xl", style: "background-color:#660A0A; margin-right: 0px; border: 1px solid; border-color: #660A0A; color: #f5f5f5 "%>
+      </div>
     </div>
   </div>
 
@@ -177,5 +174,5 @@
 
 
 
-<div style="clear:both;"></div>
 
+<div style="clear:both;"></div>
