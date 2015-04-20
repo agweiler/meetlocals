@@ -1,10 +1,10 @@
 <div class = "container col-md-offset-3">
   <h3>
-    "<%= link_to @booking.experience.title, experience_path(@booking.experience.id) %>"
+    "<%= link_to @booking.experience.title, experience_path(@booking.experience) %>"
   </h3>
   <p>
     <strong>Host by:</strong>
-    <%= link_to @booking.experience.host.username, "/hosts/" + @booking.experience.host.id.to_s %>
+    <%= link_to @experience.host.username, host_path(@experience.host) %>
   </p>
   <p>
     <strong>Date:</strong>
@@ -30,7 +30,7 @@
 
     <span class="btn btn-primary btn-xs disabled"> <%= @booking.status.capitalize %> </span>
     <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-      <%= link_to('UPDATE', edit_booking_path(@booking) ) %>
+      <%= link_to('UPDATE', edit_experience_booking_path(@experience, @booking) ) %>
     <% end %>
   </p>
 
@@ -39,7 +39,7 @@
   <% end %>
 
   <% if @booking.check_finished? && @booking.status == 'confirmed' %>
-    <%= button_to "Mark as Complete", mark_booking_completion_path(@booking.id), id: 'complete', method: :post, remote: true %>
+    <%= button_to "Mark as Complete", mark_booking_completion_path(@booking), id: 'complete', method: :post, remote: true %>
   <% end %>
 
   <h5><strong>Messages:</strong></h5>
@@ -94,11 +94,11 @@
       <% end %>
 
       <% if current_guest && @booking.status != "invite" && @booking.status != 'completed' %>
-        <%= link_to 'Edit', edit_booking_path(@booking), class:"btn btn-xs btn-warning", style:"color:#fff" %>
+        <%= link_to 'Edit', edit_experience_booking_path(@experience, @booking), class:"btn btn-xs btn-warning", style:"color:#fff" %>
       <% end %>
 
       <% if @booking.status == "completed" && @booking.testimonial.nil? %>
-        <%= link_to 'Create Testimonial', make_testimonial_path(@booking.id), class:'btn btn-success btn-xs', style:"color:#fff"  %>
+        <%= link_to 'Create Testimonial', make_testimonial_path(@booking), class:'btn btn-success btn-xs', style:"color:#fff"  %>
       <% end %>
 
       <% if @booking.check_finished? %>
