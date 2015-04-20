@@ -14,6 +14,12 @@ class StaticPagesController < ApplicationController
 
   def terms_of_service
   end
-  
+
+  def page_not_found
+  end
+
+  def unknown_error
+  end
+
 
 end
