@@ -45,7 +45,11 @@ Rails.application.routes.draw do
 
   get 'bookings/:id/testimonials/new' => 'testimonials#new', as: :make_testimonial
 
-  get "/bookings/:id" => "bookings#show", as: :show_booking
+  # get "/bookings/:id" => "bookings#show", as: :show_booking
+  get "experiences/:experience_id/bookings/:id" => "bookings#show", as: :show_booking
+
+  # post "/bookings/:id" => "bookings#show"
+  post "experiences/:experience_id/bookings/:id" => "bookings#show"
 
   get "/experiences/new" => "experiences#new"
 
@@ -58,7 +62,6 @@ Rails.application.routes.draw do
   post "/hook" => "bookings#hook"
   get "/hook" => "bookings#hook"
 
-  post "/bookings/:id" => "bookings#show"
   post 'messages' => 'messages#new'
 
   post 'bookings/:id/complete' => 'bookings#mark_completion', as: :mark_booking_completion
@@ -68,6 +71,10 @@ Rails.application.routes.draw do
   resources :experiences
 
   resources :bookings
+
+  resources :experiences do
+    resources :bookings
+  end
 
   resources :images
 
