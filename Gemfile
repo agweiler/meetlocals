@@ -56,6 +56,7 @@ gem 'gibbon', git: 'git://github.com/amro/gibbon.git'
 # gem 'font-awesome-sass', '~> 4.3.0'
 gem 'font-awesome-rails'
 
+gem 'bootstrap-wysihtml5-rails', github: 'nerian/bootstrap-wysihtml5-rails'
 
 
 group :development, :test do

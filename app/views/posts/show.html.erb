@@ -16,9 +16,9 @@
 	</div>
 	  <div class="col-md-5" style="margin-top: 95px; margin-left: 30px">
 
-				<p class="body"><%= @post.body %></p>
+				<p class="body"><%= @post.body.html_safe %></p>
 
-		  <%=  link_to 'Back to blog', blog_path %>     
+		  <%=  link_to 'Back to blog', blog_path %>
 		</div>
 	</div>
 </div>
