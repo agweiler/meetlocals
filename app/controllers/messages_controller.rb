@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to booking_path new_message.booking_id}
+      # format.html {redirect_to booking_path new_message.booking_id}
       format.js
     end
 

@@ -47,11 +47,13 @@ Rails.application.routes.draw do
 
   get "/bookings/:id" => "bookings#show", as: :show_booking
 
- get "/experiences/new" => "experiences#new"
+  get "/experiences/new" => "experiences#new"
 
   get "/experiences/:id" => "experiences#show", as: :show_experience
 
+  get "page_not_found" => 'public#404', as: :error_404
 
+  get "unknown_error" => 'public#500', as: :error_500
 
   post "/hook" => "bookings#hook"
   get "/hook" => "bookings#hook"
