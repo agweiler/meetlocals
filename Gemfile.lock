@@ -98,6 +98,7 @@ GEM
       devise (~> 3.2)
     erubis (2.7.0)
     execjs (2.3.0)
+    ffi (1.9.8)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
     globalid (0.3.3)
@@ -131,6 +132,7 @@ GEM
     minitest (5.5.1)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
+    msgpack (0.5.11)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     nokogiri (1.6.6.2)
@@ -178,6 +180,10 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     ratyrate (1.2.2.alpha)
+    rbtrace (0.4.7)
+      ffi (>= 1.0.6)
+      msgpack (>= 0.4.3)
+      trollop (>= 1.16.2)
     rdoc (4.2.0)
     redis (3.2.1)
     redis-namespace (1.5.1)
@@ -219,6 +225,7 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
+    trollop (2.1.2)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.0)
@@ -265,6 +272,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor
   ratyrate
+  rbtrace
   redis
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

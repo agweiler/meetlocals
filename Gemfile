@@ -8,7 +8,7 @@ gem "twitter-bootstrap-rails"
 gem "less-rails"
 gem 'bootstrap-sass', '3.2.0'
 gem 'autoprefixer-rails'
-
+gem 'rbtrace'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
