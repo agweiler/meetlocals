@@ -29,7 +29,6 @@ class Image < ActiveRecord::Base
     after_save :queue_upload_to_s3
 
   def queue_upload_to_s3
-  	byebug
     Delayed::Job.enqueue ImageJob.new(id) if local_image? && local_image_updated_at_changed?
   end
 
