@@ -1,89 +1,3 @@
-
-
-<footer class= "footer">
-</br>
-</br>
-</br>
-
-
-
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="row">
-
-          <p style="color: #fff"><strong> Get Meet the Danes' newsletter</strong></p>
-
-        </div>
-              <div class="row">
-                <ul id="email-form" style="float: left">
-                        <li>
-
-                            <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
-                            <div class="form-group">
-                               <%= email_field(:email, :address, {class: "form-control", id: "email", placeholder: "email address"})%>
-                            </div>
-<!--                                <%= submit_tag("Sign me up!") %>
- -->                         <%= button_tag(type: 'submit', class: "btn btn-primary") do %> Sign me up!
-<% end %>
-
-                            <% end %></li>
-                </ul>
-             </div>
-      </div>
-
-
-
-        <div class="col-md-4">
-          <div class="row">
-
-             <p style="color:#fff"><strong> Quick Links </strong></p>
-          </div>
-          <div class="row">
-                <ul style="float: left">
-                    <li><%= link_to "About", about_path, style: "color: #fff" %></li>
-                    <li><%= link_to "Find a Host", experiences_path, style: "color: #fff"  %></li>
-                    <li><%= link_to "Be a Host", how_to_be_a_host_path, style: "color: #fff"  %></li>
-
-                </ul>
-                </div>
-          <div class="row">
-                <ul style="float: left">
-
-                    <li><%= link_to "Terms of Service", terms_of_service_path, style: "color: #fff" %></li>
-
-                </ul>
-          </div>
-        </div>
-
-
-
-      <div class="col-md-4">
-          <div class="row">
-
-            <p style="margin-right: 50px; color: #fff"><strong> Connect with us on Social & Email </strong></p>
-          </div>
-          <div class="row">
-                  <ul class="list-inline social-buttons" style="margin-right: 50px">
-
-                   <li><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
-                <li><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
-                <li><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
-                <li><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a></li>
-                 
-                    </ul>
-
-          </div>   
-      </div>
-    </div>         
-  </div> 
-</div>
-
-</footer>
-
-
-
 <script>
   $(document).ready(function(){
     $("#subscribe").on("ajax:success", function(e, data, status, xhr) {
@@ -94,3 +8,93 @@
   });
 
 </script>
+
+<footer class= "footer">
+<br><br>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="row">
+          <p style="color: #fff"><strong> Get Meet the Danes' newsletter</strong></p>
+        </div>
+
+        <div class="row">
+          <div id="email-form">
+            <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
+              <div class="form-group">
+                 <%= email_field(:email, :address, {class: "form-control", style:"", id: "email", placeholder: "email address"})%>
+                 <!-- <%= submit_tag("Sign me up!") %> -->
+                <%= button_tag(type: 'submit', class: "btn btn-primary") do %> Sign me up! <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- <ul id="email-form" style="float: none">
+            <li>
+              <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
+                <div class="form-group">
+                   <%= email_field(:email, :address, {class: "form-control", id: "email", placeholder: "email address"})%>
+                  <%= button_tag(type: 'submit', class: "btn btn-primary") do %> Sign me up! <% end %>
+                </div>
+              <% end %>
+            </li>
+          </ul> -->
+        </div>
+
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+
+        <div class="row">
+           <p style="color:#fff"><strong> Quick Links </strong></p>
+        </div>
+
+        <div class="row"  class="text-center">
+          <!-- <ul style="float: none">
+            <li class="text-center"><%= link_to "About", about_path, style: "color: #fff" %></li>
+            <li class="text-center"><%= link_to "Find a Host", experiences_path, style: "color: #fff" %></li>
+            <li class="text-center"><%= link_to "Be a Host", how_to_be_a_host_path, style: "color: #fff" %></li>
+          </ul> -->
+          <p>
+            <%= link_to "About", about_path, style: "color: #fff" %>&nbsp;&nbsp;
+            <%= link_to "Find a Host", experiences_path, style: "color: #fff" %>&nbsp;&nbsp;
+            <%= link_to "Be a Host", how_to_be_a_host_path, style: "color: #fff" %>
+          </p>
+
+          <p>
+            <%= link_to "Terms of Service", terms_of_service_path, style: "color: #fff" %>
+          </p>
+        </div>
+
+        <!-- <div class="row">
+          <ul style="float: none" class="text-center">
+            <li><%= link_to "Terms of Service", terms_of_service_path, style: "color: #fff" %></li>
+          </ul>
+        </div> -->
+
+      </div>
+
+
+      <div class="col-md-4 col-sm-12 col-xs-12">
+
+        <div class="row">
+          <p class="text-center" style="color: #fff">
+            <strong> Connect with us on Social & Email </strong></p>
+        </div>
+
+        <div class="row">
+          <ul class="col-xs-12 list-inline social-buttons">
+            <li class="col-xs-2 col-xs-offset-2" style=""><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
+            <li class="col-xs-2"><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
+            <li class="col-xs-2"><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
+            <li class="col-xs-2"><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</footer>
