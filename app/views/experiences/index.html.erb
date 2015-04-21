@@ -32,7 +32,7 @@
 
 <div style="background-image:url('assets/greg.jpg'); background-attachment: fixed; margin-top:-20px;" id="pre_foot">
   <div class="row">
-          <div class="col-md-4 col-md-offset-4">
+          <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
 
               <h1 style="text-align:center; color:#fff; margin-top:70px">FIND THE PERFECT HOST</h1>
               </br>
@@ -40,7 +40,7 @@
               <div class="row">
 
                 <%= form_tag '/experiences_search', :class => "form-inline" do %>
-                  <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control", style: "width:82%") %>
+                  <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control", style: "width:100%") %>
 
                   <div class='input-group date' id='datetimepickerfrom'>
                       <input type='text' name="dateFR" class="form-control" />
