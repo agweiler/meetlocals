@@ -32,31 +32,31 @@
 
 <div style="background-image:url('assets/greg.jpg'); background-attachment: fixed; margin-top:-20px;" id="pre_foot">
   <div class="row">
-          <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
 
               <h1 style="text-align:center; color:#fff; margin-top:70px">FIND THE PERFECT HOST</h1>
               </br>
 
-              <div class="row">
+              <div class="container-fluid">
 
                 <%= form_tag '/experiences_search', :class => "form-inline" do %>
                   <%= select("experience", "location", Experience.get_location.collect {|p| [ p, p ] }, {}, class: "form-control", style: "width:100%") %>
 
-                  <div class='input-group date' id='datetimepickerfrom'>
+                  <div class='input-group date col-sm-9 col-xs-9' id='datetimepickerfrom'>
                       <input type='text' name="dateFR" class="form-control" />
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
 
-                  <div class='input-group date' id='datetimepickerto'>
+                  <div class='input-group date col-sm-9 col-xs-9' id='datetimepickerto'>
                       <input type='text' name="dateTO" class="form-control" />
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
                   </div>
 
-                  <%= submit_tag "Filter", id:'filter', class: "btn btn-primary", style: "background-color:#1abc9c; color:#f5f5f5; border-color:#1abc9c" %>
+                  <%= submit_tag "Filter", id:'filter', class: "btn btn-primary col-sm-3 col-xs-12", style: "float:right; background-color:#1abc9c; color:#f5f5f5; border-color:#1abc9c" %>
 
                 <% end %>
 
