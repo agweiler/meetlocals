@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <!-- Nav bar --> 
+  <!-- Nav bar -->
     <title>Meet The Danes</title>
 
   <script src="https://maps.googleapis.com/maps/api/js"></script>
@@ -31,18 +31,8 @@
   <% end %>
 
     <header class = "navbar navbar-fixed-top navbar-inverse" style="height:71px; border-color:#222">
-      <div class ='container-fluid'>
-
-      <% if current_admin %>
-    			<%= render 'layouts/header_admin' %>
-    		  <% elsif current_host %>
-    			<%= render 'layouts/header_host' %>
-    		  <% elsif current_guest %>
-    			<%= render 'layouts/header_guest' %>
-    		  <% else %>
-    			<%= render 'layouts/header_default' %>
-    		<% end %> 
-      </div>
+      <%= render 'layouts/header_default' %>
+    </header>
 
   <!--   <% if notice || alert %>
       <div class="col-md-12">
@@ -52,7 +42,7 @@
               ×</button>
               <%= notice %>
               <% end %>
-        
+
         <% if alert %>
 
         <div class="alert alert-danger-alt alert-dismissable">
@@ -72,8 +62,8 @@
 
 
 
-    
-    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px; background-color:#222"> 
+
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px; background-color:#222">
       <% if notice || alert %>
       <div class="col-md-12">
         <div class="alert alert-success-alt alert-dismissable">
@@ -83,7 +73,7 @@
               <%= notice %>
               <% end %>
               </div>
-        
+
         <% if alert %>
 
         <div class="alert alert-danger-alt alert-dismissable">
@@ -94,7 +84,7 @@
                 <% end %>
                 </div>
 
-      </div>  
+      </div>
 
 
     <!-- this is doubled up in some pages, should refactor -->
@@ -108,5 +98,5 @@
 <!--       <%= debug(params) if Rails.env.development? %>
  -->
 
-  </body> 
+  </body>
 </html>
