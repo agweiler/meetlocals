@@ -11,12 +11,9 @@ class Image < ActiveRecord::Base
 										styles: { :medium => "300x300!", :thumb => "100x100>" }, #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
-            				# :bucket => ENV['AWS_BUCKET'],
-            				# :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-            				# :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-            				:bucket => 'mtdimagesdev',
-            				:access_key_id => 'AKIAJ3P3LCTBF7SD2ORQ',
-            				:secret_access_key => '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'
+            				:bucket => ENV['AWS_BUCKET'],
+            				:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+            				:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
           					},
           					:path => ":class/:id/:basename_:style.:extension",
           					:url => ":s3_sg_url"
@@ -52,5 +49,6 @@ class ImageJob
     image_file = Image.find(id)
     image_file.upload_to_s3
     image_file.local_image.destroy
+
   end
  end
