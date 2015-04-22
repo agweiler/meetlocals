@@ -108,7 +108,7 @@ class ExperiencesController < ApplicationController
       #create image after parent-experience is saved
       @image_files.each do |img|
         new_img = @experience.images.new
-        new_img.image_file = img
+        new_img.local_image = img
       # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
         new_img.caption = img.original_filename
         new_img.save!
