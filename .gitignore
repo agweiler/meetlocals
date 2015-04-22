@@ -18,3 +18,6 @@
 
 # Ignore gmail config
 /config/gmail_config.yml
+
+# Ignore secret
+/config/secret.yml
