@@ -46,7 +46,7 @@ class GuestsController < ApplicationController
       if @guest.images.present?
         @guest.images.delete_all
       end
-      @guest.images.create(image_file: @image_file, caption: @image_file.original_filename)
+      @guest.images.create(local_image: @image_file, caption: @image_file.original_filename)
     end
     respond_to do |format|
       format.html { redirect_to edit_guest_profile, notice: 'Your guest profile was successfully updated.' }
@@ -80,7 +80,7 @@ class GuestsController < ApplicationController
       if @guest.images.present?
         @guest.images.delete_all
       end
-      @guest.images.create(image_file: @image_file, caption: @image_file.original_filename)
+      @guest.images.create(local_image: @image_file, caption: @image_file.original_filename)
     end
     if @guest.save
       respond_to do |format| 
