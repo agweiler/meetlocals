@@ -4,35 +4,41 @@
   <!-- Nav bar -->
     <title>Meet The Danes</title>
 
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
 
-  <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
 
 <!--   <link rel="stylesheet" href="fonts/font-awesome.min.css">
  -->
-  <%= csrf_meta_tags %>
- <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <%= csrf_meta_tags %>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-61451496-1', 'auto');
-  ga('send', 'pageview');
+      ga('create', 'UA-61451496-1', 'auto');
+      ga('send', 'pageview');
 
-</script>
+      $(function(){
+        window.setTimeout(function() { $(".alert").alert('close'); }, 3000);
+      });
+
+    </script>
   </head>
+
+  <header class = "navbar navbar-fixed-top navbar-inverse" style="border-color:#222; height:50px">
+    <%= render 'layouts/header_default' %>
+  </header>
+
   <% if controller_name == "static_pages" && action_name == "how_to_be_a_host" %>
-    <body data-no-turbolink = "true">
+    <body data-no-turbolink = "true" style="padding: 50px 0 0 0">
   <% else %>
-    <body data-no-turbolink = "false">
+    <body data-no-turbolink = "false" style="padding: 50px 0 0 0">
   <% end %>
 
-    <header class = "navbar navbar-fixed-top navbar-inverse" style="height:71px; border-color:#222">
-      <%= render 'layouts/header_default' %>
-    </header>
 
   <!--   <% if notice || alert %>
       <div class="col-md-12">
@@ -54,25 +60,16 @@
 
       </div>   -->
 
-
-    </div>
-
-
-
-
-
-
-
     <div class="container-fluid" style="padding-left: 0px; padding-right: 0px; background-color:#222">
-      <% if notice || alert %>
-      <div class="col-md-12">
+      <!-- <div class="col-xs-12"> -->
+      <% if notice %>
         <div class="alert alert-success-alt alert-dismissable">
           <span class="glyphicon glyphicon-certificate"></span>
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
               ×</button>
               <%= notice %>
               <% end %>
-              </div>
+        </div>
 
         <% if alert %>
 
