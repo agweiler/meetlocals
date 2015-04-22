@@ -216,6 +216,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sucker_punch (1.4.0)
+      celluloid (~> 0.16.0)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -276,6 +278,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   sidekiq
   spring
+  sucker_punch
   therubyracer
   turbolinks
   twitter-bootstrap-rails
