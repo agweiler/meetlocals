@@ -5,7 +5,7 @@
     <h2 style="text-align:center">Editing <%= current_guest.username %>'s account</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
-      <%= devise_error_messages! %>
+      <%= <% flash[:alert] = devise_error_messages! if devise_error_messages! %> %>
 
 
       <div class="field">
