@@ -34,7 +34,7 @@
     <% end %>
   </p>
 
-  <% if current_guest && @booking.status != "invited" %>
+  <% if current_guest && @booking.status == "invited" %>
     <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %>
   <% end %>
 
