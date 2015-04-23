@@ -67,6 +67,7 @@
           <span class="glyphicon glyphicon-certificate"></span>
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <%= notice %>
+          <% flash.clear %>
         </div>
       <% end %>
 
@@ -76,6 +77,7 @@
             <span class="glyphicon glyphicon-certificate"></span>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <%= msg %>
+            <% flash.clear %>
           </div>
         <% end if alert.kind_of?(Array)%>
       <% end %>
