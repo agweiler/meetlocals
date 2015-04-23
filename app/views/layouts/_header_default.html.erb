@@ -1,46 +1,64 @@
-<!-- <header class - "navbar navbar-fixed-top navbar inverse">
-	<div class = "container"> -->
+<!-- <header class - "navbar navbar-fixed-top navbar inverse"> -->
 
-	<!-- better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
 
-		<nav>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class ="nav navbar-nav navbar-left" style="">
+<nav class="navbar navbar-inverse">
+	<div class = "container-fluid">
 
-						<li id="logo"><%= link_to "Meet the Danes", root_path %></li>			
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+			<!-- <ul class ="nav navbar-brand" style="">
+				<span id="logo"><%= link_to "Meet the Danes", root_path %></span>
+			</ul> -->
+			<a href="/" class="navbar-brand" id="logo" style="padding-top:10px">Meet the Danes</a>
+    </div>
 
-					</ul>
-					<ul class ="nav navbar-nav navbar-right" style="margin-right:10px">
-						<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
-						<li><%= link_to "Find a Host", experiences_path %></li>
-						<li><%= link_to "How it Works", how_it_works_path %></li>
-						
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class ="nav navbar-nav navbar-right">
 
-						<li><%= link_to "Blog", blog_path %></li>
-						
-		<!-- Note different syntax to include glyphs
-		 -->
-						<li><%= link_to new_guest_registration_path do %>
-						<span class="glyphicon glyphicon-user"></span> Sign up
-						<% end %>
-						</li>
-						
-						<li><%= link_to new_guest_session_path do %>
-						<span class="glyphicon glyphicon-log-in"></span> Log in
-						<% end %>
-						</li>
+				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
+				<li><%= link_to "Find a Host", experiences_path %></li>
+				<li><%= link_to "How it Works", how_it_works_path %></li>
+				<li><%= link_to "Blog", blog_path %></li>
 
-						</li>
-					</ul>
-		  </div>
-		</nav>
+				<% if current_admin %>
+					<li><%= link_to "Show All Users", admins_path %></li>
+				<% end %>
+			<!-- </ul>
+			<ul class="nav navbar-nav navbar-right"> -->
+				<% if current_user %>
+					<li class ="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><%= "#{current_user.username}" %>
+						<span class= "caret"></span></a>
+						<ul class ="dropdown-menu" role="menu" style="">
+							<% if current_host %>
+								<li><%= link_to "Create New Experience", new_experience_path  %></li>
+							<% end %>
+							<% if current_admin %>
+								<li><%= link_to "Show All Users", admins_path %></li>
+							<% end %>
+							<li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Bookings", bookings_path %></li>
+							<li><%= link_to destroy_user_session_path, method: :delete do  %>Log out
+								<span class="glyphicon glyphicon-log-out"></span><% end %></li>
+						</ul>
+					</li>
+				<% else %>
+					<li><%= link_to new_guest_registration_path do %>
+						<span class="glyphicon glyphicon-user"></span> Sign up <% end %>
+					</li>
+
+					<li><%= link_to new_guest_session_path do %>
+						<span class="glyphicon glyphicon-log-in"></span> Log in <% end %>
+					</li>
+				<% end %>
+
+			</ul>
+	  </div>
 	</div>
-</header>
+</nav>
+<!-- </header> -->

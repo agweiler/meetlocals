@@ -19,5 +19,6 @@
 # Ignore aws config
 /config/aws_config.yml
 
-#ignore secret.yml
-/config/secrets.yml
+# Ignore secret
+/config/secret.yml
+
