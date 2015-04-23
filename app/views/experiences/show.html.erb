@@ -1,3 +1,11 @@
+<script>
+
+ $('#ga').on('click', function() {
+    ga('send', 'event', 'pageview', 'click');
+});
+</script>
+
+
 <!-- !if we follow design mockups, we will have to require that hosts upload at least 3 images with resolutions of atleast 600*600px -->
 
   <div class="row" id="mealpanel">
@@ -144,7 +152,7 @@
   <div class ="row">
     <div class = "col-md-4">
       <div class="actions" id="booking_create_button">
-        <%= f.submit "Book Now!", class:"btn btn-warning btn-md" %>
+        <%= f.submit "Book Now!", class:"btn btn-warning btn-md", id:"ga" %>
       </div>
     </div>
     <div class = "col-md-3">

@@ -49,6 +49,6 @@ class ImageJob
     image_file = Image.find(id)
     image_file.upload_to_s3
     image_file.local_image.destroy
-
+    
   end
  end
