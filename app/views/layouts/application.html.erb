@@ -24,12 +24,7 @@
 
 </script>
   </head>
-  <% if controller_name == "static_pages" && action_name == "how_to_be_a_host" %>
-    <body data-no-turbolink = "true">
-  <% else %>
-    <body data-no-turbolink = "false">
-  <% end %>
-
+   <body class="<%= controller_name %> <%= action_name %>">
     <header class = "navbar navbar-fixed-top navbar-inverse" style="height:71px; border-color:#222">
       <div class ='container-fluid'>
 
