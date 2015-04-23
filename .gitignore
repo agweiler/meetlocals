@@ -16,8 +16,8 @@
 !/log/.keep
 /tmp
 
-# Ignore gmail config
-/config/gmail_config.yml
+# Ignore aws config
+/config/aws_config.yml
 
 #ignore secret.yml
 /config/secrets.yml
