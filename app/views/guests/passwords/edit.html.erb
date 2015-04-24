@@ -1,22 +1,30 @@
-<h2>Change your password</h2>
+<h2 style="text-align: center">Change your password</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 form-horizontal">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <% flash[:alert] = devise_error_messages! if devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <% flash[:alert] = devise_error_messages! if devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+        <div class="field form-group form-inline">
+          <%= f.label :password, "New password", class:"col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-1" %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "off", class:"form-controls col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2" %>
+        </div>
+
+        <div class="field form-group form-inline">
+          <%= f.label :password_confirmation, "Confirm password", class:"col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-1" %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-controls col-sm-6 col-sm-offset-0 col-xs-8 col-xs-offset-2" %>
+        </div>
+
+        <div class="row actions">
+          <%= f.submit "Change my password", class:"btn btn-sm btn-primary col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" %>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <%= render "guests/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "guests/shared/links" %>
+</div>
