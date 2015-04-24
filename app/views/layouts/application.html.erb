@@ -34,23 +34,11 @@
     <%= render 'layouts/header_default' %>
   </header>
 
-
-</script>
-  </head>
-   <body class="<%= controller_name %> <%= action_name %>" style="padding: 50px 0 0 0">
-    <header class = "navbar navbar-fixed-top navbar-inverse" style="height:71px; border-color:#222">
-      <div class ='container-fluid'>
-
-      <% if current_admin %>
-    			<%= render 'layouts/header_admin' %>
-    		  <% elsif current_host %>
-    			<%= render 'layouts/header_host' %>
-    		  <% elsif current_guest %>
-    			<%= render 'layouts/header_guest' %>
-    		  <% else %>
-    			<%= render 'layouts/header_default' %>
-    		<% end %> 
-      </div>
+  <% if controller_name == "static_pages" && action_name == "how_to_be_a_host" %>
+    <body data-no-turbolink = "true" style="padding: 50px 0 0 0">
+  <% else %>
+    <body data-no-turbolink = "false" style="padding: 50px 0 0 0">
+  <% end %>
 
 
   <!--   <% if notice || alert %>
@@ -99,12 +87,12 @@
 
 
     <!-- this is doubled up in some pages, should refactor -->
-		  <%= yield %>
+      <%= yield %>
     </div>
 
 
     <div>
-		  <%= render 'layouts/footer' %>
+      <%= render 'layouts/footer' %>
     </div>
 <!--       <%= debug(params) if Rails.env.development? %>
  -->
