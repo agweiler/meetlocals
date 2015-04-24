@@ -25,6 +25,8 @@ gem 'jquery-rails'
 gem 'aws-sdk', '< 2.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+#added jquery-tubolinks gem so javascript code loads at the first time, before this need to refresh page
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
