@@ -34,12 +34,7 @@
     <%= render 'layouts/header_default' %>
   </header>
 
-  <% if controller_name == "static_pages" && action_name == "how_to_be_a_host" %>
-    <body data-no-turbolink = "true" style="padding: 50px 0 0 0">
-  <% else %>
-    <body data-no-turbolink = "false" style="padding: 50px 0 0 0">
-  <% end %>
-
+  <body class="<%= controller_name %> <%= action_name %>"> 
 
   <!--   <% if notice || alert %>
       <div class="col-md-12">
