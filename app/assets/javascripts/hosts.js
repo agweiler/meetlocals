@@ -51,6 +51,6 @@ function geocode() {
 				alert('Address not found, Use google maps to find your address')
 			}
 		});
-	}  
+	}
 };
 // geocode() end
