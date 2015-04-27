@@ -5,6 +5,7 @@ class AdminsController < ApplicationController
 		@hosts = Host.all
 	end
 
-	def show
+	def analytics
 	end
+
 end

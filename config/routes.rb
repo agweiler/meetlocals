@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
+  
   resources :admins
 
   root 'static_pages#home'
