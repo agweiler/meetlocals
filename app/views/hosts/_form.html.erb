@@ -11,81 +11,92 @@
     </div>
   <% end %>
 
-  <p>
+  <div class="field"
     <%= f.label :title %>
-    <%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], class: "form-control" %>
-  </p>
+    <%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], {include_blank:""}, class: "form-control" %>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name, class: "form-control" %>
-  </p>
+  </div>
 
-   <p>
+   <div class="field">
     <%= f.label :last_name %>
     <%= f.text_field :last_name, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :username %>
     <%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :languages %>
-     <%= collection_select(:languages, 0, Language.all, :id, :name, {:prompt => true, :multiple => true}) %>
-  </p>
+     <%= collection_select(:languages, 0, Language.all, :id, :name, {:prompt => true, :multiple => true}, class:"form-control") %>
+  </div>
 
-   <p>
-    <%= f.label :DOB%> (Date of Birth)
-    <%= f.date_select :DOB, :start_year => Date.today.year - 100, :end_year => Date.today.year%>
+   <div class="field">
+    <%= f.label :DOB%> (Date of Birth) <br>
+    <%= f.date_select :DOB, {:start_year => Date.today.year - 100, :end_year => Date.today.year}, {class:"form-control", style:"width:80px;display:inline"}%>
 
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :country %>
-    <%= f.select :country, [["Denmark", "Denmark"]],  class: "form-control" %>
-  </p>
+    <%= f.select :country, [["Denmark", "Denmark"]], {}, class: "form-control" %>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :region %>
-    <%= f.select :state, Experience.get_location %>
-  </p>
+    <%= f.select :state, Experience.get_location, {}, class:"form-control" %>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :suburb %>
       <%= f.text_field :suburb, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
-    <%= f.label :street_address %> (Will not be shown to guests until they confirm a booking with you.)
+  <div class="field">
+    <%= f.label :street_address %><br>
+    <small>(Will not be shown to guests until they confirm a booking with you.)</small>
     <%= f.text_field :street_address, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :video_url %>
     <%= f.text_field :video_url, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :intro %>
     <%= f.text_area :intro, class: "form-control" %>
-  </p>
+  </div>
 
-  <p>
+  <div class="field">
     <%= f.label :neighbourhood %>
     <%= f.text_area :neighbourhood, class: "form-control" %>
-  </p>
+  </div>
 
 
 
-  <p>
+  <div class="field">
     <%= f.label :additional_info %>
     <%= f.text_area :additional_info, class: "form-control" %>
-  </p>
+  </div>
 
+  <div class="">
     <%= f.label :image %><br>
-    <%= f.file_field(:image_file) %></br>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <span class="btn btn-default btn-file">
+          Browse<%= f.file_field(:image_file) %>
+        </span>
+      </span>
+      <input type="text" class="form-control" readonly>
+    </div>
+  </div>
+  <br>
    <!-- <div class="actions">
    <%= f.submit %>
    </div> -->
@@ -94,8 +105,8 @@
   <%= f.hidden_field :latitude, class: "form-control" %>
   <%= f.hidden_field :longitude, class: "form-control" %>
   <div class="actions">
-    <button type="button" name="geocoder" onclick="geocode()">Update Host</button>
-    <input name="commit" value="Update Host" type="submit" style="display: none">
+    <button type="button" name="geocoder" onclick="geocode()" class="btn btn-primary">Update my Profile!</button>
+    <input name="commit" value="Update Host" type="submit" style="display: none" class="form-control">
   </div>
 
 <% end %>

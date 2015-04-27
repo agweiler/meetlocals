@@ -25,3 +25,4 @@
 
 //= require hosts
 //= require experiences
+//= require guests
