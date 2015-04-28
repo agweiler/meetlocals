@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 
-<h1>Listing Guests</h1>
+<h1>Listing Hosts</h1>
 <div class="container">
   <% if current_admin %>
 
@@ -15,11 +15,11 @@
       </thead>
 
       <tbody>
-        <% @guests.each do |guest| %>
+        <% @hosts.each do |host| %>
           <tr>
-            <td> <%= guest.username %> </td>
-            <td> <%= guest.email %></td>
-            <td> <%= link_to 'Show', guest %></td>
+            <td> <%= host.username %> </td>
+            <td> <%= host.email %></td>
+            <td> <%= link_to 'Show', host %></td>
           </tr>
         <% end %>
       </tbody>
