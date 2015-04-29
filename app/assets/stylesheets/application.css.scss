@@ -47,7 +47,23 @@
       }
 
 body {
-  background-color: #ffffff
+  background-color: #ffffff;
+}
+
+body .container{
+  min-height: 500px;
+}
+
+/* body .container {
+  background-color: #ffffff;
+}
+ */
+.footer {
+  position: relative;
+  margin-top: 0px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
 }
 
 #home {
