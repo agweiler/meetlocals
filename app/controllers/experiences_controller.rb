@@ -1,5 +1,6 @@
 class ExperiencesController < ApplicationController
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   # GET /experiences
   def index
@@ -64,13 +65,18 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1
   def show
-  	  @booking = Booking.new
+
+  	@booking = Booking.new
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
     @average_rating = @experience.avg_rating if @experience.testimonials.present?
+    respond_to do |format|
+      format.js 
+      format.html 
+    end
   end
-
+    
   # GET /experiences/new
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?

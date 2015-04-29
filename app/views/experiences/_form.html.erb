@@ -94,7 +94,7 @@
           <div class="input-group">
             <span class="input-group-btn">
               <span class="btn btn-default btn-file">
-                Browse<%= f.file_field(:image_array, multiple: true) %>
+                Browse<%= f.file_field(:images_array, multiple: true) %>
               </span>
             </span>
             <input type="text" class="form-control" placeholder="" readonly>
@@ -103,7 +103,7 @@
         </div>
 
         <div class="actions">
-            <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136"%>
+            <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136", remote: true %>
         </div>
         <% end %>
 
