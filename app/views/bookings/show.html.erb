@@ -1,46 +1,52 @@
+<h3 class="text-center">
+  "<%= link_to @booking.experience.title, experience_path(@booking.experience) %>"
+</h3>
 <div class = "container col-md-offset-3">
-  <h3>
-    "<%= link_to @booking.experience.title, experience_path(@booking.experience) %>"
-  </h3>
-  <p>
-    <strong>Host by:</strong>
-    <%= link_to @experience.host.username, host_path(@experience.host) %>
-  </p>
-  <p>
-    <strong>Date:</strong>
-    <%= @booking.date.strftime('%b %d, %Y (%A)')  %>
-  </p>
 
-  <p>
-    <strong>Time:</strong>
-    <%= @booking.experience.time.strftime('%I:%M %p') %> ~
-    <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
-    <small>(Local Time)</small>
-  </p>
+  <div id="booking_details">
 
-  <p>
-    <strong>Group size:</strong>
-    <%= @booking.group_size %> &nbsp;
-    <strong>Is private?:</strong>
-    <%= @booking.is_private ? "Yes" : "No"%>
-  </p>
+    <p>
+      <strong>Host by:</strong>
+      <%= link_to @experience.host.username, host_path(@experience.host) %>
+    </p>
+    <p>
+      <strong>Date:</strong>
+      <%= @booking.date.strftime('%b %d, %Y (%A)')  %>
+    </p>
 
-  <p>
-    <strong>Status:</strong>
+    <p>
+      <strong>Time:</strong>
+      <%= @booking.experience.time.strftime('%I:%M %p') %> ~
+      <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
+      <small>(Local Time)</small>
+    </p>
 
-    <span class="btn btn-primary btn-xs disabled"> <%= @booking.status.capitalize %> </span>
-    <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-      <%= link_to('UPDATE', edit_experience_booking_path(@experience, @booking) ) %>
+    <p>
+      <strong>Group size:</strong>
+      <%= @booking.group_size %> &nbsp;
+      <strong>Is private?:</strong>
+      <%= @booking.is_private ? "Yes" : "No"%>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+
+      <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
+      <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+        <%= link_to('UPDATE STATUS', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-xs", style:"color:#fff" ) %>
+        <!-- <%= button_to %> -->
+      <% end %>
+
+      <% if @booking.check_finished? && @booking.status == 'confirmed' %>
+        <%= link_to "Mark as COMPLETE", mark_booking_completion_path(@booking), id: 'complete_link', method: :post, remote: true, class:"btn btn-success btn-xs" %>
+      <% end %>
+    </p>
+
+    <% if current_guest && @booking.status == "invited" %>
+      <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %>
     <% end %>
-  </p>
 
-  <% if current_guest && @booking.status == "invited" %>
-    <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %>
-  <% end %>
-
-  <% if @booking.check_finished? && @booking.status == 'confirmed' %>
-    <%= button_to "Mark as Complete", mark_booking_completion_path(@booking), id: 'complete', method: :post, remote: true %>
-  <% end %>
+  </div>
 
   <h5><strong>Messages:</strong></h5>
   <div class="row">

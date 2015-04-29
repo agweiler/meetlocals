@@ -24,3 +24,4 @@
 //= require_tree
 //= require hosts
 //= require experiences
+//= require guests
