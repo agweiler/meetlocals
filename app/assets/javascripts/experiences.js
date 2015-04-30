@@ -41,9 +41,8 @@ $(document).ready( function() {
     log = numFiles > 1 ? numFiles + ' files selected' : label;
 		$('input[type*=submit]').prop('disabled', false);
 
-    if(numFiles > 3){
-			input.val("Please select only 3 images.");
-			input.attr('style', 'color:red');
+    if(numFiles != 3){
+			input.val("Please upload 3 exeprience images.").attr('style','color:red');
 			$('input[type*=submit]').prop('disabled', true);
 		}else if( input.length ) {
 			input.removeAttr('style');
