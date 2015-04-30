@@ -101,7 +101,7 @@ class ExperiencesController < ApplicationController
     @image_files = experience_params.delete(:images_array)
 
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    @experience.location = current_host.state
+    # @experience.location = current_host.state
 
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
