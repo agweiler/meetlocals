@@ -8,7 +8,7 @@ class Host < ActiveRecord::Base
   has_many :images, as: :imageable
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
-  
+
 
   def email_to_username
   	email.gsub(/@.*/, "").capitalize
