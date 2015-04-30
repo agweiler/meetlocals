@@ -4,8 +4,12 @@ class Host < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :experiences
-
   has_many :images, as: :imageable
+
+  has_many :bookings
+  has_many :bookings, through: :experiences
+  has_many :testimonials
+  has_many :testimonials, through: :bookings
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
   # validates :images, presence: true
@@ -19,5 +23,9 @@ class Host < ActiveRecord::Base
     dob = self.DOB
     return nil if dob.nil?
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+
+  def avg_rating
+    self.testimonials.average(:rating).round(2)
   end
 end
