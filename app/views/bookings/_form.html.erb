@@ -55,7 +55,8 @@
   </div>
 
   <div class="actions" id="booking_create_button">
-    <%= f.submit class:"btn btn-primary btn-sm" %>
+    <% @action == "edit" ? submit_text = "Edit Booking" : submit_text = "Book Now!"%>
+    <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
   </div>
 <% end %>
 <!-- </div> -->
@@ -66,10 +67,10 @@
   $(function () {
     $('#datetimepicker11').datetimepicker({
       <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
-
+      <% @action == "edit" ? add_days = 0 : add_days = 5%>
       daysOfWeekDisabled: <%= days %>,
       format: 'MMMM DD, YYYY',
-      minDate: moment(),
+      minDate: moment().add(<%= add_days %>, 'days'),
       <% if @booking.date.nil? %>
         defaultDate: false,
       <% else %>
