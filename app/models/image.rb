@@ -25,7 +25,7 @@ class Image < ActiveRecord::Base
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
-    after_save :queue_upload_to_s3
+    after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
   	@id = local_image.instance.id
@@ -42,7 +42,7 @@ class Image < ActiveRecord::Base
 end
 
 class ImageJob 
-	include SuckerPunch::Job
+	   include SuckerPunch::Job
 
 	 def perform(id)
 	 	#image.id not found!!!! pass in through perform_async

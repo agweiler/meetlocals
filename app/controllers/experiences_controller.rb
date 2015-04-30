@@ -1,4 +1,5 @@
 class ExperiencesController < ApplicationController
+  include ExperiencesHelper
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
 
@@ -71,9 +72,10 @@ class ExperiencesController < ApplicationController
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
     @average_rating = @experience.avg_rating if @experience.testimonials.present?
+    @response = check_images(@experience.id)
     respond_to do |format|
-      format.js 
-      format.html 
+      format.js    { render json: @response }
+      format.html  
     end
   end
     

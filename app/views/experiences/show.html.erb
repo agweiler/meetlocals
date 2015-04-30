@@ -1,5 +1,25 @@
-
-
+<% if flash[:notice] %>
+<script>
+$(function(){
+    function check_job_status(job_id){
+      
+    var request = $.ajax({
+      type: "GET",
+      url: '/experiences/' + job_id
+    });
+    request.done(function(response){
+      if (response === 'true'){
+        location.reload();
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 5000);
+      }
+    });
+  };
+  var id = <%= @experience.id %>
+  check_job_status(id)
+});
+</script>
+<% end %>
 <div class="row" id="mealpanel">
   
   <% @experience.images.each_with_index do |image, index| %>
@@ -173,30 +193,8 @@
   </div>
 </div>
 
-<% if flash[:notice] %>
 
-  <script>
-    $(function(){
-     function check_job_status() {
-       alert("hi");
-     var img = document.getElementById("2").src;
-     while (img === "http://localhost:3000/image_files/medium/missing.png") {
-       setInterval(function()
-       {
-        debugger;
-        alert("hi");
-        location.reload()
-       }, 5000);
-
-      }
-    };
-    check_job_status()
-   }); 
-  </script>
-<% end %>
 <script type="text/javascript">
-
-
 
   $(function () {
     $('#datetimepicker11').datetimepicker({
