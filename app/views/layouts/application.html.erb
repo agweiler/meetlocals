@@ -47,9 +47,9 @@
       <% flash[:notice].clear %>
     </div>
   <% end %>
-
   <% if alert %>
     <% alert = Array.new(1, flash[:alert]) if (flash[:alert].kind_of?(String) && !flash[:alert].empty?) %>
+    <% alert ||= flash[:alert] %>
     <% alert.each do |msg| %>
       <div class="alert alert-danger-alt alert-dismissable error_alert">
         <span class="glyphicon glyphicon-certificate"></span>
