@@ -1,5 +1,7 @@
 class ExperiencesController < ApplicationController
+  include ExperiencesHelper
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   # GET /experiences
   def index
@@ -64,13 +66,19 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1
   def show
-  	  @booking = Booking.new
+
+  	@booking = Booking.new
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
     @average_rating = @experience.avg_rating if @experience.testimonials.present?
+    @response = check_images(@experience.id)
+    respond_to do |format|
+      format.js    { render json: @response }
+      format.html  
+    end
   end
-
+    
   # GET /experiences/new
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
@@ -101,14 +109,14 @@ class ExperiencesController < ApplicationController
     @image_files = experience_params.delete(:images_array)
 
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    @experience.location = current_host.state
+    # @experience.location = current_host.state
 
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
       @image_files.each do |img|
         new_img = @experience.images.new
-        new_img.image_file = img
+        new_img.local_image = img
       # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
         new_img.caption = img.original_filename
         new_img.save!
@@ -140,7 +148,7 @@ class ExperiencesController < ApplicationController
 
         @image_files.each do |img|
           new_img = @experience.images.new
-          new_img.image_file = img
+          new_img.local_image = img
         # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
           new_img.caption = img.original_filename
           new_img.save!
@@ -166,7 +174,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :is_halal, :cuisine, :max_group_size, :host_style, :available_days, :price, :time, :images_array => [],
+      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :is_halal, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :price, :time, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end

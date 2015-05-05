@@ -1,333 +1,199 @@
-<!-- !if we follow design mockups, we will have to require that hosts upload at least 3 images with resolutions of atleast 600*600px -->
-
-  <div class="row" id="mealpanel">
-
-    <% @experience.images.each_with_index do |image, index| %>
-<!--                         Needs index < 3 fix
- -->  <div class="col-md-4" style="padding:0px">
-      <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px" %></br>
-      </div>
-      <% end %>
- </div>
-
-
-  <div class="row">
-          <div class="col-md-4" style="height:400px">
-              </br>
-
-
-
-       <div style="margin-left: 70px; margin-top: 30px">
-                <% @host = @experience.host %>
-                <% if @host.images.present? %>
-                  <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle" %></br>
-                <% else %>
-                  <%= image_tag "box.jpeg", class: "img-circle" %>
-                <% end %>
-                </br>
-                <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
-
-
-                <p>
-                  <strong>Location:</strong>
-                  <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-                </p>
-
-                <p>More events by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
-                </br>
-<!--                 <hr>
- -->
-   <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker11').datetimepicker({
-            <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
-
-            daysOfWeekDisabled: <%= days %>,
-            format: 'MMMM DD, YYYY',
-            minDate: moment().add(5, 'days'),
-            <% if @booking.date.nil? %>
-              defaultDate: false,
-            <% else %>
-              defaultDate: moment([<%= @booking.date.year %>,
-                                    <%= @booking.date.month %>,
-                                    <%= @booking.date.day %>
-                                    // <%= @experience.time.hour %>,
-                                    // <%= @experience.time.min %>
-                                  ]),
-            <% end %>
-        });
-
-      // if( $("input[name*=datetime]").val() == "" )
-      //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
-      //
-      // $('div.input-group').on("click", "span.input-group-addon", function(event){
-      //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
-      // });
-
-      $('#new_booking').submit(function(event){
-        if( $("input[name*=datetime]").val() == "" ){
-          event.preventDefault();
-          $('small#date_error').text("Please specify booking date.");
-        }
-      });
-
+<% if flash[:notice] %>
+<script>
+$(function(){
+    function check_job_status(job_id){
+      
+    var request = $.ajax({
+      type: "GET",
+      url: '/experiences/' + job_id
     });
+    request.done(function(response){
+      if (response === 'true'){
+        location.reload();
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 5000);
+      }
+    });
+  };
+  var id = <%= @experience.id %>
+  check_job_status(id)
+});
 </script>
-<div class = "container" >
-  <div class = "row">
-    <div class = "col-md-8">
-      <%= form_for([@experience, @booking]) do |f| %>
-      <% if @booking.errors.any? %>
-        <div id="error_explanation">
-          <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
+<% end %>
+<div class="row" id="mealpanel">
+  
+  <% @experience.images.each_with_index do |image, index| %>
+    <div class="col-md-4" style="padding:0px">
 
-          <ul>
-          <small><% @booking.errors.full_messages.each do |message| %></small>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px", id: index %>
+     
+      </br>
 
-      <div hidden>
-        <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
-        <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
-        <%= f.date_select :date %>
-      </div>
-      <div class = "col-md-4">
-        <div class='input-group date' id='datetimepicker11'>
-          <!-- <input type='text' class="form-control" name="datetime" /> -->
-          <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-        <small id="date_error"></small>
-
-        <%= f.hidden_field :guest_id, value:@booking.guest_id %>
-        <%= f.hidden_field :experience_id, value:@experience.id %>
-</br>
-        <div class="field">
-          <% if current_host == @experience.host %>
-            <%= f.label :status %><br>
-            <%= f.select :status, options_for_select(Booking.statuses) %>
-          <% else %>
-            <%= f.text_field :status, value:@booking.status, hidden: true %>
-          <% end %>
-        </div>
-      <!-- </div> -->
-     <!--  <div class = "col-md-3"> -->
-        <div class="field">
-          <%= f.label :group_size %>
-          <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
-        </div>
-    <!--   </div> -->
-      <!-- <div class = "col-md-3 "> -->
-        <div class="field">
-         <%= f.check_box :is_private %>
-         <%= f.label :is_private, value:'private event' %>
-        </div>
-</br>
-     <!--  </div> -->
-     <% if current_host == @experience.host %>
-        <%= link_to 'Edit', edit_experience_path(@experience),
-        class: "btn btn-warning btn-xs btn_admins" %> |
-    <% end %>
-
-<!--                       <%= link_to 'Back', experiences_path %>
- -->      </div>
     </div>
-    <div class ="col-md-4">
-    </div>
-  </div>
-  <% if current_guest %>
-  <div class ="row">
-    <div class = "col-md-4">
-      <div class="actions" id="booking_create_button">
-        <%= f.submit "Book Now!", class:"btn btn-warning btn-md" %>
-      </div>
-    </div>
-    <div class = "col-md-3">
-    </div>
-  </div>
   <% end %>
 </div>
 
+<div class="col-md-4 bg-default">
+  <div class="row center-block" style="">
+    <% @host = @experience.host %>
+    <% if @host.images.present? %>
+      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-10 col-md-offset-1" %></br>
+    <% else %>
+      <%= image_tag "box.jpeg", class: "img-circle col-md-10 col-md-offset-1" %>
     <% end %>
-            </div>
+  </div>
+
+  <div class="row" style="">
+    <div class="col-md-10 col-md-offset-1">
+      <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+
+      <p><strong>Location:</strong>
+        <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
+
+      <p>More events by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 bg-info" style="border-radius: 10px">
+      <br>
+      <%= render 'bookings/form' %>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-md-8" style="background-color:#777">
+  <div class="row" id="mealframe">
+    <h2><%= @experience.title %>
+     <% if current_host == @experience.host %>
+       <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins" %>
+     <% end %>
+    </h2>
+
+    <p><%= @host.first_name%><%=@host.last_name %></p>
+    <p>
+      <strong>Location:</strong>
+      <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
+    </p>
+
+    <p><%= @host.age %></p>
+
+    <p><%= @host.title %></p>
+    <p><%= @host.intro %></p>
+    <p>Speaks: <%= @host.languages %></p>
+    <p><%= @host.neighbourhood %></p>
+    <p><%= @host.additional_info %></p>
+  </div>
+
+  <div class="row" style="" id="menuframe">
+    <h1>Menu</h1>
+    <table class="table" id="menutab">
+      <thead>
+        <tr>
+          <th id="rembor">Meal Type</th>
+          <th id="rembor">Cuisine</th>
+          <th id="rembor">Beverages</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="rembor">John</td>
+          <td id="rembor"><%= @experience.cuisine %></td>
+          <td id="rembor"><%= @experience.beverages %></td>
+        </tr>
+      </tbody>
+
+       <thead>
+        <tr>
+          <th id="rembor">Halal</th>
+          <th id="rembor">Availability</th>
+          <th id="rembor">Group Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+         <td id="rembor"><%= @experience.is_halal ? "Yes" : "No" %></td>
+          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+      <%= avail_days.to_sentence %></td>
+          <td id="rembor"><%= @experience.max_group_size %> pax</td>
+        </tr>
+      </tbody>
+
+       <thead>
+        <tr>
+          <th id="rembor">Host Style</th>
+          <th id="rembor">Duration</th>
+          <th id="rembor">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+           <td id="rembor">
+             <% if @experience.host_style %>
+               <%= @experience.host_style %>
+             <% end %></td>
+           <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
+           <td id="rembor"><%= @experience.price %> $US</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
+      <%= @experience.description %>
+    </div>
+  </div>
+
+  <div class="row" id="specframe">
+    <h1>Special Events</h1>
+  </div>
+
+  <% if true %>
+    <%if @host.video_url.present?%>
+      <div class="row" id="menuframe">
+        <h1>Video Presentation</h1>
+        <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
       </div>
+    <% end %>
+  <% end %>
 
+  <div class="row" id="menuframe">
+   <h1>Map</h1>
+   <div id="map-canvas" style="max-width: 600px"></div>
+  </div>
 
+                 <!-- Curious map code -->
+  <div id="mapLat" style="display: none;">
+    <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
+  </div>
+  <div id="mapLng" style="display: none;">
+    <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
+  </div>
 
-<!-- Carousel experiment (it works!) -->
+  <div class="row" id="specframe">
+    <h1>Meal Format</h1>
+   </div>
 
+  <div class="row" id="ratingsframe">
+    <h1>Ratings</h1>
+  </div>
 
-
-
-
-<!-- Carousel experiment end -->
-      <div class="col-md-8" style="background-color:#777">
-
-
-                <div class="row" id="mealframe">
-
-                   <h2><%= @experience.title %></h2>
-
-                    <p><%= @host.first_name%><%=@host.last_name %></p>
-
-
-              <p>
-                <strong>Location:</strong>
-                <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-              </p>
-
-          <p><%= @host.age %></p>
-
-          <p><%= @host.title %></p>
-          <p><%= @host.intro %></p>
-          <p>Speaks: <%= @host.languages %></p>
-          <p><%= @host.neighbourhood %></p>
-          <p><%= @host.additional_info %></p>
-
-
-                </div>
-
-                <div class="row" style="" id="menuframe">
-                   <h1>Menu</h1>
-
-
-                    <table class="table" id="menutab">
-                      <thead>
-                        <tr>
-                          <th id="rembor">Meal Type</th>
-                          <th id="rembor">Cuisine</th>
-                          <th id="rembor">Beverages</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td id="rembor">John</td>
-                          <td id="rembor"><%= @experience.cuisine %></td>
-                          <td id="rembor"><%= @experience.beverages %></td>
-                        </tr>
-                      </tbody>
-
-                       <thead>
-                        <tr>
-                          <th id="rembor">Halal</th>
-                          <th id="rembor">Availability</th>
-                          <th id="rembor">Group Size</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                         <td id="rembor"><%= @experience.is_halal ? "Yes" : "No" %></td>
-                          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-                      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-                      <%= avail_days.to_sentence %></td>
-                          <td id="rembor"><%= @experience.max_group_size %> pax</td>
-                        </tr>
-                      </tbody>
-
-                       <thead>
-                        <tr>
-                          <th id="rembor">Host Style</th>
-                          <th id="rembor">Duration</th>
-                          <th id="rembor">Price</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                           <td id="rembor"><% if @experience.host_style %>
-                      <%= @experience.host_style %>
-                    <% end %></td>
-                           <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
-                           <td id="rembor"><%= @experience.price %> $US</td>
-                        </tr>
-                      </tbody>
-
-
-                    </table>
-
-                    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
-                    <%= @experience.description %>
-                    </div>
-                 </div>
+  <div class="row" id="testiframe">
+    <h1>Testimonials:</h1>
+    <% @testimonials.each do |testimonial| %>
+      <h6><%= testimonial.title %></h6>
+      <p>Rating:
+        <% testimonial.rating.to_i.times do %>
+          <img src="/assets/star-on.png" />
+        <% end %></p>
+        <%= simple_format(testimonial.body) %>
+      <% end %>
+      </p>
+  </div>
+</div>
 
 
 
 
 
-                <div class="row" id="specframe">
-<!--                  <hr>
- -->                 <h1>Special Events</h1>
-
-                </div>
-
-                <% if true %>
-
-                    <%if @host.video_url.present?%>
-
-                        <div class="row" id="menuframe">
-
-                         <h1>Video Presentation</h1>
-
-
-                         <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
-
-
-                        </div>
-                    <% end %>
-
-
-                <% end %>
-
-
-
-
-                 <div class="row" id="menuframe">
-
-                   <h1>Map</h1>
-                         <div id="map-canvas" style="max-width: 600px"></div>
-                 </div>
-
-                     <!-- Curious map code -->
-          <div id="mapLat" style="display: none;">
-            <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
-          </div>
-          <div id="mapLng" style="display: none;">
-            <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
-          </div>
-
-
-
-                <div class="row" id="specframe">
-                <h1>Meal Format</h1>
-                 </div>
-
-                <div class="row" id="ratingsframe">
-                  <h1>Ratings</h1>
-                </div>
-
-
-
-
-                    <div class="row" id="testiframe">
-
-                      <h1>Testimonials:</h1>
-                      <% @testimonials.each do |testimonial| %>
-                        <h6><%= testimonial.title %></h6>
-                        <p>Rating:
-                          <% testimonial.rating.to_i.times do %>
-                            <img src="/assets/star-on.png" />
-                          <% end %></p>
-                        <%= simple_format(testimonial.body) %>
-                        <% end %>
-
-                    </div>
-
-
-
-              </div>
-
-          </div>

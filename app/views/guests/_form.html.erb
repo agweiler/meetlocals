@@ -40,18 +40,18 @@
 
   <div class="field">
       <%= f.label :nationality %><br>
-      <%= f.collection_select :nationality, Nationality.all,:name, :name %>
+      <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control'} %>
   </div>
 
   <div class="field">
       <%= f.label :country %>
-      <%= f.collection_select :country, Country.all,:name, :name %>
-     
+      <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control"} %>
+
   </div>
 
   <div class="field">
       <%= f.label :province %><br>
-      <%= f.text_field :last_name, class: "form-control" %>
+      <%= f.text_field :province, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -59,10 +59,21 @@
     <%= f.text_area :about , class: "form-control"%>
   </div>
 
-
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field(:image_file) %>
+  </div> -->
+
+  <div class="">
+    <%= f.label :image %><br>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <span class="btn btn-default btn-file">
+          Browse<%= f.file_field(:image_file) %>
+        </span>
+      </span>
+      <input type="text" class="form-control" readonly>
+    </div>
   </div>
 
   </br>
@@ -71,4 +82,3 @@
 <% end %>
 <% end %>
 </div>
-

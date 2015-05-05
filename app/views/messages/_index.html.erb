@@ -12,12 +12,13 @@
   <% end %>
 
   <% if message.sender_type == "host" %>
-    <div class="alert alert-info" role="alert" style="margin-bottom:5px">
-  <% else %>
-    <div class="alert alert-warning" role="alert" style="margin-bottom:5px">
+    <% alert_type = "alert alert-info" %>
+  <% elsif message.sender_type == "guest" %>
+    <% alert_type = "alert alert-warning" %>
   <% end %>
 
-  <p style:"float:left"><%= message.text %></p>
+  <div class="<%= alert_type %>" role="alert" style="margin-bottom:5px;padding-bottom:15px">
+    <p style:"float:left"><%= simple_format message.text %></p>
     <small style="float:right">
       <strong><%= sender.username %></strong>
       <%= message.created_at.strftime('@%b %d, %Y') %>

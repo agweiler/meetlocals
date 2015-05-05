@@ -1,109 +1,101 @@
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker11').datetimepicker({
-            <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
+<!-- <div class = "container" >
+  <div class = "col-md-offset-4 col-md-4"> -->
+<!-- <div class = "row"> -->
+<%= form_for(@booking) do |f| %>
+  <% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
 
-            daysOfWeekDisabled: <%= days %>,
-            format: 'MMMM DD, YYYY',
-            minDate: moment(),
-            <% if @booking.date.nil? %>
-              defaultDate: false,
-            <% else %>
-              defaultDate: moment([<%= @booking.date.year %>,
-                                    <%= @booking.date.month %>,
-                                    <%= @booking.date.day %>
-                                    // <%= @experience.time.hour %>,
-                                    // <%= @experience.time.min %>
-                                  ]),
-            <% end %>
-        });
-
-      // if( $("input[name*=datetime]").val() == "" )
-      //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
-      //
-      // $('div.input-group').on("click", "span.input-group-addon", function(event){
-      //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
-      // });
-
-      $('#new_booking').submit(function(event){
-        if( $("input[name*=datetime]").val() == "" ){
-          event.preventDefault();
-          $('small#date_error').text("Please specify booking date.");
-        }
-      });
-
-    });
-</script>
-<div class = "container" >
-  <div class = "row">
-    <div class = "col-md-8">
-      <%= form_for(@booking) do |f| %>
-      <% if @booking.errors.any? %>
-        <div id="error_explanation">
-          <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
-
-          <ul>
-          <small><% @booking.errors.full_messages.each do |message| %></small>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
+      <ul>
+      <small><% @booking.errors.full_messages.each do |message| %></small>
+        <li><%= message %></li>
       <% end %>
-
-      <div hidden>
-        <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
-        <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
-        <%= f.date_select :date %>
-      </div>
-      <div class = "col-md-4">
-        <div class='input-group date' id='datetimepicker11'>
-          <!-- <input type='text' class="form-control" name="datetime" /> -->
-          <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-        <small id="date_error"></small>
-
-        <%= f.hidden_field :guest_id, value:@booking.guest_id %>
-        <%= f.hidden_field :experience_id, value:@experience.id %>
-
-        <div class="field">
-          <% if current_host == @experience.host %>
-            <%= f.label :status %><br>
-            <%= f.select :status, options_for_select(Booking.statuses) %>
-          <% else %>
-            <%= f.text_field :status, value:@booking.status, hidden: true %>
-          <% end %>
-        </div>
-      </div>
-      <div class = "col-md-3">
-        <div class="field">
-          <%= f.label :group_size %>
-          <%= f.select :group_size, options_for_select(@experience.max_number_in_group) %>
-        </div>
-      </div>
-      <div class = "col-md-3 ">
-        <div class="field">
-         <%= f.check_box :is_private %>
-         <%= f.label :is_private, value:'private event' %>
-        </div>
-      </div>
-    </div> 
-    <div class ="col-md-4">
+      </ul>
     </div>
+  <% end %>
+
+  <div hidden>
+    <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
+    <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
+    <%= f.date_select :date %>
   </div>
-  <div class ="row">
-    <div class = "col-md-7 pull-right">
-      <div class="actions" id="booking_create_button">
-        <%= f.submit %>
-      </div>
-    </div>
-    <div class = "col-md-3">
-    </div>
-  </div>
-</div>    
 
+  <div class = "field">
+    <label>Date: </label>
+    <div class='input-group date' id='datetimepicker11'>
+      <!-- <input type='text' class="form-control" name="datetime" /> -->
+      <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <small id="date_error"></small>
+  </div>
+
+  <%= f.hidden_field :guest_id, value:@booking.guest_id %>
+  <%= f.hidden_field :experience_id, value:@experience.id %>
+
+  <div class="field">
+    <% if current_host == @experience.host %>
+      <%= f.label :status %><br>
+      <%= f.select :status, options_for_select(Booking.statuses), {}, class:"form-control" %>
+    <% else %>
+      <%= f.text_field :status, value:@booking.status, hidden: true %>
     <% end %>
-  
+  </div>
 
+  <div class="field">
+    <%= f.label :group_size %>
+    <%= f.select :group_size, options_for_select(@experience.max_number_in_group), {}, class:"form-control" %>
+  </div>
+
+  <div class="field">
+   <%= f.check_box :is_private %>
+   <%= f.label :is_private, value:'private event' %>
+  </div>
+
+  <div class="actions" id="booking_create_button">
+    <% @action == "edit" ? submit_text = "Edit Booking" : submit_text = "Book Now!"%>
+    <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
+  </div>
+<% end %>
+<!-- </div> -->
+  <!-- </div> -->
+<!-- </div> -->
+
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker11').datetimepicker({
+      <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
+      <% @action == "edit" ? add_days = 0 : add_days = 5%>
+      daysOfWeekDisabled: <%= days %>,
+      format: 'MMMM DD, YYYY',
+      minDate: moment().add(<%= add_days %>, 'days'),
+      <% if @booking.date.nil? %>
+        defaultDate: false,
+      <% else %>
+        defaultDate: moment([<%= @booking.date.year %>,
+                              <%= @booking.date.month %>,
+                              <%= @booking.date.day %>
+                              // <%= @experience.time.hour %>,
+                              // <%= @experience.time.min %>
+                            ]),
+      <% end %>
+    });
+
+    // if( $("input[name*=datetime]").val() == "" )
+    //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
+    //
+    // $('div.input-group').on("click", "span.input-group-addon", function(event){
+    //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
+    // });
+
+    $('#new_booking').submit(function(event){
+      if( $("input[name*=datetime]").val() == "" ){
+        event.preventDefault();
+        $('small#date_error').text("Please specify booking date.");
+      }
+    });
+
+  });
+</script>

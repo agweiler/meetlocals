@@ -27,4 +27,8 @@ class Experience < ActiveRecord::Base
 		self.testimonials.average(:rating).round(2)
 	end
 
+	def number_of_images
+		self.images.count
+	end
+
 end

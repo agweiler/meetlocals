@@ -9,17 +9,7 @@ class ApplicationController < ActionController::Base
 	  devise_parameter_sanitizer.for(:sign_up) << :username
 	end
 
-  #  def after_inactive_sign_up_path_for(resource)
-  #  	byebug
-  #    case resource
-  #    	when :guest, Guest
-  #    	  edit_guest_profile_path(resource)
-  #    	when :host, Host
-  #    	  edit_host_profile_path(resource)
-  #    	else
-  #    	  super
-  #    	end
-  #  end
+ 
 
  def after_sign_in_path_for(resource_or_scope)
     case resource_or_scope
