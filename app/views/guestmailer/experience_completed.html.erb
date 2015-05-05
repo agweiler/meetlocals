@@ -7,9 +7,11 @@
     <h1>Hi <%= @guest.username %>! </h1>
     <p>
       Its obvious you enjoyed yourself, so why not give a testimonial to tell people about it? Reliving an experience increases your gratitude, which will in turn increase your happiness (Emmons et al)
-      At The Nasi Project, we not only care about your gastronomical pleasure but also your happiness, so please leave a testimonial at the <%= link_to 'The Nasi Project' , make_testimonial_url(@booking)%>
+      At The Nasi Project, we not only care about your gastronomical pleasure but also your happiness, so please leave a testimonial at the <%= link_to 'Meet The Danes' , make_testimonial_url(@booking)%>
+
+       Alternatively, you can also leave a review at <%= link_to 'Facebook' , "www.facebook.com/meetdanes" %> or at <%= link_to 'TripAdvisor' , "www.tripadvisor.com " %> 
 
     </p>
-    <p>Thanks for using Project Nasi and have a great day!</p>
+    <p>Thanks for using Meet The Danes and have a great day!</p>
   </body>
 </html>
