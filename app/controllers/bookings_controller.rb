@@ -131,7 +131,11 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.update(booking_params)
         guest = @booking.guest
-        Guestmailer.receive_invitation(guest.id,@booking.id).deliver_now
+        if booking_params[:status] == "invited"
+          Guestmailer.receive_invitation(guest.id,@booking.id).deliver_now
+        elsif booking_params[:status] == "rejected"
+          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_now
+        end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
