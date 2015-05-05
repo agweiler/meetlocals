@@ -6,6 +6,12 @@ class Guestmailer < ApplicationMailer
     mail(to: @guest.email, subject: "They like you! Your booking status has been changed")
   end
 
+    def reject_invitation(guest_id,booking_id)
+    @guest = Guest.find guest_id
+    @booking = Booking.find booking_id
+    mail(to: @guest.email, subject: "Sorry, they can't make it work")
+  end
+
   def payment_confirmed(guest_id,booking_id)
     @guest = Guest.find guest_id
     @booking = Booking.find booking_id
