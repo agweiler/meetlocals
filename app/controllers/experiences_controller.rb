@@ -1,5 +1,7 @@
 class ExperiencesController < ApplicationController
+  include ExperiencesHelper
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
+  respond_to :html, :json
 
   # GET /experiences
   def index
@@ -64,13 +66,19 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1
   def show
-  	  @booking = Booking.new
+
+  	@booking = Booking.new
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average
     @average_rating = @experience.avg_rating if @experience.testimonials.present?
+    @response = check_images(@experience.id)
+    respond_to do |format|
+      format.js    { render json: @response }
+      format.html  
+    end
   end
-
+    
   # GET /experiences/new
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
@@ -108,7 +116,7 @@ class ExperiencesController < ApplicationController
       #create image after parent-experience is saved
       @image_files.each do |img|
         new_img = @experience.images.new
-        new_img.image_file = img
+        new_img.local_image = img
       # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
         new_img.caption = img.original_filename
         new_img.save!
@@ -140,7 +148,7 @@ class ExperiencesController < ApplicationController
 
         @image_files.each do |img|
           new_img = @experience.images.new
-          new_img.image_file = img
+          new_img.local_image = img
         # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
           new_img.caption = img.original_filename
           new_img.save!

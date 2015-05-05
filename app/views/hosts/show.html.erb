@@ -17,6 +17,7 @@
               <% if @host.images.present? %>
                 <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
               <% else %>
+              
                 <%= image_tag "box.jpeg" %>
               <% end %>
             	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
