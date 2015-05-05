@@ -17,7 +17,7 @@
 /tmp
 
 # Ignore aws config
-/config/aws_config.yml
+/config/amazon_config.yml
 
 # Ignore secret
 /config/secret.yml
