@@ -8,7 +8,7 @@ gem "twitter-bootstrap-rails"
 gem "less-rails"
 gem 'bootstrap-sass', '3.2.0'
 gem 'autoprefixer-rails'
-gem 'delayed_job_active_record'
+
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
