@@ -5,6 +5,7 @@ class Experience < ActiveRecord::Base
 
 	has_many :testimonials, through: :bookings
 
+	before_save :set_default_meal
 
 	def self.get_location
     	return ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
@@ -29,6 +30,21 @@ class Experience < ActiveRecord::Base
 
 	def number_of_images
 		self.images.count
+	end
+
+	validates :meal, presence: true
+	def self.get_mealsets
+		%w( Lunch Dinner )
+	end
+
+	def set_default_meal
+		if self.meal == 'Lunch'
+			self.time = Time.zone.local(2000, 01, 01, 12)
+			self.duration = 2
+		elsif self.meal == 'Dinner'
+			self.time = Time.zone.local(2000, 01, 01, 19)
+			self.duration = 3
+		end
 	end
 
 end

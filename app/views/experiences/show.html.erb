@@ -2,7 +2,7 @@
 <script>
 $(function(){
     function check_job_status(job_id){
-      
+
     var request = $.ajax({
       type: "GET",
       url: '/experiences/' + job_id
@@ -21,12 +21,12 @@ $(function(){
 </script>
 <% end %>
 <div class="row" id="mealpanel">
-  
+
   <% @experience.images.each_with_index do |image, index| %>
     <div class="col-md-4" style="padding:0px">
 
       <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px", id: index %>
-     
+
       </br>
 
     </div>
@@ -98,7 +98,7 @@ $(function(){
       </thead>
       <tbody>
         <tr>
-          <td id="rembor">John</td>
+          <td id="rembor"><%= @experience.meal %></td>
           <td id="rembor"><%= @experience.cuisine %></td>
           <td id="rembor"><%= @experience.beverages %></td>
         </tr>
@@ -124,7 +124,7 @@ $(function(){
        <thead>
         <tr>
           <th id="rembor">Host Style</th>
-          <th id="rembor">Duration</th>
+          <th id="rembor">Suggested Time</th>
           <th id="rembor">Price</th>
         </tr>
       </thead>
@@ -134,7 +134,11 @@ $(function(){
              <% if @experience.host_style %>
                <%= @experience.host_style %>
              <% end %></td>
-           <td id="rembor"><% duration = (@experience.duration*60).divmod(60) %><%= duration[0] %> hours <%= duration[1].to_i %> minutes.</td>
+           <td id="rembor">
+           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
+           <%= (@experience.time.in_time_zone +
+                @experience.duration.hour).strftime('%I:%M %p') %>
+           </td>
            <td id="rembor"><%= @experience.price %> $US</td>
         </tr>
       </tbody>
@@ -192,8 +196,3 @@ $(function(){
       </p>
   </div>
 </div>
-
-
-
-
-
