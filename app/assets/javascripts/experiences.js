@@ -28,7 +28,7 @@ function mapMake() {
 google.maps.event.addDomListener(window, 'load', mapMake);
 // mapMake() end
 
-$(document).on('change', '.btn-file :file', function() {
+$(document).on('change', '.upload-experience :file', function() {
   var input = $(this),
   numFiles = input.get(0).files ? input.get(0).files.length : 1,
   label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
@@ -36,13 +36,13 @@ $(document).on('change', '.btn-file :file', function() {
 });
 
 $(document).ready( function() {
-  $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+  $('.upload-experience :file').on('fileselect', function(event, numFiles, label) {
     var input = $(this).parents('.input-group').find(':text');
     log = numFiles > 1 ? numFiles + ' files selected' : label;
 		$('input[type*=submit]').prop('disabled', false);
 
     if(numFiles != 3){
-			input.val("Please upload 3 exeprience images.").attr('style','color:red');
+			input.val("Please upload 3 experience images.").attr('style','color:red');
 			$('input[type*=submit]').prop('disabled', true);
 		}else if( input.length ) {
 			input.removeAttr('style');
