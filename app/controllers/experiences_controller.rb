@@ -6,10 +6,11 @@ class ExperiencesController < ApplicationController
   # GET /experiences
   def index
     # Date.strptime('April 13, 2015',"%B %d, %Y")
-
     datefrom = Date.strptime(params[:dateFR],"%B %d, %Y") unless params[:dateFR] == '' || params[:dateFR].nil?
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
+    @group_size = params[:max_group_size]
+    @group_size ||= 1
     @location = params[:experience][:location] unless params[:experience].nil?
     @input_datefrom, @input_dateto = datefrom, dateto
 
@@ -32,11 +33,13 @@ class ExperiencesController < ApplicationController
     end
 
     if ( (params[:experience] == nil || @location == "All") && datediff >= 7 )
-      @experiences = Experience.all
+      @experiences = Experience.where("max_group_size >= ?", @group_size)
     elsif ( (params[:experience] == nil || @location == "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
-      @experiences = Experience.all
+      @experiences = Experience.where("max_group_size >= ?", @group_size)
     elsif ( (params[:experience] != nil && @location != "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
-      @experiences = Experience.where(location: @location)
+      # @experiences = Experience.where(location: @location)
+      @experiences = Experience.where("location = ? AND max_group_size",
+        @location, @group_size)
     else # date(s) + with/without @location
       from_to = []
       if dayfrom == dayto
@@ -54,7 +57,10 @@ class ExperiencesController < ApplicationController
       strlike = "(" + from_to.map { | day | "available_days LIKE '%" + day.to_s + "%'" }.join(' OR ') + ")"
       # strlike = "(" + arrlike.join(' OR ') + ")"
 
-      (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
+      strloc = "max_group_size >= #{@group_size}"
+      strloc += "AND location = '#{@location}'" unless
+        (params[:experience] == nil || params[:experience][:location] == 'All')
+      # (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
 
       strloc += ' AND ' if strloc.present? && strlike.present?
 
