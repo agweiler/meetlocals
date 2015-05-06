@@ -36,7 +36,7 @@
   <%= f.hidden_field :experience_id, value:@experience.id %>
 
   <div class="field">
-    <% if current_host == @experience.host %>
+    <% if current_host == @experience.host && @action == "edit" %>
       <%= f.label :status %><br>
       <%= f.select :status, options_for_select(Booking.statuses), {}, class:"form-control" %>
     <% else %>
@@ -56,7 +56,12 @@
   
   <div class="actions" id="booking_create_button">
     <% @action == "edit" ? submit_text = "Edit Booking" : submit_text = "Book Now!"%>
-    <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
+    <% if guest_signed_in? %>
+      <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
+    <% else %>
+      <%= link_to "Sign Up", new_guest_registration_path,
+      class:"btn btn-warning " %>
+    <% end %>
   </div>
 <% end %>
 <!-- </div> -->

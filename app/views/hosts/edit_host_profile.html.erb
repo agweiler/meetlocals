@@ -1,98 +1,10 @@
-<div class="container">
 <h2 style="text-align: center"> Thanks for signing up as a host,</h2>
 <h2 style="text-align: center"> please complete your profile </h2>
-</div>
 </br>
 <div class="container">
-<div class="row">
-<div class="col-md-4 col-md-offset-4">
-<%= form_for @host, url: { action: "update_host_profile" }, html: {multipart: true} do |f| %>
-
-   <p>
-		<%= f.label :title %>
-		<%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], class: "form-control" %>
-	</p>
-
-  <p>
-		<%= f.label :first_name %>
-		<%= f.text_field :first_name, class: "form-control" %>
-	</p>
-
-	 <p>
-		<%= f.label :last_name %>
-		<%= f.text_field :last_name, class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :username %>
-		<%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
-	</p>
-
-  <p>
-	  <%= f.label :languages %>
-    <%= collection_select(:languages, 0, Language.all, :id, :name, {:prompt => true, :multiple => true}) %>
-  </p>
-
-   <p>
-	  <%= f.label :DOB%> (Date of Birth)
-    <%= f.date_select :DOB, :start_year => Date.today.year - 100, :end_year => Date.today.year%>
-  </p>
-
-	<p>
-		<%= f.label :country %>
-		<%= f.select :country, [["Denmark", "Denmark"]],  class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :state %>
-		<%= f.select :state, Experience.get_location %>
-	</p>
-
-	<p>
-		<%= f.label :suburb %>
-	    <%= f.text_field :suburb, class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :street_address %> (Will not be shown to guests until they confirm a booking with you.)
-	  <%= f.text_field :street_address, class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :video_url %>
-	  <%= f.text_field :video_url, class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :intro %>
-	  <%= f.text_area :intro, class: "form-control" %>
-	</p>
-
-	<p>
-		<%= f.label :neighbourhood %>
-	  <%= f.text_area :neighbourhood, class: "form-control" %>
-	</p>
-
-
-
-	<p>
-		<%= f.label :additional_info %>
-	  <%= f.text_area :additional_info, class: "form-control" %>
-	</p>
-
-    <%= f.label :image %><br>
-    <%= f.file_field(:image_file) %></br>
-
-
-
-
-
-	<%= f.text_field :latitude, class: "form-control", style:"display: none" %>
-	<%= f.hidden_field :longitude, class: "form-control" %>
-<div style="text-align: center">
-<input type="submit" name="commit" value="Submit" style="display: none">
-<input type="button" onclick="geocode()" value="Complete Profile"></input>
-</div>
-
-<% end %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= render 'form' %>
+    </div>
+  </div>
 </div>

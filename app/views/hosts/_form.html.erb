@@ -11,6 +11,22 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
+  </div>
+
+  <%= f.label :image %><br>
+  <div class="input-group">
+    <span class="input-group-btn">
+      <span class="btn btn-default btn-file">
+        Browse<%= f.file_field(:image_file) %>
+      </span>
+    </span>
+    <input type="text" class="form-control" readonly>
+  </div>
+  <br>
+
   <div class="field"
     <%= f.label :title %>
     <%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], {include_blank:""}, class: "form-control" %>
@@ -24,11 +40,6 @@
    <div class="field">
     <%= f.label :last_name %>
     <%= f.text_field :last_name, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -78,25 +89,12 @@
     <%= f.text_area :neighbourhood, class: "form-control" %>
   </div>
 
-
-
   <div class="field">
     <%= f.label :additional_info %>
     <%= f.text_area :additional_info, class: "form-control" %>
   </div>
 
-  <div class="">
-    <%= f.label :image %><br>
-    <div class="input-group">
-      <span class="input-group-btn">
-        <span class="btn btn-default btn-file">
-          Browse<%= f.file_field(:image_file) %>
-        </span>
-      </span>
-      <input type="text" class="form-control" readonly>
-    </div>
-  </div>
-  <br>
+
    <!-- <div class="actions">
    <%= f.submit %>
    </div> -->
