@@ -110,17 +110,23 @@
               Browse<%= f.file_field(:images_array, multiple: true) %>
             </span>
           </span>
-          <input type="text" class="form-control" placeholder="" readonly>
+          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
         </div>
         <small><kbd>ctrl + click</kbd> to select multiple images.</small>
       </div>
 
-
-        <div class="actions">
-            <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136", remote: true %>
-        </div>
-        <% end %>
-
+    <div class="actions">
+        <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136", remote: true %>
+    </div>
+    <% end %>
 
   </div>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    if( window.location.pathname.includes('edit') ){
+      $('#showfilename').val('Browse to replace current experience images').attr('style','color:red');
+    }
+  })
+</script>
