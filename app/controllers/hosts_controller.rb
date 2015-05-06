@@ -48,7 +48,7 @@ class HostsController < ApplicationController
       if @host.images.present?
         @host.images.delete_all
       end
-      Image.create(image_file: @image_file, caption: @image_file.original_filename, imageable: @host)
+      Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
     end
     respond_to do |format|
       format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
@@ -81,7 +81,7 @@ class HostsController < ApplicationController
       if @host.images.present?
         @host.images.delete_all
       end
-      Image.create(image_file: @image_file, caption: @image_file.original_filename, imageable: @host)
+      Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
     end
     puts "preparing for host update"
     if @host.update(host_params.except(:image_file))

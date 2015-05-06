@@ -2,7 +2,6 @@ class Experience < ActiveRecord::Base
 	belongs_to :host
 	has_many :bookings
 	has_many :images, as: :imageable, dependent: :destroy
-
 	has_many :testimonials, through: :bookings
 
 
@@ -25,6 +24,10 @@ class Experience < ActiveRecord::Base
 
 	def avg_rating
 		self.testimonials.average(:rating).round(2)
+	end
+
+	def number_of_images
+		self.images.count
 	end
 
 end
