@@ -5,7 +5,7 @@ class Experience < ActiveRecord::Base
 
 	has_many :testimonials, through: :bookings
 
-	before_save :set_default_meal
+	before_save :set_default_mealtime
 
 	def self.get_location
     	return ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
@@ -15,7 +15,8 @@ class Experience < ActiveRecord::Base
     return (1..self.max_group_size).to_a
   end
 
-	validates :title, :description, :cuisine, :max_group_size, :duration, :price, presence: true
+	validates :title, :description, :cuisine, :max_group_size, :price,
+	  presence: true
 	validate :available_days_must_have_minimum_one_day
 
 	def available_days_must_have_minimum_one_day
@@ -33,18 +34,27 @@ class Experience < ActiveRecord::Base
 	end
 
 	validates :meal, presence: true
-	def self.get_mealsets
+	def self.get_meals
 		%w( Lunch Dinner )
 	end
 
-	def set_default_meal
+	def set_default_mealtime
 		if self.meal == 'Lunch'
 			self.time = Time.zone.local(2000, 01, 01, 12)
 			self.duration = 2
+			self.mealset = nil
 		elsif self.meal == 'Dinner'
 			self.time = Time.zone.local(2000, 01, 01, 19)
 			self.duration = 3
 		end
 	end
 
+	def is_dinner?
+		self.meal == 'Dinner'
+	end
+
+	validates :mealset, presence: true, if: :is_dinner?
+	def self.get_mealsets
+		["Starter + Main", "Main + Dessert"]
+	end
 end

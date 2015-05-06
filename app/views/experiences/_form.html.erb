@@ -54,12 +54,16 @@
 
       <div class="field" id="meal">
         <%= f.label :meal %> <br>
-        <%= f.select(:meal, options_for_select(Experience.get_mealsets, @experience.meal),
-           {}, {required: true, class: 'form-control', style:"width:50%"}) %>
+        <%= f.select(:meal, options_for_select(Experience.get_meals,
+              @experience.meal), {},
+              {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
 
-      <div class="" id='dinner_choice'>
-        to be filled up with dinner choices
+      <div class="field" id='dinner_choice'>
+        <%= f.label :mealset %> <br>
+        <%= f.select(:mealset, options_for_select(Experience.get_mealsets,
+              @experience.mealset), {},
+              {required: false, class: 'form-control', style:'width:50%'}) %>
       </div>
       <!-- <div class="field form-inline">
         <%= f.label :time, value: 'Preferred Time' %><br>
