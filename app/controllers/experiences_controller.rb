@@ -109,14 +109,11 @@ class ExperiencesController < ApplicationController
     (0..6).each do |num|
         default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     end
-
     experience_params[:available_days].replace(default)
-
     @image_files = experience_params.delete(:images_array)
-
+    experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    # @experience.location = current_host.state
-
+    byebug
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved

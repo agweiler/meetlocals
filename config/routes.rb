@@ -7,7 +7,13 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+
+
   get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
+
+  get 'admins/settings' => 'admins#settings', as: :admin_settings
+
+  patch '/price' => 'admins#changeprice'
   
   resources :admins
 
@@ -69,6 +75,7 @@ Rails.application.routes.draw do
   post 'bookings/:id/complete' => 'bookings#mark_completion', as: :mark_booking_completion
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
+
 
   resources :experiences
 
