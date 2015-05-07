@@ -18,9 +18,25 @@ class Host < ActiveRecord::Base
   	email.gsub(/@.*/, "").capitalize
   end
 
+  def self.age_ranges
+    [' ', '20-35', '36-50', '51-65', '66+']
+  end
+
+  def self.search_by_age(low, high) # 20, 35
+    high ||= 200
+    young = Date.today.year - low.to_i #20 -> 1995
+    old = Date.today.year - high.to_i #35 -> 1980
+
+    lower_range = Date.new(  old, 01, 01 ) #1980.1.1
+    upper_range = Date.new(young, 12, 31 ) #1995.12.31
+
+    # between [ >=] 1980.1.1 and [<= ] 1995.12.31
+    Host.where('dob >= ? AND dob <= ?', lower_range, upper_range)
+  end
+
   def age
     now = Time.now.utc.to_date
-    dob = self.DOB
+    dob = self.dob
     return nil if dob.nil?
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end

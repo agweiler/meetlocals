@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_for :admins
 
   get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
-  
+
   resources :admins
 
   root 'static_pages#home'
@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
   get '/blog' => 'posts#index'
+
+  post 'hosts_search' => "hosts#index"
+
+  get 'hosts_search' => "hosts#index"
 
   post 'experiences_search' => 'experiences#index'
 
