@@ -8,10 +8,13 @@
 
       <div class="container-fluid">
         <%= form_tag hosts_search_path  do %>
+        <%= select :search, :location, Host.get_location,
+          {selected: @selected_location}, {class:"form-control"} %>
         <%= select :search, :age_range, Host.age_ranges,
-          {selected: @selected} %>
-        <%= text_field :search, :text %>
-        <%= submit_tag :search %>
+          {selected: @selected_age}, {class:"form-control"} %>
+        <%= text_field :search, :text, {class:"form-control",
+          placeholder:"this one has nothing yet"} %>
+        <%= submit_tag :search, {class:"form-control"} %>
         <% end %>
       </div>
     </div>
