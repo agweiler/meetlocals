@@ -82,14 +82,15 @@
       </div>
 
       <div class="field">
-        <label for="experience_price">*Price (USD)</label>
+   <!--      <label for="experience_price">*Price (USD)</label>
         <form class="form-inline">
           <div class="form-group">
               <div class="input-group">
-                <div class="input-group-addon">$</div>
-                 <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?", class: "form-control", style: "width: 74%"%>
-              </div>
-            </div>
+                <div class="input-group-addon">$</div> -->
+                  <%= f.hidden_field :price %>
+                <!--  <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?", class: "form-control", style: "width: 74%"%> -->
+              <!-- </div>
+            </div> -->
       </div>
 
 
@@ -107,7 +108,7 @@
         <br>
         <div class="input-group">
           <span class="input-group-btn">
-            <span class="btn btn-default btn-file">
+            <span class="btn btn-default upload-experience btn-file">
               Browse<%= f.file_field(:images_array, multiple: true) %>
             </span>
           </span>

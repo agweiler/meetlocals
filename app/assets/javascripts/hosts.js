@@ -55,4 +55,26 @@ function geocode() {
 };
 // geocode() end
 
-// refer experience.js for file-field script
+// modified from experiences.js
+$(document).on('change', '.upload-profile :file', function() {
+  var input = $(this),
+  numFiles = input.get(0).files ? input.get(0).files.length : 1,
+  label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+  $('.upload-profile :file').on('fileselect', function(event, numFiles, label) {
+    var input = $(this).parents('.input-group').find(':text');
+    log = numFiles > 1 ? numFiles + ' files selected' : label;
+		$('input[type*=submit]').prop('disabled', false);
+
+		if( input.length ) {
+			input.removeAttr('style');
+      input.val(log);
+    } else {
+      if( log ) alert(log);
+    }
+
+  });
+});

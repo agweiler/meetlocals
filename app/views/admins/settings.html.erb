@@ -1,0 +1,28 @@
+<div class="container">
+<!-- create normal form -->
+	<!-- <form action ="/admins/settings" method="post">
+	  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<select name = "meal">
+			<option value = "Lunch">Lunch</option>
+			<option value = "Dinner">Dinner</option>
+		<select> <br>
+
+		Set Price Here <input type = "text" name = "price">
+		<br>
+		<input type = "submit" value = "Change the price">
+	</form> -->
+
+	<div>
+		<p> Change your prices here </p>
+	  <% @prices.each do |price| %>
+     <%= form_for(price) do |f|%>
+    <div>
+    	<%= price.meal %>
+    	<%= f.text_field :price %>
+    	<%= f.submit "Change Price" %>
+    </div> <br>
+    <% end %>
+  <% end %>
+  </div>
+
+</div>
