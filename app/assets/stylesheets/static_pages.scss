@@ -44,10 +44,15 @@ Image credits: unsplash.com
 /********************************/
 /*          Hero Headers        */
 /********************************/
+
+
 .hero {
     position: absolute;
-    top: 40%;
+		background-color:rgba(0,0,0,.3);
+	  top: 80%;
     left: 50%;
+		height: 80px;
+		width: 200%;
     z-index: 3;
     color: #fff;
     text-align: center;
@@ -60,7 +65,7 @@ Image credits: unsplash.com
               transform: translate3d(-50%,-50%,0);
 }
 .hero h1 {
-    font-size: 6em;    
+    font-size: 6em;
     font-weight: bold;
     margin: 0;
     padding: 0;
@@ -68,19 +73,19 @@ Image credits: unsplash.com
 
 .fade-carousel .carousel-inner .item .hero {
     opacity: 0;
-    -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s; 
+    -webkit-transition: 2s all ease-in-out .2s;
+       -moz-transition: 2s all ease-in-out .2s;
+        -ms-transition: 2s all ease-in-out .2s;
+         -o-transition: 2s all ease-in-out .2s;
+            transition: 2s all ease-in-out .2s;
 }
 .fade-carousel .carousel-inner .item.active .hero {
     opacity: 1;
-    -webkit-transition: 2s all ease-in-out .1s;
-       -moz-transition: 2s all ease-in-out .1s; 
-        -ms-transition: 2s all ease-in-out .1s; 
-         -o-transition: 2s all ease-in-out .1s; 
-            transition: 2s all ease-in-out .1s;    
+    -webkit-transition: 2s all ease-in-out .2s;
+       -moz-transition: 2s all ease-in-out .2s;
+        -ms-transition: 2s all ease-in-out .2s;
+         -o-transition: 2s all ease-in-out .2s;
+            transition: 2s all ease-in-out .2s;
 }
 
 /********************************/
@@ -112,7 +117,7 @@ Image credits: unsplash.com
 /********************************/
 /*       Slides backgrounds     */
 /********************************/
-.fade-carousel .slides .slide-1, 
+.fade-carousel .slides .slide-1,
 .fade-carousel .slides .slide-2,
 .fade-carousel .slides .slide-3 {
   height: 100vh;
@@ -123,8 +128,8 @@ Image credits: unsplash.com
   z-index: 2;
 }
 .fade-carousel .slides .slide-1 {
-/*  background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818); 
-*/  background-image: url("/assets/dinner_party.jpg"); 
+/*  background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818);
+*/  background-image: url("/assets/dinner_party.jpg");
 
 }
 .fade-carousel .slides .slide-2 {
@@ -142,10 +147,10 @@ Image credits: unsplash.com
 /*          Media Queries       */
 /********************************/
 @media screen and (min-width: 980px){
-    .hero { width: 980px; }    
+    .hero { width: 980px; }
 }
 @media screen and (max-width: 640px){
-    .hero h1 { font-size: 4em; }    
+    .hero h1 { font-size: 4em; }
 }
 
 #gradio {
@@ -163,30 +168,30 @@ z-index: 1;
 
 #pre_foot {
   background-color: #777;
-  height:335px; 
+  height:335px;
   width:100%;
    z-index: 3;
     background-color: #080d15;
     opacity: 1;
 /*    margin-bottom: -46px;
-*/    
+*/
 
 }
 
 #big_head {
-  text-align:center; 
-  font-family: reis; 
+  text-align:center;
+  font-family: reis;
   font-size: 50px;
 }
 
 #small_head {
-  text-align:center; 
+  text-align:center;
   font-family: novitonova;
 }
 
 /*.maroon {
   color: #fff;
-  font-family: novitonova; 
+  font-family: novitonova;
   font-size: 110px;
   text-shadow: 0px 0px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
@@ -198,7 +203,7 @@ z-index: 1;
 
 
 #logo {
-    font-family: reis; 
+    font-family: reis;
       font-size: 30px;
 
 }

@@ -98,8 +98,6 @@ GEM
       devise (~> 3.2)
     erubis (2.7.0)
     execjs (2.5.2)
-    font-awesome-rails (4.3.0.0)
-      railties (>= 3.2, < 5.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hitimes (1.2.2)
@@ -250,7 +248,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-async
-  font-awesome-rails
   gibbon!
   jbuilder (~> 2.0)
   jquery-rails
