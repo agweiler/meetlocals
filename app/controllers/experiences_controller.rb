@@ -105,7 +105,7 @@ class ExperiencesController < ApplicationController
 
     @days = experience_params.delete(:days)
     default = "-------"
-    byebug
+
     (0..6).each do |num|
         default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     end
