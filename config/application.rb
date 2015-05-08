@@ -31,9 +31,7 @@ module Nasi
       config.before_configuration do
         env_file = File.join(Rails.root, 'config', 'amazon_config.yml')
         x = YAML.load(File.open(env_file))
-        byebug
         x.each do |key, value|
-            byebug
           ENV[key.to_s] = value
         end if File.exists?(env_file)
       end
