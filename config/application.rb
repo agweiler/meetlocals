@@ -29,14 +29,22 @@ module Nasi
 
     if Rails.env.development?
       config.before_configuration do
-        env_file = File.join(Rails.root, 'config', 'aws_config.yml')
-        YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
+        env_file = File.join(Rails.root, 'config', 'amazon_config.yml')
+        x = YAML.load(File.open(env_file))
+        x.each do |key, value|
+          ENV[key.to_s] = value
         end if File.exists?(env_file)
       end
     end
 
+    #   if Rails.env.development?
+    #   config.before_configuration do
+    #     env_file = File.join(Rails.root, 'config', 'amazon_config.yml')
+    #    KEYS = YAML.load(File.open(env_file))
+    #   end
+    # end
 
+    # AMAZON_KEYS = YAML.load_file("#{RAILS_ROOT}/config/amazon_key_config.yml")
     # Using font-awesome
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 

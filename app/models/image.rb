@@ -11,7 +11,7 @@ class Image < ActiveRecord::Base
 										styles: { :medium => "300x300!", :thumb => "100x100>" }, #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
-            				:bucket => 'mtdimagesdev',
+            				:bucket => ENV['AWS_BUCKET'],
             				:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
             				:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
           					},
