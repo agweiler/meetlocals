@@ -30,7 +30,11 @@ class Image < ActiveRecord::Base
   def queue_upload_to_s3
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
-    	ImageJob.new.async.perform(@id)
+      if local_image.instance.imageable_type == "Experience"
+    	  ImageJob.perform_async(@id)
+      else
+        ImageJob.new.perform(@id)
+      end
     end
   end
 
@@ -42,7 +46,7 @@ class Image < ActiveRecord::Base
 end
 
 class ImageJob 
-	   include SuckerPunch::Job
+	   include Sidekiq::Worker
 
 	 def perform(id)
 	 	#image.id not found!!!! pass in through perform_async
