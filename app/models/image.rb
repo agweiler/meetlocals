@@ -24,7 +24,6 @@ class Image < ActiveRecord::Base
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-
     after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
@@ -47,12 +46,16 @@ end
 
 class ImageJob 
 	   include Sidekiq::Worker
+     sidekiq_options :retry => 5
 
-	 def perform(id)
-	 	#image.id not found!!!! pass in through perform_async
+	def perform(id)
+	  #image.id not found!!!! pass in through perform_async
     image_file = Image.find(id)
     image_file.upload_to_s3
     image_file.local_image.destroy
-    
   end
+
+   sidekiq_retry_in do |count|
+    1 * (count + 1) # (i.e. 10, 20, 30, 40)
+   end
  end
