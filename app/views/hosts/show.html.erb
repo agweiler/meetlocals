@@ -59,24 +59,45 @@
     <!-- Host major details -->
           <div class="col-md-8" id="card_container">
 
-          <p><%= @host.first_name%><%=@host.last_name %></p>
+          <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p>
 
+          <p>
+            <strong>Location:</strong>
+             <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
+          </p>
 
-              <p>
-                <strong>Location:</strong>
-                <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-              </p>
-
-          <p><%= @host.age %></p>
-          <p><%= @host.title %></p>
-          <p><%= @host.intro %></p>
-          <p><%= @host.occupation %></p>
-          <p><%= @host.interests %></p>
+          <p>
+            <strong>Age:</strong>
+            <%= @host.age %>
+          </p>
+          <p>
+            <strong>Introduction:</strong>
+            <%= @host.intro %>
+          </p>
+          <p>
+            <strong>Occupation:</strong>
+            <%= @host.occupation %>
+          </p>
+          <p>
+            <strong>Interests:</strong>
+            <%= @host.interests %>
+          </p>
           <p><%= @host.smoker? %></p>
-          <p><%= @host.pets %></p>
-          <p>Speaks: <%= @host.languages %></p>
-          <p><%= @host.neighbourhood %></p>
-          <p><%= @host.additional_info %></p>
+
+          <p>
+            <strong>Pets:</strong>
+            <%= @host.pets %>
+          </p>
+          <p><strong>Speaks:</strong> <%= @host.languages %></p>
+
+          <p>
+            <strong>Neighbourhood:</strong>
+            <%= @host.neighbourhood %>
+          </p>
+          <p>
+            <strong>Additional Info:</strong>
+            <%= @host.additional_info %>
+          </p>
 
 
        <!--    Placeholderbox For Host-specific info:
