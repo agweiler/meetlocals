@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @experiences = Experience.limit(3)
+    @recent_events = Experience.limit(3)
+    @host_party = Experience.limit(3)
   end
 
   def how_it_works
