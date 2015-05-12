@@ -105,10 +105,10 @@
   </div>
 
   <div class="row">
-    <div class="col-md-2 col-md-offset-1">
+    <div class="col-sm-2 col-sm-offset-1">
       some pic?
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <% if @recent_events.second.host.images.present? %>
         <%= image_tag @recent_events.second.host.images.first.image_file.url(:thumb), class: "img-circle" %>
       <% end %>
@@ -116,16 +116,16 @@
       <h4>HOST</h4>
       <%= content_tag :quote, @recent_events.second.description %>
     </div>
-    <div class="col-md-5">
+    <div class="col-sm-5">
       <%= image_tag @recent_events.second.images.first.image_file.url(:medium) %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-5 col-md-offset-1">
+    <div class="col-sm-5 col-sm-offset-1">
       <%= image_tag @recent_events.third.images.first.image_file.url(:medium) %>
       </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
       <% if @recent_events.third.host.images.present? %>
         <%= image_tag @recent_events.third.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <%= content_tag :h3, @recent_events.third.host.username %>
@@ -133,7 +133,7 @@
         <%= content_tag :qoute, @recent_events.third.description %>
       <% end %>
     </div>
-    <div class="col-md-2">
+    <div class="col-sm-2">
       some pic?
     </div>
   </div>
@@ -141,27 +141,27 @@
 </div>
 
 <div class="container-fluid" style="background-color: #D4D4D4" id="host_party">
-  <h3>HOST PARTY</h3>
+  <h3 style="padding-left:15px">HOST PARTY</h3>
   <% @host_party.each do |experience| %>
     <div class="col-md-4">
       <!-- <div class="thumbnail"> -->
-        <% if experience.images.present? %>
-          <%= image_tag experience.images.first.image_file.url(:medium)%>
-        <% end %>
-        <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
+      <% if experience.images.present? %>
+        <%= image_tag experience.images.first.image_file.url(:medium)%>
+      <% end %>
+      <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
 
-          <h3>
-            <%= link_to experience.host.username,  host_path(experience.host) %>
-          </h3>
-          <h5>Description: </h5>
-          <%= content_tag :quote, truncate(experience.description, length: 100) %>
+        <h3>
+          <%= link_to experience.host.username,  host_path(experience.host) %>
+        </h3>
+        <h5>Description: </h5>
+        <%= content_tag :quote, truncate(experience.description, length: 100) %>
 
-         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
-          <p style="text-align: center">
-            <%= content_tag :span, " MM/DD/YYYY ", class:"glyphicon glyphicon-calendar" %>
-            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md", style: "color:#fff" %>
-          </p>
-        </div>
+       <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
+        <p style="text-align: center">
+          <%= content_tag :span, " MM/DD/YYYY ", class:"glyphicon glyphicon-calendar" %>
+          <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md", style: "color:#fff" %>
+        </p>
+      </div>
       <!-- </div> -->
       <br><br>
     </div>
@@ -169,14 +169,10 @@
 </div>
 <!-- <div class="overlay2"></div> -->
 <div style="background-image:url('assets/greg22.jpg'); background-attachment: fixed" id="pre_foot">
-  <div class="container center-block" style="text-align:center; margin-top:100px">
-    <div class="col-md-3 col-md-offset-2 col-xs-12" style="height:80px;margin-top:100px">
-      <%= link_to "Sign up as a guest", new_guest_registration_path, class: "btn-xl col-xs-12", style: "background-color:#1abc9c; color:#f5f5f5; margin-right: 0px" %>
-    </div>
-
-    <div class="" style="height:80px;margin-top:100px">
-      <%= link_to "Sign up as a host", new_host_registration_path, class: "btn-xl col-md-3 col-md-offset-2 col-xs-12", style: "background-color:#660A0A; margin-right: 0px; border: 1px solid; border-color: #660A0A; color: #f5f5f5 "%>
-    </div>
+  <div class="container center-block" id="join_us">
+    JOIN OUR GROWING
+    <hr style="width:50%">
+    COMMUNITY  TODAY
   </div>
 </div>
 
