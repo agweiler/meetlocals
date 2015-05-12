@@ -11,8 +11,6 @@
     </div>
   <% end %>
 
-
-
   <div class="field">
     <%= f.label :username %><br>
     <%= f.text_field :username, class: "form-control" %>
@@ -28,9 +26,19 @@
       <%= f.text_field :first_name, class: "form-control" %>
   </div>
 
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
    <div class="field">
-      <%= f.label :last_name %><br>
-      <%= f.text_field :last_name, class: "form-control" %>
+      <%= f.label :interests %><br>
+      <%= f.text_field :interests, class: "form-control" %>
+  </div>
+
+   <div class="field">
+      <%= f.label :allergies %><br>
+      <%= f.text_field :allergies, class: "form-control" %>
   </div>
 
   <div class="field">

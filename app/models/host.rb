@@ -28,4 +28,12 @@ class Host < ActiveRecord::Base
   def avg_rating
     self.testimonials.average(:rating).round(2)
   end
+
+  def smoker?
+    if self.smoker == true
+      return "Smoker"
+    else
+      nil
+    end
+  end
 end
