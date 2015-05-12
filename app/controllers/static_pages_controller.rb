@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
+    @experiences = Experience.limit(3)
   end
 
   def how_it_works

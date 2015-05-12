@@ -22,7 +22,8 @@
       <div class="hero" style="width:100%">
         <hgroup>
             <!-- <h1><span class="maroon">Meet the Danes</span></h1> -->
-            <h3>Authentic meals with good company</h3>
+            <h4>Authentic meals with good company</h4>
+            <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
  -->
@@ -34,7 +35,8 @@
       <div class="hero" style="width:100%">
         <hgroup>
             <!-- <h1><span class="maroon">Become a Host</span></h1> -->
-            <h3>Wow guests with your food</h3>
+            <h4>Wow guests with your food</h4>
+            <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find out how</button>
  -->
@@ -46,7 +48,8 @@
       <div class="hero" style="width:100%">
         <hgroup>
             <!-- <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1> -->
-            <h3>Learn about the benefits</h3>
+            <h4>Learn about the benefits</h4>
+            <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">More info</button>
  -->
@@ -83,78 +86,56 @@
 </div>
 
 <div class="container-fluid">
-  </br>
-  <div class='row'>
-  </br>
-  </br>
-   <div class="col-md-4 hidden-xs hidden-sm">
-        <img class="img-circle" src="assets/111jjunkfood.jpg" style="width:350px; height:300px; margin-top:0px; margin-bottom: 10px; margin-left: 60px">
-      </div>
-    <div class='col-md-7 col-xs-12' style="margin-left: 0px">
-    <h2 style="text-align:center">What people are saying...</h2>
-    </br>
-
-      <div class="row carousel slide" data-ride="carousel" id="quote-carousel">
-        <!-- Bottom Carousel Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#quote-carousel" data-slide-to="1"></li>
-          <li data-target="#quote-carousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Carousel Slides / Quotes -->
-        <div class="carousel-inner">
-
-          <!-- Quote 1 -->
-          <div class="item active">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-          <!-- Quote 2 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-          <!-- Quote 3 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum elit in arcu blandit.</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-        </div>
-
-        <!-- Carousel Buttons Next/Prev -->
-        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
-        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
-      </div>
+  <h3>RECENT EVENTS</h3>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1">
+      <%= image_tag @experiences.first.images.first.image_file.url(:medium) %>
     </div>
+    <div class="col-md-3">
+      <% if @experiences.first.host.images.present? %>
+        <%= image_tag @experiences.first.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+      <% end %>
+      <%= content_tag "h3", @experiences.first.host.username %>
+      <h4>HOST</h4>
+      <%= content_tag "quote", @experiences.first.description %>
+    </div>
+    <div class="col-md-2">
+      some pic
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      some pic?
+    </div>
+    <div class="col-md-3">
+      <% if @experiences.second.host.images.present? %>
+        <%= image_tag @experiences.second.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+      <% end %>
+      <%= content_tag "h3", @experiences.second.host.username %>
+      <h4>HOST</h4>
+      <%= content_tag "quote", @experiences.second.description %>
+    </div>
+    <div class="col-md-5">
+      <%= image_tag @experiences.second.images.first.image_file.url(:medium) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1">
+      <%= image_tag @experiences.third.images.first.image_file.url(:medium) %>
+      </div>
+    <div class="col-md-3">
+      <% if @experiences.third.host.images.present? %>
+        <%= image_tag @experiences.third.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+        <%= content_tag "h3", @experiences.third.host.username %>
+        <h4>HOST</h4>
+        <%= content_tag "quote", @experiences.third.description %>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      some pic?
+    </div>
   </div>
 
 </div>
