@@ -8,7 +8,8 @@ class Image < ActiveRecord::Base
    validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   has_attached_file :image_file,
-										styles: { :medium => "300x300!", :thumb => "100x100>" }, #you can customise the storage path here using :path
+										styles: { :medium => "300x300!", :thumb => "100x100>",
+                      :rect_bg => '730x450!', :rect_sm => '440x200!'}, #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
             				:bucket => ENV['AWS_BUCKET'],
@@ -19,7 +20,7 @@ class Image < ActiveRecord::Base
           					:url => ":s3_sg_url"
 
   # validates_attachment_content_type :image_file, content_type: /\Aimage\/.*\Z/
-  # need to define these according to the size they will be displayed on site. 
+  # need to define these according to the size they will be displayed on site.
   # host/avatar sizes ok
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
@@ -45,7 +46,7 @@ class Image < ActiveRecord::Base
   end
 end
 
-class ImageJob 
+class ImageJob
 	   include Sidekiq::Worker
 
 	 def perform(id)
@@ -53,6 +54,6 @@ class ImageJob
     image_file = Image.find(id)
     image_file.upload_to_s3
     image_file.local_image.destroy
-    
+
   end
  end
