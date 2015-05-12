@@ -67,10 +67,10 @@
     </br>
 
       <div class="col-md-6 col-md-offset-1 col-sm-12">
-        <h1 id="big_head">AWARD WINNING AGENCY</h1>
-        <h2 id="small_head">COME MEET THE DANES</h2>
+        <h1 class="heads text-center">AWARD WINNING AGENCY</h1>
+        <h6 class="heads-sm text-center">COME MEET THE DANES</h6>
         </br>
-          <p style="text-align:center">Many nationalities visit Denmark every year. To give
+          <p class="para text-center">Many nationalities visit Denmark every year. To give
           our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
           </p>
         </br>
@@ -86,62 +86,48 @@
 </div>
 
 <div class="container-fluid" id="recent_events">
-  <h3>RECENT EVENTS</h3>
-  <div class="row">
-    <div class="col-md-5 col-md-offset-1">
-      <%= image_tag @recent_events.first.images.first.image_file.url(:medium) %>
-    </div>
-    <div class="col-md-3">
-      <% if @recent_events.first.host.images.present? %>
-        <%= image_tag @recent_events.first.host.images.first.image_file.url(:thumb), class: "img-circle" %>
-      <% end %>
-      <%= content_tag :h3, @recent_events.first.host.username %>
-      <h4>HOST</h4>
-      <%= content_tag :quote, @recent_events.first.description %>
-    </div>
-    <div class="col-md-2">
-      some pic
-    </div>
-  </div>
+  <h3 class="heads">RECENT EVENTS</h3>
 
+  <% @recent_events.each_with_index do |event, idx| %>
   <div class="row">
-    <div class="col-sm-2 col-sm-offset-1">
-      some pic?
-    </div>
-    <div class="col-sm-3">
-      <% if @recent_events.second.host.images.present? %>
-        <%= image_tag @recent_events.second.host.images.first.image_file.url(:thumb), class: "img-circle" %>
-      <% end %>
-      <%= content_tag :h3, @recent_events.second.host.username %>
-      <h4>HOST</h4>
-      <%= content_tag :quote, @recent_events.second.description %>
-    </div>
-    <div class="col-sm-5">
-      <%= image_tag @recent_events.second.images.first.image_file.url(:medium) %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-5 col-sm-offset-1">
-      <%= image_tag @recent_events.third.images.first.image_file.url(:medium) %>
+    <% if idx.even? %>
+      <div class="col-md-5 col-md-offset-1" style="background-color:red">
+        <%= image_tag @recent_events.first.images.first.image_file.url(:medium) %>
       </div>
-    <div class="col-sm-3">
-      <% if @recent_events.third.host.images.present? %>
-        <%= image_tag @recent_events.third.host.images.first.image_file.url(:thumb), class: "img-circle" %>
-        <%= content_tag :h3, @recent_events.third.host.username %>
+      <div class="col-md-3">
+        <% if @recent_events.first.host.images.present? %>
+          <%= image_tag @recent_events.first.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+        <% end %>
+        <%= content_tag :h3, @recent_events.first.host.username, class:"heads-lt" %>
         <h4>HOST</h4>
-        <%= content_tag :qoute, @recent_events.third.description %>
-      <% end %>
-    </div>
-    <div class="col-sm-2">
-      some pic?
-    </div>
+        <%= content_tag :quote, @recent_events.first.description, class:"para" %>
+      </div>
+      <div class="col-md-2" style="background-color:yellow">
+        some pic
+      </div>
+    <% else %>
+      <div class="col-sm-2 col-sm-offset-1" style="background-color:yellow">
+        some pic?
+      </div>
+      <div class="col-sm-3">
+        <% if @recent_events.second.host.images.present? %>
+          <%= image_tag @recent_events.second.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+        <% end %>
+        <%= content_tag :h3, @recent_events.second.host.username, class:"heads-lt" %>
+        <h4>HOST</h4>
+        <%= content_tag :quote, @recent_events.second.description, class:"para" %>
+      </div>
+      <div class="col-sm-5" style="background-color:red">
+        <%= image_tag @recent_events.second.images.first.image_file.url(:medium) %>
+      </div>
+    <% end %>
   </div>
-
+  <% end %>
 </div>
 
 <div class="container-fluid" style="background-color: #D4D4D4" id="host_party">
-  <h3 style="padding-left:15px">HOST PARTY</h3>
+  <h3 class="heads">HOST PARTY</h3>
   <% @host_party.each do |experience| %>
     <div class="col-md-4">
       <!-- <div class="thumbnail"> -->

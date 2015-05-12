@@ -1,6 +1,10 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Futura';
+$navi-slide: 'Lato', sans-serif;
+
 .guesthost {
 	font-color: black;
 	display: inline;
@@ -187,10 +191,37 @@ z-index: 1;
 	text-align: center;
 	padding-top: 70px;
 	padding-bottom: 70px;
-	font-family: reis;
+	font-family: $headline;
 	font-size: 72px;
+	font-weight: bold;
 	line-height: 80%;
 	color: white;
+}
+
+.heads {
+	padding-left: 15px;
+	font-family: $headline;
+	font-size: 400%;
+	font-weight: bold;
+}
+
+.heads-sm {
+	padding-left: 15px;
+	font-family: $headline;
+	font-size: 300%;
+	font-weight: bold;
+}
+
+.heads-lt {
+	font-family: $headline;
+	font-size: 300%;
+	font-weight: bold;
+	color: lime;
+}
+
+.para {
+	font-family: $paragraph;
+	font-size: 16px;
 }
 
 #big_head {
