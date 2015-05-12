@@ -13,10 +13,7 @@
           <label for="experience_description">*Description</label>
           <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
         </div>
-        <div class="field">
-          <%= f.label :is_halal %>?
-          <%= f.check_box :is_halal %>
-        </div>
+       
         <div class="field">
           <%= f.label :cuisine %>
           <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
