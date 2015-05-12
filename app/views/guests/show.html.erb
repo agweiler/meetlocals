@@ -14,20 +14,7 @@
 	</br>
 
 	<h4><%= @guest.username %><p>(<%= @guest.email %>)</p></h4>
-	<!-- <p>
-		<strong>About Me:</strong><br />
-		<%= @guest.about %>
-	</p> -->
 
-	<!-- <% if @guest == current_guest %> -->
-
-	<!-- <%= button_to "Browse Experiences", experiences_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %> -->
-
-	<!-- <%= button_to "Edit Profile" , edit_guest_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %> -->
-
-	<!-- <%= button_to "Account Settings" , edit_guest_registration_path, :class => "btn btn-default", style: "background-color:#1abc9c; color:#f5f5f5", :method => :get %> -->
-
-	<!-- <% end %> -->
 	<% if @guest == current_guest %>
 		<div class="btn-group" role="group">
 			<%= link_to "Edit Profile" , edit_guest_path, :class => "btn btn-warning btn-sm" %>
@@ -44,13 +31,17 @@
 				<strong>Name: </strong>
 				<%= @guest.title %> <%= @guest.first_name %> <%= @guest.last_name %>
 			</div>
-			<!-- <div class="field">
-				<strong>Email: </strong>
-				<%= @guest.email %>
-			</div> -->
 			<div class="field">
 				<strong>Languages: </strong>
 				<%= @guest.languages %>
+			</div>
+			<div class="field">
+				<strong>Interests: </strong>
+				<%= @guest.interests %>
+			</div>
+			<div class="field">
+				<strong>Allergies:</strong>
+				<%= @guest.allergies %>
 			</div>
 			<div class="field">
 				<strong>Nationality: </strong>
