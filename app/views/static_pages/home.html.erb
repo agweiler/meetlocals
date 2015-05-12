@@ -89,37 +89,41 @@
   <h3 class="heads">RECENT EVENTS</h3>
 
   <% @recent_events.each_with_index do |event, idx| %>
-  <div class="row">
+  <div class="row" style="padding:15px">
 
     <% if idx.even? %>
-      <div class="col-md-5 col-md-offset-1" style="background-color:red">
-        <%= image_tag @recent_events.first.images.first.image_file.url(:medium) %>
+      <div class="col-md-4 thumbnail" style="">
+        <%= image_tag event.images.first.image_file.url(:medium), class:"" %>
       </div>
-      <div class="col-md-3">
-        <% if @recent_events.first.host.images.present? %>
-          <%= image_tag @recent_events.first.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+      <div class="col-md-4">
+        <% if event.host.images.present? %>
+          <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
-        <%= content_tag :h3, @recent_events.first.host.username, class:"heads-lt" %>
+        <h3 class="heads-lt">
+          <%= link_to event.host.username, host_path(event.host) %>
+        </h3>
         <h4>HOST</h4>
-        <%= content_tag :quote, @recent_events.first.description, class:"para" %>
+        <%= content_tag :quote, event.description, class:"para" %>
       </div>
-      <div class="col-md-2" style="background-color:yellow">
+      <div class="col-md-4" style="background-color:yellow">
         some pic
       </div>
     <% else %>
-      <div class="col-sm-2 col-sm-offset-1" style="background-color:yellow">
+      <div class="col-md-4" style="background-color:yellow">
         some pic?
       </div>
-      <div class="col-sm-3">
-        <% if @recent_events.second.host.images.present? %>
-          <%= image_tag @recent_events.second.host.images.first.image_file.url(:thumb), class: "img-circle" %>
+      <div class="col-md-4">
+        <% if event.host.images.present? %>
+          <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
-        <%= content_tag :h3, @recent_events.second.host.username, class:"heads-lt" %>
+        <h3 class="heads-lt">
+          <%= link_to event.host.username, host_path(event.host) %>
+        </h3>
         <h4>HOST</h4>
-        <%= content_tag :quote, @recent_events.second.description, class:"para" %>
+        <%= content_tag :quote, event.description, class:"para" %>
       </div>
-      <div class="col-sm-5" style="background-color:red">
-        <%= image_tag @recent_events.second.images.first.image_file.url(:medium) %>
+      <div class="col-md-4 thumbnail" style="">
+        <%= image_tag event.images.first.image_file.url(:medium), class:"" %>
       </div>
     <% end %>
   </div>
@@ -130,25 +134,25 @@
   <h3 class="heads">HOST PARTY</h3>
   <% @host_party.each do |experience| %>
     <div class="col-md-4">
-      <!-- <div class="thumbnail"> -->
-      <% if experience.images.present? %>
-        <%= image_tag experience.images.first.image_file.url(:medium)%>
-      <% end %>
-      <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
+      <div class="thumbnail">
+        <% if experience.images.present? %>
+          <%= image_tag experience.images.first.image_file.url(:medium)%>
+        <% end %>
+        <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
 
-        <h3>
-          <%= link_to experience.host.username,  host_path(experience.host) %>
-        </h3>
-        <h5>Description: </h5>
-        <%= content_tag :quote, truncate(experience.description, length: 100) %>
+          <h3 class="heads-lt">
+            <%= link_to experience.host.username,  host_path(experience.host) %>
+          </h3>
+          <h5 class="para">Description: </h5>
+          <%= content_tag :quote, truncate(experience.description, length: 100) ,class:"para" %>
 
-       <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
-        <p style="text-align: center">
-          <%= content_tag :span, " MM/DD/YYYY ", class:"glyphicon glyphicon-calendar" %>
-          <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md", style: "color:#fff" %>
-        </p>
+         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
+          <p>
+            <%= content_tag :span, " MM/DD/YYYY ", class:"fa fa-calendar fa-lg", style:"margin-top:10px; color:grey" %>
+            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md pull-right", style: "color:#fff" %>
+          </p>
+        </div>
       </div>
-      <!-- </div> -->
       <br><br>
     </div>
   <% end %>
