@@ -53,6 +53,12 @@
    <%= f.check_box :is_private %>
    <%= f.label :is_private, value:'private event' %>
   </div>
+
+  <div class="field">
+    <%= f.label :add_info %>
+    <%= f.text_area :add_info, placeholder: "Add any relevant info here, eg. Number of kids" ,class: "form-control" %>
+  </div>
+
   <% if current_guest %>
   <div class="actions" id="booking_create_button">
     <% @action == "edit" ? submit_text = "Edit Booking" : submit_text = "Book Now!"%>
