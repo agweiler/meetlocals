@@ -22,32 +22,49 @@ class Host < ActiveRecord::Base
     [' ', '20-35', '36-50', '51-65', '66+']
   end
 
-  def self.search_by_age(low, high) # 20, 35
-    high ||= 200
+  # def self.search_by_age(low, high) # 20, 35
+  #   high ||= 200
+  #   young = Date.today.year - low.to_i #20 -> 1995
+  #   old = Date.today.year - high.to_i #35 -> 1980
+  #
+  #   lower_range = Date.new(  old, 01, 01 ) #1980.1.1
+  #   upper_range = Date.new(young, 12, 31 ) #1995.12.31
+  #
+  #   # between [ >=] 1980.1.1 and [<= ] 1995.12.31
+  #   Host.where('dob >= ? AND dob <= ?', lower_range, upper_range)
+  # end
+
+  # def self.search(low, high, loc) #low_age, high_age, location
+  #   high ||= 200
+  #   young = Date.today.year - low.to_i #20 -> 1995
+  #   old = Date.today.year - high.to_i #35 -> 1980
+  #
+  #   lower_range = Date.new(  old, 01, 01 ) #1980.1.1
+  #   upper_range = Date.new(young, 12, 31 ) #1995.12.31
+  #
+  #   loc == "All" ? loc = '' : loc = "AND state = '#{loc}'"
+  #
+  #   # between [ >=] 1980.1.1 and [<= ] 1995.12.31
+  #   # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
+  #   sql = "dob >= '#{lower_range}' AND dob <= '#{upper_range}' " + loc
+  #   Host.where(sql)
+  # end
+
+  def self.search(low, high, loc, group) #low_age, high_age, location, group
+    high ||= 200 #66+
     young = Date.today.year - low.to_i #20 -> 1995
     old = Date.today.year - high.to_i #35 -> 1980
 
     lower_range = Date.new(  old, 01, 01 ) #1980.1.1
     upper_range = Date.new(young, 12, 31 ) #1995.12.31
 
-    # between [ >=] 1980.1.1 and [<= ] 1995.12.31
-    Host.where('dob >= ? AND dob <= ?', lower_range, upper_range)
-  end
-
-  def self.search(low, high, loc) #low_age, high_age, location
-    high ||= 200
-    young = Date.today.year - low.to_i #20 -> 1995
-    old = Date.today.year - high.to_i #35 -> 1980
-
-    lower_range = Date.new(  old, 01, 01 ) #1980.1.1
-    upper_range = Date.new(young, 12, 31 ) #1995.12.31
-
-    loc == "All" ? loc = '' : loc = "AND state = '#{loc}'"
-
+    loc == "All" ? loc = '' : loc = " AND state = '#{loc}'"
+    group == "Any" ? group = "" : group = " AND max_group_size >= #{group}"
+# debugger
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
-    sql = "dob >= '#{lower_range}' AND dob <= '#{upper_range}' " + loc
-    Host.where(sql)
+    sql = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'" + loc + group
+    Host.joins(:experiences).where(sql).uniq
   end
 
   def age
