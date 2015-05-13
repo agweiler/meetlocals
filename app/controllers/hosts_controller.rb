@@ -42,9 +42,10 @@ class HostsController < ApplicationController
 
   # PATCH/PUT /hosts/1
   def update
+    # this commit param apparently is the name of the f.submit button
     if params[:commit] == "Approve User"
       @host.update(approved: true)
-      redirect_to 'admins/settings'
+      redirect_to admin_settings_path 
     else
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))

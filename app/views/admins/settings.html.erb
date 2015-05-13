@@ -16,10 +16,13 @@
 
   	<% @hosts.each do |new_user| %>
   	  <%= form_for(new_user) do |f|%>
-  	    <%= new_user.id %>
+  	  <div>
+  	    <%= new_user.username %>
   		  <%= new_user.email %>
   		  <%= link_to 'view profile', host_path(new_user) %>
   		  <%= f.submit "Approve User" %>
+  		 </div>
+  		 <br>
   		<% end %>
   	<% end %>
 </div>
