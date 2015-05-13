@@ -38,7 +38,7 @@
 						<span class= "caret"></span></a>
 						<ul class ="dropdown-menu" role="menu" style="">
 							<% if current_host %>
-								<li><%= link_to "Create New Experience", new_experience_path  %></li>
+								<li><%= link_to "Create New Experience", new_experience_path if current_host.host_approved? %></li>
 							<% end %>
 							<% if current_admin %>
 								<li><%= link_to "Show All Users", admins_path %></li>
