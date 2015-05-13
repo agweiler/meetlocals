@@ -113,7 +113,6 @@ $(function(){
       </thead>
       <tbody>
         <tr>
-         <td id="rembor"><%= @experience.is_halal ? "Yes" : "No" %></td>
           <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
       <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
       <%= avail_days.to_sentence %></td>

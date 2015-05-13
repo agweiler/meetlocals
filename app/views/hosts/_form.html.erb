@@ -43,6 +43,26 @@
   </div>
 
   <div class="field">
+    <%= f.label :occupation %>
+    <%= f.text_field :occupation, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :interests %>
+    <%= f.text_area :interests, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :smoker %>?
+    <%= f.check_box :smoker %> 
+  </div>
+<!--   We could also make pets a drop down list  -->
+  <div class="field">
+    <%= f.label :pets %>
+    <%= f.text_field :pets, class: "form-control" %>
+  </div>
+
+  <div class="field">
     <%= f.label :languages %>
      <%= collection_select(:languages, 0, Language.all, :id, :name, {:prompt => true, :multiple => true}, class:"form-control") %>
   </div>

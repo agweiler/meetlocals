@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507065954) do
+ActiveRecord::Schema.define(version: 20150512065805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20150507065954) do
     t.string   "title"
     t.text     "description"
     t.float    "duration"
-    t.boolean  "is_halal"
     t.string   "cuisine"
     t.integer  "max_group_size"
     t.text     "host_style"
@@ -106,6 +105,8 @@ ActiveRecord::Schema.define(version: 20150507065954) do
     t.string   "nationality"
     t.string   "country"
     t.string   "province"
+    t.text     "interests"
+    t.string   "allergies"
   end
 
   add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true, using: :btree
@@ -144,6 +145,10 @@ ActiveRecord::Schema.define(version: 20150507065954) do
     t.text     "additional_info"
     t.date     "dob"
     t.string   "video_url"
+    t.string   "occupation"
+    t.text     "interests"
+    t.boolean  "smoker"
+    t.string   "pets"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree
@@ -204,6 +209,11 @@ ActiveRecord::Schema.define(version: 20150507065954) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.string "meal"
+    t.float  "price"
   end
 
   create_table "testimonials", force: :cascade do |t|

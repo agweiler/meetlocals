@@ -25,18 +25,26 @@ module Nasi
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.active_job.queue_adapter = :sucker_punch
+    config.active_job.queue_adapter = :sidekiq
 
     if Rails.env.development?
       config.before_configuration do
-        env_file = File.join(Rails.root, 'config', 'aws_config.yml')
-        YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
+        env_file = File.join(Rails.root, 'config', 'amazon_config.yml')
+        x = YAML.load(File.open(env_file))
+        x.each do |key, value|
+          ENV[key.to_s] = value
         end if File.exists?(env_file)
       end
     end
 
+    #   if Rails.env.development?
+    #   config.before_configuration do
+    #     env_file = File.join(Rails.root, 'config', 'amazon_config.yml')
+    #    KEYS = YAML.load(File.open(env_file))
+    #   end
+    # end
 
+    # AMAZON_KEYS = YAML.load_file("#{RAILS_ROOT}/config/amazon_key_config.yml")
     # Using font-awesome
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 

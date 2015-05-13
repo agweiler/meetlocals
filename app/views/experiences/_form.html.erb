@@ -13,10 +13,7 @@
           <label for="experience_description">*Description</label>
           <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
         </div>
-        <div class="field">
-          <%= f.label :is_halal %>?
-          <%= f.check_box :is_halal %>
-        </div>
+       
         <div class="field">
           <%= f.label :cuisine %>
           <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
@@ -82,14 +79,15 @@
       </div>
 
       <div class="field">
-        <label for="experience_price">*Price (USD)</label>
+   <!--      <label for="experience_price">*Price (USD)</label>
         <form class="form-inline">
           <div class="form-group">
               <div class="input-group">
-                <div class="input-group-addon">$</div>
-                 <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?", class: "form-control", style: "width: 74%"%>
-              </div>
-            </div>
+                <div class="input-group-addon">$</div> -->
+                  <%= f.hidden_field :price %>
+                <!--  <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?", class: "form-control", style: "width: 74%"%> -->
+              <!-- </div>
+            </div> -->
       </div>
 
 

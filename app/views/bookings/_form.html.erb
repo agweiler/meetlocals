@@ -57,7 +57,7 @@
   <div class="actions" id="booking_create_button">
     <% @action == "edit" ? submit_text = "Edit Booking" : submit_text = "Book Now!"%>
     <% if guest_signed_in? %>
-      <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
+      <%= f.submit submit_text, class:"btn btn-primary btn-sm" ,id:"ga" %>
     <% else %>
       <%= link_to "Sign Up", new_guest_registration_path,
       class:"btn btn-warning " %>

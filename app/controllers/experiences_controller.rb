@@ -109,14 +109,10 @@ class ExperiencesController < ApplicationController
     (0..6).each do |num|
         default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     end
-
     experience_params[:available_days].replace(default)
-
     @image_files = experience_params.delete(:images_array)
-
+    experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    # @experience.location = current_host.state
-
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
@@ -180,7 +176,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :is_halal, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :price, :time, :meal, :mealset, :images_array => [],
+      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :price, :time, :meal, :mealset, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end

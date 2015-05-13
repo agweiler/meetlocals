@@ -89,7 +89,8 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
-        # Hostmailer.receive_booking_request(host.id,@booking.id).deliver_now
+        guest = @booking.guest
+        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
         format.html { render :new }

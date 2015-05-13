@@ -11,7 +11,7 @@ class Image < ActiveRecord::Base
 										styles: { :medium => "300x300!", :thumb => "100x100>" }, #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
-            				:bucket => 'mtdimagesdev',
+            				:bucket => ENV['AWS_BUCKET'],
             				:access_key_id => ENV['AWS_ACCESS_KEY_ID'],
             				:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
           					},
@@ -24,13 +24,16 @@ class Image < ActiveRecord::Base
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-
     after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
-    	ImageJob.new.async.perform(@id)
+      if local_image.instance.imageable_type == "Experience"
+    	  ImageJob.perform_async(@id)
+      else
+        ImageJob.new.perform(@id)
+      end
     end
   end
 
@@ -42,13 +45,17 @@ class Image < ActiveRecord::Base
 end
 
 class ImageJob 
-	   include SuckerPunch::Job
+	   include Sidekiq::Worker
+     sidekiq_options :retry => 5
 
-	 def perform(id)
-	 	#image.id not found!!!! pass in through perform_async
+	def perform(id)
+	  #image.id not found!!!! pass in through perform_async
     image_file = Image.find(id)
     image_file.upload_to_s3
     image_file.local_image.destroy
-    
   end
+
+   sidekiq_retry_in do |count|
+    1 * (count + 1) # (i.e. 10, 20, 30, 40)
+   end
  end

@@ -1,6 +1,12 @@
 require 'csv'  
 require 'open-uri'
 
+[
+  { :meal => 'Lunch', :price => 450.00},
+   { :meal => 'Dinner', :price => 450.00}
+  ].each do |c|
+  Price.create!(:meal => c[:meal], :price => c[:price])
+end
 
 CSV.foreach("config/languages.csv", { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all}) do |row|
 
