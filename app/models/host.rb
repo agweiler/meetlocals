@@ -10,6 +10,7 @@ class Host < ActiveRecord::Base
   has_many :bookings, through: :experiences
   has_many :testimonials
   has_many :testimonials, through: :bookings
+  has_many :holidays
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
 
