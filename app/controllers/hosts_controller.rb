@@ -42,7 +42,6 @@ class HostsController < ApplicationController
 
   # PATCH/PUT /hosts/1
   def update
-    byebug
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       redirect_to 'admins/settings'
