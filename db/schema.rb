@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513064408) do
+ActiveRecord::Schema.define(version: 20150514050752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150513064408) do
     t.string   "beverages"
     t.string   "meal"
     t.string   "mealset"
+    t.date     "date"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -115,17 +116,27 @@ ActiveRecord::Schema.define(version: 20150513064408) do
   add_index "guests", ["email"], name: "index_guests_on_email", unique: true, using: :btree
   add_index "guests", ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true, using: :btree
 
+  create_table "holidays", force: :cascade do |t|
+    t.date     "date"
+    t.string   "note"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "holidays", ["host_id"], name: "index_holidays_on_host_id", using: :btree
+
   create_table "hosts", force: :cascade do |t|
-    t.string   "username",               default: "",    null: false
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "country",                default: "",    null: false
-    t.string   "state",                  default: "",    null: false
-    t.string   "suburb",                 default: "",    null: false
+    t.string   "username",               default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "country",                default: "", null: false
+    t.string   "state",                  default: "", null: false
+    t.string   "suburb",                 default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -145,13 +156,12 @@ ActiveRecord::Schema.define(version: 20150513064408) do
     t.text     "intro"
     t.text     "neighbourhood"
     t.text     "additional_info"
-    t.date     "DOB"
+    t.date     "dob"
     t.string   "video_url"
     t.string   "occupation"
     t.text     "interests"
     t.boolean  "smoker"
     t.string   "pets"
-    t.boolean  "approved",               default: false, null: false
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree

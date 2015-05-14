@@ -4,7 +4,7 @@ class Experience < ActiveRecord::Base
 	has_many :images, as: :imageable, dependent: :destroy
 	has_many :testimonials, through: :bookings
 
-	before_save :set_default_mealtime
+	before_save :set_default_mealtime, :as_special_event
 
 	def self.get_location
     	return ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
@@ -19,10 +19,11 @@ class Experience < ActiveRecord::Base
 	validate :available_days_must_have_minimum_one_day
 
 	def available_days_must_have_minimum_one_day
-    	if available_days == "-------"
-      		errors.add(:available_days, "should have at least 1 available day")
-    	end
- 	end
+		debugger
+  	if available_days == "-------" && date.nil?
+    	errors.add(:available_days, "should have at least 1 available day")
+  	end
+  end
 
 	def avg_rating
 		self.testimonials.average(:rating).round(2)
@@ -50,6 +51,12 @@ class Experience < ActiveRecord::Base
 
 	def is_dinner?
 		self.meal == 'Dinner'
+	end
+
+	def as_special_event
+		unless self.date.nil?
+			self.available_days = "-------"
+		end
 	end
 
 	validates :mealset, presence: true, if: :is_dinner?
