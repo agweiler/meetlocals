@@ -19,7 +19,6 @@ class Experience < ActiveRecord::Base
 	validate :available_days_must_have_minimum_one_day
 
 	def available_days_must_have_minimum_one_day
-		debugger
   	if available_days == "-------" && date.nil?
     	errors.add(:available_days, "should have at least 1 available day")
   	end

@@ -50,7 +50,7 @@
   </div>
 
   <div class="field">
-   <%= f.check_box :is_private %>
+   <%= f.check_box :is_private, {disabled: !!@experience.date }%>
    <%= f.label :is_private, value:'private event' %>
   </div>
 
@@ -87,7 +87,7 @@
       format: 'MMMM DD, YYYY',
       minDate: moment().add(<%= add_days %>, 'days'),
       <% if @booking.date.nil? %>
-        defaultDate: false,
+        defaultDate: '<%= @experience.date.strftime('%B %d, %Y') if @experience.date %>',
       <% else %>
         defaultDate: moment([<%= @booking.date.year %>,
                               <%= @booking.date.month %>,
@@ -97,6 +97,10 @@
                             ]),
       <% end %>
     });
+
+    <% if @experience.date %>
+      $('#datetime_id').attr('disabled', true);
+    <% end %>
 
     // if( $("input[name*=datetime]").val() == "" )
     //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
