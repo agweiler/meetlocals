@@ -33,12 +33,12 @@ class ExperiencesController < ApplicationController
     end
 
     if ( (params[:experience] == nil || @location == "All") && datediff >= 7 )
-      @experiences = Experience.where("max_group_size >= ?", @group_size)
+      @experiences = Experience.where("max_group_size >= ? AND active = true", @group_size)
     elsif ( (params[:experience] == nil || @location == "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
-      @experiences = Experience.where("max_group_size >= ?", @group_size)
+      @experiences = Experience.where("max_group_size >= ? AND active = true", @group_size)
     elsif ( (params[:experience] != nil && @location != "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
       # @experiences = Experience.where(location: @location)
-      @experiences = Experience.where("location = ? AND max_group_size",
+      @experiences = Experience.where("location = ? AND max_group_size = ? AND active = true",
         @location, @group_size)
     else # date(s) + with/without @location
       from_to = []
@@ -64,8 +64,11 @@ class ExperiencesController < ApplicationController
 
       strloc += ' AND ' if strloc.present? && strlike.present?
 
+      stractive += " AND active = 'true'"
+
       # @experiences = Experience.where(location: params[:experience][:location])
-      @experiences = Experience.where("#{strloc}" + "#{strlike}").order(available_days: :desc)
+      @experiences = Experience.where("#{strloc}" + "#{strlike}" +
+      "#{stractive}").order(available_days: :desc)
       @location ||= 'All' unless @location.present?
     end
   end
@@ -162,7 +165,8 @@ class ExperiencesController < ApplicationController
 
   # DELETE /experiences/1
   def destroy
-    @experience.destroy
+    # @experience.destroy
+    @experience.to_inactive
     redirect_to experiences_url, notice: 'Experience was successfully destroyed.'
   end
 

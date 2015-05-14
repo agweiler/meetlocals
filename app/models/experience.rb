@@ -58,6 +58,16 @@ class Experience < ActiveRecord::Base
 		end
 	end
 
+	def to_inactive
+		self.active = false
+		self.save
+	end
+
+	def to_active
+		self.active = true
+		self.save
+	end
+
 	validates :mealset, presence: true, if: :is_dinner?
 	def self.get_mealsets
 		["Starter + Main", "Main + Dessert"]
