@@ -91,6 +91,10 @@ class BookingsController < ApplicationController
         host = @booking.experience.host
         guest = @booking.guest
         Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
+        Pusher["private-host-#{host.id}"].trigger('booking', {
+          :booking_id => "#{@booking.id}"
+
+        })
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
         format.html { render :new }

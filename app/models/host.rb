@@ -5,7 +5,7 @@ class Host < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :experiences
   has_many :images, as: :imageable
-
+  has_many :notifications
   has_many :bookings
   has_many :bookings, through: :experiences
   has_many :testimonials
@@ -35,5 +35,9 @@ class Host < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def all_notifications
+    self.notifications.all
   end
 end

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
-
+  post "pusher/auth"
 
   get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
 
@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
+  get 'notifications/all' => 'notifications#index', as: :all_notifications
 
   resources :experiences
 
