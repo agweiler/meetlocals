@@ -1,4 +1,30 @@
-</br>
+<script>
+$(function(){
+  $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+  $('#datepick').datepicker({
+    format: "mm/dd/yyyy",
+    endDate: "12/31/2015",
+    todayBtn: "linked",
+    multidate: true,
+    multidateSeparator: ";",
+    todayHighlight: true,
+    datesDisabled: ['05/06/2015', '05/21/2015']
+  }).on('click', function(e){
+    var text = $('#datepick').datepicker('getDates');
+    $('#showdates').html(text.join('<br>'));
+
+    // var last = $('#datepick').datepicker('getDate');
+    // $('#lastdate').append(last.toDateString() + '<br>');
+    // debugger;
+  });
+});
+
+</script>
+<h6 id='lastdate'></h6>
+<div id='showdates'>atastarstrat</div>
+<div class="" id="datepick">
+</div>
+
 <div class="container">
 
 <!-- Start of Map; maybe have this as the host page exp. footer instead, no side-padding -->
@@ -17,7 +43,7 @@
               <% if @host.images.present? %>
                 <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
               <% else %>
-              
+
                 <%= image_tag "box.jpeg" %>
               <% end %>
             	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
