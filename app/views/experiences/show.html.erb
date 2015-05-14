@@ -21,11 +21,12 @@ $(function(){
 });
 </script>
 <% end %>
+
 <div id = "loading" style = "display: none;">
   <p> Your pictures are loading..... </p>
 </div>
-<div class="row" id="mealpanel">
 
+<div class="row" id="mealpanel">
   <% @experience.images.each_with_index do |image, index| %>
     <div class="col-md-4" style="padding:0px">
 
@@ -59,10 +60,12 @@ $(function(){
   </div>
 
   <div class="row">
+    <% if @experience.active %>
     <div class="col-md-10 col-md-offset-1 bg-info" style="border-radius: 10px">
       <br>
       <%= render 'bookings/form' %>
     </div>
+    <% end %>
   </div>
 
 </div>
@@ -70,9 +73,11 @@ $(function(){
 <div class="col-md-8" style="background-color:#777">
   <div class="row" id="mealframe">
     <h2><%= @experience.title %>
-     <% if current_host == @experience.host %>
-       <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins" %>
-     <% end %>
+      <% if !@experience.active %>
+        <span class="btn btn-default">Inactive</span>
+      <% elsif current_host == @experience.host %>
+        <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins" %>
+      <% end %>
     </h2>
 
     <p><%= @host.first_name%><%=@host.last_name %></p>

@@ -7,7 +7,7 @@ class HostsController < ApplicationController
 
   def show
     @host = Host.find(params[:id])
-    @experiences = @host.experiences
+    @experiences = @host.experiences.order(:active)
   end
 
   def new
