@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   def show # Limited to only certain people
     if host_signed_in?
+      Notification.find_by(type_id: @booking.id).update(seen: true) 
       unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
@@ -35,6 +36,7 @@ class BookingsController < ApplicationController
     else
       redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
+    
     @messages = @booking.messages.all
     @message = Message.new
   end
@@ -90,7 +92,9 @@ class BookingsController < ApplicationController
       if @booking.save
         host = @booking.experience.host
         guest = @booking.guest
-        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
+        exp = @booking.experience
+        #Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
+        host.notifications.create(content: "You have a new booking for the #{exp.title} event", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         Pusher["private-host-#{host.id}"].trigger('booking', {
           :booking_id => "#{@booking.id}"
 

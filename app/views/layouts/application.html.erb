@@ -29,15 +29,13 @@
     </script>
     <% if current_host %>
       <script>
+      // creates pusher variable, listens for a message in the hosts specific channel, then creates a new <li> in the notification dropdown list
         var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
         var userChannel = pusher.subscribe("private-host-<%= current_host.id %>");
           userChannel.bind('booking', function(data) {
-            // var id  = data.booking_id
-            var location = "<li><a href=/bookings/" + data.booking_id+ "> <span class='tab'>You have a New Booking</span></a></li>";
-          $("#notification_list").prepend(location); 
+          var location = "<li><a href=/bookings/" + data.booking_id+ "> <span class='tab'>You have a New Booking</span></a></li>";
+          $("#notification_list").append(location); 
           $("#notification-dropdown").css("color", "red"); 
-          // userChannel.bind('new-notification', function(message) {
-          // $(".notifications_area").html(message);
         });
       </script>
     <% end %>
