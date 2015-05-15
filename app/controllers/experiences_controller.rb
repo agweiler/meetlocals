@@ -144,7 +144,7 @@ class ExperiencesController < ApplicationController
         redirect_to @experience, notice: 'Experience was successfully updated.'
 
         #reset image(s) after parent-experience is save
-        if @experience.images.present?
+        if @experience.images.present? && !@image_files.nil?
           @experience.images.delete_all
         end
 
