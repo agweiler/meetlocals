@@ -33,9 +33,11 @@
         var pusher = new Pusher("<%= ENV['PUSHER_KEY'] %>");
         var userChannel = pusher.subscribe("private-host-<%= current_host.id %>");
           userChannel.bind('booking', function(data) {
-          var location = "<li><a href=/bookings/" + data.booking_id+ "> <span class='tab'>You have a New Booking</span></a></li>";
-          $("#notification_list").append(location); 
-          $("#notification-dropdown").css("color", "red"); 
+          var location = "<li><a href=/bookings/" + data.booking_id+ " id = 'temp'> <span class='tab'>You have a New Booking</span></a></li>";
+          $("#notification_list").prepend(location); 
+          $("#temp").css("background-color", "#bdc3c7")
+          $("#notification-dropdown").css("background-color", "#3498db"); 
+
         });
       </script>
     <% end %>
