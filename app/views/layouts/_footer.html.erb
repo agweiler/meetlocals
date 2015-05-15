@@ -1,70 +1,91 @@
+<footer class= "footer" style="">
 
-<footer class= "footer">
-<br>
-  <!-- <div class="container"> -->
-    <!-- <div class="row"> -->
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="row">
-          <p style="color: #fff"><strong> Get Meet the Danes' newsletter</strong></p>
-        </div>
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="row">
+      <p class="para" style="color: #fff">
+        SIGN UP OUR NEWSLETTER</p>
+    </div>
 
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-10" id="email-form">
-            <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
-            <div class="input-group">
-               <%= email_field(:email, :address, {class: "form-control", style:"", id: "email", placeholder: "email address"})%>
-               <!-- <%= submit_tag("Sign me up!") %> -->
-              <span class="input-group-btn">
-                <%= button_tag(type: 'submit', class: "btn btn-info") do %> Sign me up! <% end %>
-              </span>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <br>
-      </div>
-
-      <div class="col-md-4 col-sm-6 col-xs-12" style="background-color: #1A1A1A">
-        <div class="row">
-           <p style="color:#fff"><strong> Quick Links </strong></p>
-        </div>
-
-        <div class="row"  class="text-center">
-          <p>
-            <%= link_to "About", about_path, style: "color: #fff" %>&nbsp;&nbsp;
-            <%= link_to "Find a Host", experiences_path, style: "color: #fff" %>&nbsp;&nbsp;
-            <%= link_to "Be a Host", how_to_be_a_host_path, style: "color: #fff" %>
-          </p>
-
-          <p>
-            <%= link_to "Terms of Service", terms_of_service_path, style: "color: #fff" %>
-          </p>
+    <div class="row">
+      <div class="col-xs-offset-1 col-xs-10" id="email-form">
+        <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
+        <div class="input-group">
+           <%= email_field(:email, :address, {class: "form-control", style:"", id: "email", placeholder: ""})%>
+          <span class="input-group-btn">
+            <%= button_tag(type: 'submit', class: "btn btn-success para", style:"font-size:14px") do %>
+            SIGN UP<% end %>
+          </span>
+          <% end %>
         </div>
       </div>
+    </div>
+    <br>
+    <div class="row">
+      <ul class="list-inline">
+        <li><a href="www.facebook.com"><span class="fa fa-facebook fa-2x"></span></a></li>
+        <li><a href="www.linkedin.com"><span class="fa fa-linkedin fa-2x"></span></a></li>
+        <li><a hret="www.twitter.com"><span class="fa fa-twitter fa-2x"></span></a></li>
+      </ul>
+    </div>
+  </div>
 
+  <div class="col-md-3 col-md-offset-1 col-sm-6 col-xs-12 text-left">
+    <div class="row">
+     <p class="para" style="color:#fff">POPULAR LINKS</p>
+    </div>
 
-      <div class="col-md-4 col-sm-12 col-xs-12" style="background-color: #1A1A1A">
-
-        <div class="row">
-          <p class="text-center" style="color: #fff">
-            <strong> Connect with us on Social & Email </strong></p>
-        </div>
-
-        <div class="row">
-          <ul class="list-inline social-buttons">
-            <li class="" style=""><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
-            <li class=""><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
-            <li class=""><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
-            <li class=""><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a></li>
-          </ul>
-        </div>
-
+    <div class="row" style="display:flex">
+      <div class="col-md-6 para" style="padding-left:0">
+        <%= link_to "Explore", experiences_path %><br>
+        <%= link_to "How it Works", how_it_works_path %><br>
+        <%= link_to "Be a Host", how_to_be_a_host_path %><br>
       </div>
+      <div class="col-md-6 para" style="padding-left:0">
+        <%= link_to "Press", "#" %><br>
+        <%= link_to "Blog", posts_path %><br>
+        <%= link_to "Terms of Service", terms_of_service_path %><br>
+        <a href="meetthelocals.com">Meet The Locals</a>
+      </div>
+    </div>
+
+    <!-- <div class="row"  class="text-center">
+      <p>
+        <%= link_to "About", about_path, style: "color: #fff" %>&nbsp;&nbsp;
+        <%= link_to "Find a Host", experiences_path, style: "color: #fff" %>&nbsp;&nbsp;
+        <%= link_to "Be a Host", how_to_be_a_host_path, style: "color: #fff" %>
+      </p>
+
+      <p>
+        <%= link_to "Terms of Service", terms_of_service_path, style: "color: #fff" %>
+      </p>
+    </div> -->
+  </div>
 
 
+  <div class="col-md-3 col-md-offset-1 col-sm-12 col-xs-12">
+    <div class="row para text-left">
+      <a href="/" class="logo">Meet the Danes</a><br><br>
+    </div>
+    <div class="row text-left para">
+      <a href="tel:+4523284347">+45 232 84347</a><br>
+      <a href="mailto:info@meetthedanes.dk">info@meetthedanes.dk</a><br>
+      <a href="meetwithlocals.com">meetwithlocals.com</a>
+    </div>
+    <!-- <div class="row">
+      <p class="text-center" style="color: #fff">
+        <strong> Connect with us on Social & Email </strong></p>
+    </div>
 
-    <!-- </div> -->
-  <!-- </div> -->
+    <div class="row">
+      <ul class="list-inline social-buttons">
+        <li class="" style=""><a href="https://www.facebook.com"><i id="social" class="fa fa-facebook-square fa-3x social-fb"></i></a></li>
+        <li class=""><a href="https://twitter.com/"><i id="social" class="fa fa-twitter-square fa-3x social-tw"></i></a></li>
+        <li class=""><a href="https://plus.google.com"><i id="social" class="fa fa-google-plus-square fa-3x social-gp"></i></a></li>
+        <li class=""><a href="mailto:"><i id="social" class="fa fa-envelope-square fa-3x social-em"></i></a></li>
+      </ul>
+    </div> -->
+
+  </div>
 
 </footer>
 
