@@ -228,8 +228,13 @@ z-index: 1;
 	font-size: 16px;
 }
 
+.event-title {
+	font-family: $paragraph;
+	font-size: 20px;
+}
+
 .recent-host {
-	/* background-color: #eee; */
+	background-color: #eee;
 	padding: 30px;
 }
 

@@ -94,6 +94,7 @@
           <%= link_to event.host.username, host_path(event.host) %>
         </h3>
         <h4>HOST</h4>
+        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
         <%= content_tag :quote, event.description, class:"para" %>
       </div>
       <div class="col-md-4" style="background-color:yellow">
@@ -111,6 +112,7 @@
           <%= link_to event.host.username, host_path(event.host) %>
         </h3>
         <h4>HOST</h4>
+        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
         <%= content_tag :quote, event.description, class:"para" %>
       </div>
       <div class="col-md-4 thumbnail" style="">
