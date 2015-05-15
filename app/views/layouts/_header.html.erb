@@ -1,5 +1,3 @@
-<!-- <header class - "navbar navbar-fixed-top navbar inverse"> -->
-
 
 <nav class="navbar navbar-inverse">
 	<div class = "container-fluid">
@@ -11,9 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-			<!-- <ul class ="nav navbar-brand" style="">
-				<span id="logo"><%= link_to "Meet the Danes", root_path %></span>
-			</ul> -->
+
 			<a href="/" class="navbar-brand" id="logo" style="padding-top:10px">Meet the Danes</a>
     </div>
 
@@ -31,8 +27,7 @@
 					<li><%= link_to "Analytics", admin_analytics_path %></li>
 					<li><%= link_to "Settings", admin_settings_path %></li>
 				<% end %>
-			<!-- </ul>
-			<ul class="nav navbar-nav navbar-right"> -->
+	
 				<% if current_user %>
 					<li class ="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><%= "#{current_user.username}" %>
@@ -61,4 +56,4 @@
 	  </div>
 	</div>
 </nav>
-<!-- </header> -->
+

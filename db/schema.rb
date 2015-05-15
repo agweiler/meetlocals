@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512065805) do
+ActiveRecord::Schema.define(version: 20150514080921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150512065805) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "username"
   end
 
   add_index "admins", ["confirmation_token"], name: "index_admins_on_confirmation_token", unique: true, using: :btree
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150512065805) do
     t.text     "notification_params"
     t.string   "transaction_id"
     t.datetime "purchased_at"
+    t.text     "add_info"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -78,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150512065805) do
     t.string   "beverages"
     t.string   "meal"
     t.string   "mealset"
+    t.date     "date"
+    t.boolean  "active",         default: true
   end
 
   create_table "guests", force: :cascade do |t|
@@ -112,6 +116,16 @@ ActiveRecord::Schema.define(version: 20150512065805) do
   add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true, using: :btree
   add_index "guests", ["email"], name: "index_guests_on_email", unique: true, using: :btree
   add_index "guests", ["reset_password_token"], name: "index_guests_on_reset_password_token", unique: true, using: :btree
+
+  create_table "holidays", force: :cascade do |t|
+    t.date     "date"
+    t.string   "note"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "holidays", ["host_id"], name: "index_holidays_on_host_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
     t.string   "username",               default: "", null: false

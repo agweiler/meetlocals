@@ -2,7 +2,6 @@
 <script>
 $(function(){
     function check_job_status(job_id){
-
     var request = $.ajax({
       type: "GET",
       url: '/experiences/' + job_id
@@ -15,11 +14,16 @@ $(function(){
       }
     });
   };
+   $("#loading").show();
+  $("#mealpanel").hide();
   var id = <%= @experience.id %>
   check_job_status(id)
 });
 </script>
 <% end %>
+<div id = "loading" style = "display: none;">
+  <p> Your pictures are loading..... </p>
+</div>
 <div class="row" id="mealpanel">
 
   <% @experience.images.each_with_index do |image, index| %>

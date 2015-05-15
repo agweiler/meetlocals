@@ -1,9 +1,3 @@
-<!-- <head>
- <link href="css/bootstrap.css" rel="stylesheet">
- <link href="css/agency.css" rel="stylesheet">
-</head>
- -->
-
 <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4500" id="bs-carousel" style="height: 600px">
   <!-- Overlay -->
 <!--   <div class="overlay"></div>
@@ -21,9 +15,9 @@
       <div class="slide-1"></div>
       <div class="hero" style="width:100%">
         <hgroup>
-            <!-- <h1><span class="maroon">Meet the Danes</span></h1> -->
-            <h4>Authentic meals with good company</h4>
-            <a href="#"><h3>Let's Connect</h3></a>
+          <!-- <h1><span class="maroon">Meet the Danes</span></h1> -->
+          <h4>Authentic meals with good company</h4>
+          <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
  -->
@@ -34,9 +28,9 @@
       <div class="slide-2"></div>
       <div class="hero" style="width:100%">
         <hgroup>
-            <!-- <h1><span class="maroon">Become a Host</span></h1> -->
-            <h4>Wow guests with your food</h4>
-            <a href="#"><h3>Let's Connect</h3></a>
+          <!-- <h1><span class="maroon">Become a Host</span></h1> -->
+          <h4>Wow guests with your food</h4>
+          <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find out how</button>
  -->
@@ -47,9 +41,9 @@
       <div class="slide-3"></div>
       <div class="hero" style="width:100%">
         <hgroup>
-            <!-- <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1> -->
-            <h4>Learn about the benefits</h4>
-            <a href="#"><h3>Let's Connect</h3></a>
+          <!-- <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1> -->
+          <h4>Learn about the benefits</h4>
+          <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">More info</button>
  -->
@@ -59,29 +53,26 @@
   </div>
 </div>
 
-</br>
-</div>
+<br>
 
 <div class="col-md-12 col-sm-12 col-xs-12" id="gradio">
-    </br>
-    </br>
+  <br><br>
 
-      <div class="col-md-6 col-md-offset-1 col-sm-12">
-        <h1 class="heads text-center">AWARD WINNING AGENCY</h1>
-        <h6 class="heads-sm text-center">COME MEET THE DANES</h6>
-        </br>
-          <p class="para text-center">Many nationalities visit Denmark every year. To give
-          our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
-          </p>
-        </br>
-            <p style="text-align:center; margin-bottom:40px"><%= link_to "Learn more", how_it_works_path, class: "btn btn-default", style:"background-color:#fcd136; color:#660A0A"%>
-            </p>
-      </div>
+  <div class="col-md-6 col-md-offset-1 col-sm-12">
+    <h1 class="heads text-center">AWARD WINNING AGENCY</h1>
+    <h6 class="heads-sm text-center">COME MEET THE DANES</h6>
+    <br>
+    <p class="para text-center">Many nationalities visit Denmark every year. To give our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
+    </p>
+    <br>
+    <p style="text-align:center; margin-bottom:40px"><%= link_to "Learn more", how_it_works_path, class: "btn btn-default", style:"background-color:#fcd136; color:#660A0A"%>
+    </p>
+  </div>
  <!--  </div>
  -->
   <div class="col-md-4 hidden-xs hidden-sm">
-        <img class="img-circle" src="assets/denmark_dock.jpg" style="width:250px; height:250px; margin-top:20px; margin-bottom: 0px; margin-left: 90px">
-      </div>
+    <img class="img-circle" src="assets/denmark_dock.jpg" style="width:250px; height:250px; margin-top:20px; margin-bottom: 0px; margin-left: 90px">
+  </div>
 
 </div>
 
@@ -89,13 +80,13 @@
   <h3 class="heads">RECENT EVENTS</h3>
 
   <% @recent_events.each_with_index do |event, idx| %>
-  <div class="row" style="padding:15px">
+  <div class="row" style="padding:15px 30px">
 
     <% if idx.even? %>
       <div class="col-md-4 thumbnail" style="">
         <%= image_tag event.images.first.image_file.url(:medium), class:"" %>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 text-center">
         <% if event.host.images.present? %>
           <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
@@ -105,14 +96,14 @@
         <h4>HOST</h4>
         <%= content_tag :quote, event.description, class:"para" %>
       </div>
-      <div class="col-md-4" style="background-color:yellow">
+      <div class="col-md-4" style="height:100%;background-color:yellow">
         some pic
       </div>
     <% else %>
       <div class="col-md-4" style="background-color:yellow">
         some pic?
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 text-center" style="">
         <% if event.host.images.present? %>
           <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
@@ -126,6 +117,7 @@
         <%= image_tag event.images.first.image_file.url(:medium), class:"" %>
       </div>
     <% end %>
+
   </div>
   <% end %>
 </div>
@@ -144,7 +136,7 @@
             <%= link_to experience.host.username,  host_path(experience.host) %>
           </h3>
           <h5 class="para">Description: </h5>
-          <%= content_tag :quote, truncate(experience.description, length: 100) ,class:"para" %>
+          <%= content_tag :quote, truncate(experience.description, length: 140) ,class:"para" %>
 
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
           <p>
@@ -165,7 +157,6 @@
     COMMUNITY  TODAY
   </div>
 </div>
-
 
 
 
