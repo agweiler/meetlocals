@@ -80,13 +80,13 @@
   <h3 class="heads">RECENT EVENTS</h3>
 
   <% @recent_events.each_with_index do |event, idx| %>
-  <div class="row" style="padding:15px 30px">
+  <div class="row" style="padding:15px 30px;display:flex">
 
     <% if idx.even? %>
-      <div class="col-md-4 thumbnail" style="">
+      <div class="col-md-4 thumbnail">
         <%= image_tag event.images.first.image_file.url(:medium), class:"" %>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-md-4 text-center recent-host" style="">
         <% if event.host.images.present? %>
           <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
@@ -96,14 +96,14 @@
         <h4>HOST</h4>
         <%= content_tag :quote, event.description, class:"para" %>
       </div>
-      <div class="col-md-4" style="height:100%;background-color:yellow">
-        some pic
+      <div class="col-md-4" style="background-color:yellow">
+        TEMP
       </div>
     <% else %>
       <div class="col-md-4" style="background-color:yellow">
-        some pic?
+        TEMP
       </div>
-      <div class="col-md-4 text-center" style="">
+      <div class="col-md-4 text-center recent-host" style="">
         <% if event.host.images.present? %>
           <%= image_tag event.host.images.first.image_file.url(:thumb), class: "img-circle" %>
         <% end %>
