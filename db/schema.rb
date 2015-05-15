@@ -81,7 +81,10 @@ ActiveRecord::Schema.define(version: 20150514080921) do
     t.string   "meal"
     t.string   "mealset"
     t.date     "date"
+<<<<<<< HEAD
     t.boolean  "active",         default: true
+=======
+>>>>>>> d8970f5318fb015bed08608bdb389db5c368a4fc
   end
 
   create_table "guests", force: :cascade do |t|

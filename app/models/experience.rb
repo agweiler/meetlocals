@@ -5,6 +5,7 @@ class Experience < ActiveRecord::Base
 	has_many :testimonials, through: :bookings
 
 	scope :available, -> { where("date > ?", Date.today) }
+
 	before_save :set_default_mealtime, :as_special_event
 
 	def self.get_location
