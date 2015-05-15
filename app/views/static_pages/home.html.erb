@@ -140,7 +140,7 @@
 
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
           <p>
-            <%= content_tag :span, " MM/DD/YYYY ", class:"fa fa-calendar fa-lg", style:"margin-top:10px; color:grey" %>
+            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar fa-lg", style:"margin-top:10px; color:grey" %>
             <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md pull-right", style: "color:#fff" %>
           </p>
         </div>

@@ -1,8 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @recent_events = Experience.limit(3)
-    @host_party = Experience.limit(3)
+    @recent_events = Experience.order(created_at: :desc).limit(3)
+    @host_party = Experience.available.where('date IS NOT NULL').order(:date).limit(3)
   end
 
   def how_it_works
