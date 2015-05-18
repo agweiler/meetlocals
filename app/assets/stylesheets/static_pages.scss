@@ -264,6 +264,10 @@ z-index: 1;
 
 .logo, #logo {
     font-family: reis;
-      font-size: 30px;
-
+      font-size: 34px;
+			color: #fff;
+	span {
+		text-decoration: underline;
+		font-size: 20px;
+	}
 }
