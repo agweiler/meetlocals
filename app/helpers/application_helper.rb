@@ -5,7 +5,7 @@ module ApplicationHelper
       current_host
     elsif current_guest
       current_guest
-    elsif
+    elsif current_admin
       current_admin
     end
   end

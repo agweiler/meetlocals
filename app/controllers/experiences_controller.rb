@@ -176,7 +176,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :price, :time, :meal, :mealset, :images_array => [],
+      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_array => [],
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end

@@ -55,11 +55,16 @@ class BookingsController < ApplicationController
   # POST /bookings
   def create
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
+    @experience = Experience.find(params[:booking][:experience_id])
     booking_params[:guest_id].replace(current_guest.id.to_s)
     # starttime = Time.parse( params[:datetime] )
 
-    #moment.js foramt MMMM DD, YYYY
-    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+    if @experience.date
+      starttime = @experience.date
+    else
+      #moment.js foramt MMMM DD, YYYY
+      starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+    end
 
     booking_params['date(1i)'].replace( starttime.strftime('%Y') )
     booking_params['date(2i)'].replace( starttime.strftime('%m') )
@@ -83,7 +88,6 @@ class BookingsController < ApplicationController
     # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
     # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
 
-    @experience = Experience.find(params[:booking][:experience_id])
     @booking = @experience.bookings.new(booking_params)
 
     respond_to do |format|
@@ -192,6 +196,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:start_time, :end_time, :date, :guest_id, :experience_id, :status, :group_size, :is_private, :rating)
+      params.require(:booking).permit(:start_time, :end_time, :date, :guest_id, :experience_id, :status, :group_size, :is_private, :rating, :add_info)
     end
 end
