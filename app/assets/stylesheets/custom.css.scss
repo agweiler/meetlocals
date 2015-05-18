@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+/* nav-bar */
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+
 /* footer */
 
 footer {
@@ -9,16 +15,20 @@ footer {
  /* padding-top: 5px;
   border-top: 1px solid #eaeaea;*/
 
-  color: #777;
+  color: #fff;
 }
 
 footer a {
-  color: #555;
+  color: #fff;
 }
 
 footer a:hover {
-  color: #222;
-  background-color: #A0A0A0;
+  color: #fff;
+  /* background-color: ; */
+}
+
+footer a:visited {
+  color: #fff;
 }
 
 footer small {
