@@ -2,16 +2,29 @@
 $(function(){
   $.fn.datepicker.defaults.format = "mm/dd/yyyy";
   $('#datepick').datepicker({
-    format: "mm/dd/yyyy",
+    format: "mm/dd/yy",
     endDate: "12/31/2015",
     todayBtn: "linked",
     multidate: true,
     multidateSeparator: ";",
     todayHighlight: true,
-    datesDisabled: ['05/06/2015', '05/21/2015']
+    datesDisabled: <%= raw(@host.holidays_list) %>
   }).on('click', function(e){
-    var text = $('#datepick').datepicker('getDates');
-    $('#showdates').html(text.join('<br>'));
+    var dates = $('#datepick').datepicker('getDates');
+
+    // text.toString().substring(0,15);
+    var formatted = new Array(dates.length);
+    for(i=0; i<dates.length; i++){
+      var temp = new Date(dates[i].toLocaleString());
+
+      formatted[i] = temp.getFullYear() + "-"
+                      +("0"+ (temp.getMonth()+1)).slice(-2) + "-"
+                      + ("0"+ temp.getDate()).slice(-2);
+
+      // formatted[i] = dates[i].toString().substring(3,15);
+    };
+
+    $('#showdates').html(formatted.sort().join('<br>'));
 
     // var last = $('#datepick').datepicker('getDate');
     // $('#lastdate').append(last.toDateString() + '<br>');
@@ -20,10 +33,10 @@ $(function(){
 });
 
 </script>
-<h6 id='lastdate'></h6>
-<div id='showdates'>atastarstrat</div>
 <div class="" id="datepick">
 </div>
+<h6 id='lastdate'></h6>
+<div id='showdates'>show all selected dates</div>
 
 <div class="container">
 

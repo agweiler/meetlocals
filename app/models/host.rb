@@ -30,6 +30,10 @@ class Host < ActiveRecord::Base
     self.testimonials.average(:rating).round(2)
   end
 
+  def holidays_list
+    self.holidays.map { |holiday| holiday.date.strftime('%D') }
+  end
+
   def smoker?
     if self.smoker == true
       return "Smoker"
