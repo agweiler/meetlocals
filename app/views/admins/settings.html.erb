@@ -1,17 +1,4 @@
 <div class="container">
-<!-- create normal form -->
-	<!-- <form action ="/admins/settings" method="post">
-	  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-		<select name = "meal">
-			<option value = "Lunch">Lunch</option>
-			<option value = "Dinner">Dinner</option>
-		<select> <br>
-
-		Set Price Here <input type = "text" name = "price">
-		<br>
-		<input type = "submit" value = "Change the price">
-	</form> -->
-
 	<div>
 		<p> Change your prices here </p>
 	  <% @prices.each do |price| %>
@@ -25,4 +12,17 @@
   <% end %>
   </div>
 
+  <p><strong> View Unapproved Hosts here</strong> </p>
+
+  	<% @hosts.each do |new_user| %>
+  	  <%= form_for(new_user) do |f|%>
+  	  <div>
+  	    <%= new_user.username %>
+  		  <%= new_user.email %>
+  		  <%= link_to 'view profile', host_path(new_user) %>
+  		  <%= f.submit "Approve User" %>
+  		 </div>
+  		 <br>
+  		<% end %>
+  	<% end %>
 </div>

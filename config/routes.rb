@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'admins/settings' => 'admins#settings', as: :admin_settings
 
   patch '/price' => 'admins#changeprice'
+
+  patch '/host' => 'admins#approveuser'
   
   resources :admins
 

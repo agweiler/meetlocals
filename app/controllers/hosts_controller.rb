@@ -42,16 +42,22 @@ class HostsController < ApplicationController
 
   # PATCH/PUT /hosts/1
   def update
-    @image_file = params[:host].delete(:image_file)
-    @host.update(host_params.except(:image_file))
-    if @image_file.present?  
-      if @host.images.present?
-        @host.images.delete_all
+    # this commit param apparently is the name of the f.submit button
+    if params[:commit] == "Approve User"
+      @host.update(approved: true)
+      redirect_to admin_settings_path 
+    else
+      @image_file = params[:host].delete(:image_file)
+      @host.update(host_params.except(:image_file))
+      if @image_file.present?  
+        if @host.images.present?
+          @host.images.delete_all
+        end
+        Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
-      Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
-    end
-    respond_to do |format|
-      format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
+      respond_to do |format|
+        format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
+      end
     end
   end
 
