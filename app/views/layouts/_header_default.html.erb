@@ -30,10 +30,10 @@
 							<% current_host.notifications.reverse.take(10).each do |x| %>
 								<li> <%= link_to "#{x.content}", booking_path("#{x.type_id}"), :id => "notification-#{x.id}" %></li>
 								<% if x.seen == false %>
-							<!-- 	if there are any unseen notifications, this changes to notification tab and the link red -->
+							<!-- 	if there are any unseen notifications, this changes the notification tab and the unseen link red -->
 								  <script> 
 								  	 var id = <%= x.id %>
-								  	 $("#notification-dropdown").css("background-color", "#3498db"); 
+								  	 $("#notification-dropdown").css("background-color", "#1abc9c"); 
 								  	 $("#notification-"+id).css("background-color", "#bdc3c7"); 
 								  </script>	
 								<% end %>
