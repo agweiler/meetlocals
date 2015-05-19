@@ -203,14 +203,26 @@ z-index: 1;
 
 #pre_foot {
   background-color: #777;
-  height:300px;
+	padding-top: 20px;
+  height:250px;
   width:100%;
    z-index: 3;
     background-color: #080d15;
     opacity: 1;
-/*    margin-bottom: -46px;
-*/
+	background-image:url('greg.jpg');
+	background-attachment: fixed;
+	h1{
+		/* text-align:center; */
+		color:#fff;
+		margin-top:50px;
+		font-size:80px;
+		font-family: $headline;
+		font-weight: bold;
+	}
+}
 
+#search_box{
+	padding-top: 30px;
 }
 
 #join_us {
