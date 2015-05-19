@@ -1,42 +1,52 @@
 <script>
 $(function(){
-  $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   $('#datepick').datepicker({
-    format: "mm/dd/yy",
-    endDate: "12/31/2015",
-    todayBtn: "linked",
+    format: "yyyy-mm-dd",
+    // endDate: "12/31/2015",
+    // todayBtn: "linked",
     multidate: true,
     multidateSeparator: ";",
     todayHighlight: true,
     datesDisabled: <%= raw(@host.holidays_list) %>
   }).on('click', function(e){
-    var dates = $('#datepick').datepicker('getDates');
+    show = formatting($('#datepick').datepicker('getDates'), '<li>', '</li>');
+    $('#showdates').html(show.sort());
+  });
 
-    // text.toString().substring(0,15);
-    var formatted = new Array(dates.length);
+  $('#showdates').on('click', 'li', function(e){ //remove item from <li>
+    nonformatted = formatting($('#datepick').datepicker('getDates'));
+    nonformatted.splice(nonformatted.indexOf($(this).text()), 1);
+    $('#datepick').datepicker('setDates', nonformatted);
+
+    show = formatting($('#datepick').datepicker('getDates'), '<li>', '</li>');
+    $('#showdates').html(show.sort());
+  });
+
+  function formatting(dates, open_tag, close_tag){
+    if(open_tag === undefined || close_tag === undefined){
+      open_tag = '';
+      close_tag = '';
+    }
+
+    formatted = new Array(dates.length);
     for(i=0; i<dates.length; i++){
       var temp = new Date(dates[i].toLocaleString());
 
-      formatted[i] = temp.getFullYear() + "-"
-                      +("0"+ (temp.getMonth()+1)).slice(-2) + "-"
-                      + ("0"+ temp.getDate()).slice(-2);
-
-      // formatted[i] = dates[i].toString().substring(3,15);
+      formatted[i] = open_tag + temp.getFullYear() + "-"
+                      + ("0"+ (temp.getMonth()+1)).slice(-2) + "-"
+                      + ("0"+ temp.getDate()).slice(-2) + close_tag;
     };
+    return formatted;
+  };
 
-    $('#showdates').html(formatted.sort().join('<br>'));
-
-    // var last = $('#datepick').datepicker('getDate');
-    // $('#lastdate').append(last.toDateString() + '<br>');
-    // debugger;
-  });
 });
-
 </script>
+
 <div class="" id="datepick">
 </div>
-<h6 id='lastdate'></h6>
 <div id='showdates'>show all selected dates</div>
+<h6 id='lastdate'></h6>
 
 <div class="container">
 

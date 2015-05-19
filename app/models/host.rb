@@ -31,7 +31,8 @@ class Host < ActiveRecord::Base
   end
 
   def holidays_list
-    self.holidays.map { |holiday| holiday.date.strftime('%D') }
+    # self.holidays.map { |holiday| holiday.date.strftime('%D') } # 05/19/15
+    self.holidays.map { |holiday| holiday.date.strftime('%F') } # 2015-05-19
   end
 
   def smoker?
