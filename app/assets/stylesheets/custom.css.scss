@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Helvetica';
+$navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
 
 /* nav-bar */
 .navbar-inverse .navbar-nav > li > a {
@@ -97,4 +101,35 @@ footer ul li a i {
   width: 400px;
   height: 200px;
   border-radius: 2%;
+}
+
+#view {
+  h2 {
+    font-family: $headline;
+    font-weight: bold;
+    a{
+      color: $green_text;
+    }
+  }
+
+  h5 {
+    font-family: $paragraph;
+    font-weight: bold;
+    a {
+      color: black;
+    }
+  }
+
+  label{
+    font-family: $paragraph;
+    font-size: 14px;
+    color: $green_text;
+  }
+
+  span{
+    font-family: $paragraph;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
 }

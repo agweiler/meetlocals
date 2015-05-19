@@ -4,6 +4,7 @@
 $headline: 'Amatic SC', cursive;
 $paragraph: 'Helvetica';
 $navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
 
 .guesthost {
 	font-color: black;
@@ -254,10 +255,10 @@ z-index: 1;
 	font-family: $headline;
 	font-size: 300%;
 	font-weight: bold;
-	color: lime;
+	color: $green_text;
 
 	a {
-		color: lime;
+		color: $green_text;
 	}
 }
 
