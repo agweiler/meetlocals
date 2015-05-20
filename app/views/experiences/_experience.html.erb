@@ -3,7 +3,7 @@
 
   <div class="caption" style="background-color: #D4D4D4; height: 100%">
     <div id="avataro">
-      <%= image_tag(experience.host.images.first.image_file.url(:thumb), class: "img-circle") if experience.host.images.present? %>
+      <%= link_to image_tag(experience.host.images.first.image_file.url(:thumb), class: "img-circle"), experience.host if experience.host.images.present? %>
     </div>
 
     <h2><%= link_to experience.host.username,  host_path(experience.host_id.to_s) %></p>
