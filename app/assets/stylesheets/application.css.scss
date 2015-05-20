@@ -19,6 +19,11 @@
 @import url(http://fonts.googleapis.com/css?family=Amatic+SC:400,700);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,700);
 
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Helvetica';
+$navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
+
 /*//Import any stylesheets we need
 */
 #social:hover {
@@ -57,12 +62,51 @@ body .container{
   min-height: 500px;
 }
 
-.footer {
-  position: relative;
-  margin-top: 0px; /* negative value of footer height */
-  min-height: 200px;
+/* footer */
+
+footer {
   clear:both;
-  padding-top:50px;
+  position: relative;
+  margin-top: 0px;
+  padding-top: 30px;
+  background-color: #1A1A1A;
+  color: #fff;
+  text-align: center;
+  font-family: $paragraph;
+
+  a {
+    color:inherit;
+    font-family: inherit;
+    font-size: 16px;
+  }
+  a:hover {
+    color:inherit;
+  }
+  a:visited {
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+    float: none;
+    margin: 0;
+  }
+
+  .foot-sect {
+    padding-left: 30px;
+  }
+
+  p {
+    font-family: inherit;
+    font-size: 16px;
+    color: inherit;
+  }
+
+  div.link-sect {
+    width:50%;
+    margin-left:50px
+  }
+
 }
 
 #home {
@@ -117,44 +161,6 @@ body .container{
  	padding-left:10px;
  	padding-right:10px;
  }
-
- /* footer */
-
-footer {
-  margin-top: 0px;
-  padding-top: 30px;
-  padding-right: 70px;
- /* border-top: 1px solid #eaeaea;*/
-  color: #777;
-  background-color: #1A1A1A;
-  margin-bottom: -100px;
-  /* height: 220px; */
-  /*border-top: 2px;
-  border-top-color: #000;*/
-}
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
-  color: #222;
-  /* background-color: #A0A0A0; */
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 15px;
-}
 
 // Place all the styles related to the bookings controller here.
 // They will automatically be included in application.css.
@@ -687,26 +693,6 @@ section#contact:-ms-input-placeholder {
 
 section#contact .text-danger {
     color: #e74c3c;
-}
-
-footer {
-    padding: 25px 0;
-    text-align: center;
-}
-
-footer span.copyright {
-    text-transform: uppercase;
-    text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 40px;
-}
-
-footer ul.quicklinks {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    text-transform: none;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 40px;
 }
 
 ul.social-buttons {
