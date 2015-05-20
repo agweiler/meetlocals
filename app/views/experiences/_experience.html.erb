@@ -1,0 +1,35 @@
+<div class="thumbnail">
+  <%= link_to image_tag(experience.images.first.image_file.url(:medium)), experience if experience.images.present?%>
+
+  <div class="caption" style="background-color: #D4D4D4; height: 100%">
+    <div id="avataro">
+      <%= image_tag(experience.host.images.first.image_file.url(:thumb), class: "img-circle") if experience.host.images.present? %>
+    </div>
+
+    <h2><%= link_to experience.host.username,  host_path(experience.host_id.to_s) %></p>
+    </h2>
+
+    <!-- <p>
+      Rating:
+      <%= experience.testimonials.present? ? experience.avg_rating.to_s + " / " + pluralize(experience.testimonials.count, "review") + "": '-'%>
+    </p> -->
+
+    <h5><%= link_to truncate(experience.title.upcase, length: 20), experience_path(experience.id) %>
+    </h5>
+
+    <label>Speaks:</label>
+    <%= content_tag 'span', experience.host.languages %><br>
+    <label>Guests:</label>
+    <%= content_tag 'span', "#{experience.max_group_size} pax" %><br>
+    <label>Age:</label>
+    <%= content_tag 'span', "#{experience.host.age} yrs old" %><br>
+
+    <p class="text-left">
+      <% link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
+    <% if current_host == experience.host || current_admin %>
+      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs btn_admins" %> |
+      <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %>
+    <% end %>
+    </p>
+  </div>
+</div>
