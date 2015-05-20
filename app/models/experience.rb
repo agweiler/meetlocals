@@ -9,7 +9,7 @@ class Experience < ActiveRecord::Base
 	before_save :set_default_mealtime, :as_special_event
 
 	def self.get_location
-    	return ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+    	return ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 	end
 
   def max_number_in_group

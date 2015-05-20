@@ -10,7 +10,8 @@ class ExperiencesController < ApplicationController
     dateto = Date.strptime(params[:dateTO],"%B %d, %Y") unless params[:dateTO] == '' || params[:dateTO].nil?
 
     @group_size = params[:max_group_size]
-    @group_size ||= 1
+    # @group_size ||= 1
+    @group_size = nil if @group_size.blank?
     @location = params[:experience][:location] unless params[:experience].nil?
     @input_datefrom, @input_dateto = datefrom, dateto
 
@@ -32,14 +33,14 @@ class ExperiencesController < ApplicationController
       dayto = @input_dateto.strftime('%w').to_i
     end
 
-    if ( (params[:experience] == nil || @location == "All") && datediff >= 7 )
-      @experiences = Experience.where("max_group_size >= ?", @group_size)
-    elsif ( (params[:experience] == nil || @location == "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
-      @experiences = Experience.where("max_group_size >= ?", @group_size)
-    elsif ( (params[:experience] != nil && @location != "All") && (!params[:dateFR].present? && !params[:dateTO].present?) )
+    if ( (params[:experience] == nil || @location == "Region") && datediff >= 7 )
+      @experiences = Experience.where("max_group_size >= ?", @group_size || 1)
+    elsif ( (params[:experience] == nil || @location == "Region") && (!params[:dateFR].present? && !params[:dateTO].present?) )
+      @experiences = Experience.where("max_group_size >= ?", @group_size || 1)
+    elsif ( (params[:experience] != nil && @location != "Region") && (!params[:dateFR].present? && !params[:dateTO].present?) )
       # @experiences = Experience.where(location: @location)
-      @experiences = Experience.where("location = ? AND max_group_size",
-        @location, @group_size)
+      @experiences = Experience.where("location = ? AND max_group_size >= ?",
+        @location, @group_size || 1)
     else # date(s) + with/without @location
       from_to = []
       if dayfrom == dayto
@@ -57,16 +58,16 @@ class ExperiencesController < ApplicationController
       strlike = "(" + from_to.map { | day | "available_days LIKE '%" + day.to_s + "%'" }.join(' OR ') + ")"
       # strlike = "(" + arrlike.join(' OR ') + ")"
 
-      strloc = "max_group_size >= #{@group_size}"
+      strloc = "max_group_size >= #{(@group_size || 1)}"
       strloc += "AND location = '#{@location}'" unless
-        (params[:experience] == nil || params[:experience][:location] == 'All')
-      # (params[:experience] == nil || params[:experience][:location] == 'All') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
+        (params[:experience] == nil || params[:experience][:location] == 'Region')
+      # (params[:experience] == nil || params[:experience][:location] == 'Region') ? strloc = '' : strloc = "location = '#{params[:experience][:location]}'"
 
       strloc += ' AND ' if strloc.present? && strlike.present?
 
       # @experiences = Experience.where(location: params[:experience][:location])
       @experiences = Experience.where("#{strloc}" + "#{strlike}").order(available_days: :desc)
-      @location ||= 'All' unless @location.present?
+      @location ||= 'Region' unless @location.present?
     end
   end
 

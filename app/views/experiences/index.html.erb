@@ -9,14 +9,14 @@
   <%= form_tag '/experiences_search', :class => "form-inline" do %>
 
     <div class='input-group date col-sm-3 col-xs-12' id='datetimepickerfrom'>
-      <input type='text' name="dateFR" class="form-control" />
+      <input type='text' name="dateFR" class="form-control" placeholder="From" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
 
     <div class='input-group date col-sm-3 col-xs-12' id='datetimepickerto'>
-      <input type='text' name="dateTO" class="form-control" />
+      <input type='text' name="dateTO" class="form-control" placeholder="To" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
@@ -29,8 +29,8 @@
         {prompt:"Guests", class:"form-control"} %>
     </div>
 
-    <%= submit_tag "Filter", id:'filter',
-        class: "btn btn-success pull-right col-sm-2 col-xs-12" %>
+    <%= submit_tag "FILTER", id:'filter',
+        class: "btn btn-success pull-right col-sm-2 col-xs-1 para" %>
   <% end %>
   </div>
 </div>
@@ -77,7 +77,7 @@
         </div>
 
       </div>
-
+      <br><br>
     </div>
     <% end %>
   </div>
@@ -107,9 +107,9 @@
         $('#datetimepickerfrom').data("DateTimePicker").maxDate(e.date);
     });
 
-    $('#experience_location').val('<%= @location ||= 'All' %>');
+    $('#experience_location').val('<%= @location ||= 'Region' %>');
 
-    <% if @input_datefrom.present? || @location != 'All'%>
+    <% if @input_datefrom.present? || @location != 'Region' %>
       location.hash = '#view'
     <% end %>
 //  Date.strptime('April 13, 2015',"%B %d, %Y")
