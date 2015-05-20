@@ -1,44 +1,17 @@
-<% if flash[:notice] %>
-<script>
-$(function(){
-    function check_job_status(job_id){
-    var request = $.ajax({
-      type: "GET",
-      url: '/experiences/' + job_id
-    });
-    request.done(function(response){
-      if (response === 'true'){
-        location.reload();
-      } else {
-        setTimeout(function(){ check_job_status(job_id) }, 5000);
-      }
-    });
-  };
-   $("#loading").show();
-  $("#mealpanel").hide();
-  var id = <%= @experience.id %>
-  check_job_status(id)
-});
-</script>
-<% end %>
 <div id = "loading" style = "display: none;">
   <p> Your pictures are loading..... </p>
 </div>
-<div class="row" id="mealpanel">
 
-  <% @experience.images.each_with_index do |image, index| %>
+<div id="mealpanel">
+  <% @experience.images.limit(3).each_with_index do |image, index| %>
     <div class="col-md-4" style="padding:0px">
-
-      <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px", id: index %>
-
-      </br>
-
+      <%= image_tag image.image_file.url(:medium), id: index %>
     </div>
   <% end %>
 </div>
 
-<div class="col-md-4 bg-default">
-  <div class="row center-block" style="">
+<div class="col-md-4">
+  <div class="row center-block" style="padding:0px">
     <% @host = @experience.host %>
     <% if @host.images.present? %>
       <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-10 col-md-offset-1" %></br>
@@ -47,7 +20,7 @@ $(function(){
     <% end %>
   </div>
 
-  <div class="row" style="">
+  <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
@@ -67,107 +40,101 @@ $(function(){
 
 </div>
 
-<div class="col-md-8" style="background-color:#777">
+<div class="col-md-8" id="mealinfo">
   <div class="row" id="mealframe">
-    <h2><%= @experience.title %>
-     <% if current_host == @experience.host %>
-       <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins" %>
-     <% end %>
-    </h2>
+    <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins pull-right" if current_host == @experience.host%>
 
-    <p><%= @host.first_name%><%=@host.last_name %></p>
-    <p>
-      <strong>Location:</strong>
-      <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-    </p>
+    <%= content_tag 'h1', @experience.title %>
 
-    <p><%= @host.age %></p>
+    <%= content_tag 'p', "#{@host.suburb}, #{@host.state}, #{@host.country} (Age #{@host.age})" %>
+    <%= content_tag 'p', @host.intro %>
+    <%= content_tag 'p', "Speaks: #{@host.languages}" %>
 
-    <p><%= @host.title %></p>
-    <p><%= @host.intro %></p>
-    <p>Speaks: <%= @host.languages %></p>
-    <p><%= @host.neighbourhood %></p>
-    <p><%= @host.additional_info %></p>
+    <label>Neighbourhood:</label>
+    <%= content_tag 'p', @host.neighbourhood %>
+
+    <label>Additinal Information:</label>
+    <%= content_tag 'p', @host.additional_info %>
   </div>
 
   <div class="row" style="" id="menuframe">
-    <h1>Menu</h1>
+    <h2>MENU</h2>
     <table class="table" id="menutab">
       <thead>
         <tr>
-          <th id="rembor">Meal Type</th>
-          <th id="rembor">Cuisine</th>
-          <th id="rembor">Beverages</th>
+          <th>MEAL</th>
+          <th>ALCOHOL SERVED</th>
+          <th>CUISINE</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td id="rembor"><%= @experience.meal %></td>
-          <td id="rembor"><%= @experience.cuisine %></td>
-          <td id="rembor"><%= @experience.beverages %></td>
+          <td><%= @experience.meal %></td>
+          <td><%= @experience.beverages %></td>
+          <td><%= @experience.cuisine %></td>
         </tr>
       </tbody>
 
        <thead>
         <tr>
-          <th id="rembor">Halal</th>
-          <th id="rembor">Availability</th>
-          <th id="rembor">Group Size</th>
+          <th>Halal</th>
+          <th>Availability</th>
+          <th>Group Size</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+          <td>
+            No
+          </td>
+          <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
       <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
       <%= avail_days.to_sentence %></td>
-          <td id="rembor"><%= @experience.max_group_size %> pax</td>
+          <td><%= @experience.max_group_size %> pax</td>
         </tr>
       </tbody>
 
        <thead>
         <tr>
-          <th id="rembor">Host Style</th>
-          <th id="rembor">Suggested Time</th>
-          <th id="rembor">Price</th>
+          <th>Host Style</th>
+          <th>Suggested Time</th>
+          <th>Price</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-           <td id="rembor">
-             <% if @experience.host_style %>
-               <%= @experience.host_style %>
-             <% end %></td>
-           <td id="rembor">
-           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
-           <%= (@experience.time.in_time_zone +
+          <td>
+              <%= @experience.host_style if @experience.host_style %>
+          </td>
+          <td>
+          <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
+          <%= (@experience.time.in_time_zone +
                 @experience.duration.hour).strftime('%I:%M %p') %>
-           </td>
-           <td id="rembor"><%= @experience.price %> $US</td>
+          </td>
+          <td><%= @experience.price %> $US</td>
         </tr>
       </tbody>
     </table>
 
     <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
-      <%= @experience.description %>
+      <%= content_tag 'p', @experience.description %>
     </div>
   </div>
 
   <div class="row" id="specframe">
-    <h1>Special Events</h1>
+    <h2>SPECIAL EVENTS</h2>
   </div>
 
-  <% if true %>
-    <%if @host.video_url.present?%>
-      <div class="row" id="menuframe">
-        <h1>Video Presentation</h1>
-        <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
-      </div>
-    <% end %>
+  <%if @host.video_url.present?%>
+  <div class="row" id="menuframe">
+    <h2>VIDEO PRESENTATION</h2>
+    <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
+  </div>
   <% end %>
 
   <div class="row" id="menuframe">
-   <h1>Map</h1>
-   <div id="map-canvas" style="max-width: 600px"></div>
+   <h2>MAP</h2>
+   <div id="map-canvas" style="float:left; max-width: 600px"></div>
   </div>
 
                  <!-- Curious map code -->
@@ -179,23 +146,38 @@ $(function(){
   </div>
 
   <div class="row" id="specframe">
-    <h1>Meal Format</h1>
-   </div>
-
-  <div class="row" id="ratingsframe">
-    <h1>Ratings</h1>
+    <h2>MEAL FORMAT</h2>
   </div>
 
   <div class="row" id="testiframe">
-    <h1>Testimonials:</h1>
+    <h2>REVIEWS</h2>
     <% @testimonials.each do |testimonial| %>
-      <h6><%= testimonial.title %></h6>
-      <p>Rating:
-        <% testimonial.rating.to_i.times do %>
-          <img src="/assets/star-on.png" />
-        <% end %></p>
-        <%= simple_format(testimonial.body) %>
-      <% end %>
-      </p>
+      <%= content_tag 'h5', testimonial.title %>
+      <%= simple_format(testimonial.body) %>
+    <% end %>
   </div>
 </div>
+
+<script>
+<% if flash[:notice] %>
+$(function(){
+    function check_job_status(job_id){
+    var request = $.ajax({
+      type: "GET",
+      url: '/experiences/' + job_id
+    });
+    request.done(function(response){
+      if (response === 'true'){
+        location.reload();
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 5000);
+      }
+    });
+  };
+   $("#loading").show();
+  $("#mealpanel").hide();
+  var id = <%= @experience.id %>
+  check_job_status(id)
+});
+<% end %>
+</script>
