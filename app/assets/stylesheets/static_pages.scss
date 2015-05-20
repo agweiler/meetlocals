@@ -204,9 +204,9 @@ z-index: 1;
 
 #pre_foot {
   background-color: #777;
-	/* padding-top: 20px; */
-  height: 300px;
-  width: 100%;
+	padding-top: 20px;
+  height:250px;
+  width:100%;
    z-index: 3;
     background-color: #080d15;
     opacity: 1;
@@ -228,8 +228,8 @@ z-index: 1;
 
 #join_us {
 	text-align: center;
-	padding-top: 70px;
-	padding-bottom: 70px;
+	padding-top: 30px;
+	/* padding-bottom: 70px; */
 	font-family: $headline;
 	font-size: 72px;
 	font-weight: bold;
