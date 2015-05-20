@@ -10,7 +10,7 @@
   <% end %>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4" id="hostinfo">
   <div class="row center-block" style="padding:0px">
     <% @host = @experience.host %>
     <% if @host.images.present? %>
@@ -20,20 +20,13 @@
     <% end %>
   </div>
 
+  <%= content_tag 'h3', @host.username, class:"text-center" %>
+
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-      <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
-
-      <p><strong>Location:</strong>
-        <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
-
-      <p>More events by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 bg-info" style="border-radius: 10px">
-      <br>
+      <h4 class="text-left">DKK <%= @experience.price.round %>
+        <span>PER PERSON</span></h4>
+        
       <%= render 'bookings/form' %>
     </div>
   </div>

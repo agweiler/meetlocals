@@ -1,3 +1,12 @@
+#booking_form {
+  padding-left: 20px;
+  padding-right: 20px; 
+}
+
+#booking_create_button {
+  text-align: center;
+}
+
 /*!
  * Datetimepicker for Bootstrap 3
 //! version : 4.0.0-beta
@@ -349,11 +358,3 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
-#booking_form {
-  margin-bottom: 147px;
-}
-#booking_create_button {
-  margin-right: 500px;
-}
-

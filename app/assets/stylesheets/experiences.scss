@@ -218,6 +218,25 @@ float: right;
   }
 }
 
+#hostinfo {
+  h3 {
+    font-family: $headline;
+    font-weight: bold;
+    color: $green_text;
+    font-size: 36px;
+  }
+
+  h4 {
+    font-family: $paragraph;
+    font-weight: bold;
+    font-size: 24px;
+    span {
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
 #mealinfo {
   h1 {
     font-family: $headline;
