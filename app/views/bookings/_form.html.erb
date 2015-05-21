@@ -69,6 +69,8 @@
       class:"btn btn-warning " %>
     <% end %>
   </div>
+  <% elsif current_host == @experience.host && @action == "edit" %>
+     <%= f.submit submit_text, class:"btn btn-primary btn-sm" %>
   <% else %>
     <%= link_to "Sign In Here", new_guest_session_path, class:"btn btn-primary btn-sm" %>
   <% end %>
