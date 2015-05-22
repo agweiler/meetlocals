@@ -14,9 +14,9 @@
   <div class="row center-block" style="padding:0px">
     <% @host = @experience.host %>
     <% if @host.images.present? %>
-      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-10 col-md-offset-1" %></br>
+      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-3 col-md-offset-3", style:"height:50%; width:50%; padding-top:20px" %></br>
     <% else %>
-      <%= image_tag "box.jpeg", class: "img-circle col-md-10 col-md-offset-1" %>
+      <%= image_tag "box.jpeg", class: "img-circle col-md-3 col-md-offset-3", style:"height:50%;width:50%" %>
     <% end %>
   </div>
 
@@ -173,4 +173,15 @@ $(function(){
   check_job_status(id)
 });
 <% end %>
+
+$(function(){
+  $(window).scroll(function(){
+    if($(window).scrollTop() >= 600){
+      $('#hostinfo').css({position:'fixed', top:'-125px'});
+      $('#mealinfo').css({float:'right'});
+    }else{
+      $('#hostinfo').css({position:'initial'});
+    }
+  });
+});
 </script>
