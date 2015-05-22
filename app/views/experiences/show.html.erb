@@ -11,10 +11,10 @@
 </div>
 
 <div class="col-md-4" id="hostinfo">
-  <div class="row center-block" style="padding:0px">
+  <div class="row center-block" id="profilepic" style="padding:0px">
     <% @host = @experience.host %>
     <% if @host.images.present? %>
-      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-3 col-md-offset-3", style:"height:50%; width:50%; padding-top:20px" %></br>
+      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-sm-4 col-sm-offset-3", style:"height:50%; width:50%" %></br>
     <% else %>
       <%= image_tag "box.jpeg", class: "img-circle col-md-3 col-md-offset-3", style:"height:50%;width:50%" %>
     <% end %>
@@ -22,11 +22,11 @@
 
   <%= content_tag 'h3', @host.username, class:"text-center" %>
 
-  <div class="row">
+  <div class="row" id="bookinfo">
     <div class="col-md-10 col-md-offset-1">
       <h4 class="text-left">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4>
-        
+
       <%= render 'bookings/form' %>
     </div>
   </div>
@@ -176,8 +176,8 @@ $(function(){
 
 $(function(){
   $(window).scroll(function(){
-    if($(window).scrollTop() >= 600){
-      $('#hostinfo').css({position:'fixed', top:'-125px'});
+    if(($(window).scrollTop() + 0) >= ($('#1').height() + $('#profilepic').height()) && $(window).width() > 992){
+      $('#hostinfo').css({position:'fixed', top:0 - $('#profilepic').height()});
       $('#mealinfo').css({float:'right'});
     }else{
       $('#hostinfo').css({position:'initial'});
