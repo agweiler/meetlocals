@@ -42,4 +42,16 @@ class Host < ActiveRecord::Base
       nil
     end
   end
+
+  def set_holiday(dates)
+    return false if dates.blank?
+    self.holidays.destroy_all
+
+    dates.split(',').each do |date|
+      holiday = self.holidays.new(date:date.strip)
+      holiday.save
+    end
+    true
+  end
+
 end
