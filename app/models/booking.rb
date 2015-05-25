@@ -51,20 +51,48 @@ class Booking < ActiveRecord::Base
 	# DO STUFF HERE MON
 	serialize :notification_params, Hash
 	def paypal_url(return_path)
-	@experience = Experience.find(self.experience_id)
-	values = {
-	    business: "thenasiproject-facilitator@gmail.com ",
-	    cmd: "_xclick",
-	    upload: 1,
-	    return: "#{Rails.application.secrets.app_host}#{return_path}",
-	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
-	    amount: @experience.price,
-	    item_name: "#{@experience.title} experience booking",
-	    item_number: @experience.id,
-	    quantity: self.group_size,
-	    notify_url: "#{Rails.application.secrets.app_host}/hook"
-	}
-
-	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+		@experience = Experience.find(self.experience_id)
+		@api = PayPal::SDK::AdaptivePayments.new
+		# Build request object
+		@pay = @api.build_pay({
+	  	:actionType => "PAY",
+	  	:cancelUrl => "http://localhost:3000",
+	  	:currencyCode => "USD",
+	  	:feesPayer => "PRIMARYRECEIVER",
+	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
+	  	:receiverList => {
+	    	:receiver => [{
+	      	:amount => 20.0,
+	      	:email => "thenasiproject-facilitator@gmail.com",
+	      	:primary => true,
+	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
+	      	},
+	      	{
+	      		:amount => 10.0,
+	      		:email => "thenasiproject-buyer@gmail.com",
+	      		:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
+	      	}] 
+	      },
+	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}" 
+	  	})
+		# values = {
+	#     business: "thenasiproject-facilitator@gmail.com ",
+	#     cmd: "_xclick",
+	#     upload: 1,
+	#     return: "#{Rails.application.secrets.app_host}#{return_path}",
+	#     invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
+	#     amount: @experience.price,
+	#     item_name: "#{@experience.title} experience booking",
+	#     item_number: @experience.id,
+	#     quantity: self.group_size,
+	#     notify_url: "#{Rails.application.secrets.app_host}/hook"
+	# }
+		@response = @api.pay(@pay)
+	  if @response.success? && @response.payment_exec_status != "ERROR"
+	    # @api.payment_url(@response)  # Url to complete payment
+	    "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=" + @response.payKey
+	  else
+	    @response.error[0].message
+	  end
 	end
 end

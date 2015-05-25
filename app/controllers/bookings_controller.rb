@@ -174,7 +174,7 @@ class BookingsController < ApplicationController
     byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
-    id = params[:invoice].scan(/\d+/).first
+    id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
     if status == "Completed"
       @booking = Booking.find id
       guest = @booking.guest

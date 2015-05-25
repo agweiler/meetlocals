@@ -1,5 +1,6 @@
 class ExperiencesController < ApplicationController
   include ExperiencesHelper
+  require 'paypal-sdk-adaptivepayments'
   before_action :set_experience, only: [:show, :edit, :update, :destroy]
   respond_to :html, :json
 
