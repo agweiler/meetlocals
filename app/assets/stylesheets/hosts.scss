@@ -12,11 +12,28 @@
 }
 
 #avatar_align {
-  text-align:center; 
+  text-align:center;
   margin-left:0px;
 }
 
 
 #host_events_title {
   background-color: #777;
+}
+
+#holiday_calendar{
+
+	div#showdates{
+		padding-top: 40px;
+
+		ul{
+			list-style-type:none;
+
+			li{
+				i {
+					color:red;
+				}
+			}
+		}
+	}
 }
