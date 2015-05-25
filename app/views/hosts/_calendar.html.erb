@@ -8,9 +8,9 @@
     <% end %>
     </div>
   </div>
+
   <div class="col-md-9" id="showdates">
-    <!-- <ul id='showdates' class="col-md-3" style="list-style-type: none"> -->
-    <!-- show all selected dates</ul> -->
+
   </div>
 
 </div>
@@ -31,6 +31,7 @@ $(function(){
     showDates($('#datepick').datepicker('getDates'));
   });
 
+// on-load
   $('#datepick').datepicker('setDates', <%= raw(@host.holidays_list) %>);
   showDates($('#datepick').datepicker('getDates'));
 
@@ -66,7 +67,7 @@ $(function(){
     };
     formatted = formatted.sort();
 
-    if(open_tag !== ''){
+    if(open_tag !== '' && len > 1){
       formatted[0] = '<ul class="col-md-3">' + formatted[0];
       formatted[len+1] = '</ul>';
 

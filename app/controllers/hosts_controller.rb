@@ -13,12 +13,13 @@ class HostsController < ApplicationController
 			@selected_age = age_range[0]
 
 			@selected_location = params[:search][:location]
-
 			@selected_group = params[:search][:max_group]
+			@selected_date = params[:search][:date]
+
 			# @hosts = Host.search_by_age(age_range[1], age_range[2])
 			# @hosts = Host.search(age_range[1], age_range[2], @selected_location)
 			@hosts = Host.search(age_range[1], age_range[2],
-								@selected_location, @selected_group)
+								@selected_location, @selected_group, @selected_date)
 		end
   end
 

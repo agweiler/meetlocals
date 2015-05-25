@@ -1,3 +1,15 @@
+<script>
+$(function(){
+  $('.datepick').datepicker({
+      clearBtn: false,
+      format: "yyyy-mm-dd",
+      keyboardNavigation: false
+  });
+
+  $('.datepick').datepicker('setDate', '<%= raw(@selected_date) %>')
+});
+</script>
+
 <div style="background-image:url('assets/greg.jpg'); background-attachment: fixed; margin-top:-20px;" id="pre_foot">
   <!-- <div class="row"> -->
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
@@ -7,15 +19,15 @@
 
     <!-- <div class="container-fluid"> -->
     <%= form_tag hosts_search_path  do %>
-    <%= select :search, :location, Host.get_location,
-      {selected: @selected_location}, {class:"form-control"} %>
-    <%= select :search, :age_range, Host.age_ranges,
-      {selected: @selected_age}, {class:"form-control"} %>
-    <%= text_field :search, :text, {class:"form-control",
-      placeholder:"this one has nothing yet"} %>
-    <%= select :search, :max_group, (["Any"] + (1..10).to_a),
-      {selected: @selected_group}, {class:"form-control"} %>
-    <%= submit_tag :search, {class:"form-control"} %>
+      <%= text_field :search, :date,
+      {class:"form-control datepick", placeholder:"Date"} %>
+      <%= select :search, :location, Host.get_location,
+        {selected: @selected_location}, {class:"form-control"} %>
+      <%= select :search, :age_range, Host.age_ranges,
+        {selected: @selected_age}, {class:"form-control"} %>
+      <%= select :search, :max_group, (["Any"] + (1..10).to_a),
+        {selected: @selected_group}, {class:"form-control"} %>
+      <%= submit_tag :search, {class:"form-control"} %>
     <% end %>
     <!-- </div> -->
   </div>
@@ -29,7 +41,6 @@
     <% group.each do |host| %>
     <div class="col-md-4">
       <div class="thumbnail">
-
         <% if host.images.present? %>
           <%= image_tag host.images.first.image_file.url(:medium)%>
         <% end %>

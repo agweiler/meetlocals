@@ -51,21 +51,24 @@ class Host < ActiveRecord::Base
   #   Host.where(sql)
   # end
 
-  def self.search(low, high, loc, group) #low_age, high_age, location, group
+  def self.search(low, high, loc, group, date) #low_age, high_age, etc..
     high ||= 200 #66+
     young = Date.today.year - low.to_i #20 -> 1995
     old = Date.today.year - high.to_i #35 -> 1980
 
     lower_range = Date.new(  old, 01, 01 ) #1980.1.1
     upper_range = Date.new(young, 12, 31 ) #1995.12.31
+    age = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'"
 
     loc == "All" ? loc = '' : loc = " AND state = '#{loc}'"
     group == "Any" ? group = "" : group = " AND max_group_size >= #{group}"
-# debugger
+
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
-    sql = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'" + loc + group
-    Host.joins(:experiences).where(sql).uniq
+    Host.joins(:experiences).where(age + loc + group).uniq.map do |host|
+      host if host.free?(date.to_date)
+    end.compact
+    # Host.joins(:experiences).joins(:holidays).joins(:bookings).where(sql).uniq
   end
 
   def age
@@ -74,6 +77,10 @@ class Host < ActiveRecord::Base
     # return nil if dob.nil?
     # now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     Date.today.year - dob.year unless dob.nil?
+  end
+
+  def free?(date)
+    !(self.holidays.find_by(date:date) || self.bookings.find_by(date:date, status:'confirmed'))
   end
 
   def self.get_location
