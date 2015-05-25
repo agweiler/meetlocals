@@ -42,7 +42,7 @@ $(function(){
     <div class="col-md-4">
       <div class="thumbnail">
         <% if host.images.present? %>
-          <%= image_tag host.images.first.image_file.url(:medium)%>
+          <%= link_to (image_tag host.images.first.image_file.url(:medium)), host_path(host)%>
         <% end %>
         <div class="caption" style="background-color: #D4D4D4; height: 100%">
           <!-- <div id="avataro">

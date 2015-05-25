@@ -1,4 +1,6 @@
 <div class="row" id="holiday_calendar">
+  <h3 class="text-center">My Holiday Calendar</h3>
+  <h6 class="text-center" id='notice'>&nbsp;</h6>
   <div class="col-md-3">
     <div id="datepick"></div>
     <div class="text-center">
@@ -17,17 +19,19 @@
 
 <script>
 $(function(){
+
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   $('#datepick').datepicker({
     format: "yyyy-mm-dd",
     // endDate: "12/31/2015",
     // todayBtn: "linked",
+    // calendarWeeks: true,
     multidate: true,
     multidateSeparator: ",",
     todayHighlight: true,
     datesDisabled: <%= raw(@host.bookings.confirmed_dates) %>
-  }).on('click', function(e){
-
+  }).on('click', this, function(e){
+    $('#notice').removeClass('alert alert-success').html('&nbsp;');
     showDates($('#datepick').datepicker('getDates'));
   });
 
@@ -40,6 +44,7 @@ $(function(){
     nonformatted.splice(nonformatted.indexOf($(this).text()), 1);
     $('#datepick').datepicker('setDates', nonformatted);
 
+    $('#notice').removeClass('alert alert-success').html('&nbsp;');
     showDates($('#datepick').datepicker('getDates'));
   });
 

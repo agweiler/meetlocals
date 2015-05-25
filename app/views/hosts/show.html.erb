@@ -26,8 +26,9 @@
       </div>
       <br>
       <div class="row">
-  			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %> |
-  			<%= link_to "Account Settings" , edit_host_registration_path, :class => "btn btn-danger btn-sm" %>
+  			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
+  			<%= link_to "Account Settings" , edit_host_registration_path,
+          class:"btn btn-danger btn-sm", style:"color:white" %>
       </div>
     	<% end %>
     </div>
@@ -88,7 +89,7 @@
   </div>
   <!-- End of row -->
 
-  <%= render 'calendar' %>
+  <%= render 'calendar' if @host == current_host %>
 
   <!-- Events title-->
   <div class="row" id="host_events_title">
