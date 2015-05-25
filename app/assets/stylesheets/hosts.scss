@@ -23,6 +23,13 @@
 
 #holiday_calendar{
 
+	div#datepick{
+		.disabled-date {
+			background-color: yellow;
+			color: black;
+		}
+	}
+
 	div#showdates{
 		padding-top: 40px;
 

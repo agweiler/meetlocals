@@ -24,8 +24,8 @@ $(function(){
     // todayBtn: "linked",
     multidate: true,
     multidateSeparator: ",",
-    todayHighlight: true
-    // datesDisabled: <%= raw(@host.holidays_list) %>
+    todayHighlight: true,
+    datesDisabled: <%= raw(@host.bookings.confirmed_dates) %>
   }).on('click', function(e){
 
     showDates($('#datepick').datepicker('getDates'));
