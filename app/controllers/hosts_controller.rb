@@ -1,5 +1,5 @@
 class HostsController < ApplicationController
-	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile]
+	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
   def index
 		# age = params[:search][:age]
@@ -109,6 +109,16 @@ class HostsController < ApplicationController
     end
   end
 
+	def update_holiday
+		holiday = params[:holiday][:dates]
+
+		# redirect_to host_path if @host.set_holiday(holiday)
+
+		respond_to do |format|
+			format.js
+		end if @host.set_holiday(holiday)
+	end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
@@ -117,7 +127,7 @@ class HostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
-      params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :longitude, :title, :first_name, :last_name, :languages, :street_adress, :intro, :neighbourhood, :additional_info, :DOB, :video_url )
+      params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :longitude, :title, :first_name, :last_name, :languages, :street_adress, :intro, :neighbourhood, :additional_info, :dob, :video_url )
     end
 
 end

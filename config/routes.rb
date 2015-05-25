@@ -80,6 +80,7 @@ Rails.application.routes.draw do
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
+  post 'hosts/:id' => 'hosts#update_holiday'
 
   resources :experiences
 

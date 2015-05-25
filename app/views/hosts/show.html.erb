@@ -1,164 +1,141 @@
-</br>
 <div class="container">
 
 <!-- Start of Map; maybe have this as the host page exp. footer instead, no side-padding -->
-    <div class="row">
-      <div class="col-md-12" id="map-canvas" min-height="500px"></div>
-    </div>
+  <div class="row">
+    <div class="col-md-12" id="map-canvas" min-height="500px"></div>
+  </div>
 <!-- End of Map -->
 
-    <div class="row">
-    <!--    Host Avatar and minor details -->
-          <div class="col-md-4" id="avatar_align">
-            	<% if @host == current_host %>
-                <h3>Your account</h3>
-            	<% end %>
-              </br>
-              <% if @host.images.present? %>
-                <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
-              <% else %>
-              
-                <%= image_tag "box.jpeg" %>
-              <% end %>
-            	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+  <div class="row">
+  <!--    Host Avatar and minor details -->
+    <div class="col-md-4" id="avatar_align">
+    	<% if @host == current_host %>
+        <h3>Your account</h3>
+    	<% end %>
+      </br>
+      <% if @host.images.present? %>
+        <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
+      <% else %>
+        <%= image_tag "box.jpeg" %>
+      <% end %>
+    	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
-
-
-              <% if @host == current_host %>
-              <div class="row">
-                <!-- <div class="col-xs-1"> -->
-              	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
-                <!-- </div> -->
-              </div>
-              <br>
-              <div class="row">
-                <!-- <div class="col-xs-1">
-              	   <%= button_to "Edit Profile" , edit_host_path, :class => "btn btn-default btn-xs", :method => :get %>
-                </div>
-                <div>
-              	   <%= button_to "Account Settings" , edit_host_registration_path, :class => "btn btn-default btn-xs", :method => :get %>
-                 </div> -->
-            		<!-- <div class="btn-group" role="group"> -->
-            			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %> |
-            			<%= link_to "Account Settings" , edit_host_registration_path, :class => "btn btn-danger btn-sm" %>
-            		<!-- </div> -->
-              </div>
-            	<% end %>
-          </div>
+      <% if @host == current_host %>
+      <div class="row">
+      	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
+      </div>
+      <br>
+      <div class="row">
+  			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %> |
+  			<%= link_to "Account Settings" , edit_host_registration_path, :class => "btn btn-danger btn-sm" %>
+      </div>
+    	<% end %>
+    </div>
     <!-- End of host avatar and minor details -->
 
     <!-- Curious map code -->
-          <div id="mapLat" style="display: none;">
-            <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
-          </div>
-          <div id="mapLng" style="display: none;">
-            <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
-          </div>
+    <div id="mapLat" style="display: none;">
+      <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
+    </div>
+    <div id="mapLng" style="display: none;">
+      <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
+    </div>
     <!-- End curious map code -->
 
     <!-- Host major details -->
-          <div class="col-md-8" id="card_container">
+    <div class="col-md-8" id="card_container">
+      <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p>
 
-          <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p>
+      <p>
+        <strong>Location:</strong>
+         <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
+      </p>
 
-          <p>
-            <strong>Location:</strong>
-             <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-          </p>
+      <p>
+        <strong>Age:</strong>
+        <%= @host.age %>
+      </p>
+      <p>
+        <strong>Introduction:</strong>
+        <%= @host.intro %>
+      </p>
+      <p>
+        <strong>Occupation:</strong>
+        <%= @host.occupation %>
+      </p>
+      <p>
+        <strong>Interests:</strong>
+        <%= @host.interests %>
+      </p>
+      <p><%= @host.smoker? %></p>
 
-          <p>
-            <strong>Age:</strong>
-            <%= @host.age %>
-          </p>
-          <p>
-            <strong>Introduction:</strong>
-            <%= @host.intro %>
-          </p>
-          <p>
-            <strong>Occupation:</strong>
-            <%= @host.occupation %>
-          </p>
-          <p>
-            <strong>Interests:</strong>
-            <%= @host.interests %>
-          </p>
-          <p><%= @host.smoker? %></p>
+      <p>
+        <strong>Pets:</strong>
+        <%= @host.pets %>
+      </p>
+      <p><strong>Speaks:</strong> <%= @host.languages %></p>
 
-          <p>
-            <strong>Pets:</strong>
-            <%= @host.pets %>
-          </p>
-          <p><strong>Speaks:</strong> <%= @host.languages %></p>
-
-          <p>
-            <strong>Neighbourhood:</strong>
-            <%= @host.neighbourhood %>
-          </p>
-          <p>
-            <strong>Additional Info:</strong>
-            <%= @host.additional_info %>
-          </p>
-
-
-       <!--    Placeholderbox For Host-specific info:
-
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id. -->
-          </div>
+      <p>
+        <strong>Neighbourhood:</strong>
+        <%= @host.neighbourhood %>
+      </p>
+      <p>
+        <strong>Additional Info:</strong>
+        <%= @host.additional_info %>
+      </p>
+    </div>
     <!-- End host major details -->
   </div>
   <!-- End of row -->
 
-<!-- Events title-->
-<div class="row" id="host_events_title">
-        <h1 style="text-align:center"><%= @host.username %>'s Events</h1>
-        </br>
+  <%= render 'calendar' %>
+
+  <!-- Events title-->
+  <div class="row" id="host_events_title">
+    <h1 style="text-align:center"><%= @host.username %>'s Events</h1>
+    </br>
   </div>
-<!-- End of events title -->
+  <!-- End of events title -->
 
-<!-- Hosts experiences listing -->
+  <!-- Hosts experiences listing -->
+  <% @host.experiences.in_groups_of(3, false).each do |group| %>
+  <div class="row">
 
-          <% @host.experiences.in_groups_of(3, false).each do |group| %>
-          <div class="row">
+    <% group.each do |experience| %>
+    <div class="col-md-4">
 
-                      <% group.each do |experience| %>
+      <div class="thumbnail">
+        <% if experience.images.present? %>
+          <%= image_tag experience.images.first.image_file.url(:medium)%>
+        <% end %>
+        <div class="caption" style="background-color: #D4D4D4; height: 100%">
+          <div id="avataro">
+            <% if experience.host.images.present? %>
+            <%= image_tag experience.host.images.first.image_file.url(:thumb), class: "img-circle"%>
+            <% end %>
+          </div>
 
-               <div class="col-md-4">
+          <p><%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
+           <p>
+            Rating:
+            <%= @average_rating.nil? ? '-' : @average_rating %>
+          </p>
+          <h3><%= truncate(experience.title, length: 20) %></h3>
 
-                  <div class="thumbnail">
-                    <% if experience.images.present? %>
-                      <%= image_tag experience.images.first.image_file.url(:medium)%>
-                    <% end %>
-                      <div class="caption" style="background-color: #D4D4D4; height: 100%">
-                          <div id="avataro">
-                            <% if experience.host.images.present? %>
-                              <%= image_tag experience.host.images.first.image_file.url(:thumb), class: "img-circle"%>
-                              <% end %>
-                        </div>
-
-                          <p><%= link_to experience.host.username,  "/hosts/" + experience.host_id.to_s %></p>
-                           <p>
-                            Rating:
-                            <%= @average_rating.nil? ? '-' : @average_rating %>
-                          </p>
-                          <h3><%= truncate(experience.title, length: 20) %></h3>
-
-                         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
-                          <p style="text-align: left"><%= link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
-                                    <% if current_host == experience.host || current_admin %>
-                                      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs btn_admins" %> |
-                                      <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %></p>
-                        <% end %>
-
-
-                      </div>
-
-
-                  </div>
-              </div>
-
-
+         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
+          <p style="text-align: left"><%= link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
+          <% if current_host == experience.host || current_admin %>
+            | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs btn_admins" %> |
+            <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %></p>
           <% end %>
+
+        </div>
+      </div>
 
     </div>
     <% end %>
+
+  </div>
+  <% end %>
+
 </div>
