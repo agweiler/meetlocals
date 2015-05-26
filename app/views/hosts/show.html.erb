@@ -27,7 +27,9 @@
               <% if @host == current_host %>
               <div class="row">
                 <!-- <div class="col-xs-1"> -->
-              	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
+                <% if current_host.approved == true %>
+              	  <%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
+                <% end %>
                 <!-- </div> -->
               </div>
               <br>
