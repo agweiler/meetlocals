@@ -78,6 +78,14 @@ class ExperiencesController < ApplicationController
   def show
 
   	@booking = Booking.new
+
+    if @experience.special_event?
+      @endDate = @startDate = @experience.date.strftime('%F')
+    else
+      @startDate = (Date.today + 5.days).strftime('%F')
+      @endDate = (Date.today + 6.months).strftime('%F')
+    end
+
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
     @testimonials = @experience.testimonials #associate Experience-Testimonials
     # @average_rating = @experience.bookings.joins(:testimonial).select('AVG(rating) as average').first.average

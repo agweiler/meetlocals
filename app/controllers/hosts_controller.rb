@@ -3,7 +3,6 @@ class HostsController < ApplicationController
 
   def index
 		# age = params[:search][:age]
-		# debugger
 		# Host.search_by_age(20, 40)
     if (request.request_method == 'GET')
 			@hosts = Host.all

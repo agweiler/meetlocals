@@ -11,16 +11,10 @@
     </div>
   <% end %>
 
-  <!-- <div hidden>
-    <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
-    <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
-    <%= f.date_select :date %>
-  </div> -->
-
   <div class="field text-center">
     <div id='datepick'></div>
-    <%= f.hidden_field :date %>
-    <small id="notice"></small>
+    <%= f.date_select :date, {use_month_numbers:true}, class:'hidden' %>
+    <small id="date_error"></small>
   </div>
 
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
@@ -66,47 +60,50 @@
 
 <% end %>
 </div>
-  <!-- </div> -->
-<!-- </div> -->
 
 <script type="text/javascript">
-  $(function () {
 
-    $('#datepick').datepicker({
-      format: "yyyy-mm-dd",
-      // endDate: "12/31/2015",
-      // todayBtn: "linked",
-      // calendarWeeks: true,
-      // multidateSeparator: ",",
-      // todayHighlight: true,
-      multidate: false,
-      datesDisabled: <%= raw (@host.bookings.confirmed_dates + @host.holidays_list).uniq.sort %>
-    }).on('click', this, function(e){
-      // $('#notice').removeClass('alert alert-success').html('&nbsp;');
-      // showDates($('#datepick').datepicker('getDates'));
-      $('#booking_date').text($('#datepick').datepicker('getDate'));
-    });
-
-    $('.datepicker-inline').addClass('center-block');
-
-    <% if @experience.date %>
-      $('#datetime_id').attr('disabled', true);
-      $('#private_field').hide();
-    <% end %>
-
-    // if( $("input[name*=datetime]").val() == "" )
-    //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
-    //
-    // $('div.input-group').on("click", "span.input-group-addon", function(event){
-    //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
-    // });
-
-    $('#new_booking').submit(function(event){
-      if( $("input[name*=datetime]").val() == "" ){
-        event.preventDefault();
-        $('small#date_error').text("Please specify booking date.");
-      }
-    });
-
+$(function () {
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+  $('#datepick').datepicker({
+    format: "yyyy-mm-dd",
+    startDate: "<%= @startDate %>",
+    endDate: "<%= @endDate %>",
+    // todayBtn: "linked",
+    // calendarWeeks: true,
+    // multidateSeparator: ",",
+    todayHighlight: true,
+    multidate: false,
+    datesDisabled: <%= raw (@host.bookings.confirmed_dates + @host.holidays_list).uniq.sort %>
+  }).on('click', this, function(e){
+    date = $('#datepick').datepicker('getDate');
+    if(date !== null){
+      $('#booking_date_1i').val(date.getFullYear());
+      $('#booking_date_2i').val(date.getMonth()+1);
+      $('#booking_date_3i').val(date.getDate());
+    }
   });
+
+  $('.datepicker-inline').addClass('center-block');
+
+  <% if @experience.special_event? %>
+    $('#datepick').datepicker('setDates', '<%= @startDate %>');
+  <% end %>
+
+  // if( $("input[name*=datetime]").val() == "" )
+  //   $("div.actions>input[type*=submit]").attr('disabled', 'disabled');
+  //
+  // $('div.input-group').on("click", "span.input-group-addon", function(event){
+  //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
+  // });
+
+  $('#new_booking').submit(function(event){
+    $('#booking_date').text($('#datepick').datepicker('getDate'));
+    if( $("input[name*=datetime]").val() == "" ){
+      event.preventDefault();
+      $('small#date_error').text("Please specify booking date.");
+    }
+  });
+
+});
 </script>
