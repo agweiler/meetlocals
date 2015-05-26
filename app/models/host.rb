@@ -19,7 +19,7 @@ class Host < ActiveRecord::Base
   end
 
   def self.age_ranges
-    [' ', '20-35', '36-50', '51-65', '66+']
+    ['Age', '20-35', '36-50', '51-65', '66+']
   end
 
   # def self.search_by_age(low, high) # 20, 35
@@ -59,12 +59,12 @@ class Host < ActiveRecord::Base
     upper_range = Date.new(young, 12, 31 ) #1995.12.31
     age = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'"
 
-    loc == "All" ? loc = '' : loc = " AND state = '#{loc}'"
-    group == "Any" ? group = "" : group = " AND max_group_size >= #{group}"
+    loc == "Location" ? loc = '' : loc = " AND state = '#{loc}'"
+    group == "Guests" ? group = "" : group = " AND max_group_size >= #{group}"
 
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
-    debugger
+
     Host.joins(:experiences).where(age + loc + group).uniq.map do |host|
       host if host.free?(date.to_date)
     end.compact
@@ -83,8 +83,12 @@ class Host < ActiveRecord::Base
     !(self.holidays.find_by(date:date) || self.bookings.find_by(date:date, status:'confirmed'))
   end
 
+  def max_group_size
+    self.experiences.maximum(:max_group_size)
+  end
+
   def self.get_location
-    ["All","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+    ["Location","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
   end
 
   def avg_rating

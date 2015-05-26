@@ -1,26 +1,40 @@
-<div style="background-image:url('assets/greg.jpg'); background-attachment: fixed; margin-top:-20px;" id="pre_foot">
-  <!-- <div class="row"> -->
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-
-    <h1 class="text-center" style="color:#fff; margin-top:70px">
-      FIND THE PERFECT HOST</h1>
-
-    <!-- <div class="container-fluid"> -->
-    <%= form_tag hosts_search_path  do %>
-      <%= text_field :search, :date,
-      {class:"form-control datepick", placeholder:"Date"} %>
-      <%= select :search, :location, Host.get_location,
-        {selected: @selected_location}, {class:"form-control"} %>
-      <%= select :search, :age_range, Host.age_ranges,
-        {selected: @selected_age}, {class:"form-control"} %>
-      <%= select :search, :max_group, (["Any"] + (1..10).to_a),
-        {selected: @selected_group}, {class:"form-control"} %>
-      <%= submit_tag :search, {class:"form-control"} %>
-    <% end %>
-    <!-- </div> -->
+<div class="row">
+  <div style="" id="pre_foot">
+      <h1 class="text-center">FIND YOUR PERFECT HOST</h1>
   </div>
-  <!-- </div> -->
-  <br>
+</div>
+
+<div class="row" id="search_box">
+  <div class="col-xs-10 col-xs-offset-1 text-center" >
+
+  <%= form_tag hosts_search_path, class:"form-inline"  do %>
+  <div class='input-group col-sm-2 col-xs-12'>
+    <%= text_field :search, :date,
+    {class:"form-control datepick", placeholder:"Date"} %>
+  </div>
+
+  <div class='input-group col-sm-2 col-xs-12'>
+    <%= select :search, :age_range, Host.age_ranges,
+      {selected: @selected_age}, {class:"form-control"} %>
+  </div>
+
+  <div class="input-group col-sm-2 col-xs-12">
+    <%= select :search, :max_group, (["Guests"] + (1..10).to_a),
+      {selected: @selected_group}, {class:"form-control"} %>
+  </div>
+
+  <div class='input-group col-sm-2 col-xs-12'>
+    <%= select :search, :location, Host.get_location,
+      {selected: @selected_location}, {class:"form-control"} %>
+  </div>
+
+  <div class='input-group col-sm-2 col-xs-12'>
+    <%= submit_tag :FILTER,
+     {class:"btn btn-success col-sm-8 col-sm-offset-2 para"} %>
+  </div>
+  <% end %>
+
+  </div>
 </div>
 
 <div class="container" style="margin-top:40px" id="view">
@@ -28,35 +42,31 @@
   <div class="row">
     <% group.each do |host| %>
     <div class="col-md-4">
+
       <div class="thumbnail">
-        <% if host.images.present? %>
-          <%= link_to (image_tag host.images.first.image_file.url(:medium)), host_path(host)%>
-        <% end %>
+        <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)), host if host.experiences.first.images.present?%>
+
         <div class="caption" style="background-color: #D4D4D4; height: 100%">
-          <!-- <div id="avataro">
-            <% if host.images.present? %>
-              <%= image_tag host.images.first.image_file.url(:thumb), class: "img-circle"%>
-            <% end %>
-          </div> -->
-          <p>
-            Age : <%= host.age %><br>
-            Location : <%= host.state %>
-          </p>
+          <div id="avataro">
+            <%= link_to image_tag(host.images.first.image_file.url(:thumb), class: "img-circle"), host if host.images.present? %>
+          </div>
 
-          <h3>
-            <%= link_to host.username, host_path(host) %>
-          </h3>
+          <h2><%= link_to host.username,  host_path(host) %></p>
+          </h2>
 
-         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
-          <p style="text-align: left"><%= link_to 'More info', host, class: "btn btn-info btn-xs", style: "color:#fff" %>
-            <% if current_host == host %>
-              <%= link_to 'Edit', edit_host_path(host), class: "btn btn-warning btn-xs btn_admins" %>
-            <% elsif current_admin %>
-              <%= link_to 'Destroy', host, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %>
-            <% end %>
+          <label>Speaks:</label>
+          <%= content_tag 'span', host.languages %><br>
+          <label>Guests:</label>
+          <%= content_tag 'span', "#{host.max_group_size} pax" %><br>
+          <label>Age:</label>
+          <%= content_tag 'span', "#{host.age} yrs old" %><br>
+
+          <p class="text-left">
+            <% link_to 'More info', host, class: "btn btn-info btn-xs", style: "color:#fff" %>
           </p>
         </div>
       </div>
+
     </div>
     <% end %>
   </div>
