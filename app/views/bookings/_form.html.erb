@@ -3,7 +3,6 @@
   <% if @booking.errors.any? %>
     <div id="error_explanation">
       <!-- <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this booking from being saved:</h2> -->
-
       <ul>
       <small><% @booking.errors.full_messages.each do |message| %></small>
         <li><%= message %></li>
@@ -12,22 +11,16 @@
     </div>
   <% end %>
 
-  <div hidden>
+  <!-- <div hidden>
     <%= f.time_select :start_time, {minute_step: 15, ampm: true} %>
     <%= f.time_select :end_time, {minute_step: 15, ampm: true} %>
     <%= f.date_select :date %>
-  </div>
+  </div> -->
 
-  <div class = "field">
-    <label>Date: </label>
-    <div class='input-group date' id='datetimepicker11'>
-      <!-- <input type='text' class="form-control" name="datetime" /> -->
-      <%= text_field :datetime, :id, class:"form-control", name:"datetime", class:"form-control", required: false %>
-      <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-    </div>
-    <small id="date_error"></small>
+  <div class="field text-center">
+    <div id='datepick'></div>
+    <%= f.hidden_field :date %>
+    <small id="notice"></small>
   </div>
 
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
@@ -78,23 +71,23 @@
 
 <script type="text/javascript">
   $(function () {
-    $('#datetimepicker11').datetimepicker({
-      <% days = (0..6).to_a - @experience.available_days.delete('-').split(//).map {|x| x.to_i} %>
-      <% @action == "edit" ? add_days = 0 : add_days = 5%>
-      daysOfWeekDisabled: <%= days %>,
-      format: 'MMMM DD, YYYY',
-      minDate: moment().add(<%= add_days %>, 'days'),
-      <% if @booking.date.nil? %>
-        defaultDate: '<%= @experience.date.strftime('%B %d, %Y') if @experience.date %>',
-      <% else %>
-        defaultDate: moment([<%= @booking.date.year %>,
-                              <%= @booking.date.month %>,
-                              <%= @booking.date.day %>
-                              // <%= @experience.time.hour %>,
-                              // <%= @experience.time.min %>
-                            ]),
-      <% end %>
+
+    $('#datepick').datepicker({
+      format: "yyyy-mm-dd",
+      // endDate: "12/31/2015",
+      // todayBtn: "linked",
+      // calendarWeeks: true,
+      // multidateSeparator: ",",
+      // todayHighlight: true,
+      multidate: false,
+      datesDisabled: <%= raw (@host.bookings.confirmed_dates + @host.holidays_list).uniq.sort %>
+    }).on('click', this, function(e){
+      // $('#notice').removeClass('alert alert-success').html('&nbsp;');
+      // showDates($('#datepick').datepicker('getDates'));
+      $('#booking_date').text($('#datepick').datepicker('getDate'));
     });
+
+    $('.datepicker-inline').addClass('center-block');
 
     <% if @experience.date %>
       $('#datetime_id').attr('disabled', true);

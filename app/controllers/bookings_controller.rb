@@ -58,7 +58,7 @@ class BookingsController < ApplicationController
     @experience = Experience.find(params[:booking][:experience_id])
     booking_params[:guest_id].replace(current_guest.id.to_s)
     # starttime = Time.parse( params[:datetime] )
-
+debugger
     if @experience.date
       starttime = @experience.date
     else
