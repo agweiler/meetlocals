@@ -18,13 +18,13 @@ class Experience < ActiveRecord::Base
 
 	validates :title, :description, :cuisine, :max_group_size, :price,
 	  presence: true
-	validate :available_days_must_have_minimum_one_day
 
-	def available_days_must_have_minimum_one_day
-  	if available_days == "-------" && date.nil?
-    	errors.add(:available_days, "should have at least 1 available day")
-  	end
-  end
+	# validate :available_days_must_have_minimum_one_day
+	# def available_days_must_have_minimum_one_day
+  # 	if available_days == "-------" && date.nil?
+  #   	errors.add(:available_days, "should have at least 1 available day")
+  # 	end
+  # end
 
 	def avg_rating
 		self.testimonials.average(:rating).round(2)

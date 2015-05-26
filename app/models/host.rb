@@ -64,6 +64,7 @@ class Host < ActiveRecord::Base
 
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
+    debugger
     Host.joins(:experiences).where(age + loc + group).uniq.map do |host|
       host if host.free?(date.to_date)
     end.compact

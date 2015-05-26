@@ -104,13 +104,14 @@ class ExperiencesController < ApplicationController
   # POST /experiences
   def create
 
-    @days = experience_params.delete(:days)
-    default = "-------"
+    # @days = experience_params.delete(:days)
+    # default = "-------"
+    #
+    # (0..6).each do |num|
+    #     default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
+    # end
+    # experience_params[:available_days].replace(default)
 
-    (0..6).each do |num|
-        default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
-    end
-    experience_params[:available_days].replace(default)
     @image_files = experience_params.delete(:images_array)
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
@@ -132,14 +133,14 @@ class ExperiencesController < ApplicationController
   # PATCH/PUT /experiences/1
   def update
 
-    @days = experience_params.delete(:days)
-    default = "-------"
+    # @days = experience_params.delete(:days)
+    # default = "-------"
+    #
+    # (0..6).each do |num|
+    #     default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
+    # end
+    # experience_params[:available_days].replace(default)
 
-    (0..6).each do |num|
-        default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
-    end
-
-    experience_params[:available_days].replace(default)
     @image_files = experience_params.delete(:images_array)
       if @experience.update(experience_params.except(:images_array, :days))
         redirect_to @experience, notice: 'Experience was successfully updated.'

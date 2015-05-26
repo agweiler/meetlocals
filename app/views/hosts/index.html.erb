@@ -1,15 +1,3 @@
-<script>
-$(function(){
-  $('.datepick').datepicker({
-      clearBtn: false,
-      format: "yyyy-mm-dd",
-      keyboardNavigation: false
-  });
-
-  $('.datepick').datepicker('setDate', '<%= raw(@selected_date) %>')
-});
-</script>
-
 <div style="background-image:url('assets/greg.jpg'); background-attachment: fixed; margin-top:-20px;" id="pre_foot">
   <!-- <div class="row"> -->
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
@@ -74,3 +62,15 @@ $(function(){
   </div>
   <% end %>
 </div>
+
+<script>
+$(function(){
+  $('.datepick').datepicker({
+      clearBtn: false,
+      format: "yyyy-mm-dd",
+      keyboardNavigation: false
+  });
+
+  $('.datepick').datepicker('setDate', '<%= raw(@selected_date) %>')
+});
+</script>
