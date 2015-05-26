@@ -128,16 +128,16 @@ ActiveRecord::Schema.define(version: 20150514080921) do
   add_index "holidays", ["host_id"], name: "index_holidays_on_host_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
-    t.string   "username",               default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "country",                default: "", null: false
-    t.string   "state",                  default: "", null: false
-    t.string   "suburb",                 default: "", null: false
+    t.string   "username",               default: "",    null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "country",                default: "",    null: false
+    t.string   "state",                  default: "",    null: false
+    t.string   "suburb",                 default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150514080921) do
     t.text     "interests"
     t.boolean  "smoker"
     t.string   "pets"
+    t.boolean  "approved",               default: false, null: false
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree

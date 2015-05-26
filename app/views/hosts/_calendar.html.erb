@@ -1,0 +1,91 @@
+<div class="row" id="holiday_calendar">
+  <h3 class="text-center">My Holiday Calendar</h3>
+  <h6 class="text-center" id='notice'>&nbsp;</h6>
+  <div class="col-md-3">
+    <div id="datepick"></div>
+    <div class="text-center">
+    <%= form_for :holiday, remote:true do |f| %>
+      <%= f.hidden_field :dates %>
+      <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="col-md-9" id="showdates">
+
+  </div>
+
+</div>
+
+<script>
+$(function(){
+
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+  $('#datepick').datepicker({
+    format: "yyyy-mm-dd",
+    // endDate: "12/31/2015",
+    // todayBtn: "linked",
+    // calendarWeeks: true,
+    multidate: true,
+    multidateSeparator: ",",
+    todayHighlight: true,
+    datesDisabled: <%= raw(@host.bookings.confirmed_dates) %>
+  }).on('click', this, function(e){
+    $('#notice').removeClass('alert alert-success').html('&nbsp;');
+    showDates($('#datepick').datepicker('getDates'));
+  });
+
+// on-load
+  $('#datepick').datepicker('setDates', <%= raw(@host.holidays_list) %>);
+  showDates($('#datepick').datepicker('getDates'));
+
+  $('#showdates').on('click', 'li', function(e){ //remove item from <li>
+    nonformatted = formatting($('#datepick').datepicker('getDates'));
+    nonformatted.splice(nonformatted.indexOf($(this).text()), 1);
+    $('#datepick').datepicker('setDates', nonformatted);
+
+    $('#notice').removeClass('alert alert-success').html('&nbsp;');
+    showDates($('#datepick').datepicker('getDates'));
+  });
+
+  function showDates(dates){
+    nonformatted = formatting(dates);
+    show = formatting(dates, "<li><i class='glyphicon glyphicon-remove'></i>", '</li>');
+    $('#showdates').html(show);
+    $('#holiday_dates').val(nonformatted); //hidden_field
+  }
+
+  function formatting(dates, open_tag, close_tag){
+    if(open_tag === undefined || close_tag === undefined){
+      open_tag = '';
+      close_tag = '';
+    }
+
+    len = dates.length;
+    formatted = new Array(len);
+    for(i=0; i< len; i++){
+      var temp = new Date(dates[i].toLocaleString());
+
+      formatted[i] = open_tag + temp.getFullYear() + "-"
+                      + ("0"+ (temp.getMonth()+1)).slice(-2) + "-"
+                      + ("0"+ temp.getDate()).slice(-2) + close_tag;
+    };
+    formatted = formatted.sort();
+
+    if(open_tag !== '' && len > 1){
+      formatted[0] = '<ul class="col-md-3">' + formatted[0];
+      formatted[len+1] = '</ul>';
+
+      if(len > 12){
+        for(j=1; j< (len/12); j++)
+          formatted[j*12] = '</ul><ul class="col-md-3">' + formatted[j*12];
+      }
+
+      formatted = formatted.join(' ');
+    }
+
+    return formatted
+  };
+
+});
+</script>

@@ -1,8 +1,26 @@
 class HostsController < ApplicationController
-	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile]
+	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
   def index
-    @host = Host.all
+		# age = params[:search][:age]
+		# debugger
+		# Host.search_by_age(20, 40)
+    if (request.request_method == 'GET')
+			@hosts = Host.all
+		elsif (request.request_method == 'POST')
+			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
+			age_range ||= [nil, 0, 200]
+			@selected_age = age_range[0]
+
+			@selected_location = params[:search][:location]
+			@selected_group = params[:search][:max_group]
+			@selected_date = params[:search][:date]
+
+			# @hosts = Host.search_by_age(age_range[1], age_range[2])
+			# @hosts = Host.search(age_range[1], age_range[2], @selected_location)
+			@hosts = Host.search(age_range[1], age_range[2],
+								@selected_location, @selected_group, @selected_date)
+		end
   end
 
   def show
@@ -42,16 +60,22 @@ class HostsController < ApplicationController
 
   # PATCH/PUT /hosts/1
   def update
-    @image_file = params[:host].delete(:image_file)
-    @host.update(host_params.except(:image_file))
-    if @image_file.present?
-      if @host.images.present?
-        @host.images.delete_all
+    # this commit param apparently is the name of the f.submit button
+    if params[:commit] == "Approve User"
+      @host.update(approved: true)
+      redirect_to admin_settings_path
+    else
+      @image_file = params[:host].delete(:image_file)
+      @host.update(host_params.except(:image_file))
+      if @image_file.present?
+        if @host.images.present?
+          @host.images.delete_all
+        end
+        Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
-      Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
-    end
-    respond_to do |format|
-      format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
+      respond_to do |format|
+        format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
+      end
     end
   end
 
@@ -92,6 +116,16 @@ class HostsController < ApplicationController
     end
   end
 
+	def update_holiday
+		holiday = params[:holiday][:dates]
+
+		# redirect_to host_path if @host.set_holiday(holiday)
+
+		respond_to do |format|
+			format.js
+		end if @host.set_holiday(holiday)
+	end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
@@ -102,4 +136,5 @@ class HostsController < ApplicationController
     def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :longitude, :title, :first_name, :last_name, :languages, :street_adress, :intro, :neighbourhood, :additional_info, :dob, :video_url )
     end
+
 end

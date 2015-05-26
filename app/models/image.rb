@@ -31,7 +31,7 @@ class Image < ActiveRecord::Base
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
-        ImageJob.perform_async(@id)
+    	  ImageJob.perform_async(@id)
       else
         ImageJob.new.perform(@id)
       end

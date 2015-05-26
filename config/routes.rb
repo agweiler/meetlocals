@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get 'admins/settings' => 'admins#settings', as: :admin_settings
 
   patch '/price' => 'admins#changeprice'
-  
+
+  patch '/host' => 'admins#approveuser'
+
   resources :admins
 
   root 'static_pages#home'
@@ -44,6 +46,10 @@ Rails.application.routes.draw do
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
   get '/blog' => 'posts#index'
+
+  post 'hosts_search' => "hosts#index"
+
+  get 'hosts_search' => "hosts#index"
 
   post 'experiences_search' => 'experiences#index'
 
@@ -76,6 +82,7 @@ Rails.application.routes.draw do
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
+  post 'hosts/:id' => 'hosts#update_holiday'
 
   resources :experiences
 
