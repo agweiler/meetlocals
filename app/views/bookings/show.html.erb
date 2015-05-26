@@ -16,8 +16,8 @@
 
     <p>
       <strong>Time:</strong>
-      <%= @booking.experience.time.strftime('%I:%M %p') %> ~
-      <%= (@booking.experience.time + @booking.experience.duration.hour).strftime('%I:%M %p') %>
+      <%= @booking.experience.time.in_time_zone.strftime('%I:%M %p') %> ~
+      <%= (@booking.experience.time + @booking.experience.duration.hour).in_time_zone.strftime('%I:%M %p') %>
       <small>(Local Time)</small>
     </p>
 

@@ -65,8 +65,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
-    bootstrap3-datetimepicker-rails (4.0.0)
-      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     byebug (4.0.5)
       columnize (= 0.9.0)
@@ -98,8 +96,6 @@ GEM
       devise (~> 3.2)
     erubis (2.7.0)
     execjs (2.5.2)
-    font-awesome-rails (4.3.0.0)
-      railties (>= 3.2, < 5.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hitimes (1.2.2)
@@ -130,8 +126,6 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
-    momentjs-rails (2.9.0)
-      railties (>= 3.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     nokogiri (1.6.6.2)
@@ -245,18 +239,15 @@ DEPENDENCIES
   aws-sdk (< 2.0)
   bootstrap-sass (= 3.2.0)
   bootstrap-wysihtml5-rails!
-  bootstrap3-datetimepicker-rails (~> 4.0.0)
   byebug
   coffee-rails (~> 4.1.0)
   devise
   devise-async
-  font-awesome-rails
   gibbon!
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
   minitest (~> 5.5.1)
-  momentjs-rails (>= 2.9.0)
   paperclip (~> 4.2)
   pg
   puma

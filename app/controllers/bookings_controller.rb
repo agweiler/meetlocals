@@ -59,16 +59,22 @@ class BookingsController < ApplicationController
     booking_params[:guest_id].replace(current_guest.id.to_s)
     # starttime = Time.parse( params[:datetime] )
 
-    if @experience.date
-      starttime = @experience.date
-    else
-      #moment.js foramt MMMM DD, YYYY
-      starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+    if exp_date = @experience.date
+      booking_params['date(1i)'].replace exp_date.strftime('%Y')
+      booking_params['date(2i)'].replace exp_date.strftime('%-m')
+      booking_params['date(3i)'].replace exp_date.strftime('%-d')
     end
 
-    booking_params['date(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['date(2i)'].replace( starttime.strftime('%m') )
-    booking_params['date(3i)'].replace( starttime.strftime('%d') )
+    # if @experience.date
+    #   starttime = @experience.date
+    # else
+    #   #moment.js foramt MMMM DD, YYYY
+    #   starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+    # end
+
+    # booking_params['date(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['date(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['date(3i)'].replace( starttime.strftime('%d') )
 
     # @experience = Experience.find(booking_params[:experience_id])
     #
@@ -171,11 +177,12 @@ class BookingsController < ApplicationController
   # Paypal sends this
   protect_from_forgery except: [:hook]
   def hook
+    byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
-
+    id = params[:invoice].scan(/\d+/).first
     if status == "Completed"
-      @booking = Booking.find params[:invoice]
+      @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_now
@@ -196,6 +203,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:start_time, :end_time, :date, :guest_id, :experience_id, :status, :group_size, :is_private, :rating, :add_info)
+      params.require(:booking).permit(:start_time, :end_time, :date, :date_text, :guest_id, :experience_id, :status, :group_size, :is_private, :rating, :add_info)
     end
 end
