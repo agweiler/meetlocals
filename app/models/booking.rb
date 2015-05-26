@@ -7,6 +7,8 @@ class Booking < ActiveRecord::Base
 	validates :guest_id, :experience_id, :date, presence: true
 	validate :group_size_must_not_exceed_maximum
 
+	scope :confirmed, -> { where(status: 'confirmed') }
+
 	def group_size_must_not_exceed_maximum
 		max = self.experience.max_group_size
 		unless (max >= 0 && max == nil)
@@ -23,6 +25,8 @@ class Booking < ActiveRecord::Base
 			status.replace("invited")
 		when "reject"
 			status.replace("rejected")
+		when "confirm"
+			status.replace("confirmed")
 		when "complete"
 			status.replace("completed")
 		end
@@ -43,9 +47,12 @@ class Booking < ActiveRecord::Base
 
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
 
-
 	def self.statuses
 		["Invite", "Reject", "Complete"]
+	end
+
+	def self.confirmed_dates
+		self.confirmed.map { |book| book.date.strftime('%F') }
 	end
 
 	# DO STUFF HERE MON

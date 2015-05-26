@@ -19,7 +19,7 @@ class Image < ActiveRecord::Base
           					:url => ":s3_sg_url"
 
   # validates_attachment_content_type :image_file, content_type: /\Aimage\/.*\Z/
-  # need to define these according to the size they will be displayed on site. 
+  # need to define these according to the size they will be displayed on site.
   # host/avatar sizes ok
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
@@ -30,6 +30,7 @@ class Image < ActiveRecord::Base
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
+        # ImageJob.new.perform(@id)
     	  ImageJob.perform_async(@id)
       else
         ImageJob.new.perform(@id)
@@ -44,7 +45,7 @@ class Image < ActiveRecord::Base
   end
 end
 
-class ImageJob 
+class ImageJob
 	   include Sidekiq::Worker
      sidekiq_options :retry => 5
 
