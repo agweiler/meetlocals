@@ -1,3 +1,8 @@
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Helvetica';
+$navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
+
 #map-canvas {
 	width: 100%;
 	height: 300px;
@@ -16,10 +21,29 @@
   margin-left:0px;
 }
 
-
 #host_events_title {
   background-color: #777;
 }
+
+#search_box{
+	padding-top: 30px;
+	font-weight: bold;
+	font-family: $paragraph;
+
+	select {
+		border-color: black;
+	}
+
+	input[type="text"]{
+		border-color: black;
+		border-radius: 5px;
+	}
+
+	input[type="submit"]{
+		border-width: 0px;
+	}
+}
+
 
 #holiday_calendar{
 

@@ -3,7 +3,6 @@ class HostsController < ApplicationController
 
   def index
 		# age = params[:search][:age]
-		# debugger
 		# Host.search_by_age(20, 40)
     if (request.request_method == 'GET')
 			@hosts = Host.all
@@ -24,8 +23,8 @@ class HostsController < ApplicationController
   end
 
   def show
-    @host = Host.find(params[:id])
-    @experiences = @host.experiences
+    @normal_events = @host.experiences.normal_events
+		@special_events = @host.experiences.special_events
   end
 
   def new

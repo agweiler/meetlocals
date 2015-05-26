@@ -7,3 +7,17 @@
   */
 .highlight p { margin:0 }
 
+.navbar {
+  height: 80px;
+}
+
+.nav li a {
+  margin-top: 14px;
+  font-size: 11pt;
+  font-family: arial;
+  span{
+    margin-top: -7px;
+    font-size: 11pt;
+    font-family: arial;
+  }
+}

@@ -7,14 +7,22 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome";
+/* @import "font-awesome"; */
 @import "hosts";
-@import "agency";
+/* @import "agency"; */
 @import "bookings";
 @import "experiences";
 @import "custom";
 @import "scaffolds";
 @import "static_pages";
+
+@import url(http://fonts.googleapis.com/css?family=Amatic+SC:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Helvetica';
+$navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
 
 /*//Import any stylesheets we need
 */
@@ -54,12 +62,51 @@ body .container{
   min-height: 500px;
 }
 
-.footer {
-  position: relative;
-  margin-top: 0px; /* negative value of footer height */
-  height: 150px;
+/* footer */
+
+footer {
   clear:both;
-  padding-top:20px;
+  position: relative;
+  margin-top: 0px;
+  padding-top: 30px;
+  background-color: #1A1A1A;
+  color: #fff;
+  text-align: center;
+  font-family: $paragraph;
+
+  a {
+    color:inherit;
+    font-family: inherit;
+    font-size: 16px;
+  }
+  a:hover {
+    color:inherit;
+  }
+  a:visited {
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+    float: none;
+    margin: 0;
+  }
+
+  .foot-sect {
+    padding-left: 30px;
+  }
+
+  p {
+    font-family: inherit;
+    font-size: 16px;
+    color: inherit;
+  }
+
+  div.link-sect {
+    width:50%;
+    margin-left:50px
+  }
+
 }
 
 #home {
@@ -115,399 +162,6 @@ body .container{
  	padding-right:10px;
  }
 
- /* footer */
-
-footer {
-  margin-top: 0px;
-  padding-top: 30px;
-  padding-right: 70px;
- /* border-top: 1px solid #eaeaea;*/
-  color: #777;
-  background-color: #1A1A1A;
-  margin-bottom: -100px;
-  /* height: 220px; */
-  /*border-top: 2px;
-  border-top-color: #000;*/
-}
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
-  color: #222;
-  background-color: #A0A0A0;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 15px;
-}
-
-// Place all the styles related to the bookings controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-/*!
- * Datetimepicker for Bootstrap 3
-//! version : 4.0.0-beta
-
- * https://github.com/Eonasdan/bootstrap-datetimepicker/
- */
-
-.bootstrap-datetimepicker-widget.dropdown-menu {
-  margin: 2px 0;
-  padding: 4px;
-  width: 19em;
-}
-@media (min-width: 768px) {
-  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
-    width: 38em;
-  }
-}
-@media (min-width: 992px) {
-  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
-    width: 38em;
-  }
-}
-@media (min-width: 1200px) {
-  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
-    width: 38em;
-  }
-}
-.bootstrap-datetimepicker-widget.dropdown-menu:before,
-.bootstrap-datetimepicker-widget.dropdown-menu:after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
-  top: -7px;
-  left: 7px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid white;
-  top: -6px;
-  left: 8px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.top:before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #ccc;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  bottom: -7px;
-  left: 6px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid white;
-  bottom: -6px;
-  left: 7px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
-  left: auto;
-  right: 6px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
-  left: auto;
-  right: 7px;
-}
-.bootstrap-datetimepicker-widget .list-unstyled {
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget a[data-action] {
-  padding: 6px 0;
-}
-.bootstrap-datetimepicker-widget a[data-action]:active {
-  box-shadow: none;
-}
-.bootstrap-datetimepicker-widget .timepicker-hour,
-.bootstrap-datetimepicker-widget .timepicker-minute,
-.bootstrap-datetimepicker-widget .timepicker-second {
-  width: 54px;
-  font-weight: bold;
-  font-size: 1.2em;
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget button[data-action] {
-  padding: 6px;
-}
-.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Increment Hours";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Increment Minutes";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Decrement Hours";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Decrement Minutes";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Show Hours";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Show Minutes";
-}
-.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Toggle AM/PM";
-}
-.bootstrap-datetimepicker-widget .picker-switch {
-  text-align: center;
-}
-.bootstrap-datetimepicker-widget .picker-switch::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Toggle Date and Time Screens";
-}
-.bootstrap-datetimepicker-widget .picker-switch td {
-  padding: 0;
-  margin: 0;
-  height: auto;
-  width: auto;
-  line-height: inherit;
-}
-.bootstrap-datetimepicker-widget .picker-switch td span {
-  line-height: 2.5;
-  height: 2.5em;
-  width: 100%;
-}
-.bootstrap-datetimepicker-widget .picker-switch td span:hover {
-  background: #eeeeee;
-}
-.bootstrap-datetimepicker-widget .picker-switch td a {
-  background: none;
-}
-.bootstrap-datetimepicker-widget table {
-  width: 100%;
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget td,
-.bootstrap-datetimepicker-widget th {
-  text-align: center;
-  border-radius: 4px;
-}
-.bootstrap-datetimepicker-widget th {
-  height: 20px;
-  line-height: 20px;
-  width: 20px;
-}
-.bootstrap-datetimepicker-widget th.picker-switch {
-  width: 145px;
-}
-.bootstrap-datetimepicker-widget th.disabled,
-.bootstrap-datetimepicker-widget th.disabled:hover {
-  background: none;
-  color: #777777;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget th.prev::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Previous Month";
-}
-.bootstrap-datetimepicker-widget th.next::after {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  content: "Next Month";
-}
-.bootstrap-datetimepicker-widget thead tr:first-child th {
-  cursor: pointer;
-}
-.bootstrap-datetimepicker-widget thead tr:first-child th:hover {
-  background: #eeeeee;
-}
-.bootstrap-datetimepicker-widget td {
-  height: 54px;
-  line-height: 54px;
-  width: 54px;
-}
-.bootstrap-datetimepicker-widget td.cw {
-  font-size: .8em;
-  height: 20px;
-  line-height: 20px;
-  color: #777777;
-}
-.bootstrap-datetimepicker-widget td.day {
-  height: 20px;
-  line-height: 20px;
-  width: 20px;
-}
-.bootstrap-datetimepicker-widget td.day:hover,
-.bootstrap-datetimepicker-widget td.hour:hover,
-.bootstrap-datetimepicker-widget td.minute:hover,
-.bootstrap-datetimepicker-widget td.second:hover {
-  background: #eeeeee;
-  cursor: pointer;
-}
-.bootstrap-datetimepicker-widget td.old,
-.bootstrap-datetimepicker-widget td.new {
-  color: #777777;
-}
-.bootstrap-datetimepicker-widget td.today {
-  position: relative;
-}
-.bootstrap-datetimepicker-widget td.today:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-bottom: 7px solid #fed136;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-}
-.bootstrap-datetimepicker-widget td.active,
-.bootstrap-datetimepicker-widget td.active:hover {
-  background-color: #fed136;
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.bootstrap-datetimepicker-widget td.active.today:before {
-  border-bottom-color: #fff;
-}
-.bootstrap-datetimepicker-widget td.disabled,
-.bootstrap-datetimepicker-widget td.disabled:hover {
-  background: none;
-  color: #777777;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget td span {
-  display: inline-block;
-  width: 54px;
-  height: 54px;
-  line-height: 54px;
-  margin: 2px 1.5px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.bootstrap-datetimepicker-widget td a {
-  background: none;
-}
-.bootstrap-datetimepicker-widget td span:hover {
-  background: #eeeeee;
-}
-.bootstrap-datetimepicker-widget td span.active {
-  background-color: #fed136;
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.bootstrap-datetimepicker-widget td span.old {
-  color: #777777;
-}
-.bootstrap-datetimepicker-widget td span.disabled,
-.bootstrap-datetimepicker-widget td span.disabled:hover {
-  background: none;
-  color: #777777;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget.usetwentyfour td.hour {
-  height: 27px;
-  line-height: 27px;
-}
-.input-group.date .input-group-addon {
-  cursor: pointer;
-}
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
 /*
 Image carousel CSS Stuff starts here*/
 
@@ -616,3 +270,164 @@ Image carousel CSS Stuff starts here*/
 /* stops textareas from resizing */
 
 textarea { resize: none; }
+
+/**
+Footer Social buttons
+**/
+
+section#contact {
+    background-color: #222;
+    background-image: url(../img/map-image.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+section#contact .section-heading {
+    color: #fff;
+}
+
+section#contact .form-group {
+    margin-bottom: 25px;
+}
+
+section#contact .form-group input,
+section#contact .form-group textarea {
+    padding: 20px;
+}
+
+section#contact .form-group input.form-control {
+    height: auto;
+}
+
+section#contact .form-group textarea.form-control {
+    height: 236px;
+}
+
+section#contact .form-control:focus {
+    border-color: #fed136;
+    box-shadow: none;
+}
+
+section#contact::-webkit-input-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section#contact:-moz-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section#contact::-moz-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section#contact:-ms-input-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+section#contact .text-danger {
+    color: #e74c3c;
+}
+
+ul.social-buttons {
+    margin-bottom: 0;
+}
+
+ul.social-buttons li a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    font-size: 20px;
+    line-height: 40px;
+    outline: 0;
+    color: #fff;
+    background-color:#1A1A1A;
+
+  -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+
+ul.social-buttons li a:hover,
+ul.social-buttons li a:focus,
+ul.social-buttons li a:active {
+
+    /* background-color: #1A1A1A; */
+
+}
+
+ul.social-buttons li a:disabled{
+    color: lightgrey;
+}
+
+
+/**
+Home btn-xl
+**/
+.btn-xl {
+    padding: 20px 40px;
+    border-color: #fed136;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #fed136;
+}
+
+.btn-xl:hover,
+.btn-xl:focus,
+.btn-xl:active,
+.btn-xl.active,
+.open .dropdown-toggle.btn-xl {
+    border-color: #f6bf01;
+    color: #fff;
+    background-color: #fec503;
+}
+
+.btn-xl:active,
+.btn-xl.active,
+.open .dropdown-toggle.btn-xl {
+    background-image: none;
+}
+
+.btn-xl.disabled,
+.btn-xl[disabled],
+fieldset[disabled] .btn-xl,
+.btn-xl.disabled:hover,
+.btn-xl[disabled]:hover,
+fieldset[disabled] .btn-xl:hover,
+.btn-xl.disabled:focus,
+.btn-xl[disabled]:focus,
+fieldset[disabled] .btn-xl:focus,
+.btn-xl.disabled:active,
+.btn-xl[disabled]:active,
+fieldset[disabled] .btn-xl:active,
+.btn-xl.disabled.active,
+.btn-xl[disabled].active,
+fieldset[disabled] .btn-xl.active {
+    border-color: #fed136;
+    background-color: #fed136;
+}
+
+.btn-xl .badge {
+    color: #fed136;
+    background-color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #777777;
+}

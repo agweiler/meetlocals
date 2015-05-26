@@ -13,8 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require moment
-//= require bootstrap-datetimepicker
+
 //= require jquery.raty.js
 //= require jquery-readyselector
 //= require bootstrap-wysihtml5

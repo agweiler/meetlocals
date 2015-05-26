@@ -8,7 +8,8 @@ class Image < ActiveRecord::Base
    validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   has_attached_file :image_file,
-										styles: { :medium => "300x300!", :thumb => "100x100>" }, #you can customise the storage path here using :path
+										styles: { :medium => "300x300!", :thumb => "100x100>"},
+                    #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
             				:bucket => ENV['AWS_BUCKET'],
@@ -30,7 +31,6 @@ class Image < ActiveRecord::Base
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
-        # ImageJob.new.perform(@id)
     	  ImageJob.perform_async(@id)
       else
         ImageJob.new.perform(@id)
