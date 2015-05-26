@@ -60,17 +60,18 @@ class Booking < ActiveRecord::Base
 	def paypal_url(return_path)
 	@experience = Experience.find(self.experience_id)
 	values = {
-	    business: "hewrin-facilitator@hotmail.com ",
+	    business: "thenasiproject-facilitator@gmail.com ",
 	    cmd: "_xclick",
 	    upload: 1,
 	    return: "#{Rails.application.secrets.app_host}#{return_path}",
-	    invoice: id,
+	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
 	    amount: @experience.price,
 	    item_name: "#{@experience.title} experience booking",
 	    item_number: @experience.id,
 	    quantity: self.group_size,
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
 	}
+
 	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
 	end
 end

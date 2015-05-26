@@ -14,7 +14,6 @@ class Host < ActiveRecord::Base
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
 
-
   def email_to_username
   	email.gsub(/@.*/, "").capitalize
   end
@@ -102,6 +101,10 @@ class Host < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def host_approved?
+    self.approved
   end
 
   def set_holiday(dates)

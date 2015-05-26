@@ -1,43 +1,53 @@
+<div class="container">
 <%= form_for @experience, html: {multipart: true} do |f| %>
   <!-- <% flash[:alert] = @experience.errors.full_messages if @experience.errors.any?%> -->
-  <% @experience.errors.count > 3 ? flash[:alert] = "Please fill out all the required fields." : flash[:alert] = @experience.errors.full_messages %>
-<div class="container">
+<% @experience.errors.count > 3 ? flash[:alert] = "Please fill out all the required fields." : flash[:alert] = @experience.errors.full_messages %>
+
   <div class="row">
     <div class="col-md-6">
 
-        <div class="field">
-          <label for="experience_title">*Title</label><br>
-          <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false, class: 'form-control', style: 'width: 75%' %>
-        </div>
-        <div class="field">
-          <label for="experience_description">*Description</label>
-          <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
-        </div>
-       
-        <div class="field">
-          <%= f.label :cuisine %>
-          <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
-        </div>
-        <div class="field">
-          <%= f.label :beverages %><br>
-          <%= f.text_field :beverages, class: 'form-control', style: 'width: 75%' %>
-        </div>
-        <div class="field">
-          <label for="exprience_max_group_size">*Max Group Size</label>
-          <small>(Don't want a hundred guests now do we?)</small><br>
-          <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
-            {required:true, class:'form-control', style:'width:20%'} %>
-        </div>
-        <div class="field">
-          <%= f.label :host_style %><br>
-          <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%' %>
-        </div>
-        </br>
+      <div class="field">
+        <label for="experience_title">*Title</label><br>
+        <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false, class: 'form-control', style: 'width: 75%' %>
+      </div>
+      <div class="field">
+        <label for="experience_description">*Description</label>
+        <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :cuisine %>
+        <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
+      </div>
+      <div class="field">
+        <%= f.label :beverages %><br>
+        <%= f.text_field :beverages, class: 'form-control', style: 'width: 75%' %>
+      </div>
+      <div class="field">
+        <label for="exprience_max_group_size">*Max Group Size</label>
+        <small>(Don't want a hundred guests now do we?)</small><br>
+        <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
+          {required:true, class:'form-control', style:'width:20%'} %>
+      </div>
+      <div class="field">
+        <%= f.label :host_style %><br>
+        <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%' %>
+      </div>
+      </br>
     </div>
+
     <div class="col-md-6">
 
+      <%= f.label :date %><small> *(For one-time event)</small>
       <div class="field form-inline">
-        <label for="experience_available_days">*Days Available</label>
+        <%= f.date_select :date,
+        {include_blank:true, use_short_month:true, order:[:month, :day, :year],
+        start_year: Date.today.year, end_year: Date.today.year.next},
+        {class:"form-control"} %>
+      </div>
+
+      <div class="field form-inline">
+        <label for="experience_available_days">Days Available</label>
         <small>(Check at least one)</small><br>
         <%= f.hidden_field :available_days%>
         <%= f.fields_for :days do |d| %>
@@ -90,7 +100,6 @@
             </div> -->
       </div>
 
-
       <!-- <div class="field">
         <%= f.label :image %></br>
         <small>Please upload 3 images with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results.</small>
@@ -114,12 +123,13 @@
         <small><kbd>ctrl + click</kbd> to select multiple images.</small>
       </div>
 
-    <div class="actions">
+      <div class="actions">
         <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136", remote: true %>
-    </div>
-    <% end %>
+      </div>
 
+    </div>
   </div>
+<% end %>
 </div>
 
 <script type="text/javascript">

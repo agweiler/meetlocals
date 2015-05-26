@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   patch '/price' => 'admins#changeprice'
 
+  patch '/host' => 'admins#approveuser'
+
   resources :admins
 
   root 'static_pages#home'
