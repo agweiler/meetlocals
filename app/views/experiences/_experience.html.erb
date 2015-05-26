@@ -9,13 +9,16 @@
     <h2><%= link_to experience.host.username,  host_path(experience.host_id.to_s) %></p>
     </h2>
 
+    <h5><%= link_to truncate(experience.title.upcase, length: 20), experience_path(experience.id) %>
+    </h5>
+
+    <%= content_tag :h5, experience.date.strftime(" %B %d, %Y"),
+     class:"fa fa-calendar fa-md" if experience.special_event? %>
+    <br>
     <!-- <p>
       Rating:
       <%= experience.testimonials.present? ? experience.avg_rating.to_s + " / " + pluralize(experience.testimonials.count, "review") + "": '-'%>
     </p> -->
-
-    <h5><%= link_to truncate(experience.title.upcase, length: 20), experience_path(experience.id) %>
-    </h5>
 
     <label>Speaks:</label>
     <%= content_tag 'span', experience.host.languages %><br>
@@ -24,12 +27,14 @@
     <label>Age:</label>
     <%= content_tag 'span', "#{experience.host.age} yrs old" %><br>
 
-    <p class="text-left">
-      <% link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
+
     <% if current_host == experience.host || current_admin %>
-      | <%= link_to 'Edit', edit_experience_path(experience), class: "btn btn-warning btn-xs btn_admins" %> |
+    <p class="text-center">
+      <%= link_to 'More info', experience, class: "btn btn-info btn-xs", style: "color:#fff" %>
+      | <%= link_to 'Edit', edit_experience_path(experience),
+       class: "btn btn-warning btn-xs btn_admins" %> |
       <%= link_to 'Destroy', experience, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs", style: "color:#fff" %>
-    <% end %>
     </p>
+    <% end %>
   </div>
 </div>

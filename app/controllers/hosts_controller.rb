@@ -24,8 +24,8 @@ class HostsController < ApplicationController
   end
 
   def show
-    @host = Host.find(params[:id])
-    @experiences = @host.experiences
+    @normal_events = @host.experiences.normal_events
+		@special_events = @host.experiences.special_events
   end
 
   def new

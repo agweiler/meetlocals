@@ -5,6 +5,8 @@ class Experience < ActiveRecord::Base
 	has_many :testimonials, through: :bookings
 
 	scope :available, -> { where("date > ?", Date.today) }
+	scope :normal_events, -> { where(date:nil) }
+	scope :special_events, -> { where.not(date:nil)}
 
 	before_save :set_default_mealtime, :as_special_event
 
@@ -58,6 +60,10 @@ class Experience < ActiveRecord::Base
 		unless self.date.nil?
 			self.available_days = "-------"
 		end
+	end
+
+	def special_event?
+		!self.date.nil?
 	end
 
 	validates :mealset, presence: true, if: :is_dinner?
