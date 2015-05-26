@@ -1,3 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-	protected 
+	private
+		def partner_params
+			params.require(:partner).permit(:name, :contact_info, :address)
+		end
 end

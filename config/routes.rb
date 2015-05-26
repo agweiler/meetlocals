@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :partners, controllers: { registrations: "partners/registrations" }
+  resources :partners
+
   devise_for :hosts, controllers: { registrations: "hosts/registrations" }
   resources :hosts
 
@@ -78,7 +81,6 @@ Rails.application.routes.draw do
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
-
   resources :experiences
 
   resources :bookings
@@ -92,4 +94,6 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :testimonials
+
+  resources :partner_events
 end

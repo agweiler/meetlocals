@@ -23,8 +23,6 @@
 
 				<% if current_admin %>
 					<li><%= link_to "Show All Users", admins_path %></li>
-					<li><%= link_to "Analytics", admin_analytics_path %></li>
-					<li><%= link_to "Settings", admin_settings_path %></li>
 				<% end %>
 	
 				<% if current_user %>
@@ -37,10 +35,12 @@
 							<% end %>
 							<% if current_admin %>
 								<li><%= link_to "Show All Users", admins_path %></li>
-							<% end %>
-							<li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Bookings", bookings_path %></li>
-							<li><%= link_to destroy_user_session_path, method: :delete do  %>Log out
+								<li><%= link_to "Settings", admin_settings_path %></li>
+						  <% else %>
+								<li><%= link_to "Profile", current_user %></li>
+              	<li><%= link_to "Bookings", bookings_path %></li>
+              <% end %>
+								<li><%= link_to destroy_user_session_path, method: :delete do  %>Log out
 								<span class="glyphicon glyphicon-log-out"></span><% end %></li>
 						</ul>
 					</li>
