@@ -1,20 +1,23 @@
 <div class="row" id="holiday_calendar">
+
   <h3 class="text-center">My Holiday Calendar</h3>
   <h6 class="text-center" id='notice'>&nbsp;</h6>
-  <div class="col-md-3">
+  <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
     <div id="datepick"></div>
-    <div class="text-center">
-    <%= form_for :holiday, remote:true do |f| %>
+    <!-- <%= form_for :holiday, remote:true do |f| %>
       <%= f.hidden_field :dates %>
       <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
-    <% end %>
-    </div>
+    <% end %> -->
   </div>
 
-  <div class="col-md-9" id="showdates">
+  <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
+  <div class="row text-center">
 
+  <%= form_for :holiday, remote:true do |f| %>
+    <%= f.hidden_field :dates %>
+    <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
+  <% end %>
   </div>
-
 </div>
 
 <script>
@@ -73,12 +76,12 @@ $(function(){
     formatted = formatted.sort();
 
     if(open_tag !== '' && len > 1){
-      formatted[0] = '<ul class="col-md-3">' + formatted[0];
+      formatted[0] = '<ul class="col-md-2 col-sm-3 col-xs-6">' + formatted[0];
       formatted[len+1] = '</ul>';
 
       if(len > 12){
         for(j=1; j< (len/12); j++)
-          formatted[j*12] = '</ul><ul class="col-md-3">' + formatted[j*12];
+          formatted[j*12] = '</ul><ul class="col-md-2 col-sm-3 col-xs-6">' + formatted[j*12];
       }
 
       formatted = formatted.join(' ');

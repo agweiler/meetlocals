@@ -12,9 +12,11 @@
     <h5><%= link_to truncate(experience.title.upcase, length: 20), experience_path(experience.id) %>
     </h5>
 
-    <%= content_tag :h5, experience.date.strftime(" %B %d, %Y"),
-     class:"fa fa-calendar fa-md" if experience.special_event? %>
-    <br>
+    <div class="">
+      <%= content_tag :h5, experience.date.strftime(" %B %d, %Y"),
+       class:"fa fa-calendar fa-lg" if experience.special_event? %>
+      <br>
+    </div>
     <!-- <p>
       Rating:
       <%= experience.testimonials.present? ? experience.avg_rating.to_s + " / " + pluralize(experience.testimonials.count, "review") + "": '-'%>

@@ -6,7 +6,7 @@ class Experience < ActiveRecord::Base
 
 	scope :available, -> { where("date > ?", Date.today) }
 	scope :normal_events, -> { where(date:nil) }
-	scope :special_events, -> { where.not(date:nil) }
+	scope :special_events, -> { where.not(date:nil).order(:date) }
 	scope :special_events_dates,
 	 -> { where.not(date:nil).pluck(:date).map {|date| date.strftime('%F') } }
 
@@ -66,6 +66,10 @@ class Experience < ActiveRecord::Base
 
 	def special_event?
 		!self.date.nil?
+	end
+
+	def available?
+		self.date.nil? || self.date > Date.today
 	end
 
 	validates :mealset, presence: true, if: :is_dinner?
