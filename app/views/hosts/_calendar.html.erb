@@ -29,7 +29,7 @@ $(function(){
     multidate: true,
     multidateSeparator: ",",
     todayHighlight: true,
-    datesDisabled: '<%= raw(@host.bookings.confirmed_dates) %>'
+    datesDisabled: <%= raw(@host.bookings.confirmed_dates + @host.experiences.special_events_dates) %>
   }).on('click', this, function(e){
     $('#notice').removeClass('alert alert-success').html('&nbsp;');
     showDates($('#datepick').datepicker('getDates'));

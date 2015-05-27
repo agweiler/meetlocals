@@ -6,7 +6,9 @@ class Experience < ActiveRecord::Base
 
 	scope :available, -> { where("date > ?", Date.today) }
 	scope :normal_events, -> { where(date:nil) }
-	scope :special_events, -> { where.not(date:nil)}
+	scope :special_events, -> { where.not(date:nil) }
+	scope :special_events_dates,
+	 -> { where.not(date:nil).pluck(:date).map {|date| date.strftime('%F') } }
 
 	before_save :set_default_mealtime, :as_special_event
 
