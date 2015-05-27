@@ -1,5 +1,159 @@
-<% if flash[:notice] %>
+<div id = "loading" style = "display: none;">
+  <p> Your pictures are loading..... </p>
+</div>
+
+<div id="mealpanel">
+  <% @experience.images.limit(3).each_with_index do |image, index| %>
+    <div class="col-md-4" style="padding:0px">
+      <%= image_tag image.image_file.url(:medium), id: index %>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-md-4" id="hostinfo">
+  <div class="row center-block" id="profilepic" style="padding:0px">
+    <% @host = @experience.host %>
+    <% if @host.images.present? %>
+      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-sm-4 col-sm-offset-3", style:"height:50%; width:50%" %></br>
+    <% else %>
+      <%= image_tag "box.jpeg", class: "img-circle col-md-3 col-md-offset-3", style:"height:50%;width:50%" %>
+    <% end %>
+  </div>
+
+  <%= content_tag 'h3', @host.username, class:"text-center" %>
+
+  <div class="row" id="bookinfo">
+    <div class="col-md-10 col-md-offset-1">
+      <h4 class="text-center">DKK <%= @experience.price.round %>
+        <span>PER PERSON</span></h4>
+      <%= content_tag :h5, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",
+       class:"text-center" if @experience.special_event? %>
+      <%= render 'bookings/form' %>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-md-8" id="mealinfo">
+  <div class="row" id="mealframe">
+    <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins pull-right" if current_host == @experience.host%>
+
+    <%= content_tag 'h1', @experience.title %>
+
+    <%= content_tag 'p', "#{@host.suburb}, #{@host.state}, #{@host.country} (Age #{@host.age})" %>
+    <%= content_tag 'p', @host.intro %>
+    <%= content_tag 'p', "Speaks: #{@host.languages}" %>
+
+    <label>Neighbourhood:</label>
+    <%= content_tag 'p', @host.neighbourhood %>
+
+    <label>Additinal Information:</label>
+    <%= content_tag 'p', @host.additional_info %>
+  </div>
+
+  <div class="row" style="" id="menuframe">
+    <h2>MENU</h2>
+    <table class="table" id="menutab">
+      <thead>
+        <tr>
+          <th>MEAL</th>
+          <th>ALCOHOL SERVED</th>
+          <th>CUISINE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @experience.meal %></td>
+          <td><%= @experience.beverages %></td>
+          <td><%= @experience.cuisine %></td>
+        </tr>
+      </tbody>
+
+       <thead>
+        <tr>
+          <th>Halal</th>
+          <th>Availability</th>
+          <th>Group Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            No
+          </td>
+          <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
+      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
+      <%= avail_days.to_sentence %></td>
+          <td><%= @experience.max_group_size %> pax</td>
+        </tr>
+      </tbody>
+
+       <thead>
+        <tr>
+          <th>Host Style</th>
+          <th>Suggested Time</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+              <%= @experience.host_style if @experience.host_style %>
+          </td>
+          <td>
+          <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
+          <%= (@experience.time.in_time_zone +
+                @experience.duration.hour).strftime('%I:%M %p') %>
+          </td>
+          <td>DKK <%= @experience.price.round %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
+      <%= content_tag 'p', @experience.description %>
+    </div>
+  </div>
+
+  <div class="row" id="specframe">
+    <h2>SPECIAL EVENTS</h2>
+  </div>
+
+  <%if @host.video_url.present?%>
+  <div class="row" id="menuframe">
+    <h2>VIDEO PRESENTATION</h2>
+    <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
+  </div>
+  <% end %>
+
+  <div class="row" id="menuframe">
+   <h2>MAP</h2>
+   <div id="map-canvas" style="float:left; max-width: 600px"></div>
+  </div>
+
+                 <!-- Curious map code -->
+  <div id="mapLat" style="display: none;">
+    <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
+  </div>
+  <div id="mapLng" style="display: none;">
+    <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
+  </div>
+
+  <div class="row" id="specframe">
+    <h2>MEAL FORMAT</h2>
+  </div>
+
+  <div class="row" id="testiframe">
+    <h2>REVIEWS</h2>
+    <% @testimonials.each do |testimonial| %>
+      <%= content_tag 'h5', testimonial.title %>
+      <%= simple_format(testimonial.body) %>
+    <% end %>
+  </div>
+</div>
+
 <script>
+<% if flash[:notice] %>
 $(function(){
     function check_job_status(job_id){
     var request = $.ajax({
@@ -19,183 +173,16 @@ $(function(){
   var id = <%= @experience.id %>
   check_job_status(id)
 });
-</script>
 <% end %>
-<div id = "loading" style = "display: none;">
-  <p> Your pictures are loading..... </p>
-</div>
-<div class="row" id="mealpanel">
 
-  <% @experience.images.each_with_index do |image, index| %>
-    <div class="col-md-4" style="padding:0px">
-
-      <%= image_tag image.image_file.url(:medium), style: "width:100%; padding: 0px", id: index %>
-
-      </br>
-
-    </div>
-  <% end %>
-</div>
-
-<div class="col-md-4 bg-default">
-  <div class="row center-block" style="">
-    <% @host = @experience.host %>
-    <% if @host.images.present? %>
-      <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle col-md-10 col-md-offset-1" %></br>
-    <% else %>
-      <%= image_tag "box.jpeg", class: "img-circle col-md-10 col-md-offset-1" %>
-    <% end %>
-  </div>
-
-  <div class="row" style="">
-    <div class="col-md-10 col-md-offset-1">
-      <h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
-
-      <p><strong>Location:</strong>
-        <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
-
-      <p>More events by: <%= link_to @experience.host.username,  "/hosts/" + @experience.host_id.to_s %></p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1 bg-info" style="border-radius: 10px">
-      <br>
-      <%= render 'bookings/form' %>
-    </div>
-  </div>
-
-</div>
-
-<div class="col-md-8" style="background-color:#777">
-  <div class="row" id="mealframe">
-    <h2><%= @experience.title %>
-     <% if current_host == @experience.host %>
-       <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins" %>
-     <% end %>
-    </h2>
-
-    <p><%= @host.first_name%><%=@host.last_name %></p>
-    <p>
-      <strong>Location:</strong>
-      <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-    </p>
-
-    <p><%= @host.age %></p>
-
-    <p><%= @host.title %></p>
-    <p><%= @host.intro %></p>
-    <p>Speaks: <%= @host.languages %></p>
-    <p><%= @host.neighbourhood %></p>
-    <p><%= @host.additional_info %></p>
-  </div>
-
-  <div class="row" style="" id="menuframe">
-    <h1>Menu</h1>
-    <table class="table" id="menutab">
-      <thead>
-        <tr>
-          <th id="rembor">Meal Type</th>
-          <th id="rembor">Cuisine</th>
-          <th id="rembor">Beverages</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="rembor"><%= @experience.meal %></td>
-          <td id="rembor"><%= @experience.cuisine %></td>
-          <td id="rembor"><%= @experience.beverages %></td>
-        </tr>
-      </tbody>
-
-       <thead>
-        <tr>
-          <th id="rembor">Halal</th>
-          <th id="rembor">Availability</th>
-          <th id="rembor">Group Size</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="rembor"><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-      <%= avail_days.to_sentence %></td>
-          <td id="rembor"><%= @experience.max_group_size %> pax</td>
-        </tr>
-      </tbody>
-
-       <thead>
-        <tr>
-          <th id="rembor">Host Style</th>
-          <th id="rembor">Suggested Time</th>
-          <th id="rembor">Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-           <td id="rembor">
-             <% if @experience.host_style %>
-               <%= @experience.host_style %>
-             <% end %></td>
-           <td id="rembor">
-           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
-           <%= (@experience.time.in_time_zone +
-                @experience.duration.hour).strftime('%I:%M %p') %>
-           </td>
-           <td id="rembor"><%= @experience.price %> $US</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
-      <%= @experience.description %>
-    </div>
-  </div>
-
-  <div class="row" id="specframe">
-    <h1>Special Events</h1>
-  </div>
-
-  <% if true %>
-    <%if @host.video_url.present?%>
-      <div class="row" id="menuframe">
-        <h1>Video Presentation</h1>
-        <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div class="row" id="menuframe">
-   <h1>Map</h1>
-   <div id="map-canvas" style="max-width: 600px"></div>
-  </div>
-
-                 <!-- Curious map code -->
-  <div id="mapLat" style="display: none;">
-    <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
-  </div>
-  <div id="mapLng" style="display: none;">
-    <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
-  </div>
-
-  <div class="row" id="specframe">
-    <h1>Meal Format</h1>
-   </div>
-
-  <div class="row" id="ratingsframe">
-    <h1>Ratings</h1>
-  </div>
-
-  <div class="row" id="testiframe">
-    <h1>Testimonials:</h1>
-    <% @testimonials.each do |testimonial| %>
-      <h6><%= testimonial.title %></h6>
-      <p>Rating:
-        <% testimonial.rating.to_i.times do %>
-          <img src="/assets/star-on.png" />
-        <% end %></p>
-        <%= simple_format(testimonial.body) %>
-      <% end %>
-      </p>
-  </div>
-</div>
+$(function(){
+  $(window).scroll(function(){
+    if(($(window).scrollTop() + 0) >= ($('#1').height() + $('#profilepic').height()) && $(window).width() > 992){
+      $('#hostinfo').css({position:'fixed', top:0 - $('#profilepic').height()});
+      $('#mealinfo').css({float:'right'});
+    }else{
+      $('#hostinfo').css({position:'initial'});
+    }
+  });
+});
+</script>

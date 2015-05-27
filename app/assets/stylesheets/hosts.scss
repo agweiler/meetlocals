@@ -1,3 +1,8 @@
+$headline: 'Amatic SC', cursive;
+$paragraph: 'Helvetica';
+$navi-slide: 'Lato', sans-serif;
+$green_text: darkGreen;
+
 #map-canvas {
 	width: 100%;
 	height: 300px;
@@ -6,17 +11,118 @@
 
 
 #card_container {
-  background-color: #777;
-  height: 320px;
+  /* background-color: #fff; */
   margin-top: 15px;
+
+	p {
+		font-family: $paragraph;
+		font-size: 16px;
+		strong {
+
+		}
+	}
+}
+
+#host_controls {
+	a{
+	margin-top: 5px;
+	color: white;
+	}
 }
 
 #avatar_align {
-  text-align:center; 
+  text-align:center;
   margin-left:0px;
 }
 
+h3.title {
+	font-family: $headline;
+	font-size: 38px;
+	color: $green_text;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
-#host_events_title {
-  background-color: #777;
+#map {
+	margin-top: 15px;
+}
+
+#host_events {
+  /* background-color: #eee; */
+	margin-bottom: 15px;
+}
+
+#host_specials {
+	/* background-color: #fff; */
+}
+
+#search_box{
+	padding-top: 30px;
+	font-weight: bold;
+	font-family: $paragraph;
+
+	select {
+		border-color: black;
+	}
+
+	input[type="text"]{
+		border-color: black;
+		border-radius: 5px;
+	}
+
+	input[type="submit"]{
+		border-width: 0px;
+	}
+}
+
+
+#holiday_calendar{
+
+	background-color: #eee;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+	h3{
+		font-family: $headline;
+		font-size: 38px;
+		color: $green_text;
+		font-weight: bold;
+	}
+
+	#notice{
+		margin:0px;
+	}
+
+	div#datepick{
+		/* background-color: #fff; */
+		.disabled-date {
+			background-color: yellow;
+			color: black;
+		}
+		.active.day{
+			background-color: red;
+			color: white;
+		}
+
+		.datepicker-inline {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	div#showdates{
+		padding-bottom: 40px;
+
+		ul{
+			list-style-type:none;
+			padding: 0px;
+
+			li{
+				i {
+					color:red;
+				}
+			}
+		}
+	}
 }

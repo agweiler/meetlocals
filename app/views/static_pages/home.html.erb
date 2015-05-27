@@ -1,171 +1,162 @@
-<!-- <head>
- <link href="css/bootstrap.css" rel="stylesheet">
- <link href="css/agency.css" rel="stylesheet">
-</head>
- -->
-
-<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="3500" id="bs-carousel" style="height: 600px">
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4500" id="bs-carousel" style="height: 600px">
   <!-- Overlay -->
 <!--   <div class="overlay"></div>
  -->
   <!-- Indicators -->
-  <ol class="carousel-indicators">
+  <!-- <ol class="carousel-indicators">
     <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
     <li data-target="#bs-carousel" data-slide-to="1"></li>
     <li data-target="#bs-carousel" data-slide-to="2"></li>
-  </ol>
+  </ol> -->
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" style="height: 600px">
     <div class="item slides active">
       <div class="slide-1"></div>
-      <div class="hero">
+      <div class="hero" style="width:100%">
         <hgroup>
-            <h1><span class="maroon">Meet the Danes</span></h1>
-            <h3>Authentic meals with good company</h3>
+          <!-- <h1><span class="maroon">Meet the Danes</span></h1> -->
+          <!-- <h4>Authentic meals with good company</h4> -->
+          <h3>More than 15,000 guests have...</h3>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find a Host</button>
- -->       <%= link_to "Find a Host", experiences_path, class: "btn btn-hero btn-lg" %>
+ -->
+ <!-- <%= link_to "Find a Host", experiences_path, class: "btn btn-hero btn-lg" %> -->
       </div>
     </div>
     <div class="item slides">
       <div class="slide-2"></div>
-      <div class="hero">
+      <div class="hero" style="width:100%">
         <hgroup>
-            <h1><span class="maroon">Become a Host</span></h1>
-            <h3>Wow guests with your food</h3>
+          <!-- <h1><span class="maroon">Become a Host</span></h1> -->
+          <!-- <h4>Wow guests with your food</h4> -->
+          <h3>Meet the locals, who will cook up...</h3>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">Find out how</button>
- -->    <%= link_to "Be a Host", how_to_be_a_host_path, class: "btn btn-hero btn-lg"%>
+ -->
+ <!-- <%= link_to "Be a Host", how_to_be_a_host_path, class: "btn btn-hero btn-lg"%> -->
       </div>
     </div>
     <div class="item slides">
       <div class="slide-3"></div>
-      <div class="hero">
+      <div class="hero" style="width:100%">
         <hgroup>
-            <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1>
-            <h3>Learn about the benefits</h3>
+          <!-- <h1 style="margin-left:15px"><span class="maroon">Find out how it works</span></h1> -->
+          <!-- <h4>Learn about the benefits</h4> -->
+          <a href="#"><h3>Let's Connect</h3></a>
         </hgroup>
 <!--         <button class="btn btn-hero btn-lg" role="button">More info</button>
- -->         <%= link_to "Learn more", how_it_works_path, class: "btn btn-hero btn-lg" %>
+ -->
+ <!-- <%= link_to "Learn more", how_it_works_path, class: "btn btn-hero btn-lg" %> -->
       </div>
     </div>
   </div>
 </div>
 
-</br>
-</div>
+<br>
 
 <div class="col-md-12 col-sm-12 col-xs-12" id="gradio">
-    </br>
-    </br>
+  <br><br>
 
-      <div class="col-md-6 col-md-offset-1 col-sm-12">
-        <h1 id="big_head">AWARD WINNING AGENCY</h1>
-        <h2 id="small_head">COME MEET THE DANES</h2>
-        </br>
-          <p style="text-align:center">Many nationalities visit Denmark every year. To give
-          our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
-          </p>
-        </br>
-            <p style="text-align:center; margin-bottom:40px"><%= link_to "Learn more", how_it_works_path, class: "btn btn-default", style:"background-color:#fcd136; color:#660A0A"%>
-            </p>
-      </div>
+  <div class="col-md-6 col-md-offset-1 col-sm-12">
+    <h1 class="heads text-center">AWARD WINNING AGENCY</h1>
+    <h6 class="heads-sm text-center">COME MEET THE DANES</h6>
+    <br>
+    <p class="para text-center">Many nationalities visit Denmark every year. To give our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
+    </p>
+    <br>
+    <p style="text-align:center; margin-bottom:40px"><%= link_to "Learn more", how_it_works_path, class: "btn btn-default", style:"background-color:#fcd136; color:#660A0A"%>
+    </p>
+  </div>
  <!--  </div>
  -->
   <div class="col-md-4 hidden-xs hidden-sm">
-        <img class="img-circle" src="assets/denmark_dock.jpg" style="width:250px; height:250px; margin-top:20px; margin-bottom: 0px; margin-left: 90px">
-      </div>
-
-</div>
-
-<div class="container-fluid">
-  </br>
-  <div class='row'>
-  </br>
-  </br>
-   <div class="col-md-4 hidden-xs hidden-sm">
-        <img class="img-circle" src="assets/111jjunkfood.jpg" style="width:350px; height:300px; margin-top:0px; margin-bottom: 10px; margin-left: 60px">
-      </div>
-    <div class='col-md-7 col-xs-12' style="margin-left: 0px">
-    <h2 style="text-align:center">What people are saying...</h2>
-    </br>
-
-      <div class="row carousel slide" data-ride="carousel" id="quote-carousel">
-        <!-- Bottom Carousel Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#quote-carousel" data-slide-to="1"></li>
-          <li data-target="#quote-carousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Carousel Slides / Quotes -->
-        <div class="carousel-inner">
-
-          <!-- Quote 1 -->
-          <div class="item active">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-          <!-- Quote 2 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-          <!-- Quote 3 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum elit in arcu blandit.</p>
-                  <small>Someone famous</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-        </div>
-
-        <!-- Carousel Buttons Next/Prev -->
-        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
-        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
-      </div>
-    </div>
-
+    <img class="img-circle" src="assets/denmark_dock.jpg" style="width:250px; height:250px; margin-top:20px; margin-bottom: 0px; margin-left: 90px">
   </div>
 
 </div>
 
+<div class="container-fluid" id="recent_events">
+  <h3 class="heads">RECENT EVENTS</h3>
+
+  <% @recent_events.each_with_index do |event, idx| %>
+  <div class="row" style="padding:15px 30px;display:flex">
+
+    <% if idx.even? %>
+      <div class="col-md-4 thumbnail">
+        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
+          event %>
+      </div>
+      <div class="col-md-4 text-center recent-host" style="">
+        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
+            class: "img-circle"), event.host if event.host.images.present? %>
+        <h3 class="heads-lt">
+          <%= link_to event.host.username, host_path(event.host) %>
+        </h3>
+        <h4>HOST</h4>
+        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
+        <%= content_tag :quote, event.description, class:"para" %>
+      </div>
+      <div class="col-md-4" style="background-color:yellow">
+        TEMP
+      </div>
+    <% else %>
+      <div class="col-md-4" style="background-color:yellow">
+        TEMP
+      </div>
+      <div class="col-md-4 text-center recent-host" style="">
+        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
+            class: "img-circle"), event.host if event.host.images.present? %>
+        <h3 class="heads-lt">
+          <%= link_to event.host.username, host_path(event.host) %>
+        </h3>
+        <h4>HOST</h4>
+        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
+        <%= content_tag :quote, event.description, class:"para" %>
+      </div>
+      <div class="col-md-4 thumbnail" style="">
+        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
+          event %>
+      </div>
+    <% end %>
+
+  </div>
+  <% end %>
+</div>
+
+<div class="container-fluid" style="background-color: #D4D4D4" id="host_party">
+  <h3 class="heads">HOST PARTY</h3>
+  <% @host_party.each do |experience| %>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <%= link_to image_tag(experience.images.first.image_file.url(:medium)),
+          experience if experience.images.present?%>
+
+        <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
+
+          <h3 class="heads-lt">
+            <%= link_to experience.host.username,  host_path(experience.host) %>
+          </h3>
+          <h5 class="para">Description: </h5>
+          <%= content_tag :quote, truncate(experience.description, length: 140) ,class:"para" %>
+
+         <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
+          <p>
+            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar fa-lg", style:"margin-top:10px; color:grey" %>
+            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-md pull-right", style: "color:#fff" %>
+          </p>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  <% end %>
+</div>
 <!-- <div class="overlay2"></div> -->
 <div style="background-image:url('assets/greg22.jpg'); background-attachment: fixed" id="pre_foot">
-  <div class="container center-block" style="text-align:center; margin-top:100px">
-    <div class="col-md-3 col-md-offset-2 col-xs-12" style="height:80px;margin-top:100px">
-      <%= link_to "Sign up as a guest", new_guest_registration_path, class: "btn-xl col-xs-12", style: "background-color:#1abc9c; color:#f5f5f5; margin-right: 0px" %>
-    </div>
-
-    <div class="" style="height:80px;margin-top:100px">
-      <%= link_to "Sign up as a host", new_host_registration_path, class: "btn-xl col-md-3 col-md-offset-2 col-xs-12", style: "background-color:#660A0A; margin-right: 0px; border: 1px solid; border-color: #660A0A; color: #f5f5f5 "%>
-    </div>
+  <div class="center-block" id="join_us">
+    JOIN OUR GROWING
+    <hr style="width:50%">
+    COMMUNITY  TODAY
   </div>
 </div>
 

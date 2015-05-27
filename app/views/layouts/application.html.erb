@@ -34,10 +34,10 @@
   </head>
 
   <header class = "navbar navbar-fixed-top navbar-inverse" style="border-color:#222; height:50px">
-    <%= render 'layouts/header_default' %>
+    <%= render 'layouts/header' %>
   </header>
 
-    <body class="<%= controller_name %> <%= action_name %>" style="padding: 50px 0 0 0">
+    <body class="<%= controller_name %> <%= action_name %>" style="padding: 80px 0 0 0">
 
   <% if notice %>
     <div class="alert alert-success-alt alert-dismissable error_notice">
@@ -71,7 +71,7 @@
 
     <div style='float:bottom'>
   	  <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+      <!-- <%= debug(params) if Rails.env.development? %> -->
     </div>
   <!--       <%= debug(params) if Rails.env.development? %>
  -->
