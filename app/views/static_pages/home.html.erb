@@ -77,25 +77,25 @@
 </div>
 
 <div class="container-fluid" id="recent_events">
-  <h3 class="heads">RECENT EVENTS</h3>
+  <h3 class="heads">MEET THE HOSTS</h3>
 
-  <% @recent_events.each_with_index do |event, idx| %>
+  <% @hosts.each_with_index do |host, idx| %>
   <div class="row" style="padding:15px 30px;display:flex">
 
     <% if idx.even? %>
       <div class="col-md-4 thumbnail">
-        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
-          event %>
+        <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)),
+          host.experiences.first %>
       </div>
       <div class="col-md-4 text-center recent-host" style="">
-        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
-            class: "img-circle"), event.host if event.host.images.present? %>
+        <%= link_to image_tag(host.images.first.image_file.url(:thumb),
+            class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
-          <%= link_to event.host.username, host_path(event.host) %>
+          <%= link_to host.username, host_path(host) %>
         </h3>
         <h4>HOST</h4>
-        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
-        <%= content_tag :quote, event.description, class:"para" %>
+        <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
+        <%= content_tag :quote, host.experiences.first.description, class:"para" %>
       </div>
       <div class="col-md-4" style="background-color:yellow">
         TEMP
@@ -105,18 +105,18 @@
         TEMP
       </div>
       <div class="col-md-4 text-center recent-host" style="">
-        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
-            class: "img-circle"), event.host if event.host.images.present? %>
+        <%= link_to image_tag(host.images.first.image_file.url(:thumb),
+            class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
-          <%= link_to event.host.username, host_path(event.host) %>
+          <%= link_to host.username, host_path(host) %>
         </h3>
         <h4>HOST</h4>
-        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
-        <%= content_tag :quote, event.description, class:"para" %>
+        <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
+        <%= content_tag :quote, host.experiences.first.description, class:"para" %>
       </div>
-      <div class="col-md-4 thumbnail" style="">
-        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
-          event %>
+      <div class="col-md-4 thumbnail">
+        <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)),
+          host.experiences.first %>
       </div>
     <% end %>
 
