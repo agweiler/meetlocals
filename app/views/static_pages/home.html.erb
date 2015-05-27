@@ -77,51 +77,19 @@
 </div>
 
 <div class="container-fluid" id="recent_events">
-  <h3 class="heads">RECENT EVENTS</h3>
+  <h3 class="heads">MEET THE HOSTS</h3>
 
-  <% @recent_events.each_with_index do |event, idx| %>
-  <div class="row" style="padding:15px 30px;display:flex">
+  <% @hosts.in_groups_of(3, false).each do |group| %>
+   <div class="row">
+     <% group.each do |host| %>
+     <div class="col-md-4">
 
-    <% if idx.even? %>
-      <div class="col-md-4 thumbnail">
-        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
-          event %>
-      </div>
-      <div class="col-md-4 text-center recent-host" style="">
-        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
-            class: "img-circle"), event.host if event.host.images.present? %>
-        <h3 class="heads-lt">
-          <%= link_to event.host.username, host_path(event.host) %>
-        </h3>
-        <h4>HOST</h4>
-        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
-        <%= content_tag :quote, event.description, class:"para" %>
-      </div>
-      <div class="col-md-4" style="background-color:yellow">
-        TEMP
-      </div>
-    <% else %>
-      <div class="col-md-4" style="background-color:yellow">
-        TEMP
-      </div>
-      <div class="col-md-4 text-center recent-host" style="">
-        <%= link_to image_tag(event.host.images.first.image_file.url(:thumb),
-            class: "img-circle"), event.host if event.host.images.present? %>
-        <h3 class="heads-lt">
-          <%= link_to event.host.username, host_path(event.host) %>
-        </h3>
-        <h4>HOST</h4>
-        <%= link_to event.title, experience_path(event), class:"event-title" %><br>
-        <%= content_tag :quote, event.description, class:"para" %>
-      </div>
-      <div class="col-md-4 thumbnail" style="">
-        <%= link_to image_tag(event.images.first.image_file.url(:medium)),
-          event %>
-      </div>
-    <% end %>
+       <%= render host %>
 
-  </div>
-  <% end %>
+     </div>
+     <% end %>
+   </div>
+   <% end %>
 </div>
 
 <div class="container-fluid" style="background-color: #D4D4D4" id="host_party">
