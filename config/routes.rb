@@ -7,10 +7,6 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
-
-
-  get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
-
   get 'admins/settings' => 'admins#settings', as: :admin_settings
 
   patch '/price' => 'admins#changeprice'
