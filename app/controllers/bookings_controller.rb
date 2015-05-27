@@ -48,6 +48,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1/edit
   def edit
+    @host = @experience.host
     @action = request.filtered_parameters['action']
     @booking = @experience.bookings.find(params[:id])
   end
