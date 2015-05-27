@@ -88,6 +88,7 @@ $(function () {
 
   <% if @experience.special_event? %>
     $('#datepick').datepicker('setDates', '<%= @startDate %>');
+    $('#datepick').hide();
   <% end %>
 
   // if( $("input[name*=datetime]").val() == "" )
