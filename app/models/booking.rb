@@ -56,22 +56,15 @@ class Booking < ActiveRecord::Base
 		# Build request object
 		@pay = @api.build_pay({
 	  	:actionType => "PAY",
-	  	:cancelUrl => "http://localhost:3000",
-	  	:currencyCode => "USD",
-	  	:feesPayer => "PRIMARYRECEIVER",
+	  	:cancelUrl => "http://gentle-inlet-1053.herokuapp.com/",
+	  	:currencyCode => "DKK",
 	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
 	  	:receiverList => {
 	    	:receiver => [{
-	      	:amount => 20.0,
-	      	:email => "thenasiproject-facilitator@gmail.com",
-	      	:primary => true,
+	      	:amount => @experience.price,
+	      	:email => "MTD@meetdanes.com",
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
-	      	},
-	      	{
-	      		:amount => 10.0,
-	      		:email => "thenasiproject-buyer@gmail.com",
-	      		:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
-	      	}] 
+	      	}],
 	      },
 	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}" 
 	  	})
