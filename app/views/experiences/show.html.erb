@@ -26,7 +26,8 @@
     <div class="col-md-10 col-md-offset-1">
       <h4 class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4>
-
+      <%= content_tag :h5, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",
+       class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
   </div>
@@ -104,7 +105,7 @@
           <%= (@experience.time.in_time_zone +
                 @experience.duration.hour).strftime('%I:%M %p') %>
           </td>
-          <td>DKK <%= @experience.price %></td>
+          <td>DKK <%= @experience.price.round %></td>
         </tr>
       </tbody>
     </table>
