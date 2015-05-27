@@ -12,9 +12,15 @@ $green_text: darkGreen;
 
 #card_container {
   /* background-color: #fff; */
-	background-color: yellow;
-  height: 320px;
   margin-top: 15px;
+
+	p {
+		font-family: $paragraph;
+		font-size: 16px;
+		strong {
+
+		}
+	}
 }
 
 #host_controls {
@@ -38,14 +44,17 @@ h3.title {
 	margin-bottom: 10px;
 }
 
+#map {
+	margin-top: 15px;
+}
+
 #host_events {
   /* background-color: #eee; */
-
 	margin-bottom: 15px;
 }
 
 #host_specials {
-	
+	/* background-color: #fff; */
 }
 
 #search_box{

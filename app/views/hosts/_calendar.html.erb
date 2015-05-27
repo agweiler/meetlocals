@@ -2,7 +2,7 @@
 
   <h3 class="text-center">My Holiday Calendar</h3>
   <h6 class="text-center" id='notice'>&nbsp;</h6>
-  <div class="col-md-3 col-sm-4 col-xs-6">
+  <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
     <div id="datepick"></div>
     <!-- <%= form_for :holiday, remote:true do |f| %>
       <%= f.hidden_field :dates %>
@@ -10,7 +10,7 @@
     <% end %> -->
   </div>
 
-  <div class="col-md-9 col-sm-8 col-xs-6" id="showdates"></div>
+  <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
   <div class="row text-center">
 
   <%= form_for :holiday, remote:true do |f| %>

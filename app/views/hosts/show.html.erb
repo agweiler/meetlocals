@@ -2,16 +2,16 @@
 
   <div class="row">
   <!--    Host Avatar and minor details -->
-    <div class="col-md-4" id="avatar_align">
-      <%= content_tag :h3, "Host Account",
-       class:'title' if @host == current_host %>
+    <div class="col-md-4 col-sm-5 col-xs-12" id="avatar_align">
+      <!-- <%= content_tag :h3, "Host Account",
+       class:'title' if @host == current_host %> -->
       </br>
       <% if @host.images.present? %>
         <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
       <% else %>
         <%= image_tag "box.jpeg" %>
       <% end %>
-    	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+      <%= content_tag :h3, @host.username, class:"title" %>
 
       <% if @host == current_host %>
       <div class="row" id="host_controls">
@@ -35,78 +35,71 @@
     <!-- End curious map code -->
 
     <!-- Host major details -->
-    <div class="col-md-8" id="card_container">
-      <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p>
+    <div class="col-md-8 col-sm-7 col-sm-offset-0 col-xs-offset-1 col-xs-10" id="card_container">
+      <br>
+      <!-- <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p> -->
+      <!-- <div class="col-md-4"> -->
+        <p><strong>Age:</strong> <%= @host.age %> years old</p>
+        <p><strong>Location:</strong>
+           <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
 
-      <p>
-        <strong>Location:</strong>
-         <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %>
-      </p>
+        <p><strong>Occupation:</strong> <%= @host.occupation %></p>
+        <p><strong>Interests:</strong> <%= @host.interests %></p>
 
-      <p>
-        <strong>Age:</strong>
-        <%= @host.age %>
-      </p>
-      <p>
-        <strong>Introduction:</strong>
-        <%= @host.intro %>
-      </p>
-      <p>
-        <strong>Occupation:</strong>
-        <%= @host.occupation %>
-      </p>
-      <p>
-        <strong>Interests:</strong>
-        <%= @host.interests %>
-      </p>
-      <p><%= @host.smoker? %></p>
+        <p><%= @host.smoker? %></p>
+        <p><strong>Pets:</strong> <%= @host.pets %></p>
+        <p><strong>Speaks:</strong> <%= @host.languages %></p>
+        <p><strong>Neighbourhood:</strong> <%= @host.neighbourhood %></p>
+      <!-- </div> -->
 
-      <p>
-        <strong>Pets:</strong>
-        <%= @host.pets %>
-      </p>
-      <p><strong>Speaks:</strong> <%= @host.languages %></p>
+      <!-- <div class="col-md-8 visible-md-block visible-lg-block">
 
-      <p>
-        <strong>Neighbourhood:</strong>
-        <%= @host.neighbourhood %>
-      </p>
-      <p>
-        <strong>Additional Info:</strong>
-        <%= @host.additional_info %>
-      </p>
+      </div> -->
+
+      <!-- <div class="col-md-12"> -->
+        <p>
+          <strong>Introduction:</strong><br>
+          <%= @host.intro %>
+        </p>
+
+        <p>
+          <strong>Additional Info:</strong><br>
+          <%= @host.additional_info %>
+        </p>
+      <!-- </div> -->
+
     </div>
     <!-- End host major details -->
   </div>
   <!-- End of row -->
 
-  <%= render 'calendar' %>
-
-<!-- Start of Map; maybe have this as the host page exp. footer instead, no side-padding -->
-  <div class="row">
+  <!-- Start of Map; maybe have this as the host page exp. footer instead, no side-padding -->
+  <div class="row" id="map">
     <div class="col-md-12" id="map-canvas" min-height="500px"></div>
   </div>
-<!-- End of Map -->
+  <!-- End of Map -->
 
-<!-- Events title-->
-<div class="row" id="host_specials">
-  <%= content_tag :h3, "#{@host.username}'s Special Events", class:"text-center title" %>
-<!-- End of events title -->
+  <%= render 'calendar' %>
 
-<!-- Hosts experiences listing -->
-  <% @special_events.in_groups_of(3, false).each do |group| %>
-    <div class="row">
-      <% group.each do |experience| %>
-        <% next if !experience.available? && @host != current_host %>
-      <div class="col-md-4">
-        <%= render experience %>
+  <!-- Events title-->
+  <div class="row" id="host_specials">
+    <%= content_tag :h3, "#{@host.username}'s Special Events", class:"text-center title" %>
+  <!-- End of events title -->
+
+  <!-- Hosts experiences listing -->
+    <% @special_events.in_groups_of(3, false).each do |group| %>
+      <div class="row">
+        <% group.each do |experience| %>
+          <% next if !experience.available? && @host != current_host %>
+        <div class="col-md-4">
+          <%= render experience %>
+        </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
-<hr>
+  <hr>
 
 <!-- Events title-->
   <div class="row" id="host_events">
