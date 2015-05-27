@@ -6,32 +6,36 @@
   </div>
 <!-- End of Map -->
 
-  <div class="row">
-  <!--    Host Avatar and minor details -->
-    <div class="col-md-4" id="avatar_align">
-    	<% if @host == current_host %>
-        <h3>Your account</h3>
-    	<% end %>
-      </br>
-      <% if @host.images.present? %>
-        <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
-      <% else %>
-        <%= image_tag "box.jpeg" %>
-      <% end %>
-    	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
 
-      <% if @host == current_host %>
-      <div class="row">
-      	<%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
-      </div>
-      <br>
-      <div class="row">
-  			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
-  			<%= link_to "Account Settings" , edit_host_registration_path,
-          class:"btn btn-danger btn-sm", style:"color:white" %>
-      </div>
-    	<% end %>
-    </div>
+    <div class="row">
+    <!--    Host Avatar and minor details -->
+          <div class="col-md-4" id="avatar_align">
+            	<% if @host == current_host %>
+                <h3>Your account</h3>
+            	<% end %>
+              </br>
+              <% if @host.images.present? %>
+                <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
+              <% else %>
+              
+                <%= image_tag "box.jpeg" %>
+              <% end %>
+            	<h4><%= @host.username %><p>(<%= @host.email %>)</p></h4>
+              <% if @host == current_host %>
+              <div class="row">
+                <% if current_host.approved == true %>
+              	  <%= button_to "Create New Experience", new_experience_path, :class => "btn btn-success", :method => :get %>
+                <% end %>
+              </div>
+              <br>
+              <div class="row">
+            			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %> |
+            			<%= link_to "Account Settings" , edit_host_registration_path, :class => "btn btn-danger btn-sm" %>
+
+              </div>
+            	<% end %>
+          </div>
+
     <!-- End of host avatar and minor details -->
 
     <!-- Curious map code -->

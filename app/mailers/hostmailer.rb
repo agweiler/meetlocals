@@ -18,5 +18,9 @@ class Hostmailer < ApplicationMailer
     @booking = Booking.find booking_id
     mail(to: @host.email, subject: "You got mail!")
   end
-  
+
+  def host_approved(host_id)
+    @host = Host.find host_id
+    mail(to: @host.email, subject: "You have been approved")
+  end
 end

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A new host has been created </h1>
+    <p>
+     A new host has been created to join the ranks of Meet the Danes. They are probably waiting patiently for your approval.
+     His/Her bank details are as follows, <br>
+     Bank Number = <%= @bank_number %> <br>
+     Bank Name = <%= @bank_name %>
+    </p>
+
+    <p>
+      Go check him out at <%= link_to 'his profile' , host_url(@host) %>
+    </p>
+   
+
+  </body>
+</html>
