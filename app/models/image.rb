@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
 
   has_attached_file :local_image,
-                    path: ":rails_root/tmp/:attachment_:id_:style_:basename.:extension",
+                    path: "#{Rails.root}/tmp/:attachment_:id_:style_:basename.:extension",
                     url:  "/system/:attachment/:id/:style/:basename.:extension"
    validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
@@ -28,6 +28,7 @@ class Image < ActiveRecord::Base
     after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
+    byebug
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
