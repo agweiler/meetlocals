@@ -28,7 +28,8 @@ class Image < ActiveRecord::Base
     after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
-    byebug
+    puts "find it here"
+    puts local_image.path
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
