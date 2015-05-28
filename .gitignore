@@ -14,7 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
-/tmp
+
 
 # Ignore aws config
 /config/amazon_config.yml
