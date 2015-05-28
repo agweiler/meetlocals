@@ -53,6 +53,9 @@
       <%= link_to "SIGN UP", new_guest_registration_path,
       class:"btn btn-warning " %>
     <% end %>
+  <% elsif current_host %>
+    <% @action == "edit" ? submit_text = "EDIT BOOKING" : submit_text = "SUGGEST DATE"%>
+    <%= f.submit submit_text, class:"btn btn-danger" %>
   <% else %>
     <%= link_to "SIGH IN HERE", new_guest_session_path, class:"btn btn-primary btn-sm", style:"color:white" %>
   <% end %>

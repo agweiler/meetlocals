@@ -42,7 +42,8 @@ class Booking < ActiveRecord::Base
 	end
 
 	def check_finished?
-		Time.now >= self.date && Time.now.hour > (self.start_time + self.experience.duration.hour).hour
+		#Settle!
+				Time.now >= self.date && Time.now.hour > (@booking.experience.time.hour + 4.hours)
 	end
 
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
@@ -94,5 +95,29 @@ class Booking < ActiveRecord::Base
 	  else
 	    @response.error[0].message
 	  end
+	end
+
+	def paypal_refund(receiver)
+		@api = PayPal::SDK::AdaptivePayments::API.new
+
+		# Build request object
+		@refund = @api.build_refund({
+		  :currencyCode => "DKK",
+		  :transactionId => @booking.transaction_id,
+		  :receiverList => {
+		    :receiver => [{
+		      :amount => @booking.experience.price,
+		      :email => receiver }] } })
+
+		# Make API call & get response
+		@refund_response = @api.refund(@refund)
+
+		# Access Response
+		if @refund_response.success?
+		  @refund_response.currencyCode
+		  @refund_response.refundInfoList
+		else
+		  @refund_response.error
+		end
 	end
 end
