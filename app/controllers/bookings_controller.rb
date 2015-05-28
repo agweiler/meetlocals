@@ -51,6 +51,7 @@ class BookingsController < ApplicationController
     @host = @experience.host
     @action = request.filtered_parameters['action']
     @booking = @experience.bookings.find(params[:id])
+    @date = @booking.date.strftime('%F')
   end
 
   # POST /bookings
@@ -115,14 +116,14 @@ class BookingsController < ApplicationController
     booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
 
     # starttime = Time.parse( params[:datetime] )
- 
+
     #moment.js foramt MMMM DD, YYYY
 
     booking_params['date(1i)'].replace( params[:booking]["date(1i)"] )
     booking_params['date(2i)'].replace( params[:booking]["date(2i)"] )
     booking_params['date(3i)'].replace( params[:booking]["date(3i)"] )
 
-    #commented out this part cause it seems like there is no params[:datetime] 
+    #commented out this part cause it seems like there is no params[:datetime]
     #------------------------------------------------------------------
     # starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
 

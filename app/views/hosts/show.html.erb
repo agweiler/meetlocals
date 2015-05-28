@@ -15,7 +15,7 @@
 
       <% if @host == current_host %>
       <div class="row" id="host_controls">
-      	<%= link_to "Create Experience", new_experience_path, class: "btn btn-success btn-sm" %>
+      	<%= link_to "Create Experience", new_experience_path, class: "btn btn-success btn-sm" if @host.approved? %>
   			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
   			<%= link_to "Account Settings" , edit_host_registration_path,
           class:"btn btn-danger btn-sm" %>
