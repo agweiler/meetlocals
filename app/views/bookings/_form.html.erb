@@ -31,7 +31,7 @@
 
   <div class="field">
     <%= f.label :group_size %>
-    <%= f.select :group_size, options_for_select(@experience.max_number_in_group), {}, class:"form-control" %>
+    <%= f.select :group_size, options_for_select(@experience.max_number_in_group, @booking.group_size), {}, class:"form-control" %>
   </div>
 
   <div class="field" id="private_field">
@@ -89,8 +89,8 @@ $(function () {
 
   $('.datepicker-inline').addClass('center-block');
 
+  $('#datepick').datepicker('setDates', '<%= @date %>');
   <% if @experience.special_event? %>
-    $('#datepick').datepicker('setDates', '<%= @startDate %>');
     $('#datepick').hide();
   <% end %>
 
