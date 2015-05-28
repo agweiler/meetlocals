@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
   belongs_to :imageable, polymorphic: true
 
   has_attached_file :local_image,
-                    path: ":rails_root//tmp/public/system/:attachment/:id/:style/:basename.:extension",
+                    path: ":rails_root/tmp/public/system/:attachment/:id/:style/:basename.:extension",
                     url:  "/system/:attachment/:id/:style/:basename.:extension"
    validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
