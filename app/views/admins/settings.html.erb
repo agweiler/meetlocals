@@ -1,29 +1,32 @@
 <div class="container">
-	<div>
-		<p> Change your prices here </p>
+
+	<div class = "col-md-offset-3 col-md-6">
+  <h2 class="text-center"> View Unapproved Hosts here</h2>
+
+	<% @hosts.each do |new_user| %>
+	  <%= form_for(new_user) do |f|%>
+	  <div class="field form-inline text-center">
+	    <%= content_tag :strong, new_user.username %>
+		  <%= content_tag :span, "(#{new_user.email})" %>
+		  <%= link_to 'VIEW', host_path(new_user), class:"btn btn-default btn-sm" %>
+		  <%= f.submit "APPROVE", class:'form-control btn btn-primary btn-sm' %>
+		 </div>
+		 <br>
+		<% end %>
+	<% end %>
+  </div>
+
+	<div class = "col-md-offset-3 col-md-6">
+		<h2 class="text-center">Change your prices here</h2>
 	  <% @prices.each do |price| %>
-     <%= form_for(price) do |f|%>
-    <div>
-    	<%= price.meal %>
-    	<%= f.text_field :price %>
-    	<%= f.submit "Change Price" %>
-    </div> <br>
+
+		<%= form_for(price) do |f|%>
+    <div class="field form-inline text-center">
+			<%= f.label price.meal, style:'width:50px' %>
+    	<%= f.text_field :price, class:'form-control' %>
+    	<%= f.submit "Change Price", class:'form-control btn btn-warning' %>
+    </div>
     <% end %>
   <% end %>
-  </div>
-  <div>
-    <p><strong> View Unapproved Hosts here</strong> </p>
-
-  	<% @hosts.each do |new_user| %>
-  	  <%= form_for(new_user) do |f|%>
-  	  <div>
-  	    <%= new_user.username %>
-  		  <%= new_user.email %>
-  		  <%= link_to 'view profile', host_path(new_user) %>
-  		  <%= f.submit "Approve User" %>
-  		 </div>
-  		 <br>
-  		<% end %>
-  	<% end %>
   </div>
 </div>
