@@ -195,7 +195,8 @@ class BookingsController < ApplicationController
   def hook
 
     params.permit! # Permit all Paypal input params
-    status = params[:payment_status]
+    # status = params[:payment_status]
+    status = params[:payment_status]["0"][".status"]
     id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
     if status == "Completed"
       @booking = Booking.find id
