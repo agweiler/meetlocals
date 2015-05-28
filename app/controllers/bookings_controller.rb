@@ -193,7 +193,7 @@ class BookingsController < ApplicationController
   # Paypal sends this
   protect_from_forgery except: [:hook]
   def hook
-    byebug
+
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
     id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
