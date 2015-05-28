@@ -33,7 +33,7 @@ class Image < ActiveRecord::Base
   	@id = local_image.instance.id
     if local_image? && local_image_updated_at_changed?
       if local_image.instance.imageable_type == "Experience"
-    	  ImageJob.new.perform@id)
+    	  ImageJob.new.perform(@id)
       else
         ImageJob.new.perform(@id)
       end
