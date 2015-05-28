@@ -37,6 +37,7 @@ module Nasi
       end
     end
 
+    PayPal::SDK.load('config/paypal.yml',  ENV['RACK_ENV'] || 'development')
     #   if Rails.env.development?
     #   config.before_configuration do
     #     env_file = File.join(Rails.root, 'config', 'amazon_config.yml')

@@ -5,9 +5,6 @@ class AdminsController < ApplicationController
 		@hosts = Host.all
 	end
 
-	def analytics
-	end
-
 	def settings
 		@prices = Price.all
 		@hosts = Host.where(approved: false)

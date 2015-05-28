@@ -11,8 +11,8 @@
     <% end %>
   <% end %>
   </div>
-
-  <p><strong> View Unapproved Hosts here</strong> </p>
+  <div>
+    <p><strong> View Unapproved Hosts here</strong> </p>
 
   	<% @hosts.each do |new_user| %>
   	  <%= form_for(new_user) do |f|%>
@@ -25,4 +25,5 @@
   		 <br>
   		<% end %>
   	<% end %>
+  </div>
 </div>

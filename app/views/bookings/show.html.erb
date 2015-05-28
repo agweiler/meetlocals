@@ -118,6 +118,11 @@
       <% end %>
 
     <% end %>
+    <% if current_host || current_guest %>
+    <div>
+      <%= link_to 'Cancel booking', @booking, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-warning btn-xs' %>
+    </div>
+    <% end %>
     <!-- <% link_to 'Back', bookings_path, class:"btn btn-warning btn-xs" %> -->
   </div>
 </div>

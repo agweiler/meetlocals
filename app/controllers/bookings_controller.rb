@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion]
-
+  include ApplicationHelper
 
   # GET /bookings
   def index
@@ -115,13 +115,21 @@ class BookingsController < ApplicationController
     booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
 
     # starttime = Time.parse( params[:datetime] )
-
+ 
     #moment.js foramt MMMM DD, YYYY
-    starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
 
-    booking_params['date(1i)'].replace( starttime.strftime('%Y') )
-    booking_params['date(2i)'].replace( starttime.strftime('%m') )
-    booking_params['date(3i)'].replace( starttime.strftime('%d') )
+    booking_params['date(1i)'].replace( params[:booking]["date(1i)"] )
+    booking_params['date(2i)'].replace( params[:booking]["date(2i)"] )
+    booking_params['date(3i)'].replace( params[:booking]["date(3i)"] )
+
+    #commented out this part cause it seems like there is no params[:datetime] 
+    #------------------------------------------------------------------
+    # starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
+
+    # booking_params['date(1i)'].replace( starttime.strftime('%Y') )
+    # booking_params['date(2i)'].replace( starttime.strftime('%m') )
+    # booking_params['date(3i)'].replace( starttime.strftime('%d') )
+    #-------------------------------------------------------------------
 
     # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
     # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
@@ -160,7 +168,13 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
-    @booking.destroy
+    if current_user.class == Guest
+      #subtracts number of days between current cancel date and booking date,turns it into an integer
+      if (@booking.date - Time.now.to_date).to_i > 5
+        paypal_refund(current_user.email)
+      end
+    end
+    @booking.update(status: "canceled")
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully removed.' }
       format.json { head :no_content }
@@ -181,7 +195,7 @@ class BookingsController < ApplicationController
     byebug
     params.permit! # Permit all Paypal input params
     status = params[:payment_status]
-    id = params[:invoice].scan(/\d+/).first
+    id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
     if status == "Completed"
       @booking = Booking.find id
       guest = @booking.guest
