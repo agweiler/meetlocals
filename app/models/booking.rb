@@ -70,7 +70,7 @@ class Booking < ActiveRecord::Base
 	  	:receiverList => {
 	    	:receiver => [{
 	      	:amount => @experience.price,
-	      	:email => "MTD@meetdanes.com",
+	      	:email => "Meetdanes@meetdanes.com",
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
 	      	}],
 	      },
