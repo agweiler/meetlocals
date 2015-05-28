@@ -65,7 +65,7 @@
 
   <div class="field">
     <%= f.label :smoker %>?
-    <%= f.check_box :smoker %> 
+    <%= f.check_box :smoker %>
   </div>
 <!--   We could also make pets a drop down list  -->
   <div class="field">
@@ -91,7 +91,7 @@
 
   <div class="field">
     <%= f.label :region %>
-    <%= f.select :state, Experience.get_location, {}, class:"form-control" %>
+    <%= f.select :state, Experience.get_all_location, {}, class:"form-control" %>
   </div>
 
   <div class="field">
