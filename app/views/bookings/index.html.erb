@@ -1,4 +1,4 @@
-<div class="container" style="text-align:center">
+<div class="container text-center">
   <% if host_signed_in? %>
     <h1>Listing bookings to your experiences</h1>
   <% elsif guest_signed_in? %>
@@ -12,7 +12,7 @@
     <h2>Nothing was found D:</h2>
   <% else %>
   </br>
-  <div class="col-sm-11" style="border: 2px solid; border-radius: 10px; border-color: #000000">
+  <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid; border-radius: 10px; border-color: #000000">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -36,7 +36,7 @@
       <tbody>
         <% @bookings.each do |booking| %>
           <% experience = Experience.find(booking.experience_id)%>
-          <tr>
+          <tr class="text-left">
 
             <td><%= booking.date.strftime('%b %d, %Y') %></td>
             <td><%= experience.time.strftime('%I:%M %p') %></td>
