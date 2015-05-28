@@ -85,7 +85,7 @@
 
       <div class="field">
         <%= f.label :region %> <br>
-        <%= f.select(:location, options_for_select(Experience.get_location, current_host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
+        <%= f.select(:location, options_for_select(Experience.get_all_location, current_host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
 
       <div class="field">
