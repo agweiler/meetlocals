@@ -75,12 +75,13 @@
   <!-- End of row -->
 
   <!-- Start of Map; maybe have this as the host page exp. footer instead, no side-padding -->
-  <div class="row" id="map">
+  <!-- <div class="row" id="map">
     <div class="col-md-12" id="map-canvas" min-height="500px"></div>
-  </div>
+  </div> -->
   <!-- End of Map -->
-
-  <%= render 'calendar' %>
+  <% if @host == current_host %>
+    <%= render 'calendar' %>
+  <% end %>
 
   <!-- Events title-->
   <div class="row" id="host_specials">
