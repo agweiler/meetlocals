@@ -6,9 +6,9 @@
       <%= link_to image_tag(host.images.first.image_file.url(:thumb), class: "img-circle"), host if host.images.present? %>
     </div>
 
-    <h2><%= link_to host.username,  host_path(host) %></p>
+    <h2><%= link_to host.username,  host_path(host) %>
     </h2>
-
+    <h3> <%= link_to host.experiences.first, experience_path(host.experience) %> </h3>
     <label>Speaks:</label>
     <%= content_tag 'span', host.languages %><br>
     <label>Guests:</label>
