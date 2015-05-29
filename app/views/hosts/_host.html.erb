@@ -8,7 +8,7 @@
 
     <h2><%= link_to host.username,  host_path(host) %>
     </h2>
-    <h3> <%= link_to host.experiences.first, experience_path(host.experiences.first) %> </h3>
+    <h3> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </h3>
     <label>Speaks:</label>
     <%= content_tag 'span', host.languages %><br>
     <label>Guests:</label>
