@@ -5,7 +5,7 @@ class HostsController < ApplicationController
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
     if (request.request_method == 'GET')
-			@hosts = Host.all
+			@hosts = Host.joins(:experiences)
 		elsif (request.request_method == 'POST')
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
 			age_range ||= [nil, 0, 200]
