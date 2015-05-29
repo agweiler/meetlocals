@@ -22,11 +22,6 @@
 				<li><%= link_to "PARTNER", root_url %></li>
 				<li><%= link_to "BLOG", blog_path %></li>
 
-				<% if current_admin %>
-					<li><%= link_to "Show All Users", admins_path %></li>
-					<li><%= link_to "Settings", admin_settings_path %></li>
-				<% end %>
-
 				<% if current_user %>
 					<li class ="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><%= "#{current_user.username}" %>
@@ -34,18 +29,26 @@
 						<ul class ="dropdown-menu" role="menu" style="">
 							<% if current_host %>
 								<li><%= link_to "Create New Experience", new_experience_path if current_host.host_approved? %></li>
+								<li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Bookings", bookings_path %></li>
 							<% end %>
+
 							<% if current_admin %>
 								<li><%= link_to "Show All Users", admins_path %></li>
+								<li><%= link_to "Analytics", admin_analytics_path %></li>
+					      <li><%= link_to "Settings", admin_settings_path %></li>
+					      <li><%= link_to "Create New Partner" , new_partner_registration_path %> </li>
 							<% end %>
-							<li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Bookings", bookings_path %></li>
-							<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+
+							<% if current_guest %>
+							  <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Bookings", bookings_path %></li>
+              <% end %>
+							  <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 						</ul>
 					</li>
 				<% else %>
 					</li>
-
 					<li><%= link_to "SIGN IN", new_guest_session_path %></li>
 					<li><%= link_to "SIGN UP", new_guest_registration_path %></li>
 				<% end %>
