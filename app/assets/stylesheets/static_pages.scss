@@ -18,6 +18,58 @@ $green_text: darkGreen;
 	display: inline;
 
 }
+
+.img-circle {
+  border-radius: 50%;
+  border: 5px solid  #f4f4f4;
+}
+
+.box1{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/illus-1.jpg") no-repeat bottom;
+width: 150px;
+height: auto;
+background-size: contain;
+}
+
+.box3{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/ilust-3.jpg") no-repeat bottom;
+width: 150px;
+height: auto;
+background-size: contain;
+}
+
+
+.box2{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/ilust-2.jpg") no-repeat bottom;
+	  width: 25%;
+	  height: auto;
+	  background-size: 200px;
+}
+
+
+#search_box input[type="text"] {
+  border-color: black;
+  border-radius: 0;
+}
+
+.form-control{
+	border-radius: 0;
+}
+
+
+.select-wrapper{
+    border: 1px solid black;
+    border-radius: 0px;
+}
+
+select.no-radius{
+    border:none;
+}
+
+
+
+
+
 /*
 Fade content bs-carousel with hero headers
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
@@ -54,14 +106,12 @@ Image credits: unsplash.com
 .hero {
     position: absolute;
 		background-color:rgba(0,0,0,.3);
-	  top: 580px;
-    left: 50%;
-		height: 80px;
-		width: 200%;
+	  /* top: 580px; */
+		bottom: -45px;
+		min-height: 85px;
+		width: 100%;
     z-index: 3;
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
+		left:50%;
     text-shadow: 2px 2px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
@@ -96,7 +146,62 @@ Image credits: unsplash.com
 hgroup a h3{
 	color: LimeGreen;
 	font-weight: bold;
+	font-style: normal;
 }
+
+h3 a:hover {
+	text-decoration:none;
+}
+
+hgroup h3{
+	position:relative;
+	padding: 15px;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+	color: #fff;
+	text-transform: uppercase;
+;}
+
+
+@media screen and (max-width: 798px) {
+	hgroup h3 {
+		position:relative;
+		padding: 5px;
+		font-style: italic;
+		line-height: 1.0;
+		text-align: center;
+		color: #fff;
+		text-transform: uppercase;
+    }
+}
+
+@media screen and (max-width: 998px) {
+	hgroup h3 {
+		position:relative;
+		padding: 5px;
+		font-style: italic;
+		line-height: 1.0;
+		text-align: center;
+		color: #fff;
+		text-transform: uppercase;
+    }
+}
+
+
+
+
+
+hgroup .connect{
+	color:limeGreen;
+}
+hgroup .connect a{
+	color: LimeGreen;
+}
+hgroup .connect a:hover{
+	text-decoration: none !important;
+}
+
 
 /********************************/
 /*            Overlay           */
@@ -283,6 +388,21 @@ z-index: 1;
   text-align:center;
   font-family: novitonova;
 }
+
+.learnmore{
+	background: #f4f4f4 !important;
+	  border: 2px solid darkGreen;
+	  border-radius: 0;
+	  font-family: "Amatic SC", cursive;
+		font-size: 30px;
+		font-weight: 600;
+		letter-spacing: 1px;
+}
+
+.btn.btn-lg {
+  padding: 5px 10px;
+}
+
 
 /*.maroon {
   color: #fff;
