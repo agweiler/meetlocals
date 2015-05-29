@@ -1,5 +1,5 @@
 <div class="thumbnail">
-  <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)), host if host.experiences.first.images.present?%>
+  <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)), host if host.experiences.first.images.present? && host.experiences.present? %>
 
   <div class="caption" style="background-color: #D4D4D4; height: 100%">
     <div id="avataro">
