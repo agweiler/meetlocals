@@ -52,10 +52,16 @@ background-size: contain;
   border-radius: 0;
 }
 
-.form-control{
-	border-radius: 0;
-}
+#search_box{
 
+	.square_box{
+		-webkit-border-radius: 0px !important;
+		-moz-border-radius: 0px !important;
+		-o-border-radius: 0px !important;
+		border-radius: 0px !important;
+		-webkit-appearance: none;
+	}
+}
 
 .select-wrapper{
     border: 1px solid black;

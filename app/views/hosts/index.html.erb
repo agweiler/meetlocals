@@ -15,17 +15,17 @@
 
   <div class='input-group col-sm-2 col-xs-12'>
     <%= select :search, :age_range, Host.age_ranges,
-      {selected: @selected_age}, {class:"form-control"} %>
+      {selected: @selected_age}, {class:"form-control square_box"} %>
   </div>
 
   <div class="input-group col-sm-2 col-xs-12">
     <%= select :search, :max_group, (["Guests"] + (1..10).to_a),
-      {selected: @selected_group}, {class:"form-control"} %>
+      {selected: @selected_group}, {class:"form-control square_box"} %>
   </div>
 
   <div class='input-group col-sm-2 col-xs-12'>
     <%= select :search, :location, Host.get_location,
-      {selected: @selected_location}, {class:"form-control no-radius"} %>
+      {selected: @selected_location}, {class:"form-control square_box"} %>
   </div>
 
   <div class='input-group col-sm-2 col-xs-12'>
