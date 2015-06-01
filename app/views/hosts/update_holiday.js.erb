@@ -1,2 +1,2 @@
-$("#holiday_calendar").html("<%= j render('hosts/calendar') %>");
-$('#notice').addClass('alert alert-success').text('Calendar updated successfully.');
+$("#holiday_calendar").parent().html("<%= j render('hosts/calendar') %>");
+$('#notify').addClass('label label-success').text('Calendar updated successfully.');

@@ -19,6 +19,7 @@
   			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
   			<%= link_to "Account Settings" , edit_host_registration_path,
           class:"btn btn-danger btn-sm" %>
+        <button class="btn btn-primary btn-sm" id='btn-cal'>Show Calendar</button>
       </div>
     	<% end %>
     </div>
@@ -36,7 +37,7 @@
     <!-- End curious map code -->
 
     <!-- Host major details -->
-    <div class="col-md-8 col-sm-7 col-sm-offset-0 col-xs-offset-1 col-xs-10" id="card_container">
+    <div class="col-md-7 col-md-offset-1 col-sm-6 col-sm-offset-1 col-xs-offset-1 col-xs-10" id="card_container">
       <br>
       <!-- <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p> -->
       <!-- <div class="col-md-4"> -->
@@ -80,7 +81,9 @@
   </div> -->
   <!-- End of Map -->
   <% if @host == current_host %>
+  <div class="row">
     <%= render 'calendar' %>
+  </div>
   <% end %>
 
   <!-- Events title-->
@@ -93,7 +96,7 @@
       <div class="row">
         <% group.each do |experience| %>
           <% next if !experience.available? && @host != current_host %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-10 col-xs-offset-1">
           <%= render experience %>
         </div>
         <% end %>
@@ -107,12 +110,12 @@
   <div class="row" id="host_events">
     <%= content_tag :h3, "#{@host.username}'s Events", class:"text-center title" %>
 <!-- End of events title -->
-
+  <%= content_tag :h5, "<No Events for now>", class:"text-center" if @normal_events.available.empty? %>
 <!-- Hosts experiences listing -->
     <% @normal_events.in_groups_of(3, false).each do |group| %>
       <div class="row">
         <% group.each do |experience| %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-xs-offset-1">
           <%= render experience %>
         </div>
         <% end %>
@@ -121,3 +124,21 @@
   </div>
 
 </div>
+
+<script>
+$(function(){
+  $('#holiday_calendar').hide()
+
+  $("#btn-cal").on('click', this, function(e){
+    cal = $('#holiday_calendar')
+    if (cal.is(':visible') === true){
+      $('#notify').html('&nbsp;').removeClass('label label-success')
+      cal.hide()
+      $('#btn-cal').text('Show Calendar')
+    }else{
+      cal.show()
+      $('#btn-cal').text('Hide Calendar')
+    }
+  });
+});
+</script>

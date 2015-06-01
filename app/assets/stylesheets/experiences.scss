@@ -198,6 +198,10 @@ body {
     height: 100%;
 }
 
+.slice img {
+  min-height: 267px;
+}
+
 #avataro {
 height:60px;
 width:60px;
@@ -220,6 +224,11 @@ float: right;
 
 #hostinfo {
   margin-top: 20px;
+
+  #profilepic img{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
   h3 {
     font-family: $headline;
