@@ -206,7 +206,7 @@ body {
 height:60px;
 width:60px;
 float: right;
-    /* border:5px solid #fff; */
+    border:5px solid #fff;
     border-radius: 500px;
     -webkit-border-radius: 500px;
     -moz-border-radius: 500px;
@@ -224,6 +224,11 @@ float: right;
 
 #hostinfo {
   margin-top: 20px;
+
+  #profilepic img{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
   h3 {
     font-family: $headline;
