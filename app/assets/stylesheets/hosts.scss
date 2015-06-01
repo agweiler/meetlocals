@@ -33,6 +33,11 @@ $green_text: darkGreen;
 #avatar_align {
   text-align:center;
   margin-left:0px;
+
+	#btn-cal {
+		margin-top: 5px;
+	}
+
 }
 
 h3.title {
@@ -90,9 +95,6 @@ h3.title {
 		font-weight: bold;
 	}
 
-	#notice{
-		margin:0px;
-	}
 
 	div#datepick{
 		/* background-color: #fff; */

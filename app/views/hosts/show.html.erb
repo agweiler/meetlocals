@@ -19,6 +19,7 @@
   			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
   			<%= link_to "Account Settings" , edit_host_registration_path,
           class:"btn btn-danger btn-sm" %>
+        <button class="btn btn-primary btn-sm" id='btn-cal'>Show Calendar</button>
       </div>
     	<% end %>
     </div>
@@ -80,7 +81,9 @@
   </div> -->
   <!-- End of Map -->
   <% if @host == current_host %>
+  <div class="row">
     <%= render 'calendar' %>
+  </div>
   <% end %>
 
   <!-- Events title-->
@@ -121,3 +124,21 @@
   </div>
 
 </div>
+
+<script>
+$(function(){
+  $('#holiday_calendar').hide()
+
+  $("#btn-cal").on('click', this, function(e){
+    cal = $('#holiday_calendar')
+    if (cal.is(':visible') === true){
+      $('#notify').html('&nbsp;').removeClass('label label-success')
+      cal.hide()
+      $('#btn-cal').text('Show Calendar')
+    }else{
+      cal.show()
+      $('#btn-cal').text('Hide Calendar')
+    }
+  });
+});
+</script>
