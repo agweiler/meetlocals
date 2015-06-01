@@ -425,16 +425,48 @@ z-index: 1;
 
 .logo, #logo {
   font-family: reis;
-  font-size: 34px;
+  font-size: 44px;
 	color: #fff;
 	word-spacing: -5px;
 	span {
-		text-decoration: underline;
 		font-size: 20px;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+    border-radius: 1px;
+    vertical-align: middle;
 	}
 }
 
-@media (min-width: 768px)
+@media (min-width: 768px){
 .navbar {
   border-radius: 0px;
+}
+}
+
+
+.navbar-inverse {
+  background: #434341;
+  /* border-color: #090909; */
+}
+
+.green-btn{
+  padding: 20px !important;
+  background: #66a422 !important;
+  height: 10px !important;
+  line-height: 0px !important;
+  padding-top: 20px !important;
+  max-width: 110px !important;
+  margin: 20px !important;
+  border-radius: 5px !important;
+}
+
+
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #434341 !important;
+}
+
+.navbar-inverse {
+ border-color: #434341 !important;
+  /* border-color: #090909; */
 }
