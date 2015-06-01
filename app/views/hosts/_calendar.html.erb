@@ -1,5 +1,6 @@
-<div class="row" id="holiday_calendar">
+<div id="holiday_calendar">
 
+<div class="row">
   <h3 class="text-center">My Holiday Calendar</h3>
   <h6 class="text-center" id='notice'>&nbsp;</h6>
   <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
@@ -11,7 +12,9 @@
   </div>
 
   <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
-  <div class="row text-center">
+</div>
+
+<div class="row text-center">
 
   <%= form_for :holiday, remote:true do |f| %>
     <%= f.hidden_field :dates %>

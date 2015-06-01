@@ -93,7 +93,7 @@
       <div class="row">
         <% group.each do |experience| %>
           <% next if !experience.available? && @host != current_host %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-10 col-xs-offset-1">
           <%= render experience %>
         </div>
         <% end %>
@@ -112,7 +112,7 @@
     <% @normal_events.in_groups_of(3, false).each do |group| %>
       <div class="row">
         <% group.each do |experience| %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6 col-xs-12 col-xs-offset-1">
           <%= render experience %>
         </div>
         <% end %>
