@@ -43,7 +43,7 @@
       <br><br>
 
       <div class="col-md-4 col-sm-12 text-center pull-right">
-        <img  src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/medal-2.png" style="width:450px; height:auto; padding:20px;">
+        <img  src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/medal-2.png" style="width:100%; height:auto; padding:20px;">
       </div>
 
       <div class="col-md-8 col-sm-12 ">
@@ -73,11 +73,11 @@
   <div class="row" style="padding:15px 30px;display:flex">
 
     <% if idx == 0 %>
-      <div class="col-md-6 col-sm-8 col-xs-6 thumbnail slice">
+      <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_01.png" />
       </div>
 
-      <div class="col-md-3 col-sm-4 col-xs-6 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
@@ -95,7 +95,7 @@
       <div class="col-md-3 hidden-sm hidden-xs box2">
 
       </div>
-      <div class="col-md-3 col-sm-4 col-xs-6 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
@@ -105,16 +105,16 @@
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
         <%= content_tag :quote, host.experiences.first.description, class:"para" %>
       </div>
-      <div class="col-md-6 col-sm-8 col-xs-6 thumbnail slice">
+      <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_02.jpg" />
       </div>
     <% elsif idx == 2 %>
 
-      <div class="col-md-6 col-sm-8 col-xs-6 thumbnail slice">
+      <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_01.png" />
       </div>
 
-      <div class="col-md-3 col-sm-4 col-xs-6 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
