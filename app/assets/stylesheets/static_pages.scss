@@ -433,3 +433,8 @@ z-index: 1;
 		font-size: 20px;
 	}
 }
+
+@media (min-width: 768px)
+.navbar {
+  border-radius: 0px;
+}
