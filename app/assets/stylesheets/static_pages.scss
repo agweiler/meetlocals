@@ -349,6 +349,7 @@ z-index: 1;
 	font-family: $headline;
 	font-size: 400%;
 	font-weight: bold;
+  color:#4b4b4b;
 }
 
 .heads-sm {
@@ -397,7 +398,7 @@ z-index: 1;
 
 .learnmore{
 	background: #f4f4f4 !important;
-	  border: 2px solid darkGreen;
+	  border: 2px solid #66a422;
 	  border-radius: 0;
 	  font-family: "Amatic SC", cursive;
 		font-size: 30px;
@@ -428,6 +429,7 @@ z-index: 1;
   font-size: 44px;
 	color: #fff;
 	word-spacing: -5px;
+  padding-left: 40px;
 	span {
 		font-size: 20px;
     border-bottom: 2px solid #fff;
@@ -470,3 +472,14 @@ z-index: 1;
  border-color: #434341 !important;
   /* border-color: #090909; */
 }
+
+.btn-danger {
+  color: #fff;
+  background-color: #ff4b00;
+  border-color: #ff4b00;
+}
+
+.heads-lt a {
+  color: #66a422;
+}
+
