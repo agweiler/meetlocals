@@ -43,10 +43,11 @@ function geocode() {
 		geocoder.geocode({ 'address': address }, function (results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				console.log(results[0].geometry.location)
-				$('#host_latitude').val(results[0].geometry.location['k'])
-				$('#host_longitude').val(results[0].geometry.location['D'])
+				$('#host_latitude').val(results[0].geometry.location.lat())
+				$('#host_longitude').val(results[0].geometry.location.lng())
 				$('input[name=commit]').click();
 			} else {
+		
 				console.log("Geocoding failed: " + status);
 				alert('Address not found, Use google maps to find your address')
 			}
