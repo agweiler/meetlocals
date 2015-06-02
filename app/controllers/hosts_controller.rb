@@ -4,8 +4,10 @@ class HostsController < ApplicationController
   def index
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
+		limit_per_page = 3
+
     if (request.request_method == 'GET')
-			@hosts = Host.joins(:experiences).uniq.paginate(page:params[:page], per_page:3)
+			@hosts = Host.joins(:experiences).uniq.paginate(page:params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
 			age_range ||= [nil, 0, 200]
@@ -15,13 +17,13 @@ class HostsController < ApplicationController
 			@selected_group = params[:search][:max_group]
 			@selected_date = params[:search][:date]
 
-			# @hosts = Host.search_by_age(age_range[1], age_range[2])
-			# @hosts = Host.search(age_range[1], age_range[2], @selected_location)
-			@hosts = Host.search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page:3)
+			@hosts = Host.search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
 		end
 
-		# @hosts = Host.paginate(page:params[:page], per_page:3)
-
+		respond_to do |format|
+	  	# format.html
+	  	format.js
+		end unless params[:page].nil?
   end
 
   def show
