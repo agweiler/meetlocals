@@ -110,7 +110,7 @@
   <div class="row" id="host_events">
     <%= content_tag :h3, "#{@host.username}'s Events", class:"text-center title" %>
 <!-- End of events title -->
-  <%= content_tag :h5, "<No Events for now>", class:"text-center" if @normal_events.available.empty? %>
+  <%= content_tag :h5, "<No Events for now>", class:"text-center" if @normal_events.empty? %>
 <!-- Hosts experiences listing -->
     <% @normal_events.in_groups_of(3, false).each do |group| %>
       <div class="row">
