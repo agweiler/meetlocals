@@ -11,6 +11,10 @@ class Host < ActiveRecord::Base
   has_many :testimonials
   has_many :testimonials, through: :bookings
   has_many :holidays
+
+  scope :not_holiday, -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
+  scope :from_state, -> (location) { where("state = ?", location) }
+
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
 
@@ -65,10 +69,14 @@ class Host < ActiveRecord::Base
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
 
-    Host.joins(:experiences).where(age + loc + group).uniq.map do |host|
-      host if host.free?(date.to_date)
-    end.compact
-    # Host.joins(:experiences).joins(:holidays).joins(:bookings).where(sql).uniq
+    # Host.joins(:experiences).where(age + loc + group).uniq.map do |host|
+    #   host if host.free?(date.to_date)
+    # end.compact
+    if date.blank?
+      Host.joins(:experiences).where(age + loc + group).uniq
+    else
+      Host.joins(:experiences).where(age + loc + group).not_holiday(date).uniq
+    end
   end
 
   def age
