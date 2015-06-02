@@ -38,8 +38,11 @@
 </div>
 
 <div class="container" style="margin-top:40px" id="view">
- <% @hosts.in_groups_of(3, false).each do |group| %>
-  <div class="row">
+
+  <%= will_paginate %>
+  
+  <% @hosts.in_groups_of(3, false).each do |group| %>
+  <div class="row" id="hosts_row-<%=params[:page]%>">
     <% group.each do |host| %>
     <div class="col-md-4">
 
@@ -49,6 +52,9 @@
     <% end %>
   </div>
   <% end %>
+
+  <%= will_paginate %>
+
 </div>
 
 <script>

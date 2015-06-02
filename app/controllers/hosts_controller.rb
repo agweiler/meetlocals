@@ -5,7 +5,7 @@ class HostsController < ApplicationController
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
     if (request.request_method == 'GET')
-			@hosts = Host.joins(:experiences).uniq
+			@hosts = Host.joins(:experiences).uniq.paginate(page:params[:page], per_page:3)
 		elsif (request.request_method == 'POST')
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
 			age_range ||= [nil, 0, 200]
@@ -17,9 +17,11 @@ class HostsController < ApplicationController
 
 			# @hosts = Host.search_by_age(age_range[1], age_range[2])
 			# @hosts = Host.search(age_range[1], age_range[2], @selected_location)
-			@hosts = Host.search(age_range[1], age_range[2],
-								@selected_location, @selected_group, @selected_date)
+			@hosts = Host.search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page:3)
 		end
+
+		# @hosts = Host.paginate(page:params[:page], per_page:3)
+
   end
 
   def show
@@ -63,7 +65,7 @@ class HostsController < ApplicationController
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       Hostmailer.host_approved(@host.id).deliver_now
-      redirect_to admin_settings_path 
+      redirect_to admin_settings_path
     else
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
