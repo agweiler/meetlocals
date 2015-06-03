@@ -18,6 +18,64 @@ $green_text: darkGreen;
 	display: inline;
 
 }
+
+.img-circle {
+  border-radius: 50%;
+  border: 5px solid  #f4f4f4;
+}
+
+.box1{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/illus-1.jpg") no-repeat bottom;
+width: 150px;
+height: auto;
+background-size: contain;
+}
+
+.box3{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/ilust-3.jpg") no-repeat bottom;
+width: 150px;
+height: auto;
+background-size: contain;
+}
+
+
+.box2{
+	background: url("https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/ilust-2.jpg") no-repeat bottom;
+	  width: 25%;
+	  height: auto;
+	  background-size: 200px;
+}
+
+
+#search_box input[type="text"] {
+  border-color: black;
+  border-radius: 0;
+}
+
+#search_box{
+
+	.square_box{
+		-webkit-border-radius: 0px !important;
+		-moz-border-radius: 0px !important;
+		-o-border-radius: 0px !important;
+		border-radius: 0px !important;
+		-webkit-appearance: none;
+	}
+}
+
+.select-wrapper{
+    border: 1px solid black;
+    border-radius: 0px;
+}
+
+select.no-radius{
+    border:none;
+}
+
+
+
+
+
 /*
 Fade content bs-carousel with hero headers
 Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
@@ -54,14 +112,12 @@ Image credits: unsplash.com
 .hero {
     position: absolute;
 		background-color:rgba(0,0,0,.3);
-	  top: 580px;
-    left: 50%;
-		height: 80px;
-		width: 200%;
+	  /* top: 580px; */
+		bottom: -45px;
+		min-height: 85px;
+		width: 100%;
     z-index: 3;
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
+		left:50%;
     text-shadow: 2px 2px 0 rgba(0,0,0,.75);
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
@@ -96,7 +152,96 @@ Image credits: unsplash.com
 hgroup a h3{
 	color: LimeGreen;
 	font-weight: bold;
+	font-style: normal;
 }
+
+h3 a:hover {
+	text-decoration:none;
+}
+
+hgroup h3{
+	position:relative;
+	padding: 15px;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+	color: #fff;
+	text-transform: uppercase;
+;}
+
+
+@media screen and (max-width: 798px) {
+	hgroup h3 {
+		position:relative;
+		padding: 5px;
+		font-style: italic;
+		line-height: 1.0;
+		text-align: center;
+		color: #fff;
+		text-transform: uppercase;
+    }
+}
+
+@media screen and (max-width: 998px) {
+	hgroup h3 {
+		position:relative;
+		padding: 5px;
+		font-style: italic;
+		line-height: 1.0;
+		text-align: center;
+		color: #fff;
+		text-transform: uppercase;
+    }
+}
+
+@media (max-width: 880px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        /* border-top: 1px solid transparent; */
+        /* box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); */
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: right !important;
+				background-color: #222;
+        /* margin-top: 7.5px; */
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+}
+
+hgroup .connect{
+	color:limeGreen;
+}
+hgroup .connect a{
+	color: LimeGreen;
+}
+hgroup .connect a:hover{
+	text-decoration: none !important;
+}
+
 
 /********************************/
 /*            Overlay           */
@@ -162,32 +307,6 @@ hgroup a h3{
 @media screen and (max-width: 640px){
     .hero h1 { font-size: 4em; }
 }
-@media (max-width: 880px) {
-    .navbar-header {
-        float: none;
-    }
-    .navbar-toggle {
-        display: block;
-    }
-    .navbar-collapse {
-        border-top: 1px solid transparent;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-collapse.collapse {
-        display: none!important;
-    }
-    .navbar-nav {
-        float: none!important;
-        margin: 7.5px -15px;
-    }
-    .navbar-nav>li {
-        float: none;
-    }
-    .navbar-nav>li>a {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-}
 
 #gradio {
  background: rgba(255,255,255,1);
@@ -234,10 +353,11 @@ z-index: 1;
 }
 
 .heads {
-	padding-left: 15px;
+	/* padding-left: 15px; */
 	font-family: $headline;
 	font-size: 400%;
 	font-weight: bold;
+  color:#4b4b4b;
 }
 
 .heads-sm {
@@ -270,7 +390,7 @@ z-index: 1;
 
 .recent-host {
 	background-color: #eee;
-	padding: 30px;
+	/* padding: 30px; */
 }
 
 #big_head {
@@ -283,6 +403,21 @@ z-index: 1;
   text-align:center;
   font-family: novitonova;
 }
+
+.learnmore{
+	background: #f4f4f4 !important;
+	  border: 2px solid #66a422;
+	  border-radius: 0;
+	  font-family: "Amatic SC", cursive;
+		font-size: 30px;
+		font-weight: 600;
+		letter-spacing: 1px;
+}
+
+.btn.btn-lg {
+  padding: 5px 10px;
+}
+
 
 /*.maroon {
   color: #fff;
@@ -299,11 +434,60 @@ z-index: 1;
 
 .logo, #logo {
   font-family: reis;
-  font-size: 34px;
+  font-size: 44px;
 	color: #fff;
 	word-spacing: -5px;
+  padding-left: 40px;
 	span {
-		text-decoration: underline;
 		font-size: 20px;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+    border-radius: 1px;
+    vertical-align: middle;
 	}
 }
+
+@media (min-width: 768px){
+.navbar {
+  border-radius: 0px;
+}
+}
+
+
+.navbar-inverse {
+  background: #434341;
+  /* border-color: #090909; */
+}
+
+.green-btn{
+  padding: 20px !important;
+  background: #66a422 !important;
+  height: 10px !important;
+  line-height: 0px !important;
+  padding-top: 20px !important;
+  max-width: 110px !important;
+  margin: 20px !important;
+  border-radius: 5px !important;
+}
+
+
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #434341 !important;
+}
+
+.navbar-inverse {
+ border-color: #434341 !important;
+  /* border-color: #090909; */
+}
+
+.btn-danger {
+  color: #fff;
+  background-color: #ff4b00;
+  border-color: #ff4b00;
+}
+
+.heads-lt a {
+  color: #66a422;
+}
+

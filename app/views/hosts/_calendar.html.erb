@@ -1,18 +1,17 @@
-<div class="row" id="holiday_calendar">
+<div id="holiday_calendar">
 
-  <h3 class="text-center">My Holiday Calendar</h3>
-  <h6 class="text-center" id='notice'>&nbsp;</h6>
-  <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
-    <div id="datepick"></div>
-    <!-- <%= form_for :holiday, remote:true do |f| %>
-      <%= f.hidden_field :dates %>
-      <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
-    <% end %> -->
+  <div class="row text-center">
+    <%= content_tag :h3, "#{@host.username}'s Holiday Calendar",
+     class:"text-center" %>
+    <h6 class="text-center" id="notify">&nbsp;</h6>
+    <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
+      <div id="datepick"></div>
+    </div>
+
+    <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
   </div>
 
-  <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
   <div class="row text-center">
-
   <%= form_for :holiday, remote:true do |f| %>
     <%= f.hidden_field :dates %>
     <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
@@ -22,7 +21,6 @@
 
 <script>
 $(function(){
-
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   $('#datepick').datepicker({
     format: "yyyy-mm-dd",
@@ -75,7 +73,7 @@ $(function(){
     };
     formatted = formatted.sort();
 
-    if(open_tag !== '' && len > 1){
+    if(open_tag !== '' && len > 0){
       formatted[0] = '<ul class="col-md-2 col-sm-3 col-xs-6">' + formatted[0];
       formatted[len+1] = '</ul>';
 
