@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
 	validates :title, presence: true, length: {minimum: 5}
 	validates :body,  presence: true
 
-  has_attached_file :image, :styles => { :full=>"1232x466!", :large=> "600x600>", :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/nasi_head_placeholder.png"
+  has_attached_file :image, :styles => { :full=>"1232x466!", :large=> "600x600>", :medium => "300x300>", :thumb => "100x100>" }
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 end
