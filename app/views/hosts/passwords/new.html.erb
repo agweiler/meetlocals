@@ -11,12 +11,12 @@
           <%= f.email_field :email, autofocus: true, class:"form-controls" %>
 
         <!-- <div class="actions"> -->
-          <%= f.submit "Send", class:"btn btn-md btn-primary" %>
+          <%= f.submit "Send", class:"btn btn-sm btn-primary", style:"background-color:#1abc9c" %>
         <!-- </div> -->
         </div>
       <% end %>
-
-      <%= render "guests/shared/links" %>
+      <br>
+      <%= content_tag :div, render("hosts/shared/links"), class:"text-center" %>
     </div>
   </div>
 </div>
