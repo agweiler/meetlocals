@@ -33,7 +33,7 @@
 
       <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
       <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-        <%= link_to('UPDATE STATUS', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-xs", style:"color:#fff" ) %>
+        <%= link_to('UPDATE STATUS', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-warning btn-xs", style:"color:#fff" ) %>
         <!-- <%= button_to %> -->
       <% end %>
 
@@ -96,11 +96,11 @@
       <% if guest_signed_in? %>
         <%= m.hidden_field :sender_id, value: current_guest.id %>
         <%= m.hidden_field :sender_type, value: 'guest' %>
-        <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
+        <%= m.submit 'Send Message', class:'btn btn-primary btn-sm' %>
       <% elsif host_signed_in? %>
         <%= m.hidden_field :sender_id, value: current_host.id %>
         <%= m.hidden_field :sender_type, value: 'host' %>
-        <%= m.submit 'Send Message', class:'btn btn-primary btn-xs' %>
+        <%= m.submit 'Send Message', class:'btn btn-primary btn-sm' %>
       <% else %>
         <p>Sign in to send message</p>
       <% end %>
@@ -118,11 +118,11 @@
       <% end %>
 
     <% end %>
-    <% if current_host || current_guest %>
+    <!-- <% if current_host || current_guest %>
     <div>
       <%= link_to 'Cancel booking', @booking, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-warning btn-xs' %>
     </div>
-    <% end %>
+    <% end %> -->
     <!-- <% link_to 'Back', bookings_path, class:"btn btn-warning btn-xs" %> -->
   </div>
 </div>
