@@ -79,6 +79,7 @@ footer {
   margin-top: 0px;
   padding-top: 30px;
   background: #434341;
+
   color: #fff;
   text-align: center;
   font-family: $paragraph;
@@ -246,7 +247,7 @@ Image carousel CSS Stuff starts here*/
 */
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 880px) {
     #quote-carousel
     {
       margin-bottom: 0;
@@ -256,7 +257,7 @@ Image carousel CSS Stuff starts here*/
 }
 
 /* Small devices (tablets, up to 768px) */
-@media (max-width: 768px) {
+@media (max-width: 880px) {
 
     /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
 
