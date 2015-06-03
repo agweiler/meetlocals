@@ -46,7 +46,7 @@
 
   <div class="actions" id="booking_create_button">
   <% if current_guest %>
-    <% @action == "edit" ? submit_text = "EDIT BOOKING" : submit_text = "SUGGEST DATE"%>
+    <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
     <% if guest_signed_in? %>
       <%= f.submit submit_text, class:"btn btn-danger" ,id:"ga" %>
     <% else %>
@@ -54,8 +54,12 @@
       class:"btn btn-warning " %>
     <% end %>
   <% elsif current_host %>
-    <% @action == "edit" ? submit_text = "EDIT BOOKING" : submit_text = "SUGGEST DATE"%>
+    <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
     <%= f.submit submit_text, class:"btn btn-danger" %>
+
+    <%= link_to 'Cancel Booking?', @booking,
+     method: :delete, data: { confirm: 'Are you sure?' },
+    class:'btn btn-warning', style:'color:white' if @action == 'edit' %>
   <% else %>
     <%= link_to "SIGH IN HERE", new_guest_session_path, class:"btn btn-primary btn-sm", style:"color:white" %>
   <% end %>
