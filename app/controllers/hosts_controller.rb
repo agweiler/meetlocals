@@ -4,7 +4,10 @@ class HostsController < ApplicationController
   def index
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
+
 		limit_per_page = 3
+		session[:seed] = rand(10).round(2) / 10 if params[:page].nil?
+		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
 			@hosts = Host.where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
@@ -24,6 +27,7 @@ class HostsController < ApplicationController
 	  	# format.html
 	  	format.js
 		end unless params[:page].nil?
+
   end
 
   def show

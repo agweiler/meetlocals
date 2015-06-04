@@ -14,6 +14,9 @@ class Host < ActiveRecord::Base
 
   scope :in_holiday,
    -> (date) { joins(:holidays).where("holidays.date = ?", date) }
+
+  scope :has_booking,
+   -> (date) { joins(:bookings).where("bookings.date = ? AND status = 'confirmed'", date) }
   # scope :not_holiday,
   #  -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
   scope :from_state, -> (location) { where("state = ?", location) }
@@ -80,7 +83,11 @@ class Host < ActiveRecord::Base
       host_in = " AND id IN(#{Experience.pluck('host_id').uniq.join(',')})"
     else
       # Host.joins(:experiences).where(age + loc + group).not_holiday(date).uniq
-      host_in = " AND id IN(#{(Experience.pluck('host_id').uniq - Host.in_holiday(date).pluck('hosts.id').uniq).join(',')})"
+      free_hosts = Experience.pluck('host_id').uniq -
+                    Host.in_holiday(date).pluck('hosts.id').uniq -
+                    Host.has_booking(date).pluck('hosts.id').uniq
+
+      host_in = " AND id IN(#{free_hosts.join(',')})"
     end
 
     Host.where( age + loc + group + host_in ).order('random()')
