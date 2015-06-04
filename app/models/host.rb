@@ -15,7 +15,8 @@ class Host < ActiveRecord::Base
   scope :in_holiday,
    -> (date) { joins(:holidays).where("holidays.date = ?", date) }
 
-  scope :has_booking, -> (date) { joins(:bookings).where("bookings.date = ?", date) }
+  scope :has_booking,
+   -> (date) { joins(:bookings).where("bookings.date = ? AND status = 'confirmed'", date) }
   # scope :not_holiday,
   #  -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
   scope :from_state, -> (location) { where("state = ?", location) }
