@@ -4,9 +4,8 @@ class HostsController < ApplicationController
   def index
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
-
 		limit_per_page = 3
-		session[:seed] = rand(10).round(2) / 10 if params[:page].nil?
+		session[:seed] ||= rand(10).round(2) / 10
 		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
