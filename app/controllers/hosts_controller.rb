@@ -82,7 +82,7 @@ class HostsController < ApplicationController
       end
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
-        Adminmailer.host_created(@host.id,params[:bank_number],params[:bank_name]).deliver_now
+        Adminmailer.host_created(@host.id,params[:bank_number],params[:bank_name],params[:registration_number]).deliver_now
       end
       respond_to do |format|
         format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
