@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
   has_attached_file :local_image,
                     path: "#{Rails.root}/tmp/:attachment_:id_:style_:basename.:extension",
                     url:  "/system/:attachment/:id/:style/:basename.:extension"
-   validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
   has_attached_file :image_file,
 										styles: { :medium => "300x300!", :thumb => "100x100>"},
