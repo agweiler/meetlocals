@@ -15,7 +15,7 @@
     </div>
      <div class="item slides">
       <div class="slide-2"></div>
-      <div class="hero">
+      <div class="hero" style="width:100%">
         <hgroup>
 
           <h3>Meet the locals, who will cook up.....</h3>
@@ -28,7 +28,7 @@
       <div class="hero" style="width:100%">
         <hgroup>
 
-          <h3><a class="connect" href="#">Let's Connect</a></h3>
+          <h3>Let's Connect</h3>
         </hgroup>
 
       </div>
@@ -44,23 +44,23 @@
       <br><br>
 
       <div class="col-md-4 col-sm-12 text-center pull-right">
-        <img  src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/medal-2.png" style="width:100%; height:auto; padding:20px;">
+        <img  src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/medal-2.png" style="width:120%; height:auto; padding:0px;">
       </div>
 
 
       <div class="col-md-8 col-sm-12 ">
-        <h1 class="heads text-center" style ="color:darkGreen">AWARD WINNING AGENCY</h1>
+        <h1 class="heads text-center" style ="color:#66a422;">AWARD WINNING AGENCY</h1>
         <p class="para text-justify">In 2003 Meet the Danes received a Danish award called the Initiative Award from “Fonden for Turismens Fællesråd”.</p><br>
         <p class="para text-justify" style="padding-bottom:40px">In 2002 Meet the Danes received a prestigious International tourism award (British Guild of Travel Writers’ Silver Otter Award) for “BEST OVERSEAS TOURISM PROJECT”. An award we of course were very happy and proud to recieve. This recognition, which has been featured in media worldwide, has further increased the interest in our Meet the Danes events.
         </p>
-        <h6 class="heads-sm text-center" style ="color:darkGreen">COME MEET THE DANES</h6>
+        <h6 class="heads-sm text-center" style ="color:#66a422;">COME MEET THE DANES</h6>
         <br>
         <p class="para text-justify">Many nationalities visit Denmark every year. To give our foreign guests a different and more personal experience of Denmark and Danes, Meet the Danes invites them to visit the Danes at their private homes. Here, the guests join the Danes in a homemade dinner and the guests experience the Danes and the Danish culture and lifestyle. Thousands of guests have visited our hosting families, and got a very personal experience of Denmark, and the Danes. During these dinners many of our hosts and guests form new friendships, and some hosts have been invited to visit their guests in their home country.
         </p>
         <br>
         <p style="text-align:center; margin-bottom:40px">
           <%= link_to "Learn more", how_it_works_path,
-           class: "btn btn-default btn-lg learnmore", style:"background-color:#fff; color:darkGreen;border:1;" %>
+           class: "btn-lg learnmore", style:"background-color:#fff; border:1;" %>
         </p>
       </div>
 
@@ -79,13 +79,13 @@
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_01.png" />
       </div>
 
-      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
           <%= link_to host.username, host_path(host) %>
         </h3>
-        <h4 style="font-weight:600;">HOST</h4>
+        <h4>HOST</h4>
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
         <%= content_tag :quote, host.experiences.first.description, class:"para" %>
       </div>
@@ -97,7 +97,7 @@
       <div class="col-md-3 hidden-sm hidden-xs box2">
 
       </div>
-      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
@@ -116,13 +116,13 @@
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_01.png" />
       </div>
 
-      <div class="col-md-3 col-sm-4 col-xs-12 text-center recent-host" style="">
+      <div class="col-md-3 col-sm-4 col-xs-12 recent-host" style="">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb),
             class: "img-circle"), host if host.images.present? %>
         <h3 class="heads-lt">
           <%= link_to host.username, host_path(host) %>
         </h3>
-        <h4 style="font-weight:600;">HOST</h4>
+        <h4>HOST</h4>
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
         <%= content_tag :quote, host.experiences.first.description, class:"para" %>
       </div>

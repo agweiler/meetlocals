@@ -87,10 +87,10 @@ Image credits: unsplash.com
 /********************************/
 .fade-carousel {
     position: relative;
-    height: 100vh;
+    height: 60vh;
 }
 .fade-carousel .carousel-inner .item {
-    height: 100vh;
+    height: 60vh;
 }
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
@@ -112,13 +112,12 @@ Image credits: unsplash.com
 .hero {
     position: absolute;
 		background-color:rgba(0,0,0,.3);
-	  /* top: 580px; */
-		bottom: -45px;
+		bottom: -48px;
 		min-height: 85px;
-		width: 100%;
+		width: 200%;
     z-index: 3;
 		left:50%;
-    text-shadow: 2px 2px 0 rgba(0,0,0,.75);
+    /*text-shadow: 2px 2px 0 rgba(0,0,0,.75);*/
       -webkit-transform: translate3d(-50%,-50%,0);
          -moz-transform: translate3d(-50%,-50%,0);
           -ms-transform: translate3d(-50%,-50%,0);
@@ -153,6 +152,7 @@ hgroup a h3{
 	color: LimeGreen;
 	font-weight: bold;
 	font-style: normal;
+
 }
 
 h3 a:hover {
@@ -167,6 +167,8 @@ hgroup h3{
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -1px;
 ;}
 
 
@@ -233,10 +235,10 @@ hgroup h3{
 }
 
 hgroup .connect{
-	color:limeGreen;
+	color:#66a422;
 }
 hgroup .connect a{
-	color: LimeGreen;
+	color: #66a422;
 }
 hgroup .connect a:hover{
 	text-decoration: none !important;
@@ -275,7 +277,7 @@ hgroup .connect a:hover{
 .fade-carousel .slides .slide-1,
 .fade-carousel .slides .slide-2,
 .fade-carousel .slides .slide-3 {
-  height: 100vh;
+  height: 60vh;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -380,7 +382,8 @@ z-index: 1;
 
 .para {
 	font-family: $paragraph;
-	font-size: 16px;
+	font-size: 18px;
+  line-height: 25px;
 }
 
 .event-title {
@@ -434,12 +437,12 @@ z-index: 1;
 
 .logo, #logo {
   font-family: reis;
-  font-size: 44px;
+  font-size: 60px;
 	color: #fff;
 	word-spacing: -5px;
   padding-left: 40px;
 	span {
-		font-size: 20px;
+		font-size: 25px;
     border-bottom: 2px solid #fff;
     padding-bottom: 5px;
     border-radius: 1px;
