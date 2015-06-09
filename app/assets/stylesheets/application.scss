@@ -75,15 +75,15 @@ body .container{
 /* footer */
 
 footer {
-  clear:both;
+  clear: both;
   position: relative;
   margin-top: 0px;
-  padding-top: 30px;
+  padding-top: 80px;
+  padding-bottom: 50px;
   background: #434341;
-
   color: #fff;
   text-align: center;
-  font-family: $paragraph;
+  font-family: "Helvetica";
 
   a {
     color:inherit;

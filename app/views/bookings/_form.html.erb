@@ -61,7 +61,7 @@
      method: :delete, data: { confirm: 'Are you sure?' },
     class:'btn btn-warning', style:'color:white' if @action == 'edit' %>
   <% else %>
-    <%= link_to "SIGH IN HERE", new_guest_session_path, class:"btn btn-primary btn-sm", style:"color:white" %>
+    <%= link_to "LOGIN TO BOOK", new_guest_session_path, class:"btn btn-danger", style:"color:white" %>
   <% end %>
   </div>
 
