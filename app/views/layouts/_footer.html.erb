@@ -5,7 +5,7 @@
 
     <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
     <div class="input-group">
-       <%= email_field(:email, :address, {class: "form-control", style:"", id: "email", placeholder: ""})%>
+       <%= email_field(:email, :address, {class: "form-control", style:"height: 39px;", id: "email", placeholder: ""})%>
       <span class="input-group-btn">
         <%= button_tag(type: 'submit', class: "btn btn-success para", style:"font-size:14px") do %>
         SIGN UP<% end %>
