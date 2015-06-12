@@ -5,9 +5,11 @@ class HostsController < ApplicationController
 		# age = params[:search][:age]
 		# Host.search_by_age(20, 40)
 		limit_per_page = 3
+		session[:seed] ||= rand(10).round(2) / 10
+		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
-			@hosts = Host.joins(:experiences).uniq.paginate(page:params[:page], per_page: limit_per_page)
+			@hosts = Host.where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
 			age_range ||= [nil, 0, 200]
@@ -24,6 +26,7 @@ class HostsController < ApplicationController
 	  	# format.html
 	  	format.js
 		end unless params[:page].nil?
+
   end
 
   def show
@@ -79,7 +82,7 @@ class HostsController < ApplicationController
       end
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
-        Adminmailer.host_created(@host.id,params[:bank_number],params[:bank_name]).deliver_now
+        Adminmailer.host_created(@host.id,params[:bank_number],params[:bank_name],params[:registration_number]).deliver_now
       end
       respond_to do |format|
         format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }

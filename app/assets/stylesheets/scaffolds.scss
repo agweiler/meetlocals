@@ -19,14 +19,13 @@ pre {
 }
 
 a {
-  color: #000;
+  color:#66a422;
   &:visited {
-    color: #666;
+    color:#66a422;
   }
   &:hover {
-    /* color: #fff; */
-    /* background-color: #000; */
-    text-shadow: 1px 1px #666666;
+     color: darkGreen; 
+     text-decoration:none;
   }
 }
 
@@ -68,3 +67,13 @@ display: table;
     list-style: square;
   }
 }
+
+h4{
+  font-family:'Helvetica', arial, san-serif;
+  font-weight: 500;
+}
+
+h3{
+  font-size: 20px;
+}
+
