@@ -101,6 +101,7 @@ class ExperiencesController < ApplicationController
   # GET /experiences/new
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
     @experience = Experience.new
   end
 
@@ -108,7 +109,7 @@ class ExperiencesController < ApplicationController
   def edit
     if host_signed_in?
       redirect_to '/' unless current_host.id == @experience.host_id
-      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201, acl: :public_read)
+      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
     else
       redirect_to '/hosts/sign_in'
     end
@@ -124,22 +125,23 @@ class ExperiencesController < ApplicationController
     #     default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     # end
     # experience_params[:available_days].replace(default)
- 
-    # @image_files = experience_params.delete(:images_array)
+    
+    @image_files = experience_params.delete(:images_array)
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
     if @experience.save
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
-    #   @image_files.each do |img|
-    #     new_img = @experience.images.new
-    #     new_img.local_image = img
-    #   # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
-    #     new_img.caption = img.original_filename
-    #     new_img.save!
-    #   end unless @image_files.nil?
-    # else
-    #   render :new
+
+      @image_files.each do |img|
+        new_img = @experience.images.new
+        if img.is_a? String
+        new_img.temp_file_key = img
+        new_img.save!
+        end
+      end unless @image_files.nil?
+    else
+       render :new
     end
   end
 
@@ -153,7 +155,6 @@ class ExperiencesController < ApplicationController
     #     default[num] =  num.to_s if experience_params[:days][num.to_s] == "1"
     # end
     # experience_params[:available_days].replace(default)
-  
 
     @image_files = experience_params.delete(:images_array)
       if @experience.update(experience_params.except(:images_array, :days))
@@ -164,13 +165,13 @@ class ExperiencesController < ApplicationController
           @experience.images.delete_all
         end
 
-        # @image_files.each do |img|
-        #   new_img = @experience.images.new
-        #   new_img.local_image = img
-        # # img.title = @image_file.original_filename #this column serves no purpose, suggest to delete it via migration to images table
-        #   new_img.caption = img.original_filename
-        #   new_img.save!
-        # end unless @image_files.nil?
+        @image_files.each do |img|
+          new_img = @experience.images.new
+          if img.is_a? String
+          new_img.temp_file_key = img
+          new_img.save!
+          end
+        end unless @image_files.nil?
       else
         render :edit
       end
