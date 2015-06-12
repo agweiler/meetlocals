@@ -135,8 +135,8 @@ class Host < ActiveRecord::Base
   end
 
   def set_holiday(dates)
-    return false if dates.blank?
     self.holidays.destroy_all
+    return true if dates.blank?
 
     dates.split(',').each do |date|
       holiday = self.holidays.new(date:date.strip)
