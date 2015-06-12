@@ -5,7 +5,7 @@
 
     <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe", remote: "true", 'data-type' => :json) do -%>
     <div class="input-group">
-       <%= email_field(:email, :address, {class: "form-control", style:"", id: "email", placeholder: ""})%>
+       <%= email_field(:email, :address, {class: "form-control", style:"height: 39px;", id: "email", placeholder: ""})%>
       <span class="input-group-btn">
         <%= button_tag(type: 'submit', class: "btn btn-success para", style:"font-size:14px") do %>
         SIGN UP<% end %>
@@ -14,9 +14,9 @@
     <% end %>
     <br>
     <ul class="list-inline">
-      <li><a href="www.facebook.com"><span class="fa fa-facebook fa-2x"></span></a></li>
-      <li><a href="www.linkedin.com"><span class="fa fa-linkedin fa-2x"></span></a></li>
-      <li><a hret="www.twitter.com"><span class="fa fa-twitter fa-2x"></span></a></li>
+      <li><a href="www.facebook.com"><span class="fa fa-facebook "></span></a></li>
+      <li><a href="www.linkedin.com"><span class="fa fa-linkedin "></span></a></li>
+      <li><a hret="www.twitter.com"><span class="fa fa-twitter "></span></a></li>
     </ul>
     <br>
   </div>
@@ -41,8 +41,8 @@
 
   <div class="foot-sect col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
     <a href="/" class="logo">Meet <span>the</span> Danes</a><br><br>
-    <div class="text-left" style="line-height:25px;">
-      <a href="tel:+4523284347">+45 232 84347</a><br>
+    <a href="tel:+4523284347">+45 232 84347</a>
+    <div class="" style="line-height: 25px; padding-left: 140px; text-align: left; color: #66a422;text-decoration: underline;">
       <a href="mailto:info@meetthedanes.dk">info@meetthedanes.dk</a><br>
       <a href="http://www.meetwithlocals.com" target="_blank">meetwithlocals.com</a>
     </div>

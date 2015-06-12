@@ -26,7 +26,7 @@
     <div class="col-md-10 col-md-offset-1">
       <h4 class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4>
-      <%= content_tag :h5, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",
+      <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",
        class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
@@ -71,16 +71,13 @@
 
        <thead>
         <tr>
-          <th>Halal</th>
+        
           <th>Availability</th>
           <th>Group Size</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>
-            No
-          </td>
           <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
       <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
       <%= avail_days.to_sentence %></td>
@@ -115,9 +112,12 @@
     </div>
   </div>
 
-  <div class="row" id="specframe">
-    <h2>SPECIAL EVENTS</h2>
+   <div class="row" id="specframe">
+    <h2>MEAL FORMAT</h2>
   </div>
+
+
+
 
   <%if @host.video_url.present?%>
   <div class="row" id="menuframe">
@@ -131,6 +131,8 @@
    <div id="map-canvas" style="float:left; max-width: 600px"></div>
   </div>
 
+
+
                  <!-- Curious map code -->
   <div id="mapLat" style="display: none;">
     <% if @host.latitude -%><%= @host.latitude -%><% else -%>-82.8<% end -%>
@@ -140,9 +142,9 @@
   </div>
 
   <div class="row" id="specframe">
-    <h2>MEAL FORMAT</h2>
+    <h2 style="color:#4b4b4b;">HOST PARTY</h2>
   </div>
-
+ 
   <div class="row" id="testiframe">
     <h2>REVIEWS</h2>
     <% @testimonials.each do |testimonial| %>

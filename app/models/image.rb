@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
   has_attached_file :local_image,
                     path: "#{Rails.root}/tmp/:attachment_:id_:style_:basename.:extension",
                     url:  "/system/:attachment/:id/:style/:basename.:extension"
-   validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
 
   has_attached_file :image_file,
 										styles: { :medium => "300x300!", :thumb => "100x100>"},
@@ -24,17 +24,18 @@ class Image < ActiveRecord::Base
   # host/avatar sizes ok
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
-  validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
     after_save:queue_upload_to_s3
 
   def queue_upload_to_s3
-    puts "find it here"
-    puts local_image.path
-  	@id = local_image.instance.id
-    if local_image? && local_image_updated_at_changed?
-      if local_image.instance.imageable_type == "Experience"
-    	  ImageJob.new.perform(@id)
-      else
+     if local_image.instance.imageable_type == "Experience" 
+
+       if local_image_file_name == nil
+         ExpImageJob.perform_async(self.temp_file_key,self.id)
+       end
+    else
+      if local_image? && local_image_updated_at_changed?
+        @id = local_image.instance.id
         ImageJob.new.perform(@id)
       end
     end
@@ -61,4 +62,34 @@ class ImageJob
    sidekiq_retry_in do |count|
     1 * (count + 1) # (i.e. 10, 20, 30, 40)
    end
+ end
+
+ class ExpImageJob
+    require 'open-uri'
+    include Sidekiq::Worker
+    sidekiq_options :retry => 5
+
+    def perform(url,id)
+      image = Image.find(id)
+      # s3 = AWS::S3.new
+      # byebug
+      # x = s3.buckets[ENV['AWS_BUCKET']].objects[url]
+      # puts x.content_type
+     
+      # x.copy_to(image.local_image.s3_object)
+
+      stringIo = open(url)
+      content_type = "." + stringIo.content_type.split('/')[-1]
+      # content_type = stringIo.content_type
+      file = Tempfile.new(['temp', content_type])
+      file.binmode
+      file.write stringIo.read
+      image.local_image = file
+      image.upload_to_s3
+      image.local_image.destroy
+    end
+
+    sidekiq_retry_in do |count|
+     1 * (count + 1) # (i.e. 10, 20, 30, 40)
+    end
  end

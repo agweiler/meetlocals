@@ -33,7 +33,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'sidekiq'
-gem 'sucker_punch'
 gem 'redis'
 gem 'minitest', '~> 5.5.1'
 #gem used for ratingbundle i

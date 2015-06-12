@@ -12,7 +12,13 @@ class Host < ActiveRecord::Base
   has_many :testimonials, through: :bookings
   has_many :holidays
 
-  scope :not_holiday, -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
+  scope :in_holiday,
+   -> (date) { joins(:holidays).where("holidays.date = ?", date) }
+
+  scope :has_booking,
+   -> (date) { joins(:bookings).where("bookings.date = ? AND status = 'confirmed'", date) }
+  # scope :not_holiday,
+  #  -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
   scope :from_state, -> (location) { where("state = ?", location) }
 
   # removed uniqueness constraint
@@ -73,10 +79,18 @@ class Host < ActiveRecord::Base
     #   host if host.free?(date.to_date)
     # end.compact
     if date.blank?
-      Host.joins(:experiences).where(age + loc + group).uniq
+      # Host.joins(:experiences).where(age + loc + group).uniq
+      host_in = " AND id IN(#{Experience.pluck('host_id').uniq.join(',')})"
     else
-      Host.joins(:experiences).where(age + loc + group).not_holiday(date).uniq
+      # Host.joins(:experiences).where(age + loc + group).not_holiday(date).uniq
+      free_hosts = Experience.pluck('host_id').uniq -
+                    Host.in_holiday(date).pluck('hosts.id').uniq -
+                    Host.has_booking(date).pluck('hosts.id').uniq
+
+      host_in = " AND id IN(#{free_hosts.join(',')})"
     end
+
+    Host.where( age + loc + group + host_in ).order('random()')
   end
 
   def age
@@ -121,8 +135,8 @@ class Host < ActiveRecord::Base
   end
 
   def set_holiday(dates)
-    return false if dates.blank?
     self.holidays.destroy_all
+    return true if dates.blank?
 
     dates.split(',').each do |date|
       holiday = self.holidays.new(date:date.strip)
