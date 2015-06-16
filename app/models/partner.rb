@@ -5,4 +5,6 @@ class Partner < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :images, as: :imageable
+
+  has_many :bookings
 end

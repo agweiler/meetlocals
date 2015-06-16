@@ -1,0 +1,26 @@
+<div class = "container">
+	<div class= "row">
+			<h1><%= @partner.name %></h1>
+	</div>
+	<div class="row">
+		<div class = "col-md-6">
+			<%=  image_tag(@partner.images.first.image_file.url(:medium)) %>
+			<% if @partner == current_partner %>
+				<%= link_to "Edit Profile", edit_partner_path, :class => "btn btn-warning btn-sm" %>
+			<% end %>
+		</div>
+		<div class = "col-md-6">
+			<div>
+				<p class = "partner_info"><strong>Name:</strong> <%= @partner.name %> </p><br>
+				<p class = "partner_info"><strong>Address:</strong> <%= @partner.address %> </p><br>
+				<p class = "partner_info"><strong>Contact Info:</strong> <%= @partner.contact_info %> </p><br>
+				<% if current_admin %>
+							<%= link_to "Create MultiDinner booking", partner_bookings_path, :class => "btn btn-warning btn-sm" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class = "row">
+
+	</div>
+</div>

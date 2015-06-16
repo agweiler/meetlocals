@@ -1,0 +1,8 @@
+
+		<%= label_tag :group_size %>
+		<%= text_field_tag :group_size %>
+
+			<%= label_tag :host %>
+			<%= select_tag 'choose_host',  options_from_collection_for_select(@host, 'id', 'username') %>
+
+		
