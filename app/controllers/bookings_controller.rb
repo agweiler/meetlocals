@@ -152,8 +152,9 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.update(booking_params)
         guest = @booking.guest
+        host = @booking.experience.host
         if booking_params[:status] == "invited"
-          Guestmailer.receive_invitation(guest.id,@booking.id).deliver_now
+          Guestmailer.receive_invitation(guest.id,@booking.id,host_id).deliver_now
         elsif booking_params[:status] == "rejected"
           Guestmailer.reject_invitation(guest.id,@booking.id).deliver_now
         end
@@ -202,7 +203,7 @@ class BookingsController < ApplicationController
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest.id, @booking.id).deliver_now
+      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_now
       Hostmailer.payment_completion(host.id, @booking.id).deliver_now
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else

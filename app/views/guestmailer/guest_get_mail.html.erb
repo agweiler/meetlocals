@@ -4,14 +4,15 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You have mail <%= @guest.username %>! </h1>
+    <h1>Hi there <%= @guest.username %>! You have a message from <%= @host.first_name %> <%= @host.last_name %>! </h1>
+    
+      <p> <%= @message.text %> </p>
     <p>
-      Worried your host was a fictional creation produced from the fumes of Carbon Monoxide? Worry not!  
-      For you have a new message regarding the <%= @booking.experience.title %>
+        For the full conversation history, check out <%= @booking.experience.title %> via the Bookings tab like in the picture below:
     </p>
-    <p>
+<!-- INSET SCREENSHOT OF BOOKINGS TAB BELOW-->    <p>
 
-      Go verify his/her existence at <%= link_to 'Meet the Danes' , new_guest_session_url %>
+      For a shortcut to loggin in, follow <%= link_to 'Meet the Danes' , new_guest_session_url %>.
     </p>
     <p>Thanks for using Meet the Danes and have a great day!</p>
 

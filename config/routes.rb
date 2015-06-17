@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :partners, controllers: { registrations: "partners/registrations" }
+  
+
   devise_for :hosts, controllers: { registrations: "hosts/registrations" }
   resources :hosts
 
@@ -7,11 +10,19 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get 'partners/bookings' => 'partners#bookings', as: :partner_bookings
+
+  post 'parnters/bookings' => 'partners#create_booking', as: :create_booking
+
+  get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
+
   get 'admins/settings' => 'admins#settings', as: :admin_settings
 
   patch '/price' => 'admins#changeprice'
 
   patch '/host' => 'admins#approveuser'
+
+  resources :partners  
 
   resources :admins
 
@@ -79,6 +90,8 @@ Rails.application.routes.draw do
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
   post 'hosts/:id' => 'hosts#update_holiday'
+
+  resources :multidinners 
 
   resources :experiences
 
