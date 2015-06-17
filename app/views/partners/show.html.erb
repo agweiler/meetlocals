@@ -15,12 +15,28 @@
 				<p class = "partner_info"><strong>Address:</strong> <%= @partner.address %> </p><br>
 				<p class = "partner_info"><strong>Contact Info:</strong> <%= @partner.contact_info %> </p><br>
 				<% if current_admin %>
-							<%= link_to "Create MultiDinner booking", partner_bookings_path, :class => "btn btn-warning btn-sm" %>
+							<%= link_to "Create MultiDinner booking", new_multidinner_path(:id => @partner.id) , :class => "btn btn-warning btn-sm" %>
 				<% end %>
 			</div>
 		</div>
 	</div>
 	<div class = "row">
-
+		<h2> List of Bookings </h2>
+	</div>
+	<div class = "row">
+		<div class = "col-md-4">
+				<% @multidinners.each do |x| %>
+					<% y = x.assign_hosts_to_group_size %>
+					<p> Event Name :<%= x.name %> </p>
+					<p> Event Date :<%= x.date %> </p>
+					<ol>
+			    <% y.each do |size,host_id| %>
+				    <% host = Host.find host_id.to_i %>
+				    	<li>Host Name : <%= host.first_name %> <%= host.last_name %><br>
+				    	 Number of guests :<%= size %></li>
+			   <% end %>
+			   </ol>
+			 <% end %>
+		</div>
 	</div>
 </div>

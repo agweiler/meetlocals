@@ -4,12 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>You have received a booking <%= @host.username %></h1>
+    <h1>Hi <%= @host.username %> You have received a booking.</h1>
     <p>
       See? We told you it would work! You have recieved a booking request for the event <%= @booking.experience.title %>
     </p>
 
-    <p> Check out the booking here! 
+    <p> You can review the booking details here! 
       <%= link_to 'Meet the Danes' , booking_index_url(@booking)%> </p>
 
     <p> You can also get to know your potential new friend,  <%= link_to 'here' , guest_url(@guest)%> 

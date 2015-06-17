@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   patch '/host' => 'admins#approveuser'
 
-  resources :partners
+  resources :partners  
 
   resources :admins
 
@@ -90,6 +90,8 @@ Rails.application.routes.draw do
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
   post 'hosts/:id' => 'hosts#update_holiday'
+
+  resources :multidinners 
 
   resources :experiences
 

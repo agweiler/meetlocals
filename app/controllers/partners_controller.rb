@@ -5,6 +5,7 @@ class PartnersController < ApplicationController
 
 	def show
 		@partner = Partner.find params[:id]
+		@multidinners = @partner.multidinners.all
 	end
 
 	def edit
@@ -17,7 +18,7 @@ class PartnersController < ApplicationController
 	end
 
 	def create_booking
-		byebug
+	
 		x = 1
 		grp_size = []
 		hosts = []
@@ -32,7 +33,7 @@ class PartnersController < ApplicationController
 			end
 			x = x + 1
 		end
-		byebug
+		
 
 	end
 end
