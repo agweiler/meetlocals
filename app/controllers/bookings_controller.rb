@@ -102,7 +102,7 @@ class BookingsController < ApplicationController
       if @booking.save
         host = @booking.experience.host
         guest = @booking.guest
-        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
+        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_later
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
         format.html { render :new }
@@ -154,9 +154,9 @@ class BookingsController < ApplicationController
         guest = @booking.guest
         host = @booking.experience.host
         if booking_params[:status] == "invited"
-          Guestmailer.receive_invitation(guest.id,@booking.id,host_id).deliver_now
+          Guestmailer.receive_invitation(guest.id,@booking.id,host_id).deliver_later
         elsif booking_params[:status] == "rejected"
-          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_now
+          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
@@ -203,8 +203,8 @@ class BookingsController < ApplicationController
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_now
-      Hostmailer.payment_completion(host.id, @booking.id).deliver_now
+      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
+      Hostmailer.payment_completion(host.id, @booking.id).deliver_later
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
       puts "FAILED!!!"
