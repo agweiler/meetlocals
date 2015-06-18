@@ -21,6 +21,7 @@
 				<li><%= link_to "HOW IT WORKS", how_it_works_path %></li>
 				<li><%= link_to "PARTNER", partners_path %></li>
 				<li><%= link_to "BLOG", blog_path %></li>
+				
 
 				<% if current_user %>
 					<li class ="dropdown">
@@ -48,10 +49,32 @@
 						</ul>
 					</li>
 				<% else %>
-					</li>
+
+
 					<li><%= link_to "SIGN IN", new_guest_session_path %></li>
 					<li><%= link_to "SIGN UP", new_guest_registration_path, :class => 'green-btn' %></li>
 				<% end %>
+				<% if current_host || current_guest %>
+				  <li class = "dropdown"  >
+						 <a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true">Notifications
+							<span class= "caret"></span></a>
+								<ul class ="dropdown-menu" role="menu" style="" id = "notification_list">
+									<!-- 	This takes all the hosts notifications and takes it from newest first -->
+									<% current_user.notifications.reverse.take(10).each do |x| %>
+										<li> <%= link_to "#{x.content}", booking_path("#{x.type_id}"), :id => "notification-#{x.id}" %></li>
+										<% if x.seen == false %>
+											<!-- 	if there are any unseen notifications, this changes the notification tab and the unseen link red -->
+										<script> 
+											var id = <%= x.id %>
+											$("#notification-dropdown").css("background-color", "#1abc9c"); 
+										  $("#notification-"+id).css("background-color", "#bdc3c7"); 
+									  </script>	
+			              <% end %>
+									<% end %>
+									<li><%= link_to "All Notifications", all_notifications_path %></li>
+								</ul>
+					</li>
+			  <% end %>
 
 			</ul>
 	  </div>

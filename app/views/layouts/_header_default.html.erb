@@ -1,0 +1,81 @@
+
+<nav class="navbar navbar-inverse">
+	<div class = "container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+			<a href="/" class="navbar-brand" id="logo" style="padding-top:10px">Meet the Danes</a>
+    </div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class ="nav navbar-nav navbar-right">
+
+				<li><%= link_to "Be a Host", how_to_be_a_host_path %></li>
+				<li><%= link_to "Find a Host", experiences_path %></li>
+				<li><%= link_to "How it Works", how_it_works_path %></li>
+				<li><%= link_to "Blog", blog_path %></li>
+
+				<% if current_host %>
+					<li class = "dropdown"  >
+						<a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true">Notifications
+						<span class= "caret"></span></a>
+						<ul class ="dropdown-menu" role="menu" style="" id = "notification_list">
+						<!-- 	This takes all the hosts notifications and takes it from newest first -->
+							<% current_host.notifications.reverse.take(10).each do |x| %>
+								<li> <%= link_to "#{x.content}", booking_path("#{x.type_id}"), :id => "notification-#{x.id}" %></li>
+								<% if x.seen == false %>
+							<!-- 	if there are any unseen notifications, this changes the notification tab and the unseen link red -->
+								  <script> 
+								  	 var id = <%= x.id %>
+								  	 $("#notification-dropdown").css("background-color", "#1abc9c"); 
+								  	 $("#notification-"+id).css("background-color", "#bdc3c7"); 
+								  </script>	
+								<% end %>
+							<% end %>
+								<li><%= link_to "All Notifications", all_notifications_path %></li>
+						</ul>
+
+					</li>
+				<% end %>
+
+			
+				<% if current_user %>
+					<li class ="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><%= "#{current_user.username}" %>
+						<span class= "caret"></span></a>
+						<ul class ="dropdown-menu" role="menu" style="">
+							<% if current_host %>
+								<li><%= link_to "Create New Experience", new_experience_path  %></li>
+							<% end %>
+							<% if current_admin %>
+								<li><%= link_to "Show All Users", admins_path %></li>
+								<li><%= link_to "Analytics", admin_analytics_path %></li>
+					      <li><%= link_to "Settings", admin_settings_path %></li>
+							<% end %>
+							<li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Bookings", bookings_path %></li>
+							<li><%= link_to destroy_user_session_path, method: :delete do  %>Log out
+								<span class="glyphicon glyphicon-log-out"></span><% end %></li>
+						</ul>
+					</li>
+				<% else %>
+					<li><%= link_to new_guest_registration_path do %>
+						<span class="glyphicon glyphicon-user"></span> Sign up <% end %>
+					</li>
+
+					<li><%= link_to new_guest_session_path do %>
+						<span class="glyphicon glyphicon-log-in"></span> Log in <% end %>
+					</li>
+				<% end %>
+
+			</ul>
+	  </div>
+	</div>
+</nav>
+

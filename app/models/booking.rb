@@ -43,7 +43,7 @@ class Booking < ActiveRecord::Base
 
 	def check_finished?
 		#Settle!
-				Time.now >= self.date && Time.now.hour > (@booking.experience.time.hour + 4.hours)
+				Time.now >= self.date && Time.now.hour > (self.experience.time.hour + 4.hours)
 	end
 
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.

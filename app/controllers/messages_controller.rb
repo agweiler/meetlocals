@@ -10,9 +10,14 @@ class MessagesController < ApplicationController
     booking = new_message.booking
     if new_message.sender_type == "host"
       guest = Guest.find(booking.guest_id)
-      Guestmailer.guest_get_mail(guest.id, booking.id, new_message.id).deliver_now
+      host = booking.experience.host
+      new_notification = guest.notifications.find_or_create_by(content: "Message from #{guest.first_name}", type_of: "messages", type_id: "#{booking.id}")
+      new_notification.update(updated_at: Time.now, seen: false)
+      Guestmailer.guest_get_mail(guest.id, booking.id, new_message.id,host.id).deliver_now
     elsif new_message.sender_type == "guest"
       host = Host.find(booking.experience.host_id)
+      new_notification = host.notifications.find_or_create_by(content: "Message from #{host.first_name}", type_of: "messages", type_id: "#{booking.id}")
+      new_notification.update(updated_at: Time.now, seen: false)
       Hostmailer.host_get_mail(host.id, booking.id, new_message.id).deliver_now
     end
 

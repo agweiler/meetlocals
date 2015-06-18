@@ -91,6 +91,8 @@ Rails.application.routes.draw do
 
   post 'hosts/:id' => 'hosts#update_holiday'
 
+  get 'notifications/all' => 'notifications#index', as: :all_notifications
+
   resources :multidinners 
 
   resources :experiences
