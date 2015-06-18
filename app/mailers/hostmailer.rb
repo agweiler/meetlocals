@@ -13,9 +13,10 @@ class Hostmailer < ApplicationMailer
     mail(to: @host.email, subject: "Payment has been completed!!!")
   end
 
-  def host_get_mail(host_id,booking_id)
+  def host_get_mail(host_id,booking_id,new_message_id)
     @host = Host.find host_id
     @booking = Booking.find booking_id
+    @message = Message.find new_message_id
     mail(to: @host.email, subject: "You got mail!")
   end
 
