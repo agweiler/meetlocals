@@ -56,8 +56,8 @@
 				<% end %>
 				<% if current_host || current_guest %>
 				  <li class = "dropdown"  >
-						 <a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true">Notifications
-							<span class= "caret"></span></a>
+						 <a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+							<span class= "badge"><%= current_user.notifications.where(seen: false).count %></span></a>
 								<ul class ="dropdown-menu" role="menu" style="" id = "notification_list">
 									<!-- 	This takes all the hosts notifications and takes it from newest first -->
 									<% current_user.notifications.reverse.take(10).each do |x| %>
@@ -66,7 +66,7 @@
 											<!-- 	if there are any unseen notifications, this changes the notification tab and the unseen link red -->
 										<script> 
 											var id = <%= x.id %>
-											$("#notification-dropdown").css("background-color", "#1abc9c"); 
+											$("#badge").css("background-color", "#1abc9c"); 
 										  $("#notification-"+id).css("background-color", "#bdc3c7"); 
 									  </script>	
 			              <% end %>
