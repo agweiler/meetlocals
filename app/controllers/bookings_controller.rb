@@ -23,12 +23,13 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   def show # Limited to only certain people
     if host_signed_in?
-      Notification.find_by(type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
+
+      Notification.find_by(host_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
       unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
     elsif guest_signed_in?
-      Notification.find_by(type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
+      Notification.find_by(guest_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
       unless current_guest.id == @booking.guest_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
       end
