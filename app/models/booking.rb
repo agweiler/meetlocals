@@ -37,7 +37,7 @@ class Booking < ActiveRecord::Base
 		status.replace("completed")
 		@guest = self.guest
 		@booking_id = self.id
-		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_now
+		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_later
 		save
 	end
 
@@ -69,7 +69,7 @@ class Booking < ActiveRecord::Base
 	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
 	  	:receiverList => {
 	    	:receiver => [{
-	      	:amount => @experience.price,
+	      	:amount => @experience.price * self.group_size,
 	      	:email => "Meetdanes@meetdanes.com",
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
 	      	}],

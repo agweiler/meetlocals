@@ -106,7 +106,7 @@ class BookingsController < ApplicationController
         host = @booking.experience.host
         guest = @booking.guest
         exp = @booking.experience
-        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_now
+        Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_later
         host.notifications.create(content: "You have a new booking for the #{exp.title} event", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
@@ -159,11 +159,11 @@ class BookingsController < ApplicationController
         guest = @booking.guest
         host = @booking.experience.host
         if booking_params[:status] == "invited"
-          Guestmailer.receive_invitation(guest.id,@booking.id,host.id).deliver_now
+          Guestmailer.receive_invitation(guest.id,@booking.id,host.id)..deliver_later
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         elsif booking_params[:status] == "rejected"
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
-          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_now
+          Guestmailer.reject_invitation(guest.id,@booking.id)..deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
@@ -210,8 +210,9 @@ class BookingsController < ApplicationController
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_now
-      Hostmailer.payment_completion(host.id, @booking.id).deliver_now
+      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
+      Hostmailer.payment_completion(host.id, @booking.id).deliver_later
+      # Guestmailer.experience_completed(@bookingid,guest.id).deliver_later(wait_until: )
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
       puts "FAILED!!!"
