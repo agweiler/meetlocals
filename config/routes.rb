@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/show'
+
   devise_for :partners, controllers: { registrations: "partners/registrations" }
   
 
@@ -90,6 +92,8 @@ Rails.application.routes.draw do
   post 'emailapi/subscribe' => 'emailapi#subscribe'
 
   post 'hosts/:id' => 'hosts#update_holiday'
+
+  get 'notifications/all' => 'notifications#all', as: :all_notifications
 
   resources :multidinners 
 

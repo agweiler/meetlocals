@@ -5,6 +5,11 @@ class Guest < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings
   has_many :images, as: :imageable
+  has_many :notifications
   # removed uniqueness constraint
   # validates_uniqueness_of :username
+
+  def all_notifications
+    self.notifications.all
+  end
 end

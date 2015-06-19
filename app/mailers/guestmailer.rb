@@ -26,10 +26,11 @@ class Guestmailer < ApplicationMailer
     mail(to: @guest.email, subject: "You just had a wonderful time! Why don't you tell people?")
   end
 
-  def guest_get_mail(guest_id,booking_id,message_id)
+  def guest_get_mail(guest_id,booking_id,message_id,host_id)
     @guest = Guest.find guest_id
     @booking = Booking.find booking_id
     @message = Message.find message_id
+    @host = Host.find host_id
     mail(to: @guest.email, subject: "You got mail!")
   end
 end

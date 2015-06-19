@@ -23,10 +23,13 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   def show # Limited to only certain people
     if host_signed_in?
+      Notification.find_by(host_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(host_id: current_user.id,type_id: @booking.id).present?
       unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
     elsif guest_signed_in?
+
+      Notification.find_by(guest_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(guest_id: current_user.id, type_id: @booking.id).present?
       unless current_guest.id == @booking.guest_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
       end
@@ -102,7 +105,9 @@ class BookingsController < ApplicationController
       if @booking.save
         host = @booking.experience.host
         guest = @booking.guest
+        exp = @booking.experience
         Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_later
+        host.notifications.create(content: "You have a new booking for the #{exp.title} event", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
       else
         format.html { render :new }
@@ -154,9 +159,11 @@ class BookingsController < ApplicationController
         guest = @booking.guest
         host = @booking.experience.host
         if booking_params[:status] == "invited"
-          Guestmailer.receive_invitation(guest.id,@booking.id,host_id).deliver_later
+          Guestmailer.receive_invitation(guest.id,@booking.id,host.id)..deliver_later
+          guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         elsif booking_params[:status] == "rejected"
-          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_later
+          guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
+          Guestmailer.reject_invitation(guest.id,@booking.id)..deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
