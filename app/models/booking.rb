@@ -49,7 +49,7 @@ class Booking < ActiveRecord::Base
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
 
 	def self.statuses
-		["Invite", "Reject", "Complete"]
+		["Invite", "Reject"]
 	end
 
 	def self.confirmed_dates
@@ -69,7 +69,7 @@ class Booking < ActiveRecord::Base
 	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
 	  	:receiverList => {
 	    	:receiver => [{
-	      	:amount => @experience.price * self.group_size
+	      	:amount => @experience.price * self.group_size,
 	      	:email => "Meetdanes@meetdanes.com",
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
 	      	}],
