@@ -49,7 +49,7 @@ class Booking < ActiveRecord::Base
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
 
 	def self.statuses
-		["Invite", "Reject", "Complete"]
+		["Invite", "Reject"]
 	end
 
 	def self.confirmed_dates

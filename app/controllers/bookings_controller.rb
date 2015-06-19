@@ -23,13 +23,13 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   def show # Limited to only certain people
     if host_signed_in?
-
-      Notification.find_by(host_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
+      Notification.find_by(host_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(host_id: current_user.id,type_id: @booking.id).present?
       unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
     elsif guest_signed_in?
-      Notification.find_by(guest_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(type_id: @booking.id).present?
+
+      Notification.find_by(guest_id: current_user.id, type_id: @booking.id).update(seen: true) if Notification.find_by(guest_id: current_user.id, type_id: @booking.id).present?
       unless current_guest.id == @booking.guest_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
       end
@@ -159,7 +159,7 @@ class BookingsController < ApplicationController
         guest = @booking.guest
         host = @booking.experience.host
         if booking_params[:status] == "invited"
-          Guestmailer.receive_invitation(guest.id,@booking.id,host_id).deliver_now
+          Guestmailer.receive_invitation(guest.id,@booking.id,host.id).deliver_now
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         elsif booking_params[:status] == "rejected"
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
