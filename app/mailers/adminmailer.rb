@@ -7,4 +7,11 @@ class Adminmailer < ApplicationMailer
 		@registration_number = reg_number
 		mail(to: @admin.email, subject: "A new host has been created!")
 	end
+
+	def experience_completed(host_id)
+		@host = Host.find host_id
+		@guest = Guest.find guest_id
+		@admin = Admin.first
+		mail(to: @admin.email, subject: "A host has completed an experience")
+	end
 end

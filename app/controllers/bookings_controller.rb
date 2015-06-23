@@ -164,6 +164,9 @@ class BookingsController < ApplicationController
         elsif booking_params[:status] == "rejected"
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
           Guestmailer.reject_invitation(guest.id,@booking.id)..deliver_later
+        elsif booking_params[:status] == "completed"
+          Guestmailer.experience_completed(@bookingid,guest.id).deliver_later
+          Adminmailer.experience_completed(host.id, guest.id).deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
@@ -212,8 +215,7 @@ class BookingsController < ApplicationController
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-      # Guestmailer.experience_completed(@bookingid,guest.id).deliver_later(wait_until: )
-      @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+         @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
       puts "FAILED!!!"
     end

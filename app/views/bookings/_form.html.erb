@@ -20,14 +20,15 @@
   <%= f.hidden_field :guest_id, value:@booking.guest_id %>
   <%= f.hidden_field :experience_id, value:@experience.id %>
 
-  <div class="field">
-    <% if current_host == @experience.host && @action == "edit" %>
-      <%= f.label :status %><br>
-      <%= f.select :status, options_for_select(Booking.statuses), {}, class:"form-control" %>
-    <% else %>
-      <%= f.text_field :status, value:@booking.status, hidden: true %>
-    <% end %>
-  </div>
+    <div class="field">
+      <% if current_host == @experience.host && @action == "edit"  %>
+        <%= f.label :status %><br>
+        <%= f.select :status, options_for_select(Booking.statuses), {}, class:"form-control" %>
+      <% else %>
+        <%= f.text_field :status, value:@booking.status, hidden: true %>
+      <% end %>
+    </div>
+
 
   <div class="field">
     <%= f.label :group_size %>
