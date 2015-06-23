@@ -1,93 +1,100 @@
-<%= form_for(@guest) do |f| %>
-  <% if @guest.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@guest.errors.count, "error") %> prohibited this guest from being saved:</h2>
+    <%= form_for(@guest) do |f| %>
+      <% if @guest.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@guest.errors.count, "error") %> prohibited this guest from being saved:</h2>
 
-      <ul>
-      <% @guest.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @guest.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
+
+    <div class="col-md-12">
+      <div class="col-md-6">
+
+        <div class="field">
+          <%= f.label :username %><br>
+          <%= f.text_field :username, class: "form-control" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :title %><br>
+            <%= f.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :first_name %><br>
+            <%= f.text_field :first_name, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :last_name %><br>
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+
+         <div class="field">
+            <%= f.label :interests %><br>
+            <%= f.text_field :interests, class: "form-control" %>
+        </div>
+
+         <div class="field">
+            <%= f.label :allergies %><br>
+            <%= f.text_field :allergies, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="field">
+            <%= f.label :languages %><br>
+            <%= f.text_field :languages, class: "form-control" %>
+        </div>
+
+        <div class="field">
+            <%= f.label :nationality %><br>
+            <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control'} %>
+        </div>
+
+        <div class="field">
+            <%= f.label :country %>
+            <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control"} %>
+
+        </div>
+
+        <div class="field">
+            <%= f.label :province %><br>
+            <%= f.text_field :province, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :about %><br />
+          <%= f.text_area :about , class: "form-control"%>
+        </div>
+
+        <!-- <div class="field">
+          <%= f.label :image %><br>
+          <%= f.file_field(:image_file) %>
+        </div> -->
+
+        <div class="">
+          <%= f.label :image %><br>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <span class="btn btn-default upload-profile btn-file">
+                Browse<%= f.file_field(:image_file) %>
+              </span>
+            </span>
+            <input type="text" class="form-control" readonly>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username, class: "form-control" %>
-  </div>
-
-  <div class="field">
-      <%= f.label :title %><br>
-      <%= f.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="field">
-      <%= f.label :first_name %><br>
-      <%= f.text_field :first_name, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, class: "form-control" %>
-  </div>
-
-   <div class="field">
-      <%= f.label :interests %><br>
-      <%= f.text_field :interests, class: "form-control" %>
-  </div>
-
-   <div class="field">
-      <%= f.label :allergies %><br>
-      <%= f.text_field :allergies, class: "form-control" %>
-  </div>
-
-  <div class="field">
-      <%= f.label :languages %><br>
-      <%= f.text_field :languages, class: "form-control" %>
-  </div>
-
-  <div class="field">
-      <%= f.label :nationality %><br>
-      <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control'} %>
-  </div>
-
-  <div class="field">
-      <%= f.label :country %>
-      <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control"} %>
-
-  </div>
-
-  <div class="field">
-      <%= f.label :province %><br>
-      <%= f.text_field :province, class: "form-control" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :about %><br />
-    <%= f.text_area :about , class: "form-control"%>
-  </div>
-
-  <!-- <div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field(:image_file) %>
-  </div> -->
-
-  <div class="">
-    <%= f.label :image %><br>
-    <div class="input-group">
-      <span class="input-group-btn">
-        <span class="btn btn-default upload-profile btn-file">
-          Browse<%= f.file_field(:image_file) %>
-        </span>
-      </span>
-      <input type="text" class="form-control" readonly>
-    </div>
-  </div>
-
-  </br>
-  <div style="text-align:center">
-   <%= button_tag(type: 'submit', class: "btn btn-default") do %>
-   Update my Profile!<% end %>
-  </div>
-<% end %>
-   <br>
+      </br>
+      <div style="text-align:center" >
+       <%= button_tag(type: 'submit', class: "btn btn-default btn-nice", id:"push_down") do %>
+       Update my Profile!<% end %>
+      </div>
+    <% end %>
+       <br>

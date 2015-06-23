@@ -363,6 +363,15 @@ z-index: 1;
   color:#4b4b4b;
 }
 
+.heads-tm {
+  /* padding-left: 15px; */
+  font-family: $headline;
+  font-size: 250%;
+  font-weight: bold;
+  color:#66a422;
+  padding-bottom: 20px;
+}
+
 .heads-sm {
 	padding-left: 15px;
 	font-family: $headline;
@@ -375,6 +384,7 @@ z-index: 1;
 	font-size: 300%;
 	font-weight: bold;
 	color: $green_text;
+  padding-bottom: 40px;
 
 	a {
 		color: $green_text;
@@ -509,3 +519,9 @@ z-index: 1;
         -moz-border-radius: 8px;
              border-radius: 8px;
 }
+
+.telefon{
+  color: #66a422 !important;  
+  text-decoration: none !important;
+}
+

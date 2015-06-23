@@ -19,10 +19,6 @@ class MessagesController < ApplicationController
       new_notification = host.notifications.find_or_create_by(content: "Message from #{host.first_name}", type_of: "messages", type_id: "#{booking.id}")
       new_notification.update(updated_at: Time.now, seen: false)
       Hostmailer.host_get_mail(host.id, booking.id, new_message.id).deliver_later
-      Guestmailer.guest_get_mail(guest.id, booking.id, new_message.id).deliver_later
-    elsif new_message.sender_type == "guest"
-      host = Host.find(booking.experience.host_id)
-      Hostmailer.host_get_mail(host.id, booking.id, new_message.id).deliver_later
     end
 
     respond_to do |format|
