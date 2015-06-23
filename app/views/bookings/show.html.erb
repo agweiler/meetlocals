@@ -34,7 +34,7 @@
       <strong>Status:</strong>
 
       <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
-      <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+      <% if (@booking.status != "completed" && @booking.status != "confirmed") && current_host == @booking.experience.host %>
         <%= link_to('UPDATE STATUS', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-warning btn-xs", style:"color:#fff" ) %>
         <!-- <%= button_to %> -->
       <% end %>
@@ -113,10 +113,6 @@
 
       <% if @booking.status == "completed" && @booking.testimonial.nil? %>
         <%= link_to 'Create Testimonial', make_testimonial_path(@booking), class:'btn btn-success btn-xs', style:"color:#fff"  %>
-      <% end %>
-
-      <% if @booking.check_finished? %>
-        <button id="complete" class="btn btn-success btn-xs">Complete</button>
       <% end %>
 
     <% end %>
