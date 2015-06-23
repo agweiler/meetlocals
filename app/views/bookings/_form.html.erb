@@ -38,31 +38,38 @@
    <%= f.check_box :is_private, {disabled: !!@experience.date }%>
    <%= f.label :is_private, value:'private event' %>
   </div>
-
+  <% if current_guest %>
   <div class="field">
-    <%= f.label :add_info %>
+    <%= f.label :additional_information %>
     <%= f.text_area :add_info, placeholder: "Add any relevant info here, eg. Number of kids" ,class: "form-control" %>
   </div>
+ <% elsif current_host %>
+    <%= @booking.add_info %>
+ <% end %>
 
   <div class="actions" id="booking_create_button">
   <% if current_guest %>
     <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
     <% if guest_signed_in? %>
-      <%= f.submit submit_text, class:"btn btn-danger" ,id:"ga" %>
+      <%= f.submit submit_text, class:"btn btn-success" ,id:"ga" %>
     <% else %>
       <%= link_to "SIGN UP", new_guest_registration_path,
       class:"btn btn-warning " %>
     <% end %>
   <% elsif current_host %>
-    <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
-    <%= f.submit submit_text, class:"btn btn-danger" %>
+    <% @action == "edit" ? submit_text = "COMPLETE RESPONSE" : submit_text = "SUGGEST DATE"%>
+    <%= f.submit submit_text, class:"btn btn-success" %>
 
-    <%= link_to 'Cancel Booking?', @booking,
+<!-- IF STATUS = CONFIRMED-->   
+<% if @booking.status == "confirmed" %>
+ <%= link_to 'Cancel Booking?', @booking,
      method: :delete, data: { confirm: 'Are you sure?' },
-    class:'btn btn-warning', style:'color:white' if @action == 'edit' %>
+    class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
+  <% end %>
   <% else %>
     <%= link_to "LOGIN TO BOOK", new_guest_session_path, class:"btn btn-danger", style:"color:white" %>
   <% end %>
+
   </div>
 
 <% end %>
