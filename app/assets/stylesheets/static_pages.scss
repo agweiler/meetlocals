@@ -387,6 +387,11 @@ z-index: 1;
   line-height: 25px;
 }
 
+.para_host_party {
+  font-family: $paragraph;
+  font-size: 25px;
+  line-height: 25px;
+}
 .event-title {
 	font-family: $paragraph;
 	font-size: 20px;
@@ -493,4 +498,14 @@ z-index: 1;
 
 .heads-lt a {
   color: #66a422;
+}
+
+.btn-xlarge {
+  padding: 15px 25px;
+  margin-bottom: 10px;
+     font-size: 22px;
+     line-height: normal;
+     -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+             border-radius: 8px;
 }
