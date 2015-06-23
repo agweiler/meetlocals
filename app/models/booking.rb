@@ -37,19 +37,33 @@ class Booking < ActiveRecord::Base
 		status.replace("completed")
 		@guest = self.guest
 		@booking_id = self.id
+		host_id = self.experience.host_id
 		Guestmailer.experience_completed(@booking_id, @guest.id).deliver_later
+		Adminmailer.experience_completed(host_id, @guest.id).deliver_later
 		save
 	end
 
 	def check_finished?
-		#Settle!
-				Time.now >= self.date && Time.now.hour > (self.experience.time.hour + 4.hours)
+		  
+			time_in_seconds = Time.parse(self.experience.time.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds
+			date = self.date.to_datetime
+			date_today = date + time_in_seconds
+			if Time.now > date_today
+				true
+			else
+				false
+			end
+
 	end
 
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
 
 	def self.statuses
 		["Invite", "Reject"]
+	end
+
+	def self.statuses_completed
+		["Invite", "Complete"]
 	end
 
 	def self.confirmed_dates
