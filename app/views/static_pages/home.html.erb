@@ -143,7 +143,7 @@
         <%= link_to image_tag(experience.images.first.image_file.url(:host_party)),
           experience if experience.images.present?%>
 
-        <div class="caption" style="background-color: #FFF; height: 100%; padding:20px">
+        <div class="caption" style="background-color: #FFF; min-height: 300px; padding:20px">
             <h3 class = "host_name"><%= experience.host.username %></h3>
             <h5 class="para_host_party">Description: </h5>
           <%= content_tag :quote, truncate(experience.description, length: 120) ,class:"para_host_party" %>
@@ -151,7 +151,7 @@
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
           <p>
             <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar fa-md", style:"margin-top:10px; color:grey" %>
-            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-lg pull-right", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
+            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-xlarge pull-right", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
           </p>
         </div>
       </div>
