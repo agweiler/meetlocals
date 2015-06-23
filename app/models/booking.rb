@@ -62,10 +62,6 @@ class Booking < ActiveRecord::Base
 		["Invite", "Reject"]
 	end
 
-	def self.statuses_completed
-		["Invite", "Complete"]
-	end
-
 	def self.confirmed_dates
 		self.confirmed.map { |book| book.date.strftime('%F') }
 	end
