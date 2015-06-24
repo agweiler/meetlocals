@@ -1,25 +1,27 @@
-<div class="container">
+<div class="container-fluid">
+  <div class="row" style="padding:50px;">
 
-  <div class="row">
   <!--    Host Avatar and minor details -->
     <div class="col-md-4 col-sm-5 col-xs-12" id="avatar_align">
       <!-- <%= content_tag :h3, "Host Account",
        class:'title' if @host == current_host %> -->
       </br>
       <% if @host.images.present? %>
-        <%= image_tag @host.images.first.image_file.url(:medium), class: "img-circle", style: "margin-top: 10px" %></br>
+        <%= image_tag @host.images.first.image_file.url(:medium), class: "img-profile", style: "margin-top: 10px" %></br>
       <% else %>
         <%= image_tag "box.jpeg" %>
       <% end %>
-      <%= content_tag :h3, @host.username, class:"title" %>
+      <%= content_tag :h3, @host.username, class:"host_name" %>
 
       <% if @host == current_host %>
       <div class="row" id="host_controls">
-      	<%= link_to "Create Experience", new_experience_path, class: "btn btn-success btn-sm" if @host.approved? %>
-  			<%= link_to "Edit Profile", edit_host_path, :class => "btn btn-warning btn-sm" %>
-  			<%= link_to "Account Settings" , edit_host_registration_path,
-          class:"btn btn-danger btn-sm" %>
-        <button class="btn btn-primary btn-sm" id='btn-cal'>Show Calendar</button>
+      	
+  			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
+        <%= link_to "[ Create Experience ]", new_experience_path, class: "edit_profile" if @host.approved? %><br>
+  			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
+          class:"edit_profile" %><br>
+        <button class="btn btn-primary btn-xl" style="  background-color: #22A7F0;
+  border-color: #22A7F0;" id='btn-cal'>Show Calendar</button>
       </div>
     	<% end %>
     </div>
@@ -41,17 +43,16 @@
       <br>
       <!-- <p><%= @host.title %> <%= @host.first_name%> <%=@host.last_name %></p> -->
       <!-- <div class="col-md-4"> -->
-        <p><strong>Age:</strong> <%= @host.age %> years old</p>
-        <p><strong>Location:</strong>
-           <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
-
-        <p><strong>Occupation:</strong> <%= @host.occupation %></p>
-        <p><strong>Interests:</strong> <%= @host.interests %></p>
+        <h1 class="heads" style="color:#66a422; font-size:50px;">Profile Details</h1>
+        <p><span style="font-weight:600;">Age:</span> <%= @host.age %> years old</p>
+        <p><span style="font-weight:600;">Location:</span> <%= @host.suburb %>, <%= @host.state %>, <%= @host.country %></p>
+        <p><span style="font-weight:600;">Occupation:</span> <%= @host.occupation %></p>
+        <p><span style="font-weight:600;">Interests:</span> <%= @host.interests %></p>
 
         <p><%= @host.smoker? %></p>
-        <p><strong>Pets:</strong> <%= @host.pets %></p>
-        <p><strong>Speaks:</strong> <%= @host.languages %></p>
-        <p><strong>Neighbourhood:</strong> <%= @host.neighbourhood %></p>
+        <p><span style="font-weight:600;">Pets:</span> <%= @host.pets %></p>
+        <p><span style="font-weight:600;">Speaks:</span> <%= @host.languages %></p>
+        <p><span style="font-weight:600;">Neighbourhood:</span> <%= @host.neighbourhood %></p>
       <!-- </div> -->
 
       <!-- <div class="col-md-8 visible-md-block visible-lg-block">
@@ -60,12 +61,12 @@
 
       <!-- <div class="col-md-12"> -->
         <p>
-          <strong>Introduction:</strong><br>
+          <span style="font-weight:600;">Introduction:</span><br>
           <%= @host.intro %>
         </p>
 
         <p>
-          <strong>Additional Info:</strong><br>
+          <span style="font-weight:600;">Additional Info:</span><br>
           <%= @host.additional_info %>
         </p>
       <!-- </div> -->
@@ -85,9 +86,10 @@
     <%= render 'calendar' %>
   </div>
   <% end %>
-
+<div style="clear:both;"></div>
   <!-- Events title-->
-  <div class="row" id="host_specials">
+ 
+  <div class="row" id="special_events">
     <%= content_tag :h3, "#{@host.username}'s Special Events", class:"text-center title" %>
   <!-- End of events title -->
     <%= content_tag :h5, "<No Special Events for now>", class:"text-center" if @special_events.available.empty? %>
@@ -104,9 +106,10 @@
     <% end %>
   </div>
 
-  <hr>
+
 
 <!-- Events title-->
+
   <div class="row" id="host_events">
     <%= content_tag :h3, "#{@host.username}'s Events", class:"text-center title" %>
 <!-- End of events title -->

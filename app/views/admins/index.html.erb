@@ -1,36 +1,41 @@
-<div class="container text-center">
-  <div class="row" style="margin-top: 15px">
-    <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid; border-radius: 10px; border-color: #000000">
-      <h1>Listing Admins</h1>
+<div id="listingadmins">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" style="">
+        <h1 class="heads" style="color:#66a422;">Listing Admins</h1>
 
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th class="text-right">Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @admins.each do |admin| %>
-            <tr class="text-left">
-              <td><%= admin.username %></td>
-              <td><%= admin.email %></td>
-              <td class="text-right">
-                <%= link_to 'Destroy', admin, class:"btn btn-xs btn-danger",
-                 style:"color:#fff", method: :delete, data: { confirm: 'u r not ab00se rite?' } %>
-              </td>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th class="text-right">Actions</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            <% @admins.each do |admin| %>
+              <tr class="text-left">
+                <td><%= admin.username %></td>
+                <td><%= admin.email %></td>
+                <td class="text-right">
+                  <%= link_to 'Destroy', admin, class:"btn btn-sm red",
+                   style:"color:#fff", method: :delete, data: { confirm: 'u r not ab00se rite?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
 
-  <div class="row" style="margin-top: 15px">
-    <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid; border-radius: 10px; border-color: #000000">
-      <h1>Listing Hosts</h1>
+<div id="listinghost" style="background:#f9f9f9;">
+  <div class="container-fluid">
+  <div class="row" >
+    <div class="col-md-12">
+      <h1 class="heads" style="color:#66a422;" >Listing Hosts</h1>
 
       <table class="table table-striped">
         <thead>
@@ -53,8 +58,8 @@
               <td><%= host.state %></td>
               <td><%= host.suburb %></td>
               <td class="text-right">
-                <%= link_to 'View', host, class:"btn btn-xs btn-primary", style:"color:#fff" %>
-                <%= link_to 'Destroy', host, class:"btn btn-xs btn-danger",
+                <%= link_to 'View', host, class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %>
+                <%= link_to 'Destroy', host, class:"btn btn-sm red",
                  style:"color:#fff", method: :delete, data: { confirm: 'u r not ab00se rite?' } %>
               </td>
             </tr>
@@ -63,10 +68,14 @@
       </table>
     </div>
   </div>
+</div>
+</div>
 
-  <div class="row" style="margin-top: 15px; margin-bottom:15px">
-    <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid; border-radius: 10px; border-color: #000000">
-      <h1>Listing Guests</h1>
+<div id="listingguests">
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12" style="">
+      <h1 class="heads" style="color:#66a422;" >Listing Guests</h1>
 
       <table class="table table-striped">
         <thead>
@@ -87,8 +96,8 @@
               <td><%= guest.nationality %></td>
               <td><%= guest.country %></td>
               <td class="text-right">
-                <%= link_to 'View', guest, class:"btn btn-xs btn-primary", style:"color:#fff" %>
-                <%= link_to 'Destroy', guest, class:"btn btn-xs btn-danger",
+                <%= link_to 'View', guest, class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %>
+                <%= link_to 'Destroy', guest, class:"btn btn-sm red",
                  style:"color:#fff", method: :delete, data: { confirm: 'u r not ab00se rite?' } %>
               </td>
             </tr>
@@ -97,6 +106,6 @@
       </table>
     </div>
   </div>
-
-
 </div>
+</div>
+

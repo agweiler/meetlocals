@@ -1,21 +1,29 @@
 body {
   background-color: #fff;
-  color: #333;
+  color: #4b4b4b;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-family: "Helvetica", sans-serif;
+  font-size: 16px;
   line-height: 18px;
+}
+
+ol{
+    margin-left: -40px;
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
+}
+
+ol ul {
+  list-style-type: bullet !important;
 }
 
 a {

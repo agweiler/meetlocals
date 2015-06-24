@@ -57,9 +57,9 @@
 				<% if current_host || current_guest %>
 				
 				  <li class = "dropdown"  >
-						 <a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true"><i class="glyphicon glyphicon-tasks" aria-hidden="true"></i>
-							<span class= "badge"><%= current_user.notifications.where(seen: false).count %></span></a>
-								<ul class ="dropdown-menu" role="menu" style="" id = "notification_list">
+						 <a href="#" class="dropdown-toggle" id = "notification-dropdown"  data-toggle="dropdown" role="button" aria-expanded="true">
+							<span class= "badge"><%= current_user.notifications.where(seen: false).count %></span>
+								<ul class ="dropdown-menu menubar" role="menu" style="" id = "notification_list">
 									<!-- 	This takes all the hosts notifications and takes it from newest first -->
 									<% current_user.notifications.reverse.take(10).each do |x| %>
 								
