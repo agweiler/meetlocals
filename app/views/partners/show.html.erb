@@ -1,42 +1,46 @@
-<div class = "container">
-	<div class= "row">
-			<h1><%= @partner.name %></h1>
-	</div>
-	<div class="row">
-		<div class = "col-md-6">
-			<%=  image_tag(@partner.images.first.image_file.url(:medium)) %>
+<div class = "container-fluid">
+		<div class="row" style="padding:50px;">
+		<div class = "col-md-4 col-sm-5 col-xs-12" style="text-align:center;" >
+			<%=  image_tag(@partner.images.first.image_file.url(:medium),:class => "img-profile")%>
 			<% if @partner == current_partner %>
 				<%= link_to "Edit Profile", edit_partner_path, :class => "btn btn-warning btn-sm" %>
 			<% end %>
+					<h3 class="host_name"><%= @partner.name %></h3>
 		</div>
 		<div class = "col-md-6">
 			<div>
-				<p class = "partner_info"><strong>Name:</strong> <%= @partner.name %> </p><br>
-				<p class = "partner_info"><strong>Address:</strong> <%= @partner.address %> </p><br>
-				<p class = "partner_info"><strong>Contact Info:</strong> <%= @partner.contact_info %> </p><br>
+				<p><strong style="font-weight:600;">Name:</strong> <%= @partner.name %> </p>
+				<p><strong style="font-weight:600;">Address:</strong> <%= @partner.address %> </p>
+				<p><strong style="font-weight:600;">Contact Info:</strong> <%= @partner.contact_info %> </p>
 				<% if current_admin %>
-							<%= link_to "Create MultiDinner booking", new_multidinner_path(:id => @partner.id) , :class => "btn btn-warning btn-sm" %>
+				<%= link_to "Create MultiDinner booking", new_multidinner_path(:id => @partner.id) , :class => "btn btn-xl" , :style=>"color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px" %>
 				<% end %>
 			</div>
 		</div>
 	</div>
-	<div class = "row">
-		<h2> List of Bookings </h2>
-	</div>
-	<div class = "row">
+</div>
+<div style="background:#f4f4f4;">
+<div class="container-fluid">
+<div class = "row" style="padding:50px;">
+	<h3 class="text-center title" > List of Bookings </h3>
 		<div class = "col-md-4">
+			<div class="thumbnail" style="padding:20px;">
 				<% @multidinners.each do |x| %>
 					<% y = x.assign_hosts_to_group_size %>
-					<p> Event Name :<%= x.name %> </p>
-					<p> Event Date :<%= x.date %> </p>
+					<p> <span style="font-weight:600;">Event Name:</span><%= x.name %> </p>
+					<p> <span style="font-weight:600;">Event Date:</span><%= x.date %> </p>
 					<ol>
 			    <% y.each do |size,host_id| %>
 				    <% host = Host.find host_id.to_i %>
-				    	<li>Host Name : <%= host.first_name %> <%= host.last_name %><br>
-				    	 Number of guests :<%= size %></li>
+				    <ul>
+				    	<li><strong style="font-weight:600;">Host Name:</strong> <%= host.first_name %> <%= host.last_name %>
+				    	 <ol><strong style="font-weight:600;">Num of guests:</strong> <%= size %></ol></li>
+				    </ul>
 			   <% end %>
 			   </ol>
 			 <% end %>
+			</div>
 		</div>
 	</div>
+</div>
 </div>

@@ -43,7 +43,7 @@ $green_text: darkGreen;
 h3.title {
 	font-family: $headline;
 	font-size: 38px;
-	color: $green_text;
+	color: #66a422;
 	font-weight: bold;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -54,8 +54,7 @@ h3.title {
 }
 
 #host_events {
-  /* background-color: #eee; */
-	margin-bottom: 15px;
+padding:50px;
 }
 
 #host_specials {
@@ -86,12 +85,11 @@ h3.title {
 
 	background-color: #eee;
 	margin-top: 15px;
-	margin-bottom: 15px;
 
 	h3{
 		font-family: $headline;
 		font-size: 38px;
-		color: $green_text;
+		color: #66a422;
 		font-weight: bold;
 	}
 
