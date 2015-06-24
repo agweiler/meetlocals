@@ -8,16 +8,16 @@
     <div class="col-md-6">
 
       <div class="field">
-        <label for="experience_title">*Title</label><br>
+        <label for="experience_title">* Title</label><br>
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
-        <label for="experience_description">*Description</label>
+        <label for="experience_description">* Description</label>
         <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
       </div>
 
       <div class="field">
-        <label for="experience_cuisine">*Cuisine</label>
+        <label for="experience_cuisine">* Cuisine</label>
         <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
@@ -25,7 +25,7 @@
         <%= f.text_field :beverages, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
-        <label for="exprience_max_group_size">*Max Group Size</label>
+        <label for="exprience_max_group_size">* Max Group Size</label>
         <small>(Don't want a hundred guests now do we?)</small><br>
         <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
           {required:true, class:'form-control', style:'width:20%'} %>
@@ -125,7 +125,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Create new experience", class: 'btn btn-default', style: "background-color: #fed136", remote: true ,id: "test" %>
+        <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
       </div>
 
     </div>

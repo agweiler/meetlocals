@@ -1,22 +1,25 @@
 <div id="holiday_calendar">
+  <div class="container-fluid">
 
-  <div class="row text-center">
+  <div class="row text-center" style="padding:20px;">
     <%= content_tag :h3, "#{@host.username}'s Holiday Calendar",
      class:"text-center" %>
     <h6 class="text-center" id="notify">&nbsp;</h6>
-    <div class="col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
+    <div class="">
       <div id="datepick"></div>
     </div>
 
-    <div class="col-md-9 col-sm-8 col-xs-12" id="showdates"></div>
-  </div>
-
-  <div class="row text-center">
+    <div class="col-md-12 col-sm-12 col-xs-12" id="showdates"></div>
+      <div class="row">
   <%= form_for :holiday, remote:true do |f| %>
     <%= f.hidden_field :dates %>
-    <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-danger' if @host == current_host %>
+    <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-xl btn-danger' if @host == current_host %>
   <% end %>
   </div>
+  </div>
+</div>
+
+
 </div>
 
 <script>
@@ -74,7 +77,7 @@ $(function(){
     formatted = formatted.sort();
 
     if(open_tag !== '' && len > 0){
-      formatted[0] = '<ul class="col-md-2 col-sm-3 col-xs-6">' + formatted[0];
+      formatted[0] = '<ul class="" style="margin-top:-200px; margin-right:-400px;">' + formatted[0];
       formatted[len+1] = '</ul>';
 
       if(len > 12){

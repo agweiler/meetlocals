@@ -1,6 +1,7 @@
-<div class="container text-center">
+<div class="container-fluid">
+  <div class="row">
   <% if host_signed_in? %>
-    <h1>Listing bookings to your experiences</h1>
+    <h1 class="heads text-center" style="color:#66a422; font-size:70px;">Listing bookings to your experiences</h1>
   <% elsif guest_signed_in? %>
     <h1>Listing your bookings</h1>
   <% elsif admin_signed_in? %>
@@ -12,7 +13,7 @@
     <h2>Nothing was found D:</h2>
   <% else %>
   </br>
-  <div class="col-sm-10 col-sm-offset-1" style="border: 2px solid; border-radius: 10px; border-color: #000000">
+  <div class="col-md-12">
     <table class="table table-striped">
       <thead>
         <tr>
@@ -52,12 +53,13 @@
             <td colspan="3"><%= link_to booking.experience.title, experience_path(experience.id.to_s) %></td>
             <td><span class="label label-info"><%= booking.status.capitalize %></span></td>
             <td><%= booking.group_size %></td>
-            <td colspan="2"><%= link_to 'View', [experience, booking], class:"btn btn-xs btn-primary", style:"color:#fff" %></td>
+            <td colspan="2"><%= link_to 'View', [experience, booking], class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
     <% end %>
     <br>
+  </div>
   </div>
 </div>
