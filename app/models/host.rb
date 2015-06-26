@@ -156,5 +156,6 @@ class Host < ActiveRecord::Base
       end
     end
     return self.experiences.special_events[0].id  
+
   end
 end
