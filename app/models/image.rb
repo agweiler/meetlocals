@@ -8,7 +8,7 @@ class Image < ActiveRecord::Base
   validates_attachment :local_image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
 
   has_attached_file :image_file,
-										styles: { :medium => "300x300!", :thumb => "100x100>" , :host_party => "600x200!"},
+										styles: { :medium => "300x300!", :thumb => "100x100>" , :host_party => "600x400!"},
                     #you can customise the storage path here using :path
 										:storage => :s3,
           					:s3_credentials => {
