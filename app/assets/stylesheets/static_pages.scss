@@ -632,3 +632,31 @@ z-index: 1;
 .nas{
   margin-top:-10px;
 }
+
+
+.alert {
+  padding: 15px;
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+}
+
+.alert-dismissable .close,
+.alert-dismissible .close {
+  position: relative;
+  top: -2px;
+  right: 0px;
+  color: inherit;
+}
+
+.blue{
+  color: #fff !important;
+  background-color: #4183D7 !important;
+  border: #4183D7 !important;
+}
+
+.border-hitam{
+  background-color: #fff !important;
+  border-radius: 0px;
+  border-color: #000 !important;
+}
