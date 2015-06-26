@@ -150,11 +150,11 @@ class Host < ActiveRecord::Base
   end
 
   def next_host_party
-    array = []
     self.experiences.special_events.each do |x| 
       if x.date > Time.now
-        return x.id
+        return x
       end
-    end   
+    end
+    return self.experiences.special_events[0].id  
   end
 end
