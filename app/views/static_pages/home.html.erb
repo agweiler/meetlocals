@@ -38,7 +38,7 @@
 
 <br>
 
-<div id="award" style="background:#f4f4f4; margin-top:-20px;">
+<div id="award" style="background:#f9f9f9; margin-top:-20px;">
   <div class="container">
     <div class="row" >
       <br><br>
@@ -85,9 +85,9 @@
        
             <h3 class = "host_name"><%= host.username %></h3>
        
-        <h4>HOST</h4>
-        <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
-        <%= content_tag :quote, host.experiences.first.description, class:"para" %>
+        <p style="line-height: 1px;font-size: 16px;">HOST</p>
+      <p><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>  
+    <p style="text-align:justify;"><sup><i class="fa fa-quote-left"></i></sup>... <%= content_tag :quote, host.experiences.first.description, class:"para" %></p>
       </div>
 
       <div class="col-md-3 hidden-sm hidden-xs box1" >
@@ -103,9 +103,9 @@
         
            <h3 class = "host_name"><%= host.username %></h3>
 
-        <h4>HOST</h4>
+        <p style="line-height: 1px;font-size: 16px;">HOST</p>
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
-        <%= content_tag :quote, host.experiences.first.description, class:"para" %>
+        <p style="text-align:justify;"><sup><i class="fa fa-quote-left"></i></sup>... <%= content_tag :quote, host.experiences.first.description, class:"para" %></p>
       </div>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_02.jpg" />
@@ -122,9 +122,9 @@
        
           <h3 class = "host_name"><%= host.username %></h3>
         
-        <h4>HOST</h4>
+        <p style="line-height: 1px;font-size: 16px;">HOST</p>
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
-        <%= content_tag :quote, host.experiences.first.description, class:"para" %>
+       <p style="text-align:justify;"><sup><i class="fa fa-quote-left"></i></sup>... <%= content_tag :quote, host.experiences.first.description, class:"para" %></p>
       </div>
 
       <div class="col-md-3 hidden-sm hidden-xs box3" >
@@ -135,7 +135,7 @@
    <% end %>
 </div>
 
-<div class="container-fluid" style="background-color: #D4D4D4" id="host_party">
+<div class="container-fluid" style="background-color: #e4e4e4" id="host_party">
   <h3 class="heads" style="margin-left:15px">HOST PARTY</h3>
   <% @host_party.each do |experience| %>
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -143,16 +143,16 @@
         <%= link_to image_tag(experience.images.first.image_file.url(:host_party)),
           experience if experience.images.present?%>
 
-        <div class="caption" style="background-color: #FFF; min-height: 300px; padding:20px">
+        <div id="thumbthumb" class="caption">
             <h3 class = "host_name"><%= experience.host.username %></h3>
-            <h5 class="para_host_party">Description: </h5>
-          <%= content_tag :quote, truncate(experience.description, length: 120) ,class:"para_host_party" %>
+             <quote class="para" >Description: </quote><br>
+          <%= content_tag :quote, truncate(experience.description, length: 120) ,class:"para" %>
 
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
-          <p>
-            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar fa-md", style:"margin-top:10px; color:grey" %>
-            <%= link_to 'Book Now', experience, class: "btn btn-danger btn-xlarge pull-right", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
-          </p>
+          <div class="row" style="position: absolute; bottom: 0; padding: 10px; width:100%;">
+            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar col-xs-6", style:" color:#b4b4b4; line-height: 50px;" %>
+           <div class="col-xs-6" style="color:#b4b4b4;   text-align: right;"> <span><i class="fa fa-arrow-left"></i> </span><span><%= link_to 'Book Now', experience, class: "btn btn-danger", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %></span></div>
+          </div>
         </div>
       </div>
       <br><br>

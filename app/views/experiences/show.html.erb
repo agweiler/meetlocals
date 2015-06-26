@@ -141,9 +141,12 @@
     <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
   </div>
 
-  <div class="row" id="specframe">
-    <h2 style="color:#4b4b4b;">HOST PARTY</h2>
-  </div>
+  <% if @host.experiences.special_events.present? %>
+      <div class="row" id="specframe">
+        <h2>HOST PARTY</h2>
+          <%= exp_id = @host.next_host_party %>
+      </div>
+    <% end %>
  
   <div class="row" id="testiframe">
     <h2>REVIEWS</h2>

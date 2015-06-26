@@ -63,8 +63,9 @@ padding:50px;
 
 #search_box{
 	padding-top: 30px;
-	font-weight: bold;
-	font-family: $paragraph;
+	font-weight: 500;
+	font-family: "Helvetica";
+	color:#000 !important;
 
 	select {
 		border-color: black;
@@ -72,7 +73,7 @@ padding:50px;
 
 	input[type="text"]{
 		border-color: black;
-		border-radius: 5px;
+		border-radius: 0px;
 	}
 
 	input[type="submit"]{

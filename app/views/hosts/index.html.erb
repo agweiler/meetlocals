@@ -1,5 +1,5 @@
 <div class="row">
-  <div style="" id="pre_foot">
+  <div id="pre_foot">
       <h1 class="text-center">FIND YOUR PERFECT HOST</h1>
   </div>
 </div>
@@ -8,27 +8,27 @@
   <div class="col-xs-10 col-xs-offset-1 text-center" >
 
   <%= form_tag hosts_search_path, class:"form-inline"  do %>
-  <div class='input-group col-sm-2 col-xs-12'>
+  <div class="input-group col-sm-2 col-xs-12 selectParent">
     <%= text_field :search, :date,
-    {class:"form-control datepick", placeholder:"Date"} %>
+    {class:"form-control datepick fa fa-arrow-left", placeholder:"Date"} %>
   </div>
 
-  <div class='input-group col-sm-2 col-xs-12'>
+  <div class="input-group col-sm-2 col-xs-12 selectParent">
     <%= select :search, :age_range, Host.age_ranges,
       {selected: @selected_age}, {class:"form-control square_box"} %>
   </div>
 
-  <div class="input-group col-sm-2 col-xs-12">
+  <div class="input-group col-sm-2 col-xs-12 selectParent">
     <%= select :search, :max_group, (["Guests"] + (1..10).to_a),
       {selected: @selected_group}, {class:"form-control square_box"} %>
   </div>
 
-  <div class='input-group col-sm-2 col-xs-12'>
+  <div class="input-group col-sm-2 col-xs-12 selectParent">
     <%= select :search, :location, Host.get_location,
       {selected: @selected_location}, {class:"form-control square_box"} %>
   </div>
 
-  <div class='input-group col-sm-2 col-xs-12'>
+  <div class="input-group col-sm-2 col-xs-12">
     <%= submit_tag :FILTER,
      {class:"btn btn-success col-sm-8 col-sm-offset-2 para"} %>
   </div>

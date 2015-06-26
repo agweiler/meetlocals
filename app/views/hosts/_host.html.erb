@@ -2,20 +2,24 @@
   <div class="thumbnail" style = "margin-bottom:15px">
     <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)), host if host.experiences.first.images.present? %>
 
-    <div class="caption" style="background-color: #D4D4D4; height: 100%">
+    <div class="caption" style="background-color: #f3f3f3; height: 100%; padding:20px;">
       <div id="avataro">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb), class: "img-circle"), host if host.images.present? %>
       </div>
 
          <h3 class = "host_name"><%= host.username %></h3>
      
-      <h3> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </h3>
-      <label>Speaks:</label>
-      <%= content_tag 'span', host.languages %><br>
-      <label>Guests:</label>
-      <%= content_tag 'span', "#{host.max_group_size} pax" %><br>
-      <label>Age:</label>
-      <%= content_tag 'span', "#{host.age} yrs old" %><br>
+      <p class="nas"> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </p>
+
+        <div>
+        <label>Speaks:</label>
+        <%= content_tag 'span', host.languages %><br>
+        <label>Guests:</label>
+        <%= content_tag 'span', "#{host.max_group_size} pax" %><br>
+        <label>Age:</label>
+        <%= content_tag 'span', "#{host.age} yrs old" %><br>
+        </div>
+
 
       <p class="text-left">
         <% link_to 'More info', host, class: "btn btn-info btn-xs", style: "color:#fff" %>
