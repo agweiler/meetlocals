@@ -18,6 +18,7 @@ $(".experiences.show").ready(function(){
 	 		center: new google.maps.LatLng(mapLat, mapLng),
 	 		zoom: 15,
 	 		mapTypeId: google.maps.MapTypeId.ROADMAP
+	 		scrollwheel: false
 	 	}
 	 	var map = new google.maps.Map(mapCanvas, mapOptions);
 	 	mapRad = 300
