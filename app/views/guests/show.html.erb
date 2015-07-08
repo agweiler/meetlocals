@@ -1,31 +1,27 @@
-<div class="container">
-
-	<div class="row">
+<div class="container-fluid">
+	<div class="row" style="padding:50px;">
 
 		<div class="col-md-4 col-sm-5 col-xs-12" id="avatar_align">
 			<br>
 			<% if @guest.images.present? %>
-				<%= image_tag @guest.images.first.image_file.url(:medium), class: "img-circle" %></br>
+				<%= image_tag @guest.images.first.image_file.url(:medium), class: "img-profile" %>
 			<% else %>
 				<%= image_tag "box.jpeg" %>
 			<% end %>
-			</br>
+			
 
-			<%= content_tag :h3, @guest.username, class:"title" %>
+			<%= content_tag :h3, @guest.username, class:"host_name" %>
 
 			<% if @guest == current_guest %>
 			<div class="row" id="host_controls">
-					<%= link_to "Edit Profile" , edit_guest_path, :class => "btn btn-warning btn-sm" %>
-					<%= link_to "Account Settings" , edit_guest_registration_path, :class => "btn btn-danger btn-sm" %>
+					<%= link_to "Edit Profile" , edit_guest_path, :class => "btn btn-profile btn-warning btn-sm" %>
+					<%= link_to "Account Settings" , edit_guest_registration_path, :class => "btn btn-profile btn-danger btn-sm" %>
 			</div>
 			<% end %>
 		</div>
 
-		<div class="col-md-8 col-sm-7 col-sm-offset-0 col-xs-offset-1 col-xs-10" id="card_container">
+		<div class="col-md-8 col-sm-7 " id="card_container" style="background-color:#f3f3f3; padding:20px;">
 
-			<!-- <div class="field">
-				<strong>Username: </strong> <%= @guest.username %>
-			</div> -->
 			<div class="field">
 				<strong>Name: </strong>
 				<%= @guest.title %> <%= @guest.first_name %> <%= @guest.last_name %>
@@ -58,7 +54,7 @@
 				<strong>About: </strong>
 				<%= simple_format(@guest.about) %>
 			</div>
-			<br>
+			
 
 		</div>
 
