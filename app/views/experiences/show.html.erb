@@ -24,10 +24,15 @@
 
   <div class="row" id="bookinfo">
     <div class="col-md-10 col-md-offset-1">
-      <h4 class="text-center">DKK <%= @experience.price.round %>
+       <div class="row" style="text-align:center; padding-top:20px;">
+          <%= link_to "MESSAGE", new_guest_registration_path, :class => 'btn btn-success white' %></div>
+      <h4 style="padding-top:20px;   padding-top: 20px;
+  color: #000;
+  font-size: 28px;
+  font-weight: 600;" class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4>
-      <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",
-       class:"text-center" if @experience.special_event? %>
+        
+     <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",       class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
   </div>
@@ -107,7 +112,7 @@
       </tbody>
     </table>
 
-    <div class="col-md-6" style="margin-left:-8px; margin-top:15px">
+    <div class="col-md-12" style="margin-left:-8px; margin-top:15px">
       <%= content_tag 'p', @experience.description %>
     </div>
   </div>
@@ -144,7 +149,7 @@
 
   <div class="row" id="menuframe">
    <h2>MAP</h2>
-   <div id="map-canvas" style="float:left; max-width: 600px"></div>
+   <div id="map-canvas" style="float:left; max-width: 750px"></div>
   </div>
 
 
@@ -165,6 +170,7 @@
         <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
     </div>
   <% end %>
+
  
   <div class="row" id="testiframe">
     <h2>REVIEWS</h2>
