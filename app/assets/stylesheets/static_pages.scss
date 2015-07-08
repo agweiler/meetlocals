@@ -19,6 +19,15 @@ $green_text: darkGreen;
 
 }
 
+.label-info {
+  background-color: #b4b4b4 !important;
+}
+
+body{
+  font-size:16px;
+}
+
+
 .img-circle {
   border-radius: 50%;
   border: 5px solid  #fefffe;
@@ -712,6 +721,8 @@ z-index: 1;
     z-order: 0;
     
 }
+
+
 
 .process-step {    
     display: table-cell;

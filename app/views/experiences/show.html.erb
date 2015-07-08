@@ -77,15 +77,13 @@
        <thead>
         <tr>
         
-          <th>Availability</th>
+          
           <th>Group Size</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
-      <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
-      <%= avail_days.to_sentence %></td>
+          
           <td><%= @experience.max_group_size %> Max</td>
         </tr>
       </tbody>
