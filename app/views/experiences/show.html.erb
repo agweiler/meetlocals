@@ -86,14 +86,14 @@
           <td><% days = ["Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thursdays", "Fridays", "Saturdays"] %>
       <% avail_days = @experience.available_days.split(//).select {|num| num != "-"}.map { |num| days[num.to_i] } %>
       <%= avail_days.to_sentence %></td>
-          <td><%= @experience.max_group_size %> pax</td>
+          <td><%= @experience.max_group_size %> Max</td>
         </tr>
       </tbody>
 
        <thead>
         <tr>
           <th>Host Style</th>
-          <th>Suggested Time</th>
+          <th>Time</th>
           <th>Price</th>
         </tr>
       </thead>
@@ -119,6 +119,22 @@
 
    <div class="row" id="specframe">
     <h2>MEAL FORMAT</h2>
+    <table class="table" id="menutab">
+      <thead>
+        <tr>
+          <th>PRICE</th>
+          <th>GROUP SIZE</th>
+          <th>HOST STYLE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @experience.price %></td>
+          <td><%= @experience.max_group_size %> Max</td> 
+          <td><%= @experience.host_style%></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 
@@ -147,11 +163,14 @@
   </div>
 
   <% if @host.experiences.special_events.present? %>
-      <div class="row" id="specframe1">
-        <h2>HOST PARTY</h2>
-          <%= exp_id = @host.next_host_party %>
-      </div>
-    <% end %>
+
+    <div class="row" id="specframe">
+      <h2>HOST PARTY</h2>
+        <p><%= @host.next_host_party.description %> </p>
+        <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
+    </div>
+  <% end %>
+
  
   <div class="row" id="testiframe">
     <h2>REVIEWS</h2>
