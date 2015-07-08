@@ -135,6 +135,7 @@
    <% end %>
 </div>
 
+<% if Experience.special_events.present? %>
 <div class="container-fluid" style="background-color: #e4e4e4" id="host_party">
   <h3 class="heads" style="margin-left:15px">HOST PARTY</h3>
   <% @host_party.each do |experience| %>
@@ -159,6 +160,7 @@
     </div>
   <% end %>
 </div>
+<% end %>
 <!-- <div class="overlay2"></div> -->
 <!-- <div style="background-image:url('https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/join-ourcom.jpg'); background-attachment: fixed" id="pre_foot"> -->
 <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/join-ourcom.jpg" style="height:100%;width:100%">
