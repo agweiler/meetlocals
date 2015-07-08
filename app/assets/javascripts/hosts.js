@@ -10,7 +10,7 @@ if (/\/hosts\/\d+$/.test(window.location.href)) {
 		var mapOptions = {
 			center: new google.maps.LatLng(mapLat, mapLng),
 			zoom: 15,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
       scrollwheel: false
 		}
 		var map = new google.maps.Map(mapCanvas, mapOptions);
