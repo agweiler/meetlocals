@@ -30,7 +30,7 @@
         <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
           {required:true, class:'form-control', style:'width:20%'} %>
       </div> -->
-      <%= f.hidden_field :max_group_size, value: @experience.host.max_group_size %>
+      <%= f.hidden_field :max_group_size, value: @host.max_group_size %>
       <div class="field">
         <%= f.label :host_style %><br>
         <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%' %>

@@ -11,6 +11,7 @@ class HostsController < ApplicationController
     if (request.request_method == 'GET')
 			@hosts = Host.where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
+
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
 			age_range ||= [nil, 0, 200]
 			@selected_age = age_range[0]
