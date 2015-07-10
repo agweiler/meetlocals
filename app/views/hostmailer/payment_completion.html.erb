@@ -4,12 +4,15 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body> 
-    <h1>Hi <%= @host.username %>! You have received payment for the <%= @booking.experience.title %> event from <%= @guest.username %>. </h1>
-    <p>
-      You can review the booking via the Bookings tab once signed in via <%= link_to 'Meet the Danes' , booking_index_url(@booking)%>.
+    <h1>Hello <%= host.first_name %>. Congratulations! User: <%= @guest.username %> has completed payment for the experience: <%= @booking.experience.title %>.</h1>
+
+    <p>In order to trigger the transfer of your payment from Meet the Danes, please change the status of the booking to 'complete' once the event has finished.</p>
+
+    <p>In order to do so, log in to <%= link_to 'Meet the Danes' , booking_index_url(@booking)%>. as a host. You will then be redicrected to the relevant Booking. Here, you will be able to change the status.</p>
+
+    <p>Once this is done, you will receive a confirmation email that funds transfer has commenced. Please do not forget to do so, otherwise the payment will not be triggered. </p>
     <!--INSET SCREENSHOT OF BOOKING LINK HERE-->   
-    <p> <%= image_tag("https://s3-ap-southeast-1.amazonaws.com/mtdimages/emailimages/bookings_tab.png") %> </p>
-    </p>
+
     <p>Thanks for using Meet the Danes and have a great day!</p>
 
   </body>
