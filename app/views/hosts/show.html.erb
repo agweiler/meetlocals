@@ -94,16 +94,44 @@
   <!-- End of events title -->
     <%= content_tag :h5, "<No Special Events for now>", class:"text-center" if @special_events.available.empty? %>
   <!-- Hosts experiences listing -->
-    <% @special_events.in_groups_of(3, false).each do |group| %>
+      <div class="container-fluid">
       <div class="row">
-        <% group.each do |experience| %>
-          <% next if !experience.available? && @host != current_host %>
-        <div class="col-md-4 col-sm-6 col-xs-10 col-xs-offset-1">
-          <%= render experience %>
+        <div class="col-sm-12" style="">
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Meal Type</th>
+                <th>Date</th>
+                <th>Cuisine</th>
+                <th>Beverages</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @host.experiences.special_events.each do |event| %>
+                <tr class="text-left">
+                  <td><%= event.title %></td>
+                  <td><%= event.meal %></td>
+                  <td><%= event.date %></td>
+                  <td><%= event.cuisine %></td>
+                  <td><%= event.beverages %></td>
+                  <td class="text-right">
+                    <% if current_host == @host %>
+                      <%= link_to 'View', event, class: "btn btn-xs btn_admins fa fa-info", style: "color:#4b4b4b" %>
+                      <%= link_to 'Edit', event, lass: "btn btn-xs btn_admins fa fa-pencil", style: "color:#4b4b4b"  %>
+                      <%= link_to 'Destroy', event, class:"btn btn-sm red",
+                       style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 
 
@@ -115,15 +143,42 @@
 <!-- End of events title -->
   <%= content_tag :h5, "<No Events for now>", class:"text-center" if @normal_events.empty? %>
 <!-- Hosts experiences listing -->
-    <% @normal_events.in_groups_of(3, false).each do |group| %>
-      <div class="row">
-        <% group.each do |experience| %>
-        <div class="col-md-4 col-sm-6 col-xs-12 col-xs-offset-1">
-          <%= render experience %>
-        </div>
-        <% end %>
-      </div>
-    <% end %>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12" style="">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Meal Type</th>
+            <th>Cuisine</th>
+            <th>Beverages</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @host.experiences.normal_events.each do |event| %>
+            <tr class="text-left">
+              <td><%= event.title %></td>
+              <td><%= event.meal %></td>
+              <td><%= event.cuisine %></td>
+              <td><%= event.beverages %></td>
+              <td class="text-right">
+                <% if current_host == @host %>
+                  <%= link_to 'View', event, class: "btn btn-xs btn_admins fa fa-info", style: "color:#4b4b4b" %>
+                  <%= link_to 'Edit', event, lass: "btn btn-xs btn_admins fa fa-pencil", style: "color:#4b4b4b"  %>
+                  <%= link_to 'Destroy', event, class:"btn btn-sm red",
+                   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
   </div>
 
 </div>
