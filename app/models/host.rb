@@ -105,9 +105,9 @@ class Host < ActiveRecord::Base
     !(self.holidays.find_by(date:date) || self.bookings.find_by(date:date, status:'confirmed'))
   end
 
-  def max_group_size
-    self.experiences.maximum(:max_group_size)
-  end
+  # def max_group_size
+  #   self.experiences.maximum(:max_group_size)
+  # end
 
   def self.get_location
     ["Location","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]

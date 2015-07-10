@@ -64,6 +64,13 @@
   </div>
 
   <div class="field">
+    <label for="exprience_max_group_size">* Max Group Size</label>
+    <small>(Don't want a hundred guests now do we?)</small><br>
+    <%= f.select :max_group_size, options_for_select(1..10, @host.max_group_size), {},
+      {required:true, class:'form-control', style:'width:20%'} %>
+  </div>
+
+  <div class="field">
     <%= f.label :interests %>
     <%= f.text_area :interests, class: "form-control" %>
   </div>

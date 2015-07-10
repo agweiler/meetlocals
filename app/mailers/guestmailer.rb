@@ -33,4 +33,11 @@ class Guestmailer < ApplicationMailer
     @host = Host.find host_id
     mail(to: @guest.email, subject: "You got mail!")
   end
+
+  def create_booking_request(host_id,booking_id,guest_id)
+  @guest = Guest.find guest_id
+  @booking = Booking.find booking_id
+  @host = Host.find host_id
+  mail(to: @guest.email, subject: "You got mail!")
+  end
 end

@@ -10,6 +10,7 @@ class Hostmailer < ApplicationMailer
   def payment_completion(host_id, booking_id)
     @host = Host.find host_id
     @booking = Booking.find booking_id
+    @guest = @booking.guest
     mail(to: @host.email, subject: "Payment has been completed!!!")
   end
 

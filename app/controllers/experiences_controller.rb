@@ -103,6 +103,7 @@ class ExperiencesController < ApplicationController
     redirect_to '/hosts/sign_in' unless host_signed_in?
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
     @experience = Experience.new
+    @host = current_host
   end
 
   # GET /experiences/1/edit
@@ -189,6 +190,7 @@ class ExperiencesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_experience
       @experience = Experience.find(params[:id])
+      @host = @experience.host
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

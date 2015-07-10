@@ -72,12 +72,10 @@ class ImageJob
     def perform(url,id)
       image = Image.find(id)
       # s3 = AWS::S3.new
-      # byebug
       # x = s3.buckets[ENV['AWS_BUCKET']].objects[url]
       # puts x.content_type
      
       # x.copy_to(image.local_image.s3_object)
-
       stringIo = open(url)
       content_type = "." + stringIo.content_type.split('/')[-1]
       # content_type = stringIo.content_type
