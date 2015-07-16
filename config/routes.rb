@@ -8,26 +8,28 @@ Rails.application.routes.draw do
   resources :hosts
 
   # devise_for :guests, controllers: { registrations: "guests/registrations" }
-  # resources :guests
+  devise_for :guests, controllers:
+   { omniauth_callbacks: "guests/omniauth_callbacks" },
+   skip: [:registrations]
+    as :guest do
+      #modified paths
+      post 'guests' => 'registrations#create', as: 'guest_registration'
+      get 'guests/sign_up' => 'registrations#new', as: 'new_guest_registration'
+      get 'guests/edit' => 'registrations#edit',
+       as: 'edit_guest_registration'
 
-  devise_for :guests, skip: [:registrations]
-  as :guest do
-    #modified paths
-    post 'guests' => 'registrations#create', as: 'guest_registration'
-    get 'guests/sign_up' => 'registrations#new', as: 'new_guest_registration'
-    get 'guests/edit' => 'registrations#edit',
-     as: 'edit_guest_registration'
+      #original devise paths
+      get 'guests/cancel' => 'devise/registrations#cancel',
+       as: 'cancel_guest_registration'
+      patch 'guests' => 'devise/registrations#update'
+      put 'guests' => 'devise/registrations#update'
+      delete 'guests' => 'devise/registrations#destroy'
+    end
 
-    #original devise paths
-    get 'guests/cancel' => 'devise/registrations#cancel',
-     as: 'cancel_guest_registration'
-    patch 'guests' => 'devise/registrations#update'
-    put 'guests' => 'devise/registrations#update'
-    delete 'guests' => 'devise/registrations#destroy'
-  end
-
+  resources :guests
   resources :authentications
-  get '/auth/:provider/callback' => 'authentications#create'
+  # get '/auth/:provider/callback' => 'authentications#create'
+  get '/guests/authentications' => 'authentications#index'
 
   devise_for :admins
 
