@@ -34,6 +34,12 @@ module Nasi
         x.each do |key, value|
           ENV[key.to_s] = value
         end if File.exists?(env_file)
+
+        omni_file = File.join(Rails.root, 'config', 'omniauth.yml')
+        omni = YAML.load(File.open(omni_file))
+        omni.each do |key, value|
+          ENV[key.to_s] = value.to_s
+        end if File.exists?(omni_file)
       end
     end
 
