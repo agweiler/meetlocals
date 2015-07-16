@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'notifications/show'
 
   devise_for :partners, controllers: { registrations: "partners/registrations" }
-  
+
 
   devise_for :hosts, controllers: { registrations: "hosts/registrations" }
   resources :hosts
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   patch '/host' => 'admins#approveuser'
 
-  resources :partners  
+  resources :partners
 
   resources :admins
 
@@ -95,7 +95,7 @@ Rails.application.routes.draw do
 
   get 'notifications/all' => 'notifications#all', as: :all_notifications
 
-  resources :multidinners 
+  resources :multidinners
 
   resources :experiences
 
@@ -110,4 +110,7 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :testimonials
+
+  resources :authentications
+  get '/auth/:provider/callback' => 'authentications#create'
 end

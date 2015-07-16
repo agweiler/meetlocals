@@ -63,6 +63,8 @@ gem 'bootstrap-wysihtml5-rails', github: 'nerian/bootstrap-wysihtml5-rails'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

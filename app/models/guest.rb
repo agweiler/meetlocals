@@ -6,6 +6,8 @@ class Guest < ActiveRecord::Base
   has_many :bookings
   has_many :images, as: :imageable
   has_many :notifications
+
+  has_many :authentications
   # removed uniqueness constraint
   # validates_uniqueness_of :username
 
