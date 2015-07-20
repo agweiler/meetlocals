@@ -65,6 +65,7 @@
 
     <% if current_guest && @booking.status == "invited" %>
       <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %></br></br>
+      <p> Please note that price includes 2.48% in transaction fees %></p>
     <% end %>
 
 

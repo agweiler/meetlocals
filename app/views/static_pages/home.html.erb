@@ -49,7 +49,7 @@
 
 
       <div class="col-md-8 col-sm-12 ">
-        <h1 class="heads text-center" style ="color:#66a422;">AWARD WINNING AGENCY</h1>
+        <h1 class="heads text-center pad-bot" style ="color:#66a422;">AWARD WINNING AGENCY</h1>
         <p class="para text-justify">In 2003 Meet the Danes received a Danish award called the Initiative Award from “Fonden for Turismens Fællesråd”.</p><br>
         <p class="para text-justify" style="padding-bottom:40px">In 2002 Meet the Danes received a prestigious International tourism award (British Guild of Travel Writers’ Silver Otter Award) for “BEST OVERSEAS TOURISM PROJECT”. An award we of course were very happy and proud to recieve. This recognition, which has been featured in media worldwide, has further increased the interest in our Meet the Danes events.
         </p>
@@ -85,12 +85,12 @@
        
             <h3 class = "host_name"><%= host.username %></h3>
        
-        <p style="line-height: 1px;font-size: 20px; font-weight: 600;">HOST</p>
-      <p><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>  
+        <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;">HOST</p>
+      <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>  
     <p style="text-align:justify;"><sup><i class="fa fa-quote-left" style="font-size:6px;" ></i></sup>... <%= content_tag :quote, host.experiences.first.description, class:"para" %></p>
       </div>
 
-      <div class="col-md-3 hidden-sm hidden-xs box1" >
+      <div class="col-md-3 hidden-sm hidden-xs box1 marge-left" >
       </div>
     <% elsif idx == 1 %>
 
