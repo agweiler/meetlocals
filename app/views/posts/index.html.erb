@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pad-top pad-bot" id="post-index">
   <div class="row">
     <div class="col-md-12">
       <h1 class="heads" style="text-align: center; color:#66a422; font-size:70px;"> Blog</h1>
@@ -6,20 +6,21 @@
   </div> 
 
   <div class="row">
-      <div class="col-md-12"><%= link_to "Create New Post", new_post_path, class: "blue btn btn-primary btn-xl pull-right " if admin_signed_in? %>
+      <div class="col-md-12"><%= link_to "Create New Post", new_post_path, class: "blue btn btn-primary btn-xl pull-right marge-bot" if admin_signed_in? %>
       </div>
   </div>
 
 
 
-  <div class="row">
+  <div class="row" align="center">
     <% @posts.each do |post| %>
-  	<div class="col-md-4 col-xs-6">
+  	<div class="col-md-4 col-xs-6" id="post-card">
       <%= content_tag :h3, link_to(post.title, post), class:'title' %>
-      <%= image_tag post.image.url(:medium), style: "border-radius:5%" %>
+      <%= image_tag post.image.url(:blogthumb), style: "border-radius:5%" %>
 
       <p><%= content_tag :p, post.created_at.strftime("%B %d, %Y") %></p>
   	</div>
     <% end %>
   </div>
 </div>
+
