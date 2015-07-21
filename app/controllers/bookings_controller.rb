@@ -106,7 +106,7 @@ class BookingsController < ApplicationController
         host = @booking.experience.host
         guest = @booking.guest
         exp = @booking.experience
-        GuestMailer.create_booking_request(host.id,@booking.id,guest.id).deliver_later
+        Guestmailer.create_booking_request(host.id,@booking.id,guest.id).deliver_later
         Hostmailer.receive_booking_request(host.id,@booking.id,guest.id).deliver_later
         host.notifications.create(content: "You have a new booking for the #{exp.title} event", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully created.' }
