@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-6">  
+<div class="col-md-4 col-sm-6">
   <div class="thumbnail" style = "margin-bottom:15px">
     <%= link_to image_tag(host.experiences.first.images.first.image_file.url(:medium)), experience_path(host.experiences.first) if host.experiences.first.images.present? %>
 
@@ -8,14 +8,14 @@
       </div>
 
          <h3 class = "host_name"><%= host.username %></h3>
-     
+
       <p class="nas"> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </p>
 
         <div>
         <label>Speaks:</label>
         <%= content_tag 'span', host.languages %><br>
         <label>Guests:</label>
-        <%= content_tag 'span', "#{host.max_group_size} pax" %><br>
+        <%= content_tag 'span', "#{host.experiences.first.max_group_size} pax" %><br>
         <label>Age:</label>
         <%= content_tag 'span', "#{host.age} yrs old" %><br>
         </div>
