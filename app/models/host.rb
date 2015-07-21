@@ -5,7 +5,7 @@ class Host < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :experiences
   has_many :images, as: :imageable
-  has_many :notifications  
+  has_many :notifications
   has_many :bookings
   has_many :bookings, through: :experiences
   has_many :testimonials
@@ -70,7 +70,7 @@ class Host < ActiveRecord::Base
     age = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'"
 
     loc == "Location" ? loc = '' : loc = " AND state = '#{loc}'"
-    group == "Guests" ? group = "" : group = " AND max_group_size >= #{group}"
+    group == "Guests" ? group = "" : group = " AND experiences.max_group_size >= #{group}"
 
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
@@ -80,17 +80,19 @@ class Host < ActiveRecord::Base
     # end.compact
     if date.blank?
       # Host.joins(:experiences).where(age + loc + group).uniq
-      host_in = " AND id IN(#{Experience.pluck('host_id').uniq.join(',')})"
+      host_in = " AND hosts.id IN(#{Experience.pluck('host_id').uniq.join(',')})"
     else
       # Host.joins(:experiences).where(age + loc + group).not_holiday(date).uniq
       free_hosts = Experience.pluck('host_id').uniq -
                     Host.in_holiday(date).pluck('hosts.id').uniq -
                     Host.has_booking(date).pluck('hosts.id').uniq
 
-      host_in = " AND id IN(#{free_hosts.join(',')})"
+      # host_in = " AND id IN(#{free_hosts.join(',')})"
+      host_in = " AND hosts.id IN(#{free_hosts.join(',')})"
     end
 
-    Host.where( age + loc + group + host_in ).order('random()')
+    # Host.where( age + loc + group + host_in ).order('random()')
+    Host.joins(:experiences).where(age + loc + host_in + group).order('random()')
   end
 
   def age
@@ -150,12 +152,12 @@ class Host < ActiveRecord::Base
   end
 
   def next_host_party
-    self.experiences.special_events.each do |x| 
+    self.experiences.special_events.each do |x|
       if x.date > Time.now
         return x
       end
     end
-    return self.experiences.special_events[0].id  
+    return self.experiences.special_events[0].id
 
   end
 end
