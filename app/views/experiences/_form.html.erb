@@ -39,7 +39,7 @@
 
     <div class="col-md-6">
 
-    <%= f.label :date %><small> *(Filling in this field will create a Host Party, A one time only Event )</small>
+    <%= f.label :date %><p><small> Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p>
       <div class="field form-inline">
         <%= f.date_select :date,
         {include_blank:true, use_short_month:true, order:[:month, :day, :year],

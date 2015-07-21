@@ -103,8 +103,8 @@
         
            <h3 class = "host_name"><%= host.username %></h3>
 
-        <p style="line-height: 1px;font-size: 20px; font-weight: 600;">HOST</p>
-        <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
+        <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;">HOST</p>
+        <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>
         <p style="text-align:justify;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, host.experiences.first.description, class:"para" %></p>
       </div>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
@@ -147,7 +147,7 @@
         <div id="thumbthumb" class="caption">
             <h3 class = "host_name"><%= experience.host.username %></h3>
              <quote class="para" >Description: </quote><br>
-          <%= content_tag :quote, truncate(experience.description, length: 120) ,class:"para" %>
+          <%= content_tag :quote, truncate(experience.description, length: 20) ,class:"para" %>...
 
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
           <div class="row" style="position: absolute; bottom: 0; padding: 10px; width:100%;">
