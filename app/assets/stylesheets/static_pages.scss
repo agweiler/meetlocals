@@ -213,7 +213,7 @@ hgroup h3{
     }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 990px) {
     .navbar-header {
         float: none;
     }
@@ -396,7 +396,7 @@ z-index: 1;
 	font-weight: bold;
   letter-spacing: 2px;
 }
-  
+
 
 .heads-lt {
 	font-family: $headline;
@@ -549,7 +549,7 @@ z-index: 1;
 }
 
 .telefon{
-  color: #66a422 !important;  
+  color: #66a422 !important;
   text-decoration: none !important;
 }
 
@@ -632,8 +632,8 @@ z-index: 1;
 .selectParent{
     overflow:hidden;
     width: 120px;
-   
-   
+
+
 }
 
 .selectParent select{
@@ -692,7 +692,7 @@ z-index: 1;
 
 
 .stepwizard-step p {
-    margin-top: 10px;    
+    margin-top: 10px;
 }
 
 .process-row {
@@ -700,7 +700,7 @@ z-index: 1;
 }
 
 .process {
-    display: table;     
+    display: table;
     width: 100%;
     position: relative;
 }
@@ -719,12 +719,12 @@ z-index: 1;
     height: 1px;
     background-color: #ccc;
     z-order: 0;
-    
+
 }
 
 
 
-.process-step {    
+.process-step {
     display: table-cell;
     text-align: center;
     position: relative;
@@ -732,7 +732,7 @@ z-index: 1;
 
 .process-step p {
     margin-top:10px;
-    
+
 }
 
 .btn-circle {
