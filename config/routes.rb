@@ -69,6 +69,8 @@ Rails.application.routes.draw do
 
   get 'explore' => 'static_pages#explore'
 
+  get 'press' => 'static_pages#press'
+
   get 'terms_of_service' => 'static_pages#terms_of_service'
 
   post 'complete_profile' => 'hosts#show'

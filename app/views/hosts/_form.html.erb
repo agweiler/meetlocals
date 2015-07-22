@@ -63,12 +63,12 @@
     <%= f.text_field :occupation, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <!-- <div class="field">
     <label for="exprience_max_group_size">* Max Group Size</label>
     <small>(Don't want a hundred guests now do we?)</small><br>
     <%= f.select :max_group_size, options_for_select(1..10, @host.max_group_size), {},
       {required:true, class:'form-control', style:'width:20%'} %>
-  </div>
+  </div> -->
 
   <div class="field">
     <%= f.label :interests %>
@@ -118,6 +118,7 @@
 
   <div class="field">
     <%= f.label :video_url %>
+    <p style="font-size: 12px"><i>Please insert a youtube url e.g. https://www.youtube.com/myvideo if you would like to introduce yourself by video.</i></p>
     <%= f.text_field :video_url, class: "form-control" %>
   </div>
 

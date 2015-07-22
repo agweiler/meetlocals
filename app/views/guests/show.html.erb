@@ -46,17 +46,24 @@
 				<strong>Country: </strong>
 				<%= @guest.country %>
 			</div>
-			<div class="field">
+			<div class="field pad-bot">
 				<strong>Province: </strong>
 				<%= @guest.province %>
 			</div>
 			<div class="field">
 				<strong>About: </strong>
+				<div class="pad-top">
 				<%= simple_format(@guest.about) %>
+				</div>
 			</div>
 			
 
 		</div>
 
 	</div>
+  <% if host_signed_in? %>
+	  <div align="center" class="pad-top pad-bot">
+		<%= link_to 'Back', booking_index_path, class: 'btn btn-default', style: 'color: #fff' %>
+		</div>
+	<% end %>
 </div>

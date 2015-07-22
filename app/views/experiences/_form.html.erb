@@ -24,13 +24,12 @@
         <%= f.label :beverages %><br>
         <%= f.text_field :beverages, class: 'form-control', style: 'width: 75%' %>
       </div>
-     <!--  <div class="field">
-        <label for="exprience_max_group_size">* Max Group Size</label>
-        <small>(Don't want a hundred guests now do we?)</small><br>
+      <div class="field">
+        <label for="exprience_max_group_size">* Max Group Size</label><br>
         <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
           {required:true, class:'form-control', style:'width:20%'} %>
-      </div> -->
-      <%= f.hidden_field :max_group_size, value: @host.max_group_size %>
+      </div>
+
       <div class="field">
         <%= f.label :host_style %><br>
         <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%' %>
@@ -40,13 +39,13 @@
 
     <div class="col-md-6">
 
-    <%= f.label :date %><small> *(Filling in this field will create a Host Party, A one time only Event )</small>
+    <%= f.label :date %><p><small> Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p>
       <div class="field form-inline">
         <%= f.date_select :date,
         {include_blank:true, use_short_month:true, order:[:month, :day, :year],
         start_year: Date.today.year, end_year: Date.today.year.next},
         {class:"form-control"} %>
-      </div> 
+      </div>
 
       <!-- <div class="field form-inline">
         <label for="experience_available_days">Days Available</label>
@@ -151,14 +150,14 @@
     var progressBar  = $("<div class='bar'></div>");
     var barContainer = $("<div class='progress'></div>").append(progressBar);
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
-   
+
     fileInput.after(barContainer);
     fileInput.fileupload({
       add: function (e, data) {
-            fd["Content-Type"] = data.files[0].type;  
+            fd["Content-Type"] = data.files[0].type;
             data.formData = fd;
              data.submit();
-           },  
+           },
       fileInput:       fileInput,
       url:             'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/',
       type:            'POST',
@@ -187,16 +186,16 @@ progressall: function (e, data) {
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
         var url   = 'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/' + key;
-   
-        
+
+
         // create hidden field
         var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
 
         form.append(input);
- 
+
 
       },
-      
+
       fail: function(e, data) {
         submitButton.prop('disabled', false);
 
