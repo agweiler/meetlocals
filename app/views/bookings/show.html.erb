@@ -53,19 +53,20 @@
       <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
 
       <% if @booking.status != "completed" && current_host == @booking.experience.host %>
-        <%= link_to('RESPOND TO REQUEST', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #b4b4b4;
-  border-color: #b4b4b4;" ) %>
+        <%= link_to('RESPOND TO REQUEST', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;
+  border-color: #4183D7;" ) %>
         <!-- <%= button_to %> -->
       <% end %>
 
       <% if @booking.check_finished? && @booking.status == 'confirmed' %>
-        <%= link_to "Mark as COMPLETE", mark_booking_completion_path(@booking), id: 'complete_link', method: :post, remote: true, class:"btn btn-success btn-xs" %>
+        <%= link_to "Mark as COMPLETE", mark_booking_completion_path(@booking), id: 'complete_link', method: :post, remote: true, class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;
+  border-color: #4183D7;" %>
       <% end %>
     </div>
 
     <% if current_guest && @booking.status == "invited" %>
       <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %></br></br>
-      <p> Please note that price includes 2.48% in transaction fees %></p>
+      <p> Please note that price includes 2.48% in transaction fees.</p>
     <% end %>
 
 
