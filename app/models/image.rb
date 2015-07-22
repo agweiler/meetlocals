@@ -43,7 +43,14 @@ class Image < ActiveRecord::Base
 
   def upload_to_s3
   	#makes the image_file become the local_image file (paperclip method)
+    puts "__________________________________________________"
+    puts "It enters this method"
+    puts "the url of image_file is #{self.image_file.url}"
+    puts "__________________________________________________"
     self.image_file = Paperclip.io_adapters.for(self.local_image)
+    puts "__________________________________________________"
+    puts "the url of image_file is #{self.image_file.url}"
+    puts "__________________________________________________"
     save!
   end
 end
