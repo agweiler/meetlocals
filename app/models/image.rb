@@ -83,7 +83,7 @@ class ImageJob
 
     def perform(url,id)
       puts "------------------------------"
-      puts "backgroundjob starts! for #{self.id}"
+      puts "backgroundjob starts! for #{id}"
       puts "------------------------------"
       image = Image.find(id)
       # s3 = AWS::S3.new
