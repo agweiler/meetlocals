@@ -3,14 +3,14 @@
   <% if host_signed_in? %>
     <h1 class="heads text-center" style="color:#66a422; font-size:70px;">Listing bookings to your experiences</h1>
   <% elsif guest_signed_in? %>
-    <h1>Listing your bookings</h1>
+    <h1 class="heads text-center" style="color:#66a422; font-size:70px;">Listing your bookings</h1>
   <% elsif admin_signed_in? %>
-    <h1>Listing all bookings</h1>
+    <h1 class="heads text-center" style="color:#66a422; font-size:70px;">Listing all bookings</h1>
   <% else %>
-    <h1>Log in to display your bookings</h1>
+    <h1 class="heads text-center" style="color:#66a422; font-size:70px;">Log in to display your bookings</h1>
   <% end %>
   <% if @bookings.empty? %>
-    <h2>Nothing was found D:</h2>
+    <h2 class="heads text-center" style="color:#66a422; font-size:70px;">Nothing was found D:</h2>
   <% else %>
   </br>
   <div class="col-md-12">
