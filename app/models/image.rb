@@ -29,8 +29,9 @@ class Image < ActiveRecord::Base
 
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
-
+       puts "everything starts here"
        if local_image_file_name == nil
+         puts "local_image is nil"
          ExpImageJob.perform_async(self.temp_file_key,self.id)
        end
     else
@@ -77,6 +78,9 @@ class ImageJob
     sidekiq_options :retry => 5
 
     def perform(url,id)
+      puts "------------------------------"
+      puts "backgroundjob starts!"
+      puts "------------------------------"
       image = Image.find(id)
       # s3 = AWS::S3.new
       # x = s3.buckets[ENV['AWS_BUCKET']].objects[url]
