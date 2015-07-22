@@ -33,6 +33,28 @@ class Booking < ActiveRecord::Base
 		status
 	end
 
+	def status_action
+		case self.status
+		when "requested"
+			host_msg = ""
+			guest_msg = "<p><b>Well done!</b> You have now created a booking request. Your potential host will get back to you as soon as possible.</p>"
+		when "invited"
+			host_msg = ""
+			guest_msg = ""
+		when "rejected"
+			host_msg = ""
+			guest_msg = ""
+		when "confirmed"
+			host_msg = "<b>$$$$$</b>"
+			guest_msg = "<b>TQ</b>"
+		when "completed"
+			host_msg = ""
+			guest_msg = ""
+		end
+
+		return { Host: host_msg, Guest: guest_msg }
+	end
+
 	def mark_as_complete
 		status.replace("completed")
 		@guest = self.guest
@@ -44,7 +66,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def check_finished?
-		  
+
 			time_in_seconds = Time.parse(self.experience.time.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds
 			date = self.date.to_datetime
 			date_today = date + time_in_seconds
@@ -81,10 +103,10 @@ class Booking < ActiveRecord::Base
 	    	:receiver => [{
 	      	:amount => (@experience.price * self.group_size * 1.019) + 2.60 ,
 	      	:email => "Meetdanes@meetdanes.com",
-	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join 
+	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
 	      	}],
 	      },
-	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}" 
+	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}"
 	  	})
 		# values = {
 	#     business: "thenasiproject-facilitator@gmail.com ",
