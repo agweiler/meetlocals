@@ -2,7 +2,7 @@
   <p> Your pictures are loading..... </p>
 </div>
 
-<div id="mealpanel">
+<div class="row" id="mealpanel">
   <% @experience.images.limit(3).each_with_index do |image, index| %>
     <div class="col-sm-4" style="padding:0px">
       <%= image_tag image.image_file.url(:medium), id: index %>
@@ -31,7 +31,7 @@
   font-size: 28px;
   font-weight: 600;" class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4>
-        
+
      <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",       class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
@@ -76,14 +76,14 @@
 
        <thead>
         <tr>
-        
-          
+
+
           <th>Group Size</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          
+
           <td><%= @experience.max_group_size %> Max</td>
         </tr>
       </tbody>
@@ -128,7 +128,7 @@
       <tbody>
         <tr>
           <td><%= @experience.price %></td>
-          <td><%= @experience.max_group_size %> Max</td> 
+          <td><%= @experience.max_group_size %> Max</td>
           <td><%= @experience.host_style%></td>
         </tr>
       </tbody>
@@ -169,7 +169,7 @@
     </div>
   <% end %>
 
- 
+
   <div class="row" id="testiframe">
     <h2>REVIEWS</h2>
     <% @testimonials.each do |testimonial| %>
