@@ -36,20 +36,20 @@ class Booking < ActiveRecord::Base
 	def status_action
 		case self.status
 		when "requested"
-			host_msg = ""
+			host_msg = "<p><b>Congratulations!</b> You have just received a booking request from a potential guest.</br> Click 'Respond to request' to accept, reject or modify the request, or use the Chat interface to get more information.</p>" 
 			guest_msg = "<p><b>Well done!</b> You have now created a booking request. Your potential host will get back to you as soon as possible.</p>"
 		when "invited"
-			host_msg = ""
-			guest_msg = ""
+			host_msg = "<p><b>Well done!</b> You have accepted a booking request by sending an invitation.</br> Please wait for the guest to confirm booking. You will receive a notification by email.</p>"
+			guest_msg = "<p><b>Congratulations!</b> The host has accepted your booking request. Please complete payment by clicking 'Pay with Paypal'.</p>"
 		when "rejected"
-			host_msg = ""
-			guest_msg = ""
+			host_msg = "<p><b>Oh no!</b> Unfortunately you had to reject this booking request.</p>"
+			guest_msg = "<p><b>Oh no!</b> Unfortunately the host had to reject this booking request.</p>"
 		when "confirmed"
-			host_msg = "<b>$$$$$</b>"
-			guest_msg = "<b>TQ</b>"
+			host_msg = "<p><b>Congratulations!</b> A guest has confirmed the booking by completing payment to Meet The Danes.</br> Please do not forget to click 'Mark as COMPLETE' to initiate funds transfer once the event is complete.</p>"
+			guest_msg = "<p><b>Well done!</b> You have confirmed your booking by completinng payment.</br> Have an excellent experience meeting the danes!</p>"
 		when "completed"
-			host_msg = ""
-			guest_msg = ""
+			host_msg = "<p><b>Congratulations!</b> You have successfully hosted a group of guests. The funds earned from the event will be transferred in the next payment cycle.</p>"
+			guest_msg = "<p><b>Congratulations!</b> You have officially finished meeting some danes. Make sure to enjoy the rest of your trip!</p>"
 		end
 
 		return { Host: host_msg, Guest: guest_msg }
