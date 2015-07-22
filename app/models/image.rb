@@ -29,9 +29,13 @@ class Image < ActiveRecord::Base
 
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
-       puts "everything starts here"
+       puts "__________________________________________________"
+       puts "everything starts here image id is #{self.id}"
+       puts "__________________________________________________"
        if local_image_file_name == nil
-         puts "local_image is nil"
+         puts "__________________________________________________"
+         puts "Next step for #{self.id}"
+         puts "__________________________________________________"
          ExpImageJob.perform_async(self.temp_file_key,self.id)
        end
     else
@@ -79,7 +83,7 @@ class ImageJob
 
     def perform(url,id)
       puts "------------------------------"
-      puts "backgroundjob starts!"
+      puts "backgroundjob starts! for #{self.id}"
       puts "------------------------------"
       image = Image.find(id)
       # s3 = AWS::S3.new
