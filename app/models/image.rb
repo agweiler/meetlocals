@@ -29,8 +29,13 @@ class Image < ActiveRecord::Base
 
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
-
+       puts "__________________________________________________"
+       puts "everything starts here image id is #{self.id}"
+       puts "__________________________________________________"
        if local_image_file_name == nil
+         puts "__________________________________________________"
+         puts "Next step for #{self.id}"
+         puts "__________________________________________________"
          ExpImageJob.perform_async(self.temp_file_key,self.id)
        end
     else
@@ -43,7 +48,14 @@ class Image < ActiveRecord::Base
 
   def upload_to_s3
   	#makes the image_file become the local_image file (paperclip method)
+    puts "__________________________________________________"
+    puts "It enters this method"
+    puts "the url of image_file is #{self.image_file.url}"
+    puts "__________________________________________________"
     self.image_file = Paperclip.io_adapters.for(self.local_image)
+    puts "__________________________________________________"
+    puts "the url of image_file is #{self.image_file.url}"
+    puts "__________________________________________________"
     save!
   end
 end
@@ -70,6 +82,9 @@ class ImageJob
     sidekiq_options :retry => 5
 
     def perform(url,id)
+      puts "------------------------------"
+      puts "backgroundjob starts! for #{id}"
+      puts "------------------------------"
       image = Image.find(id)
       # s3 = AWS::S3.new
       # x = s3.buckets[ENV['AWS_BUCKET']].objects[url]
