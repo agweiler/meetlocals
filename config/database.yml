@@ -18,5 +18,5 @@ test:
 production:
   adapter: postgresql
   database: MTD_production_db
-  pool: 5
+  pool: 10
   timeout: 5000
