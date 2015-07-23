@@ -36,7 +36,7 @@ class Booking < ActiveRecord::Base
 	def status_action
 		case self.status
 		when "requested"
-			host_msg = "<p><b>Congratulations!</b> You have just received a booking request from a potential guest.</br> Click 'Respond to request' to accept, reject or modify the request, or use the Chat interface to get more information.</p>" 
+			host_msg = "<p><b>Congratulations!</b> You have just received a booking request from a potential guest.</br> Click 'Respond to request' to accept, reject or modify the request, or use the Chat interface to get more information.</p>"
 			guest_msg = "<p><b>Well done!</b> You have now created a booking request. Your potential host will get back to you as soon as possible.</p>"
 		when "invited"
 			host_msg = "<p><b>Well done!</b> You have accepted a booking request by sending an invitation.</br> Please wait for the guest to confirm booking. You will receive a notification by email.</p>"
@@ -101,7 +101,7 @@ class Booking < ActiveRecord::Base
 	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
 	  	:receiverList => {
 	    	:receiver => [{
-	      	:amount => (@experience.price * self.group_size * 1.019) + 2.60 ,
+	      	:amount => (@experience.price * self.group_size * 1.019 + 2.60).round(2) ,
 	      	:email => "Meetdanes@meetdanes.com",
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
 	      	}],
