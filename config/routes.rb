@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   get 'notifications/show'
 
   devise_for :partners, controllers: { registrations: "partners/registrations" }
