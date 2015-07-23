@@ -52,7 +52,7 @@
     <label>Neighbourhood:</label>
     <%= content_tag 'p', @host.neighbourhood %>
 
-    <label>Additinal Information:</label>
+    <label>Additional Information:</label>
     <%= content_tag 'p', @host.additional_info %>
   </div>
 
@@ -73,21 +73,22 @@
           <td><%= @experience.cuisine %></td>
         </tr>
       </tbody>
+      </table>
 
+    <table class="table" id="menutab">
        <thead>
         <tr>
-
-
           <th>Group Size</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-
           <td><%= @experience.max_group_size %> Max</td>
         </tr>
       </tbody>
+      </table>
 
+    <table class="table" id="menutab">
        <thead>
         <tr>
           <th>Host Style</th>
@@ -110,7 +111,7 @@
       </tbody>
     </table>
 
-    <div class="col-md-12" style="margin-left:-8px; margin-top:15px">
+    <div class="col-md-12" style="margin-left:-15px; margin-top:15px">
       <%= content_tag 'p', @experience.description %>
     </div>
   </div>
