@@ -220,7 +220,8 @@ class BookingsController < ApplicationController
     else
       puts "FAILED!!!"
     end
-    render nothing: true
+    # render nothing: true
+    redirect_to @booking
   end
 
   private
