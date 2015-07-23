@@ -35,8 +35,10 @@ class Image < ActiveRecord::Base
        if local_image_file_name == nil
          puts "__________________________________________________"
          puts "Next step for #{self.id}"
+         puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
          ExpImageJob.perform_async(self.temp_file_key,self.id)
+         puts "does #{self.id} it reach here?"
        end
     else
       if local_image? && local_image_updated_at_changed?
@@ -44,6 +46,7 @@ class Image < ActiveRecord::Base
         ImageJob.new.perform(@id)
       end
     end
+    puts "or does #{self.id} go here?"
   end
 
   def upload_to_s3
