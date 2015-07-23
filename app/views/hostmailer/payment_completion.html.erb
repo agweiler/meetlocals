@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body> 
-    <h1>Hello <%= host.first_name %>. Congratulations! User: <%= @guest.username %> has completed payment for the experience: <%= @booking.experience.title %>.</h1>
+    <h1>Hello <%= @host.first_name %>. Congratulations! User: <%= @guest.username %> has completed payment for the experience: <%= @booking.experience.title %>.</h1>
 
     <p>In order to trigger the transfer of your payment from Meet the Danes, please change the status of the booking to 'complete' once the event has finished.</p>
 
