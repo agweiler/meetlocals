@@ -10,17 +10,23 @@
 		</div>
 	<% end %>
 
+  <div class="row">
+
 	<%= f.label :title %>
 	<%= f.text_field :title, class: "form-control", style: "width:50%" %><br>
+  </div>
+
+  <div class="row">
 
 	<%= f.label :body %><br>
 	<%= f.text_area :body, class: "form-control border-hitam wysihtml5 col-md-10", style: "width:100%; height: 200px" %><br>
-	<br>
+	</br>
+  </div>
 
 	<!-- <%= f.label :image %><br>
 	<%= f.file_field :image %><br>
 	<br> -->
-
+  <div class="row">
   <div class="field">
     <!-- <%= f.label :image %><br> -->
       <div class="input-group">
@@ -31,9 +37,7 @@
           </span>
         </span>
       </div>
-    
-
-    <!-- <small><kbd>ctrl + click</kbd> to select multiple images.</small> -->
+  </div>
   </div>
 
   <div class="actions pull-right">
