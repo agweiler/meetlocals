@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-
+  attr_reader :image_file_remote_url
   belongs_to :imageable, polymorphic: true
 
   has_attached_file :local_image,
