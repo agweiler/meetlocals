@@ -27,6 +27,8 @@ class Image < ActiveRecord::Base
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
   after_commit :queue_upload_to_s3
 
+  process_in_background :image_file
+
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
        puts "__________________________________________________"
@@ -37,7 +39,7 @@ class Image < ActiveRecord::Base
          puts "Next step for #{self.id}"
          puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
-         ExpImageJob.perform_async(id)
+         image_file_remote_url = temp_file_key
          puts "does #{self.id} it reach here?"
        end
     else
