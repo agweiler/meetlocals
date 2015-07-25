@@ -40,6 +40,7 @@ class Image < ActiveRecord::Base
          puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
          image_file_remote_url = temp_file_key
+         save
          puts "does #{self.id} it reach here?"
        end
     else
