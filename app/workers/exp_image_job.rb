@@ -9,6 +9,9 @@ class ExpImageJob
     puts "------------------------------"
     image = Image.find(id)
     url = image.temp_file_key
+    puts "_______________________________"
+    puts "Url is #{url}"
+    puts "_______________________________"
     image.image_file_remote_url = url
   end
 
