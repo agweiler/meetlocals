@@ -25,7 +25,7 @@ class Image < ActiveRecord::Base
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
-  after_commit :queue_upload_to_s3
+  after_commit :queue_upload_to_s3, unless: :skip_callback
 
   process_in_background :image_file
 
@@ -40,6 +40,7 @@ class Image < ActiveRecord::Base
          puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
          image_file_remote_url = temp_file_key
+         @skip_callback = true
          save
          puts "does #{self.id} it reach here?"
        end
@@ -72,4 +73,9 @@ class Image < ActiveRecord::Base
     # image_file_content_type == "image/png"
     @image_file_remote_url = url_value
   end
+
+  private
+    def skip_callback
+      @skip_callback
+    end
 end
