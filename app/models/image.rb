@@ -62,11 +62,11 @@ class Image < ActiveRecord::Base
     save!
   end
 
-  def local_image_remote_url=(url_value)
-    self.local_image = URI.parse(url_value)
+  def image_file_remote_url=(url_value)
+    self.image_file = URI.parse(url_value)
     # Assuming url_value is http://example.com/photos/face.png
-    # local_image_file_name == "face.png"
-    # local_image_content_type == "image/png"
-    @local_image_remote_url = url_value
+    # image_file_file_name == "face.png"
+    # image_file_content_type == "image/png"
+    @image_file_remote_url = url_value
   end
 end

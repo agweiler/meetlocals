@@ -9,7 +9,7 @@ class ExpImageJob
     puts "------------------------------"
     image = Image.find(id)
     url = image.temp_file_key
-    image.local_image_remote_url = url
+    image.image_file_remote_url = url
   end
 
   sidekiq_retry_in do |count|
