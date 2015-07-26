@@ -64,7 +64,7 @@ class Image < ActiveRecord::Base
     puts "the url of image_file is #{self.image_file.url}"
     puts "__________________________________________________"
     @skip_callback = true
-    save!
+    save
   end
 
   def image_file_remote_url=(url_value)
@@ -75,7 +75,7 @@ class Image < ActiveRecord::Base
     @image_file_remote_url = url_value
   end
 
-  private
+
     def skip_callback
       @skip_callback
     end
