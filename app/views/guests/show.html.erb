@@ -67,3 +67,24 @@
 		</div>
 	<% end %>
 </div>
+<script>
+<% if flash[:notice] %>
+$(function(){
+    function check_job_status(job_id){
+    var request = $.ajax({
+      type: "GET",
+      url: '/guests/' + job_id
+    });
+    request.done(function(response){
+      if (response === 'true'){
+        location.reload();
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 5000);
+      }
+    });
+  };
+  var id = <%= @guest.id %>
+  check_job_status(id)
+});
+<% end %>
+</script>

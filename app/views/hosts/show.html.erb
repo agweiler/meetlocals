@@ -184,6 +184,25 @@
 </div>
 
 <script>
+<% if flash[:notice] %>
+$(function(){
+    function check_job_status(job_id){
+    var request = $.ajax({
+      type: "GET",
+      url: '/hosts/' + job_id
+    });
+    request.done(function(response){
+      if (response === 'true'){
+        location.reload();
+      } else {
+        setTimeout(function(){ check_job_status(job_id) }, 5000);
+      }
+    });
+  };
+  var id = <%= @host.id %>
+  check_job_status(id)
+});
+<% end %>
 $(function(){
   $('#holiday_calendar').hide()
 

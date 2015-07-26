@@ -1,4 +1,5 @@
 class GuestsController < ApplicationController
+  include ImagesHelper
   before_action :set_guest, only: [:show, :edit, :update, :destroy, :update_guest_profile]
 
 	def index
@@ -7,6 +8,11 @@ class GuestsController < ApplicationController
 
   def show
     @guest = Guest.find(params[:id])
+    @response = check_images_guest(@guest.id)
+    respond_to do |format|
+      format.js    { render json: @response }
+      format.html
+    end
     # @testimonials = @guest.bookings.testimonial
   end
 
