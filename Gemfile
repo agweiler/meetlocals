@@ -68,6 +68,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 gem 'sinatra', :require => nil
+gem 'delayed_paperclip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

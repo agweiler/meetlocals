@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-
+  attr_reader :image_file_remote_url
   belongs_to :imageable, polymorphic: true
 
   has_attached_file :local_image,
@@ -25,7 +25,9 @@ class Image < ActiveRecord::Base
   # experience show top images should be longer... aspect ratio will be 4:5 maybe?
 
   validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
-    after_save:queue_upload_to_s3
+  after_commit :queue_upload_to_s3, unless: :skip_callback
+
+  process_in_background :image_file
 
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
@@ -37,7 +39,9 @@ class Image < ActiveRecord::Base
          puts "Next step for #{self.id}"
          puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
-         ExpImageJob.perform_async(self.temp_file_key,self.id)
+         self.image_file_remote_url = temp_file_key
+         @skip_callback = true
+         save
          puts "does #{self.id} it reach here?"
        end
     else
@@ -61,51 +65,17 @@ class Image < ActiveRecord::Base
     puts "__________________________________________________"
     save!
   end
-end
 
-class ImageJob
-	   include Sidekiq::Worker
-     sidekiq_options :retry => 5
-
-	def perform(id)
-	  #image.id not found!!!! pass in through perform_async
-    image_file = Image.find(id)
-    image_file.upload_to_s3
-    image_file.local_image.destroy
+  def image_file_remote_url=(url_value)
+    self.image_file = URI.parse(url_value)
+    # Assuming url_value is http://example.com/photos/face.png
+    # image_file_file_name == "face.png"
+    # image_file_content_type == "image/png"
+    @image_file_remote_url = url_value
   end
 
-   sidekiq_retry_in do |count|
-    1 * (count + 1) # (i.e. 10, 20, 30, 40)
-   end
- end
-
- class ExpImageJob
-    require 'open-uri'
-    include Sidekiq::Worker
-    sidekiq_options :retry => 5
-
-    def perform(url,id)
-      puts "------------------------------"
-      puts "backgroundjob starts! for #{id}"
-      puts "------------------------------"
-      image = Image.find(id)
-      # s3 = AWS::S3.new
-      # x = s3.buckets[ENV['AWS_BUCKET']].objects[url]
-      # puts x.content_type
-     
-      # x.copy_to(image.local_image.s3_object)
-      stringIo = open(url)
-      content_type = "." + stringIo.content_type.split('/')[-1]
-      # content_type = stringIo.content_type
-      file = Tempfile.new(['temp', content_type])
-      file.binmode
-      file.write stringIo.read
-      image.local_image = file
-      image.upload_to_s3
-      image.local_image.destroy
+  private
+    def skip_callback
+      @skip_callback
     end
-
-    sidekiq_retry_in do |count|
-     1 * (count + 1) # (i.e. 10, 20, 30, 40)
-    end
- end
+end
