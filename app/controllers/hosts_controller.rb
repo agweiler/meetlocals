@@ -1,4 +1,5 @@
 class HostsController < ApplicationController
+    include ImagesHelper
 	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
   def index
@@ -33,6 +34,11 @@ class HostsController < ApplicationController
   def show
     @normal_events = @host.experiences.normal_events
 		@special_events = @host.experiences.special_events
+    @response = check_images_host(@host.id)
+    respond_to do |format|
+      format.js    { render json: @response }
+      format.html
+    end
   end
 
   def new

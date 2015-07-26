@@ -45,10 +45,10 @@ class Image < ActiveRecord::Base
          puts "does #{self.id} it reach here?"
        end
     else
-      if local_image? && local_image_updated_at_changed?
+      # if local_image? && local_image_updated_at_changed?
         @id = local_image.instance.id
         ImageJob.new.perform(@id)
-      end
+      # end
     end
     puts "or does #{self.id} go here?"
   end
@@ -63,6 +63,7 @@ class Image < ActiveRecord::Base
     puts "__________________________________________________"
     puts "the url of image_file is #{self.image_file.url}"
     puts "__________________________________________________"
+    @skip_callback = true
     save!
   end
 
