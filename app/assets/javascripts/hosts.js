@@ -33,28 +33,28 @@
 // // mapMake() end
 
 
-// // geocode() begin
-// function geocode() {
-// 	var geocoder = new google.maps.Geocoder();
-//   var country = $('#host_country').val();
-//   var state = $('#host_state').val();
-//   var suburb = $('#host_suburb').val();
-//   address = suburb + " " + state + " " + country
-// 	if (geocoder) {
-// 		geocoder.geocode({ 'address': address }, function (results, status) {
-// 			if (status == google.maps.GeocoderStatus.OK) {
-// 				console.log(results[0].geometry.location)
-// 				$('#host_latitude').val(results[0].geometry.location.lat())
-// 				$('#host_longitude').val(results[0].geometry.location.lng())
-// 				$('input[name=commit]').click();
-// 			} else {
+// geocode() begin
+function geocode() {
+	var geocoder = new google.maps.Geocoder();
+  var country = $('#host_country').val();
+  var state = $('#host_state').val();
+  var suburb = $('#host_suburb').val();
+  address = suburb + " " + state + " " + country
+	if (geocoder) {
+		geocoder.geocode({ 'address': address }, function (results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log(results[0].geometry.location)
+				$('#host_latitude').val(results[0].geometry.location.lat())
+				$('#host_longitude').val(results[0].geometry.location.lng())
+				$('input[name=commit]').click();
+			} else {
 		
-// 				console.log("Geocoding failed: " + status);
-// 				alert('Address not found, Use google maps to find your address')
-// 			}
-// 		});
-// 	}
-// };
+				console.log("Geocoding failed: " + status);
+				alert('Address not found, Use google maps to find your address')
+			}
+		});
+	}
+};
 // geocode() end
 
 // modified from experiences.js
