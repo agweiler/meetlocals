@@ -136,7 +136,7 @@
 <script type="text/javascript">
 
   $(function(){
-    if( window.location.pathname.includes('edit') ){
+       if( window.location.pathname.indexOf("edit") >= 0 ){
       $('#showfilename').val('Browse to replace current experience images').attr('style','color:red');
       $('input[type*=submit]').val('Update Experience')
     }
@@ -144,11 +144,13 @@
 </script>
 <script>
   $('.directUpload').find("input:file").each(function(i, elem) {
+
     var fileInput    = $(elem);
     var form         = $(fileInput.parents('form:first'));
     var submitButton = form.find('input[type="submit"]');
     var progressBar  = $("<div class='bar'></div>");
     var barContainer = $("<div class='progress'></div>").append(progressBar);
+
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
 
     fileInput.after(barContainer);
@@ -185,8 +187,9 @@ progressall: function (e, data) {
 
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
+        // key = key.replace(/ /g,"_");
         var url   = 'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/' + key;
-
+        // debugger;
 
         // create hidden field
         var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })

@@ -39,6 +39,7 @@ class Image < ActiveRecord::Base
          puts "Next step for #{self.id}"
          puts "the tmpe key is #{self.temp_file_key}"
          puts "__________________________________________________"
+         temp_file_key.gsub! /\s+/, '+'
          self.image_file_remote_url = temp_file_key
          @skip_callback = true
          save
