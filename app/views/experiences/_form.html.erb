@@ -32,7 +32,8 @@
 
       <div class="field">
         <%= f.label :host_style %><br>
-        <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%' %>
+        <p><small> This field is limited to 60 characters.</small></p>
+        <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
       </div>
       </br>
     </div>
@@ -209,4 +210,18 @@ progressall: function (e, data) {
     });
   });
 
+</script>
+
+<!-- Limit chars for text area -->
+<script language="javascript" type="text/javascript">
+function DjCheckMaxlength(oInObj)
+{
+      var iMaxLen = parseInt(oInObj.getAttribute('maxlength'));
+      var iCurLen = oInObj.value.length;
+
+      if ( oInObj.getAttribute && iCurLen > iMaxLen )
+      {
+          oInObj.value = oInObj.value.substring(0, iMaxLen);
+      }
+} //@ END OF DjCheckMaxlength()
 </script>
