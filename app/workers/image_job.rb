@@ -3,7 +3,6 @@ class ImageJob
   # sidekiq_options :retry => 5
 
   def perform(id)
-
     #image.id not found!!!! pass in through perform_async
     image_file = Image.find(id)
     if image_file.image_file_file_name == nil

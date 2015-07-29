@@ -5,10 +5,10 @@ module ExperiencesHelper
 	 	exp.images.each do |x|
 	 		array << x.image_file_file_name.to_s
 	 	end
-	 	if array.include? ""
-	 		return false
-	 	else 
+	 	if array.count == 3
 	 		return true
+	 	else 
+	 		return false
 	 	end
 	end
 end

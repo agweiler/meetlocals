@@ -179,9 +179,10 @@
     <% end %>
   </div>
 </div>
+<% if flash[:notice] %>
 
 <script>
-<% if flash[:notice] %>
+
 $(function(){
     function check_job_status(job_id){
     var request = $.ajax({
@@ -193,6 +194,7 @@ $(function(){
         location.reload();
       } else {
         setTimeout(function(){ check_job_status(job_id) }, 5000);
+
       }
     });
   };
@@ -201,8 +203,9 @@ $(function(){
   var id = <%= @experience.id %>
   check_job_status(id)
 });
+</script>
 <% end %>
-
+<script>
 $(function(){
   $(window).scroll(function(){
     if(($(window).scrollTop() + 0) >= ($('#1').height() + $('#profilepic').height()) && $(window).width() > 992){
