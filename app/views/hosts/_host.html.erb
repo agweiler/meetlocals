@@ -12,12 +12,12 @@
       <p class="nas"> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </p>
 
         <div>
-        <label>Speaks:</label>
-        <%= content_tag 'span', host.languages %><br>
-        <label>Guests:</label>
-        <%= content_tag 'span', "#{host.experiences.first.max_group_size} pax" %><br>
         <label>Age:</label>
         <%= content_tag 'span', "#{host.age} yrs old" %><br>
+        <label>Guests:</label>
+        <%= content_tag 'span', "#{host.experiences.first.max_group_size} pax" %><br>
+        <label>Speaks:</label>
+        <%= content_tag 'span', host.languages %><br>
         </div>
 
 
