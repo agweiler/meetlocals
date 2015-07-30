@@ -10,7 +10,7 @@
       Host name: <%= @host.first_name %> <%= @host.last_name %> </br>
       Experience title: <%= @booking.experience.title %> </br>
       Date: <%= @booking.date %> </br>
-      Time: <%= @booking.start_time %> until <%= @booking.end_time %> </br>
+      Time: <%= @booking.start_time.strftime("%H:%M:%S") %> until <%= @booking.end_time.strftime("%H:%M:%S") %> </br>
       Address: <%= @host.street_address %> </br>
       Suburb: <%= @host.suburb %> </br>
       State: <%= @host.state %> </br>

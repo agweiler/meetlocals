@@ -106,7 +106,7 @@ class Booking < ActiveRecord::Base
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
 	      	}],
 	      },
-	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}"
+	  	  :returnUrl => "#{Rails.application.secrets.app_host}#{return_path}"
 	  	})
 		# values = {
 	#     business: "thenasiproject-facilitator@gmail.com ",
