@@ -43,7 +43,6 @@ class Image < ActiveRecord::Base
          self.image_file_remote_url = temp_file_key
          @skip_callback = true
          save
-         puts "does #{self.id} it reach here?"
        end
     else
       # if local_image? && local_image_updated_at_changed?
@@ -51,7 +50,6 @@ class Image < ActiveRecord::Base
         ImageJob.new.perform(@id)
       # end
     end
-    puts "or does #{self.id} go here?"
   end
 
   def upload_to_s3
