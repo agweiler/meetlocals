@@ -23,17 +23,14 @@
 	</br>
   </div>
 
-	<!-- <%= f.label :image %><br>
-	<%= f.file_field :image %><br>
-	<br> -->
   <div class="row">
   <div class="field">
-    <!-- <%= f.label :image %><br> -->
+
       <div class="input-group">
         <input type="text" class="form-control" placeholder="" readonly>
         <span class="input-group-btn">
           <span class="btn btn-default border-hitam btn-file">
-            Upload Image<%= f.file_field(:image, multiple: false) %>
+            Upload Image<%= f.file_field(:image_file) %>
           </span>
         </span>
       </div>
