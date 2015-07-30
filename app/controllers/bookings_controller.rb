@@ -204,12 +204,18 @@ class BookingsController < ApplicationController
       puts "booking updated"
       puts "*************************"
       puts "*************************"
-      puts "end"
+      puts "end of method"
       puts "*************************"
     else
       puts "FAILED!!!"
     end
+    puts "*************************"
+    puts "end"
+    puts "*************************"
     render nothing: true
+    puts "*************************"
+    puts "last line"
+    puts "*************************"
     # redirect_to booking_path(@booking)
   end
 
