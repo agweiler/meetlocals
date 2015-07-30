@@ -188,12 +188,24 @@ class BookingsController < ApplicationController
     status = params[:transaction]["0"][".status"]
     id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
     if status == "Completed"
+      puts "*************************"
+      puts "start"
+      puts "*************************"
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-         @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+      puts "*************************"
+      puts "mailer sent"
+      puts "*************************"
+      @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+      puts "*************************"
+      puts "booking updated"
+      puts "*************************"
+      puts "*************************"
+      puts "end"
+      puts "*************************"
     else
       puts "FAILED!!!"
     end
