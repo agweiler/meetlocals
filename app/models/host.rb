@@ -92,7 +92,7 @@ class Host < ActiveRecord::Base
     end
 
     # Host.where( age + loc + group + host_in ).order('random()')
-    Host.joins(:experiences).where(age + loc + host_in + group).order('random()')
+    Host.joins(:experiences).where(age + loc + host_in + group).order('random()').uniq
   end
 
   def age
