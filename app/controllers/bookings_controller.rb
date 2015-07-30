@@ -198,7 +198,7 @@ class BookingsController < ApplicationController
       puts "FAILED!!!"
     end
     # render nothing: true
-    redirect_to @booking
+    redirect_to booking_path(@booking)
   end
 
   private
