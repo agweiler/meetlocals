@@ -68,7 +68,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 gem 'sinatra', :require => nil
-gem 'delayed_paperclip'
+gem 'delayed_paperclip', git: "git://github.com/hewrin/delayed_paperclip.git"
 
 gem 'newrelic_rpm'
 
