@@ -8,21 +8,23 @@
           <% @authentications = current_guest.authentications %>
           <% if @authentications.empty? %>
             <%= link_to guest_omniauth_authorize_path(:facebook),
-             class:"btn btn-primary", style:"color:white" do-%>
+             class:"btn btn-primary form-control",
+             style:"background:#3B5998;color:white" do-%>
                 <i class="fa fa-facebook-official fa-lg"></i>
-                Enable Login via Facebook?
+                Enable Login via Facebook
             <% end %>
           <% else %>
             <% for authentication in @authentications %>
               <%= link_to authentication_path(authentication),
                 method: :delete, data:{ confirm: 'Are you sure?'},
-                class:"btn btn-danger" do-%>
+                class:"btn btn-danger form-control",
+                style:"background:#983b59;color:white" do-%>
                 <i class="fa fa-facebook-official fa-lg"></i>
-                Remove Facebook Login
+                Remove Login via Facebook
               <% end %>
             <% end %>
           <% end %>
-          <br><br>
+          <br>
         </div>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
