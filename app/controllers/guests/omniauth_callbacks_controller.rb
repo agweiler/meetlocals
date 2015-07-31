@@ -50,7 +50,9 @@ class Guests::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         if guest.save
           flash[:notice] = "Signed in successfully."
-          sign_in_and_redirect(:guest, guest)
+          guest.skip_confirmation!
+          sign_in(:guest, guest)
+          redirect_to edit_guest_path(guest)
         else
           session[:omniauth] = omniauth.except('extra')
           redirect_to new_guest_registration_path
