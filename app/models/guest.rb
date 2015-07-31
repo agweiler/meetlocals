@@ -18,6 +18,9 @@ class Guest < ActiveRecord::Base
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
+    puts "******************************"
+    puts omniauth['info']
+    puts "******************************"
     authentications.build(provider:omniauth['provider'], uid:omniauth['uid'])
   end
 
