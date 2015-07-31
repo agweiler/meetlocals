@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :guests
   resources :authentications
   # get '/auth/:provider/callback' => 'authentications#create'
-  get '/guests/authentications' => 'authentications#index'
+  get '/guests/authentications' => 'edit_guest_registration'
 
   devise_for :admins
 
