@@ -10,10 +10,10 @@
             <%= f.text_field :username, class: "form-control" %>
           </div>
 
-          <% email= session[:omniauth]['info']['email'] if session[:omniauth] %>
           <div class="field">
             <%= f.label :email %><br />
-            <%= f.email_field :email, value:email, autofocus: true, class: "form-control" %>
+            <%= f.email_field :email,
+             autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field">
