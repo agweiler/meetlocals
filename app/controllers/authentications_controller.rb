@@ -1,7 +1,11 @@
 class AuthenticationsController < ApplicationController
   def index
-    @authentications = current_guest.authentications if current_guest
-    redirect_to home_path unless current_guest
+    if current_guest
+      @authentications = current_guest.authentications
+      redirect_to edit_guest_registration_path
+    else
+      redirect_to home_path
+    end
   end
 
   def destroy
