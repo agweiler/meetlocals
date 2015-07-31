@@ -1,4 +1,6 @@
-<% if @authentications %>
+<div class="container" style="margin-top:50px">
+
+<% if @authentications && current_user %>
  <% unless @authentications.empty? %>
   <p><strong>You can sign in to this account using:</strong></p>
    <div class="authentications">
@@ -19,5 +21,7 @@
   <p><strong>Sign in through one of these services:</strong></p>
 <% end %>
 
-<a href="/auth/facebook" class="auth_provider">Facebook</a>
+<a href="guests/auth/facebook" class="auth_provider">Facebook</a>
 <div class="clear"></div>
+
+</div>

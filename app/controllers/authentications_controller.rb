@@ -1,6 +1,7 @@
 class AuthenticationsController < ApplicationController
   def index
     @authentications = current_guest.authentications if current_guest
+    redirect_to home_path unless current_guest
   end
 
   def destroy
