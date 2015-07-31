@@ -8,7 +8,8 @@ class AuthenticationsController < ApplicationController
     @authentication = current_guest.authentications.find(params[:id])
     @authentication.destroy
     flash[:notice] = "Successfully destroyed authentication."
-    redirect_to authentications_path
+    # redirect_to authentications_path
+    redirect_to edit_guest_registration_path
   end
 
   protected
