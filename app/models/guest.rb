@@ -8,7 +8,7 @@ class Guest < ActiveRecord::Base
   has_many :notifications
 
   has_many :authentications, dependent: :destroy
-  devise :omniauthable, :omniauth_providers => [:twitter, :facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook]
   # removed uniqueness constraint
   # validates_uniqueness_of :username
 
