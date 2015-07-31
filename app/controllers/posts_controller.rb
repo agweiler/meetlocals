@@ -27,19 +27,22 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@image_file = params[:post].delete(:image_file)
-		@post = Post.new(post_params)
-		if @image_file.present?
-			@post.images.delete_all
-		end
-		@post.images.create(local_image: @image_file, caption: @image_file.original_filename)
+		# @image_file = params[:post].delete(:image_file)
+		# @post = Post.new(post_params)
+		# if @image_file.present?
+		# 	@post.images.delete_all
+		# end
+		# @post.images.create(local_image: @image_file, caption: @image_file.original_filename)
 		@post = Post.find(params[:id])
 	end
 
 	def update
+		@image_file = params[:post].delete(:image_file)
 		@post = Post.find(params[:id])
 
 		if @post.update(params[:post].permit(:title, :body))
+			@post.images.delete_all
+			@post.images.create(local_image: @image_file, caption: @image_file.original_filename)
 			redirect_to @post
 		else
 			render 'edit'
