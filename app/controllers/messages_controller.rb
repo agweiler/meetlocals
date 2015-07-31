@@ -15,6 +15,7 @@ class MessagesController < ApplicationController
       new_notification.update(updated_at: Time.now, seen: false)
       Guestmailer.guest_get_mail(guest.id, booking.id, new_message.id,host.id).deliver_later
     elsif new_message.sender_type == "guest"
+      guest = Guest.find(booking.guest_id)
       host = Host.find(booking.experience.host_id)
       new_notification = host.notifications.find_or_create_by(content: "Message from #{guest.first_name}", type_of: "messages", type_id: "#{booking.id}")
       new_notification.update(updated_at: Time.now, seen: false)
