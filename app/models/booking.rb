@@ -45,8 +45,9 @@ class Booking < ActiveRecord::Base
 			host_msg = "<p><b>Oh no!</b> Unfortunately you had to reject this booking request.</p>"
 			guest_msg = "<p><b>Oh no!</b> Unfortunately the host had to reject this booking request.</p>"
 		when "confirmed"
-			host_msg = "<p><b>Congratulations!</b> A guest has confirmed the booking by completing payment to Meet The Danes.</br> Please do not forget to click 'Mark as COMPLETE' to initiate funds transfer once the event is complete.</p>"
-			guest_msg = "<p><b>Well done!</b> You have confirmed your booking by completinng payment.</br> Have an excellent experience meeting the danes!</p>"
+			host_msg = "<p><b>Congratulations!</b> A guest has confirmed the booking by completing payment to Meet The Danes.</br> Please do not forget to click 'Mark as COMPLETE' to initiate funds transfer once the event is complete.</br>Also note that booking status updates may require a moment to take effect.
+ </p>"
+			guest_msg = "<p><b>Well done!</b> You have confirmed your booking by completing payment.</br>Please note that booking status updates may require a moment to take effect.</br> Have an excellent experience meeting the danes!</p>"
 		when "completed"
 			host_msg = "<p><b>Congratulations!</b> You have successfully hosted a group of guests. The funds earned from the event will be transferred in the next payment cycle.</p>"
 			guest_msg = "<p><b>Congratulations!</b> You have officially finished meeting some danes. Make sure to enjoy the rest of your trip!</p>"

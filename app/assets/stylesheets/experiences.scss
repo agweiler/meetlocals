@@ -227,9 +227,12 @@ float: right;
 #hostinfo {
   margin-top: 20px;
 
-  #profilepic img{
-    padding-left: 0px;
-    padding-right: 0px;
+  #profilepic {
+    text-align: center;
+    img {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
   }
 
   h3 {

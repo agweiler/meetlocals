@@ -24,8 +24,8 @@
 
   <div class="row" id="bookinfo">
     <div class="col-md-10 col-md-offset-1">
-       <div class="row" style="text-align:center; padding-top:20px;">
-          <%= link_to "MESSAGE", new_guest_registration_path, :class => 'btn btn-success white' %></div>
+       <!-- <div class="row" style="text-align:center; padding-top:20px;">
+          <%= link_to "MESSAGE", new_guest_registration_path, :class => 'btn btn-success white' %></div> -->
       <h4 style="padding-top:20px;   padding-top: 20px;
   color: #000;
   font-size: 28px;
@@ -152,13 +152,13 @@
   <%if @host.video_url.present?%>
   <div class="row" id="menuframe">
     <h2>VIDEO PRESENTATION</h2>
-    <embed width="600" height="315" src=<%= "#{@host.video_url}" %>>
+    <embed width="600" height="315" src=<%= "#{@host.video_url}" style="max-width: 600px; width: 95%;"%>>
   </div>
   <% end %>
 
   <div class="row" id="menuframe">
    <h2>MAP</h2>
-   <div id="map-canvas" style="float:left; max-width: 750px"></div>
+   <div id="map-canvas" style="float:left; max-width: 750px; width: 95%;"></div>
   </div>
 
 
