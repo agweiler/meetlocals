@@ -43,14 +43,16 @@ class Guests::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         current_guest.authentications.create!(
           provider: omniauth['provider'], uid: omniauth['uid'])
         flash[:notice] = "Authentication successful."
-        redirect_to authentications_path
+        redirect_to edit_guest_registration_path
       else
         guest = Guest.new
         guest.apply_omniauth(omniauth)
 
         if guest.save
           flash[:notice] = "Signed in successfully."
-          sign_in_and_redirect(:guest, guest)
+          guest.skip_confirmation!
+          sign_in(:guest, guest)
+          redirect_to edit_guest_path(guest)
         else
           session[:omniauth] = omniauth.except('extra')
           redirect_to new_guest_registration_path

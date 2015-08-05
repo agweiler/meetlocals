@@ -12,7 +12,8 @@
 
           <div class="field">
             <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            <%= f.email_field :email,
+             autofocus: true, class: "form-control" %>
           </div>
 
           <div class="field">
@@ -31,10 +32,21 @@
         </br>
 
           <div class="actions" style="text-align:center">
+            <%= f.submit "Sign up", class: "btn btn-primary", style: "", id: "guest_signup" %>
+            </br></br>
 
-            <%= f.submit "Sign up", class: "btn btn-primary", style: "", id: "guest_signup" %></br></br>
+            <div class="text-center ">
+              <%= link_to guest_omniauth_authorize_path(:facebook),
+               class:"btn btn-primary", style:"color:white" do-%>
+                  <i class="fa fa-facebook-official fa-lg"></i>
+                  Sign up with Facebook ?
+              <% end %>
+              <br><br>
+            </div>
+
             <%= render "guests/shared/links" %>
           </div>
+
         <% end %>
 
       </div>

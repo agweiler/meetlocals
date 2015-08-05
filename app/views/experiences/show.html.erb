@@ -78,29 +78,14 @@
     <table class="table" id="menutab">
        <thead>
         <tr>
-          <th>Group Size</th>
+          <th>GROUP SIZE</th>
+          <th>TIME</th>
+          <th>PRICE</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><%= @experience.max_group_size %> Max</td>
-        </tr>
-      </tbody>
-      </table>
-
-    <table class="table" id="menutab">
-       <thead>
-        <tr>
-          <th>Host Style</th>
-          <th>Time</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-              <%= @experience.host_style if @experience.host_style %>
-          </td>
           <td>
           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
           <%= (@experience.time.in_time_zone +
@@ -109,13 +94,38 @@
           <td>DKK <%= @experience.price.round %></td>
         </tr>
       </tbody>
+      </table>
+
+    <table class="table">
+       <thead>
+        <tr>
+          <th id = "hoststyle_title">HOST STYLE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+              <%= @experience.host_style if @experience.host_style %>
+          </td>
+        </tr>
+      </tbody>
     </table>
 
-    <div class="col-md-12" style="margin-left:-15px; margin-top:15px">
-      <%= content_tag 'p', @experience.description %>
-    </div>
+    <table class="table">
+       <thead>
+        <tr>
+          <th id = "hoststyle_title">DESCRIPTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+              <%= @experience.description if @experience.description %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
    <div class="row" id="specframe">
     <h2>MEAL FORMAT</h2>
     <table class="table" id="menutab">

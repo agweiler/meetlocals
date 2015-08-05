@@ -70,37 +70,14 @@ class BookingsController < ApplicationController
       booking_params['date(3i)'].replace exp_date.strftime('%-d')
     end
 
-    # if @experience.date
-    #   starttime = @experience.date
-    # else
-    #   #moment.js foramt MMMM DD, YYYY
-    #   starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
-    # end
-
-    # booking_params['date(1i)'].replace( starttime.strftime('%Y') )
-    # booking_params['date(2i)'].replace( starttime.strftime('%m') )
-    # booking_params['date(3i)'].replace( starttime.strftime('%d') )
-
-    # @experience = Experience.find(booking_params[:experience_id])
-    #
-    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-    #
-    # endtime = starttime + Experience.find(booking_params[:experience_id]).duration.hour
-    #
-    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
-
     @booking = @experience.bookings.new(booking_params)
-
+    @booking.start_time = @experience.time
+    if @experience.meal == "Dinner"
+      @booking.end_time = @experience.time + 3.hours
+    elsif @experience.meal == "Lunch"
+      @booking.end_time = @experience.time + 4.hours
+    end
+    
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
@@ -211,17 +188,35 @@ class BookingsController < ApplicationController
     status = params[:transaction]["0"][".status"]
     id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
     if status == "Completed"
+      puts "*************************"
+      puts "start"
+      puts "*************************"
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-         @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+      puts "*************************"
+      puts "mailer sent"
+      puts "*************************"
+      @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+      puts "*************************"
+      puts "booking updated"
+      puts "*************************"
+      puts "*************************"
+      puts "end of method"
+      puts "*************************"
     else
       puts "FAILED!!!"
     end
-    # render nothing: true
-    redirect_to @booking
+    puts "*************************"
+    puts "end"
+    puts "*************************"
+    render nothing: true
+    puts "*************************"
+    puts "last line"
+    puts "*************************"
+    # redirect_to booking_path(@booking)
   end
 
   private

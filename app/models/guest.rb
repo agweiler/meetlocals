@@ -8,7 +8,7 @@ class Guest < ActiveRecord::Base
   has_many :notifications
 
   has_many :authentications, dependent: :destroy
-  devise :omniauthable, :omniauth_providers => [:twitter, :facebook]
+  devise :omniauthable, :omniauth_providers => [:facebook]
   # removed uniqueness constraint
   # validates_uniqueness_of :username
 
@@ -18,6 +18,10 @@ class Guest < ActiveRecord::Base
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
+    self.username = omniauth['info']['name'] if username.blank?
+    puts "******************************"
+    puts omniauth
+    puts "******************************"
     authentications.build(provider:omniauth['provider'], uid:omniauth['uid'])
   end
 

@@ -38,6 +38,6 @@ class Guestmailer < ApplicationMailer
   @guest = Guest.find guest_id
   @booking = Booking.find booking_id
   @host = Host.find host_id
-  mail(to: @guest.email, subject: "You got mail!")
+  mail(to: @guest.email, subject: "You have requested a booking")
   end
 end

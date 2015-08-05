@@ -31,7 +31,17 @@
         <div class="actions" style="text-align:center">
 
           <%= f.submit "Log in", class: "btn btn-green", style:"color: #fff; text-transform: uppercase;font-size: 15px; padding-left: 30px !important;
-  padding-right: 30px !important; background: #66a422 !important;" %></br></br>
+  padding-right: 30px !important; background: #66a422 !important;" %>
+          </br></br>
+
+          <div class="text-center">
+            <%= link_to guest_omniauth_authorize_path(:facebook),
+             class:"btn btn-success", style:"color:white" do-%>
+                <i class="fa fa-facebook-official fa-lg"></i>
+                Log in with Facebook ?
+            <% end %>
+            <br><br>
+          </div>
 
           <%= render "guests/shared/links" %>
         </div>

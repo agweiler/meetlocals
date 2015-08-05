@@ -107,20 +107,8 @@ class Booking < ActiveRecord::Base
 	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
 	      	}],
 	      },
-	  	  :returnUrl => "#{Rails.application.secrets.app_host}/#{return_path}"
+	  	  :returnUrl => "#{Rails.application.secrets.app_host}#{return_path}"
 	  	})
-		# values = {
-	#     business: "thenasiproject-facilitator@gmail.com ",
-	#     cmd: "_xclick",
-	#     upload: 1,
-	#     return: "#{Rails.application.secrets.app_host}#{return_path}",
-	#     invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
-	#     amount: @experience.price,
-	#     item_name: "#{@experience.title} experience booking",
-	#     item_number: @experience.id,
-	#     quantity: self.group_size,
-	#     notify_url: "#{Rails.application.secrets.app_host}/hook"
-	# }
 		@response = @api.pay(@pay)
 	  if @response.success? && @response.payment_exec_status != "ERROR"
 	    # @api.payment_url(@response)  # Url to complete payment
