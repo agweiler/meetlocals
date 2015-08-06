@@ -18,10 +18,10 @@ class AdminsController < ApplicationController
 
 	def bookings_list
 		redirect_to "/" unless current_admin
-		@requested_bookings = Booking.where(status: "requested").pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@invited_bookings = Booking.where(status: "invited").pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@confirmed_bookings = Booking.where(status: "confirmed").pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@completed_bookings = Booking.where(status: "completed").pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+		@requested_bookings = Booking.where(status: "requested").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+		@invited_bookings = Booking.where(status: "invited").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+		@confirmed_bookings = Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+		@completed_bookings = Booking.where(status: "completed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
 	end
 
 	def changeprice
