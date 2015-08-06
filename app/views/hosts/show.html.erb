@@ -208,7 +208,7 @@
                   <td><%= @host.bookings.where(status: 'invited').count %></td>
                   <td><%= @host.bookings.where(status: 'rejected').count %></td>
                   <td><%= @host.bookings.where(status: 'confirmed').count %></td>
-                  <td><%= (@host.bookings.where(status: 'completed').count) * 450.00 %></td>
+                  <td><%= 450.00 * @paid_exp.sum %></td>
                 </tr>
             </tbody>
           </table>
@@ -216,6 +216,7 @@
       </div>
     </div>
   </div>
+  *Revenue generated is counted from total income from confirmed bookings
   <!--end bus intel counts-->
 
 

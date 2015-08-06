@@ -35,6 +35,7 @@ class HostsController < ApplicationController
     @normal_events = @host.experiences.normal_events
 		@special_events = @host.experiences.special_events
     @response = check_images_host(@host.id)
+    @paid_exp = @host.bookings.where(status: 'completed').pluck(:group_size)
     respond_to do |format|
       format.js    { render json: @response }
       format.html
