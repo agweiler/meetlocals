@@ -3,12 +3,12 @@ class Host < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable, :async,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :experiences
+  has_many :experiences, dependent: :destroy
   has_many :images, as: :imageable
   has_many :notifications
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_many :bookings, through: :experiences
-  has_many :testimonials
+  has_many :testimonials, dependent: :destroy
   has_many :testimonials, through: :bookings
   has_many :holidays
 

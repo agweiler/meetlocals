@@ -1,6 +1,6 @@
 class Experience < ActiveRecord::Base
 	belongs_to :host
-	has_many :bookings
+	has_many :bookings, dependent: :destroy
 	has_many :images, as: :imageable, dependent: :destroy
 	has_many :testimonials, through: :bookings
 
