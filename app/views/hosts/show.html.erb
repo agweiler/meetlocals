@@ -90,9 +90,9 @@
   <!-- Events title-->
  
   <div class="row" id="special_events">
-    <%= content_tag :h3, "#{@host.username}'s Special Events", class:"text-center title pad-bot" %>
+    <%= content_tag :h3, "#{@host.username}'s Host Parties", class:"text-center title pad-bot" %>
   <!-- End of events title -->
-    <%= content_tag :h5, "<No Special Events for now>", class:"text-center" if @special_events.available.empty? %>
+    <%= content_tag :h5, "<No Host Parties for now>", class:"text-center" if @special_events.available.empty? %>
   <!-- Hosts experiences listing -->
       <div class="container-fluid">
       <div class="row">
@@ -139,9 +139,9 @@
 <!-- Events title-->
 
   <div class="row" id="host_events">
-    <%= content_tag :h3, "#{@host.username}'s Events", class:"text-center title pad-bot" %>
+    <%= content_tag :h3, "#{@host.username}'s Experiences", class:"text-center title pad-bot" %>
 <!-- End of events title -->
-  <%= content_tag :h5, "<No Events for now>", class:"text-center" if @normal_events.empty? %>
+  <%= content_tag :h5, "<No Experiences for now>", class:"text-center" if @normal_events.empty? %>
 <!-- Hosts experiences listing -->
   <div class="container-fluid">
   <div class="row">

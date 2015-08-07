@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807022010) do
+ActiveRecord::Schema.define(version: 20150807025317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20150807022010) do
     t.string   "pets"
     t.boolean  "approved",               default: false, null: false
     t.integer  "max_group_size"
+    t.string   "phone"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree

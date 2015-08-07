@@ -8,6 +8,8 @@
     <p>
       Your booking details are as below:</br>
       Host name: <%= @host.first_name %> <%= @host.last_name %> </br>
+      Host Email: <%= @host.email %>
+      Host Phone Number: <%= @host.phone %>
       Experience title: <%= @booking.experience.title %> </br>
       Date: <%= @booking.date %> </br>
       Time: <%= @booking.start_time.strftime("%H:%M:%S") %> until <%= @booking.end_time.strftime("%H:%M:%S") %> </br>
