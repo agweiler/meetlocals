@@ -5,11 +5,11 @@
 			<% if @partner == current_partner %>
 				<%= link_to "Edit Profile", edit_partner_path, :class => "btn btn-warning btn-sm" %>
 			<% end %>
-					<h3 class="host_name"><%= @partner.name %></h3>
+					<h3 class="host_name"><%= @partner.username %></h3>
 		</div>
 		<div class = "col-md-6">
 			<div>
-				<p><strong style="font-weight:600;">Name:</strong> <%= @partner.name %> </p>
+				<p><strong style="font-weight:600;">Name:</strong> <%= @partner.username %> </p>
 				<p><strong style="font-weight:600;">Address:</strong> <%= @partner.address %> </p>
 				<p><strong style="font-weight:600;">Contact Info:</strong> <%= @partner.contact_info %> </p>
 				<% if current_admin %>

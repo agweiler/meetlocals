@@ -5,7 +5,7 @@
       <div id="avataro">
         <%= link_to image_tag(partner.images.first.image_file.url(:thumb), class: "img-circle"), partner if partner.images.present? %>
       </div>
-      <h3 class="host_name" style="margin-top: 5px;"><%= link_to partner.name,  partner_path(partner) %></h3> 
+      <h3 class="host_name" style="margin-top: 5px;"><%= link_to partner.username,  partner_path(partner) %></h3> 
       <label> Address: </label> <span><%= partner.address %></span><br>
        <label> Contact Info: </label> <span><%= partner.contact_info %></span>
     </div>
