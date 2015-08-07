@@ -19,28 +19,30 @@
 		</div>
 	</div>
 </div>
+<% if current_admin || current_partner %>
 <div style="background:#f4f4f4;">
-<div class="container-fluid">
-<div class = "row" style="padding:50px;">
-	<h3 class="text-center title" > List of Bookings </h3>
-		<div class = "col-md-4">
-			<div class="thumbnail" style="padding:20px;">
-				<% @multidinners.each do |x| %>
-					<% y = x.assign_hosts_to_group_size %>
-					<p> <span style="font-weight:600;">Event Name:</span><%= x.name %> </p>
-					<p> <span style="font-weight:600;">Event Date:</span><%= x.date %> </p>
-					<ol>
-			    <% y.each do |size,host_id| %>
-				    <% host = Host.find host_id.to_i %>
-				    <ul>
-				    	<li><strong style="font-weight:600;">Host Name:</strong> <%= host.first_name %> <%= host.last_name %>
-				    	 <ol><strong style="font-weight:600;">Num of guests:</strong> <%= size %></ol></li>
+	<div class="container-fluid">
+		<div class = "row" style="padding:50px;">
+			<h3 class="text-center title" > List of Bookings </h3>
+				<div class = "col-md-4">
+					<div class="thumbnail" style="padding:20px;">
+						<% @multidinners.each do |x| %>
+							<% y = x.assign_hosts_to_group_size %>
+							<p> <span style="font-weight:600;">Event Name:</span><%= x.name %> </p>
+							<p> <span style="font-weight:600;">Event Date:</span><%= x.date %> </p>
+							<ol>
+			    			<% y.each do |size,host_id| %>
+				    			<% host = Host.find host_id.to_i %>
+				    	<ul>
+				    		<li><strong style="font-weight:600;">Host Name:</strong> <%= host.first_name %> <%= host.last_name %>
+				    	 	<ol><strong style="font-weight:600;">Num of guests:</strong> <%= size %></ol></li>
 				    </ul>
-			   <% end %>
-			   </ol>
-			 <% end %>
-			</div>
+			   				<% end %>
+			   			</ol>
+			 			<% end %>
+					</div>
+				</div>
 		</div>
 	</div>
 </div>
-</div>
+<% end %>
