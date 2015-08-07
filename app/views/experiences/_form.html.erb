@@ -69,12 +69,12 @@
               {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
 
-      <div class="field" id='dinner_choice'>
+<!--       <div class="field" id='dinner_choice'>
         <%= f.label :mealset %> <br>
         <%= f.select(:mealset, options_for_select(Experience.get_mealsets,
               @experience.mealset), {},
               {required: false, class: 'form-control', style:'width:50%'}) %>
-      </div>
+      </div> -->
       <!-- <div class="field form-inline">
         <%= f.label :time, value: 'Preferred Time' %><br>
         <%= f.time_select :time, {minute_step: 15, ampm: true, default:{hour:00,min:00}}, class:"form-control", style:"min-height:30px; min-width:80px; width:15%" %>

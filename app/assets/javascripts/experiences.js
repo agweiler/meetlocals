@@ -26,15 +26,15 @@ $(document).on('change', '.upload-experience :file', function() {
 //   });
 // });
 
-$(function(){
-	var choice_box = $('div#dinner_choice')
+// $(function(){
+// 	var choice_box = $('div#dinner_choice')
 
-	function showhide(foo){
-		(foo === "Dinner") ? choice_box.show() : choice_box.hide();
-	};
+// 	function showhide(foo){
+// 		(foo === "Dinner") ? choice_box.show() : choice_box.hide();
+// 	};
 
-	showhide($('select#experience_meal').val()) //default
-	$('#meal').on('change', '#experience_meal', function(event){
-		showhide(this.value);
-	});
-});
+// 	showhide($('select#experience_meal').val()) //default
+// 	$('#meal').on('change', '#experience_meal', function(event){
+// 		showhide(this.value);
+// 	});
+// });
