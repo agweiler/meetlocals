@@ -42,7 +42,7 @@
 
     <%= content_tag 'h1', @experience.title %>
 
-    <%= content_tag 'p', "#{@host.suburb}, #{@host.state}, #{@host.country} (Age #{@host.age})" %>
+    <%= content_tag 'p', "#{@host.location} (Age #{@host.age})" %>
     <%= content_tag 'p', @host.intro %>
     <%= content_tag 'p', "Speaks: #{@host.languages}" %>
 

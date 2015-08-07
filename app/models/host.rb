@@ -113,7 +113,25 @@ class Host < ActiveRecord::Base
   # end
 
   def self.get_location
-    ["Location","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+  	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+		[['Location','Location'],
+		 ['West region','Zeeland'],
+		 ['North region', 'Nordjylland'],
+		 ['Center region', 'Midtjylland'],
+		 ['South & Fyn', 'Syddanmark'],
+		 ['Copenhagen', 'Hovedstaden']]
+	end
+
+  def location
+    hash = {'Zeeland' => 'West region',
+    'Nordjylland' => 'North region',
+    'Midtjylland' => 'Center region',
+    'Syddanmark' => 'South & Fyn',
+    'Hovedstaden' => 'Copenhagen'}
+
+    [self.suburb, hash[self.state], self.country].reject! do |itm|
+      itm.nil? || itm.empty?
+     end.join(', ')
   end
 
   def avg_rating
