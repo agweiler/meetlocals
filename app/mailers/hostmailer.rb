@@ -25,4 +25,11 @@ class Hostmailer < ApplicationMailer
     @host = Host.find host_id
     mail(to: @host.email, subject: "You have been approved")
   end
+
+  def event_reminder(booking_id,host_id,day)
+    @booking = Booking.find booking_id
+    @host = Host.find host_id
+    @day = day
+    mail(to: @host.email, subject: "Reminder! You have an upcoming event!")
+  end
 end
