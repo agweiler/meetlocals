@@ -70,7 +70,7 @@ class Host < ActiveRecord::Base
     age = "dob >= '#{lower_range}' AND dob <= '#{upper_range}'"
 
     loc == "Location" ? loc = '' : loc = " AND state = '#{loc}'"
-    group == "Guests" ? group = "" : group = " AND experiences.max_group_size >= #{group}"
+    group == "Guests" ? group = "" : group = " AND experiences.max_group_size >= #{group} AND experiences.date IS NULL"
 
     # between [ >=] 1980.1.1 and [<= ] 1995.12.31
     # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
@@ -113,7 +113,25 @@ class Host < ActiveRecord::Base
   # end
 
   def self.get_location
-    ["Location","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+  	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+		[['Location','Location'],
+		 ['West region','Zeeland'],
+		 ['North region', 'Nordjylland'],
+		 ['Center region', 'Midtjylland'],
+		 ['South & Fyn', 'Syddanmark'],
+		 ['Copenhagen', 'Hovedstaden']]
+	end
+
+  def location
+    hash = {'Zeeland' => 'West region',
+    'Nordjylland' => 'North region',
+    'Midtjylland' => 'Center region',
+    'Syddanmark' => 'South & Fyn',
+    'Hovedstaden' => 'Copenhagen'}
+
+    [self.suburb, hash[self.state], self.country].reject! do |itm|
+      itm.nil? || itm.empty?
+     end.join(', ')
   end
 
   def avg_rating

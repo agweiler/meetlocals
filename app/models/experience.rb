@@ -13,12 +13,18 @@ class Experience < ActiveRecord::Base
 	before_save :set_default_mealtime, :as_special_event
 
 	def self.get_location
-  	["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+  	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
+		[['Location','Location'],
+		 ['West region','Zeeland'],
+		 ['North region', 'Nordjylland'],
+		 ['Center region', 'Midtjylland'],
+		 ['South & Fyn', 'Syddanmark'],
+		 ['Copenhagen', 'Hovedstaden']]
 	end
 
 	def self.get_all_location
 		all_location = get_location
-		all_location[0] = 'All'
+		all_location[0] = ['All', 'All']
 		all_location
 	end
 
