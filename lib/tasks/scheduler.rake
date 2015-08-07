@@ -1,6 +1,7 @@
 desc "This task is called by the Heroku scheduler add-on"
 task :reminder_one_day_before => :environment do
-	bookings_a_day_away = Booking.where("date = ?" ,Date.today - 1.day).pluck(:id,:experience_id)
+	confirmed_booking = Booking.where(status: "confirmed")
+	bookings_a_day_away = confirmed_booking.where("date = ?" ,Date.today + 1.day).pluck(:id,:experience_id)
 	bookings_a_day_away.each do |booking_id,exp_id|
 		host_id = Experience.find(exp_id).host_id
 		puts "booking id is #{booking_id}"
@@ -11,7 +12,8 @@ task :reminder_one_day_before => :environment do
 end
 
 task :reminder_three_day_before => :environment do
-	bookings_a_day_away = Booking.where("date = ?" ,Date.today - 3.day).pluck(:id,:experience_id)
+	confirmed_booking = Booking.where(status: "confirmed")
+	bookings_a_day_away = confirmed_booking.where("date = ?" ,Date.today + 3.day).pluck(:id,:experience_id)
 	bookings_a_day_away.each do |booking_id,exp_id|
 		host_id = Experience.find(exp_id).host_id
 		puts "booking id is #{booking_id}"
