@@ -8,23 +8,41 @@
 <body id="guest">
 </br>
 </br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12" style="text-align:center; background-color: #ffffff;">
+      <h1 class="heads text-center" style="color:#66a422; font-size:70px;">How to be a host</h1>
+      <p class="para text-center" style="padding: 50px;" >
+        Meet the Danes is a unique opportunity to meet new people from other countries. So if you like to cook and want to host a dinner, now is the time to seize the opportunity for an exciting and different experience! <br><br>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3" style="text-align:center; background-color: #ffffff;border: 2px solid; border-radius: 25px; border-color: #000000">
-      <h1 style="color: #000">How to be a host</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ullamcorper magna sed turpis lobortis pulvinar. Proin cursus congue orci, vel efficitur lacus eleifend sit amet. Nullam vitae rutrum augue, a scelerisque augue. Ut sodales sollicitudin turpis, sit amet rutrum velit facilisis eu. Pellentesque facilisis vestibulum arcu, vel tincidunt turpis rutrum sed. Duis at fringilla enim. Ut fringilla ex in magna condimentum bibendum. Nam feugiat, erat pellentesque blandit ullamcorper, lectus nunc feugiat augue, facilisis sodales nunc arcu in orci. Nam vel tincidunt tellus. Vivamus iaculis est ex, eget molestie leo accumsan sed. Curabitur eleifend, nibh nec malesuada mollis, ipsum nisi scelerisque ex, eget feugiat lorem felis in metus. Praesent imperdiet elit ipsum, non suscipit augue cursus id.
-        </p>
-      </div>
+        At the dinner event there must be a minimum of 2 adult hosts present in addition to the guests that visit you. The two hosts can be living together, neighbours, friends, or anything else. As an host you get paid an amount per adult guest and an amount per child. The amount will appear on the confirmation email you get after you have signed up and be seen in your personal Meet The Danes profile.<br><br>
+
+        Dinner will ideally be inspired by "Danish" cuisine so that guests experience something special for Denmark. It does not have to be an enormous feast - we suggest that you make a good and presentable meal that you would serve if you would otherwise have guests. <br><br>
+
+        The menu should consist of 3 dishes. For inspiration, a starter might include: herring, salmon, soup and the like. A main could be chicken, fish, roast, hamburgers, meatballs, etc. A dessert could be ice cream, homemade cake or classic currant pudding with cream. We recommend each dinner be served with beer or wine and water, and after the food is served coffee or tea. This is just for inspiration - you decide what you want to serve! <br><br>
+      </p>
     </div>
-    <br><br>
-    <div class="row text-center">
-      <!-- <div style="text-align:center"> -->
+  </div> 
+  <div style="clear:both;"></div>
+</div>
+<br><br>
+
+<div class="row" style="background: url('assets/open_sandwich.jpg') 10px -500px;">
+  <div style="text-align:center; min-height: 300px;   color: #fff;">
+    <p class="heads" style="padding: 60px; text-transform: uppercase; font-size:70px; color:#fff;"></p>
+    <% unless current_host %>
+      <%= link_to "Sign up as a host", new_host_registration_path, class: "btn btn-xl", style: "background-color:#66a422; border: #66a422; font-size: 15px; padding: 15px 30px; margin-right: 20px;"%>
+       OR 
+      <%= link_to "Sign in as a host", new_host_session_path, class: "btn btn-xl", style: "background-color:#66a422; border: #66a422; font-size: 15px; padding: 15px 30px; margin-left: 20px;"%>
+    <% end %>
+  </div>
+</div>
+
+    <!-- <div class="row text-center">
       <% unless current_host %>
               <p><%= link_to "Sign up as a host", new_host_registration_path, class: "btn btn-xl" %> | <%= link_to "Sign in as a host", new_host_session_path, class: "btn btn-xl" %></p>
       <% end %>
-      <!-- </div> -->
-    </div>
+    </div> -->
   </div>
 
 <!-- <div class="container"> -->

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   get 'notifications/show'
 
+
   devise_for :partners, controllers: { registrations: "partners/registrations" }
 
 
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   # get '/auth/:provider/callback' => 'authentications#create'
   # get '/guests/authentications' => 'authentications#index'
 
+
   devise_for :admins
 
   get 'partners/bookings' => 'partners#bookings', as: :partner_bookings
@@ -42,6 +44,8 @@ Rails.application.routes.draw do
   get 'admins/analytics' => 'admins#analytics', as: :admin_analytics
 
   get 'admins/settings' => 'admins#settings', as: :admin_settings
+
+  get 'admins/bookings' => 'admins#bookings_list', as: :admin_bookings_list
 
   patch '/price' => 'admins#changeprice'
 

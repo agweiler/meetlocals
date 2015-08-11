@@ -36,6 +36,7 @@
 
 							<% if current_admin %>
 								<li><%= link_to "Show All Users", admins_path %></li>
+								<li><%= link_to "Show All Bookings", admin_bookings_list_path %></li>
 								<li><%= link_to "Analytics", admin_analytics_path %></li>
 					      <li><%= link_to "Settings", admin_settings_path %></li>
 					      <li><%= link_to "Create New Partner" , new_partner_registration_path %> </li>
@@ -44,6 +45,9 @@
 							<% if current_guest %>
 							  <li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "Bookings", bookings_path %></li>
+              <% end %>
+              <% if current_partner %>
+              	<li><%= link_to "Profile", current_user %></li>
               <% end %>
 							  <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 						</ul>

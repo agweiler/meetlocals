@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have a big day coming up!</h1>
+    <p>
+      You have a booking scheduled in <%= @day %> day/s, better start preparing!
+    </p>
+
+    <p> 
+      Just as a reminder, your booking is with <% @booking.guest.first_name %> <% @booking.guest.last_name %>  
+      You can confirm by going to your account via <%= link_to 'Hosts Sign-in Page' , new_host_session_url  %> 
+    </p>
+    <p>Thanks for using Meet the Danes and have a great day!</p>
+
+  </body>
+</html>

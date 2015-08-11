@@ -3,7 +3,7 @@ class Guest < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,  :confirmable, :async,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_many :images, as: :imageable
   has_many :notifications
 

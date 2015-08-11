@@ -7,6 +7,8 @@ module ApplicationHelper
       current_guest
     elsif current_admin
       current_admin
+    elsif current_partner
+      current_partner
     end
   end
 

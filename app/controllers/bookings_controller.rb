@@ -22,6 +22,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1
   def show # Limited to only certain people
+    
     if host_signed_in?
       Notification.where(host_id: current_user.id, type_id: @booking.id).update_all(seen: true) if Notification.find_by(host_id: current_user.id,type_id: @booking.id).present?
       unless current_host.id == @experience.host_id
@@ -34,7 +35,7 @@ class BookingsController < ApplicationController
         redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
       end
     elsif admin_signed_in?
-      puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
+      # puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
     else
       redirect_to '/bookings', notice: "You must be logged in to view your bookings"
     end
@@ -141,7 +142,7 @@ class BookingsController < ApplicationController
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
         elsif booking_params[:status] == "rejected"
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
-          Guestmailer.reject_invitation(guest.id,@booking.id)..deliver_later
+          Guestmailer.reject_invitation(guest.id,@booking.id).deliver_later
         elsif booking_params[:status] == "completed"
           Guestmailer.experience_completed(@bookingid,guest.id).deliver_later
           Adminmailer.experience_completed(host.id, guest.id).deliver_later
@@ -187,35 +188,19 @@ class BookingsController < ApplicationController
     # status = params[:payment_status]
     status = params[:transaction]["0"][".status"]
     id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
+    message = ""
     if status == "Completed"
-      puts "*************************"
-      puts "start"
-      puts "*************************"
       @booking = Booking.find id
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-      puts "*************************"
-      puts "mailer sent"
-      puts "*************************"
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
-      puts "*************************"
-      puts "booking updated"
-      puts "*************************"
-      puts "*************************"
-      puts "end of method"
-      puts "*************************"
+      message = 'Payment was successfully made, the status of the booking may take some time to change, pending confirmtion from Paypal'
     else
-      puts "FAILED!!!"
+      message = "We're sorry but the payment process has failed, please try again later."
     end
-    puts "*************************"
-    puts "end"
-    puts "*************************"
-    render nothing: true
-    puts "*************************"
-    puts "last line"
-    puts "*************************"
+    render nothing: true ,notice: message
     # redirect_to booking_path(@booking)
   end
 
