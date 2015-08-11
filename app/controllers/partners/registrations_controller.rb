@@ -2,9 +2,11 @@ class Partners::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
 
   def create
+   
     @image_file = sign_up_params.delete(:image_file)
     build_resource(sign_up_params.except(:image_file))
     resource.save
+
     Image.create(local_image: @image_file, imageable: @partner)
     yield resource if block_given?
     if resource.persisted?
@@ -28,7 +30,7 @@ class Partners::RegistrationsController < Devise::RegistrationsController
   protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.for(:sign_up) do |u|
-          u.permit(:name, :contact_info, :address,
+          u.permit(:username, :contact_info, :address,
             :email, :password, :password_confirmation,:image_file)
         end
       end
