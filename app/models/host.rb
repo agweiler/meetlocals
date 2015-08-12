@@ -129,7 +129,7 @@ class Host < ActiveRecord::Base
     'Syddanmark' => 'South & Fyn',
     'Hovedstaden' => 'Copenhagen'}
 
-    [self.suburb, hash[self.state], self.country].reject! do |itm|
+    x = [self.suburb, hash[self.state], self.country].reject do |itm|
       itm.nil? || itm.empty?
      end.join(', ')
   end
