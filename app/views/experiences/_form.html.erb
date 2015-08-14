@@ -62,6 +62,9 @@
         <%= f.select(:location, options_for_select(Experience.get_all_location, current_host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
 
+      <div class="field">
+                  <%= f.hidden_field :price %>
+      </div>
 
       <div class="field">
         <%= f.label :image %><br>
