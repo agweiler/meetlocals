@@ -132,7 +132,7 @@ class ExperiencesController < ApplicationController
     @image_files = experience_params.delete(:images_array)
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    if @experience.save
+    if @experience.save!
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
 
