@@ -48,19 +48,6 @@
         {class:"form-control"} %>
       </div>
 
-      <!-- <div class="field form-inline">
-        <label for="experience_available_days">Days Available</label>
-        <small>(Check at least one)</small><br>
-        <%= f.hidden_field :available_days%>
-        <%= f.fields_for :days do |d| %>
-          <% [:sun, :mon, :tue, :wed, :thu, :fri, :sat].each_with_index do |w, i| %>
-            <%= d.check_box i.to_s, @experience.available_days[i] != "-" ? {checked: true, class:"form-control"} : {checked: false, class:""} %> <%= f.label w, class:"" %> &nbsp;
-            <% if i == 3 %>
-              <div class="visible-xs-inline"><br></div>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div> -->
 
       <div class="field" id="meal">
         <%= f.label :meal %> <br>
@@ -69,46 +56,12 @@
               {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
 
-<!--       <div class="field" id='dinner_choice'>
-        <%= f.label :mealset %> <br>
-        <%= f.select(:mealset, options_for_select(Experience.get_mealsets,
-              @experience.mealset), {},
-              {required: false, class: 'form-control', style:'width:50%'}) %>
-      </div> -->
-      <!-- <div class="field form-inline">
-        <%= f.label :time, value: 'Preferred Time' %><br>
-        <%= f.time_select :time, {minute_step: 15, ampm: true, default:{hour:00,min:00}}, class:"form-control", style:"min-height:30px; min-width:80px; width:15%" %>
-      </div> -->
-
-      <!-- <div class="field">
-        <%= f.label :"Duration (hours)" %>
-        <%= f.text_field :duration, placeholder: "Estimate", required: false, class: 'form-control', style: "width:75%" %>
-      </div> -->
 
       <div class="field">
         <%= f.label :region %> <br>
         <%= f.select(:location, options_for_select(Experience.get_all_location, current_host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
 
-      <div class="field">
-   <!--      <label for="experience_price">*Price (USD)</label>
-        <form class="form-inline">
-          <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon">$</div> -->
-                  <%= f.hidden_field :price %>
-                <!--  <%= f.number_field :price, min: 0, required: false, title: "Feeling generous are we?", class: "form-control", style: "width: 74%"%> -->
-              <!-- </div>
-            </div> -->
-      </div>
-
-      <!-- <div class="field">
-        <%= f.label :image %></br>
-        <small>Please upload 3 images with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results.</small>
-        <br>
-        <%= f.file_field(:images_array, multiple: true) %>
-        <small><kbd>ctrl + click</kbd> to select multiple images.</small>
-      </div> -->
 
       <div class="field">
         <%= f.label :image %><br>
