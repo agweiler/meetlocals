@@ -102,6 +102,8 @@ class ExperiencesController < ApplicationController
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
+    puts "#########################"
+    puts @s3_direct_post
     @experience = Experience.new
     @host = current_host
   end
