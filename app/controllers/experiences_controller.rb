@@ -144,7 +144,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
     else
-       render :new
+       redirect_to new_experience_path
     end
   end
 
