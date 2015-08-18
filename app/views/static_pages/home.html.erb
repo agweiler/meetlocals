@@ -60,7 +60,7 @@
         </p>
         <p class="para text-justify">Thousands of visitors have met our hosting families and got a very personal experience. During these social dinners many of our hosts and guests form friendships.
         </p>
-        <p class="para letter-spacing">Meet the Danes is an opportunity to meet and learn more about other people’s way of living. 
+        <p class="para">Meet the Danes is an opportunity to meet and learn more about other people’s way of living. 
         </p>
         <p class="para text-justify small-font"><%= link_to "*http://www.visitdenmark.co.uk/en-gb/denmark/art/happiest-people-world","http://www.visitdenmark.co.uk/en-gb/denmark/art/happiest-people-world" %> </p>
         
@@ -94,7 +94,7 @@
        
         <!-- <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
       <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>  
-    <p style="text-align:justify;"><sup><i class="fa fa-quote-left" style="font-size:6px;" ></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) , class:"para" %></p>
+    <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;" ></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) , class:"para" %></p>
 
       </div>
 
@@ -113,7 +113,7 @@
 
         <!-- <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
         <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>
-        <p style="text-align:justify;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) ,class:"para" %></p>
+        <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) ,class:"para" %></p>
       </div>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/slice_02.jpg" />
@@ -132,7 +132,7 @@
         
         <!-- <p style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
-       <p style="text-align:justify;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50), class:"para" %></p>
+       <p style="text-align: none;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50), class:"para" %></p>
       </div>
 
       <div class="col-md-3 hidden-sm hidden-xs box3" >
