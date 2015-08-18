@@ -8,7 +8,7 @@ class Adminmailer < ApplicationMailer
 		mail(to: @admin.email, subject: "A new host has been created!")
 	end
 
-	def experience_completed(host_id)
+	def experience_completed(host_id, guest_id)
 		@host = Host.find host_id
 		@guest = Guest.find guest_id
 		@admin = Admin.first
