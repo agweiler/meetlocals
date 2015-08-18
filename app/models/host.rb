@@ -1,7 +1,7 @@
 class Host < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :async,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :experiences, dependent: :destroy
   has_many :images, as: :imageable
@@ -129,7 +129,7 @@ class Host < ActiveRecord::Base
     'Syddanmark' => 'South & Fyn',
     'Hovedstaden' => 'Copenhagen'}
 
-    [self.suburb, hash[self.state], self.country].reject! do |itm|
+    x = [self.suburb, hash[self.state], self.country].reject do |itm|
       itm.nil? || itm.empty?
      end.join(', ')
   end
