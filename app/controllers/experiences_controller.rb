@@ -102,6 +102,8 @@ class ExperiencesController < ApplicationController
   def new
     redirect_to '/hosts/sign_in' unless host_signed_in?
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
+    puts "#########################"
+    puts @s3_direct_post
     @experience = Experience.new
     @host = current_host
   end
@@ -130,7 +132,7 @@ class ExperiencesController < ApplicationController
     @image_files = experience_params.delete(:images_array)
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
-    if @experience.save
+    if @experience.save!
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
 
@@ -142,7 +144,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
     else
-       render :new
+       redirect_to new_experience_path
     end
   end
 

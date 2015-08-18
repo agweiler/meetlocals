@@ -59,7 +59,6 @@ class Experience < ActiveRecord::Base
 		if self.meal == 'Lunch'
 			self.time = Time.zone.local(2000, 01, 01, 12)
 			self.duration = 2
-			self.mealset = nil
 		elsif self.meal == 'Dinner'
 			self.time = Time.zone.local(2000, 01, 01, 19)
 			self.duration = 3
@@ -82,10 +81,5 @@ class Experience < ActiveRecord::Base
 
 	def available?
 		self.date.nil? || self.date > Date.today
-	end
-
-	validates :mealset, presence: true, if: :is_dinner?
-	def self.get_mealsets
-		["Starter + Main", "Main + Dessert"]
 	end
 end
