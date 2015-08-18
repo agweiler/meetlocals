@@ -1,7 +1,23 @@
-<h2 class="heads" style="text-align: center; color:#66a422; font-size:70px;">Sign up as a Guest</h2>
   <div class="container">
+    <div class="col-md-6 pad-top">
+      <div class = "col-md-10">
+        <div class = "row">
+          <h1>For Hosts</h1>
+        </div>
+        <div class = "row">
+          <p>If you are a <strong>Host</strong> or would like to apply to be one please apply or sign in below:</p>
+          <div class="actions" style="text-align:center">
+            <div class ="pad-top float-left">Sign up as a Host: <%= link_to "SIGN UP", new_host_registration_path, :class => 'btn btn-success green-btn-host' %></div>
+            <div class = "text-center">
+              <div class ="pad-top float-left">Log in as a Host: <%= link_to "LOGIN", new_host_session_path, :class => 'btn btn-success green-btn-host' %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 pad-top">
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
+        <h2 class="heads" style="text-align: center; color:#66a422; font-size:70px;">Sign up as a Guest</h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {multipart: true} ) do |f| %>
           <% flash[:alert] = devise_error_messages! if devise_error_messages! %>
