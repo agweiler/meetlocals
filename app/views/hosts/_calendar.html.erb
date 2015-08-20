@@ -68,11 +68,11 @@ $(function(){
     len = dates.length;
     formatted = new Array(len);
     for(i=0; i< len; i++){
-      var temp = new Date(dates[i].toLocaleString());
+      // var temp = new Date(dates[i].toLocaleString());
 
-      formatted[i] = open_tag + temp.getFullYear() + "-"
-                      + ("0"+ (temp.getMonth()+1)).slice(-2) + "-"
-                      + ("0"+ temp.getDate()).slice(-2) + close_tag;
+      formatted[i] = open_tag + dates[i].getFullYear() + "-"
+                      + ("0"+ (dates[i].getMonth()+1)).slice(-2) + "-"
+                      + ("0"+ dates[i].getDate()).slice(-2) + close_tag;
     };
     formatted = formatted.sort();
 
