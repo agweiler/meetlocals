@@ -139,14 +139,14 @@ progressall: function (e, data) {
           text("Loading...");
       },
       done: function(e, data) {
-        submitButton.prop('disabled', false);
+        // submitButton.prop('disabled', false);
         progressBar.text("Uploading done");
 
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
         // key = key.replace(/ /g,"_");
         var url   = 'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/' + key;
-        // debugger;
+
 
         // create hidden field
         var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
