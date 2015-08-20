@@ -7,24 +7,23 @@ $(document).on('change', '.upload-experience :file', function() {
   input.trigger('fileselect', [numFiles, label]);
 });
 
-// $(document).ready( function() {
-//   $('.upload-experience :file').on('fileselect', function(event, numFiles, label) {
-//     var input = $(this).parents('.input-group').find(':text');
-//     log = numFiles > 1 ? numFiles + ' files selected' : label;
-// 		$('input[type*=submit]').prop('disabled', false);
+$(document).ready( function() {
+  $('.upload-experience :file').on('fileselect', function(event, numFiles, label) {
+    var input = $(this).parents('.input-group').find(':text');
+    log = numFiles > 1 ? numFiles + ' files selected' : label;
+		$('input[type*=submit]').prop('disabled', false);
+    if(numFiles != 3){
+			input.val("Please upload 3 experience images.").attr('style','color:red');
+			$('input[type*=submit]').prop('disabled', true);
+		}else if( input.length ) {
+			input.removeAttr('style');
+      input.val(log);
+    } else {
+      if( log ) alert(log);
+    }
 
-//     if(numFiles != 3){
-// 			input.val("Please upload 3 experience images.").attr('style','color:red');
-// 			$('input[type*=submit]').prop('disabled', true);
-// 		}else if( input.length ) {
-// 			input.removeAttr('style');
-//       input.val(log);
-//     } else {
-//       if( log ) alert(log);
-//     }
-
-//   });
-// });
+  });
+});
 
 // $(function(){
 // 	var choice_box = $('div#dinner_choice')
