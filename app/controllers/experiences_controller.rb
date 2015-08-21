@@ -108,6 +108,7 @@ class ExperiencesController < ApplicationController
           @experience.images.delete_all
         end
         puts "#########################"
+        puts "Start The Process"
         puts "#{Time.now}"
         puts "#########################"
         @image_files.each do |img|
@@ -116,10 +117,10 @@ class ExperiencesController < ApplicationController
           new_img.temp_file_key = img
           new_img.save!
           end
+        end unless @image_files.nil?
         puts "#########################"
         puts "#{Time.now}"
         puts "#########################"
-        end unless @image_files.nil?
       else
         render :edit
       end
