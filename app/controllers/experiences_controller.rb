@@ -107,13 +107,18 @@ class ExperiencesController < ApplicationController
         if @experience.images.present? && !@image_files.nil?
           @experience.images.delete_all
         end
-
+        puts "#########################"
+        puts "#{Time.Now}"
+        puts "#########################"
         @image_files.each do |img|
           new_img = @experience.images.new
           if img.is_a? String
           new_img.temp_file_key = img
           new_img.save!
           end
+        puts "#########################"
+        puts "#{Time.Now}"
+        puts "#########################"
         end unless @image_files.nil?
       else
         render :edit
