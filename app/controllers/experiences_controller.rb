@@ -71,7 +71,7 @@ class ExperiencesController < ApplicationController
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
       puts "#########################"
-      puts "#{Time.Now}"
+      puts "#{Time.now}"
       puts "#########################"
       @image_files.each do |img|
         new_img = @experience.images.new
@@ -81,7 +81,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
       puts "#########################"
-      puts "#{Time.Now}"
+      puts "#{Time.now}"
       puts "#########################"
     else
        redirect_to new_experience_path
@@ -108,7 +108,7 @@ class ExperiencesController < ApplicationController
           @experience.images.delete_all
         end
         puts "#########################"
-        puts "#{Time.Now}"
+        puts "#{Time.now}"
         puts "#########################"
         @image_files.each do |img|
           new_img = @experience.images.new
@@ -117,7 +117,7 @@ class ExperiencesController < ApplicationController
           new_img.save!
           end
         puts "#########################"
-        puts "#{Time.Now}"
+        puts "#{Time.now}"
         puts "#########################"
         end unless @image_files.nil?
       else
