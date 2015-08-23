@@ -68,17 +68,41 @@
 
       <div class="field">
         <%= f.label :images %><br>
-        <small>Please upload 3 images with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. Note: attempting to upload images larger than 4MB will redirect you to the homepage as the experience is created.</small>
         <br>
         <div class="input-group">
           <span class="input-group-btn">
             <span class="btn btn-default upload-experience btn-file">
-              Browse<%= f.file_field(:images_array, multiple: true) %>
+              Browse<%= f.file_field(:images_1, multiple: false) %>
             </span>
           </span>
           <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
         </div>
-        <small><kbd>ctrl + click</kbd> to select multiple images.</small>
+      </div>
+
+      <div class="field">
+        <%= f.label :images %><br>
+        <br>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default upload-experience btn-file">
+              Browse<%= f.file_field(:images_2, multiple: false) %>
+            </span>
+          </span>
+          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :images %><br>
+        <br>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-default upload-experience btn-file">
+              Browse<%= f.file_field(:images_3, multiple: false) %>
+            </span>
+          </span>
+          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
+        </div>
       </div>
 
       <div class="actions">
@@ -139,7 +163,7 @@ progressall: function (e, data) {
           text("Loading...");
       },
       done: function(e, data) {
-        // submitButton.prop('disabled', false);
+        submitButton.prop('disabled', false);
         progressBar.text("Uploading done");
 
         // extract key and generate URL from response

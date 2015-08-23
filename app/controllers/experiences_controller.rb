@@ -54,7 +54,7 @@ class ExperiencesController < ApplicationController
 
   # POST /experiences
   def create
-    
+
     @image_files = experience_params.delete(:images_array)
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_array, :days))
@@ -76,31 +76,34 @@ class ExperiencesController < ApplicationController
 
   # PATCH/PUT /experiences/1
   def update
+    @image_files = []
+    @image_files << experience_params.delete(:images_1)
+    @image_files << experience_params.delete(:images_2)
+    @image_files << experience_params.delete(:images_3)
+    byebug
+    if @experience.update(experience_params.except(:images_1,:images_2,:images_3,:days))
+      redirect_to @experience, notice: 'Experience was successfully updated.'
 
-    @image_files = experience_params.delete(:images_array)
-      if @experience.update(experience_params.except(:images_array, :days))
-        redirect_to @experience, notice: 'Experience was successfully updated.'
-
-        #reset image(s) after parent-experience is save
-        if @experience.images.present? && !@image_files.nil?
+      #reset image(s) after parent-experience is save
+      if @experience.images.present? && !@image_files.nil?
           @experience.images.delete_all
-        end
-        puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-        puts "#{Time.now}"
-        puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-        @image_files.each do |img|
-          new_img = @experience.images.new
-          if img.is_a? String
-          new_img.temp_file_key = img
-          new_img.save!
-          end
-        end unless @image_files.nil?
-        puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-        puts "#{Time.now}"
-        puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-      else
-        render :edit
       end
+      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
+      puts "#{Time.now}"
+      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
+      @image_files.each do |img|
+        new_img = @experience.images.new
+        if img.is_a? String
+        new_img.temp_file_key = img
+        new_img.save!
+        end
+      end unless @image_files.nil?
+      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
+      puts "#{Time.now}"
+      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
+    else
+        render :edit
+    end
   end
 
   # DELETE /experiences/1
@@ -120,7 +123,7 @@ class ExperiencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def experience_params
-      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_array => [],
+      params.require(:experience).permit(:title, :location, :datefrom, :dateto, :description, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3,
       #  days: [:sun, :mon, :tue, :wed, :thu, :fri, :sat],
        days: ["0","1","2","3","4","5","6"])
     end
