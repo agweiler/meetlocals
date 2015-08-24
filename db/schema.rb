@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807025317) do
+ActiveRecord::Schema.define(version: 20150824031152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,23 @@ ActiveRecord::Schema.define(version: 20150807025317) do
     t.string   "iso_two_letter_code"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "exp_images", force: :cascade do |t|
+    t.integer  "experience_id"
+    t.integer  "image_number"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.boolean  "finished"
+    t.string   "local_image_file_name"
+    t.string   "local_image_content_type"
+    t.integer  "local_image_file_size"
+    t.datetime "local_image_updated_at"
+    t.string   "image_file_file_name"
+    t.string   "image_file_content_type"
+    t.integer  "image_file_file_size"
+    t.datetime "image_file_updated_at"
+    t.string   "temp_file_key"
   end
 
   create_table "experiences", force: :cascade do |t|
@@ -201,6 +218,8 @@ ActiveRecord::Schema.define(version: 20150807025317) do
     t.string   "local_image_content_type"
     t.integer  "local_image_file_size"
     t.datetime "local_image_updated_at"
+    t.string   "direct_upload_url"
+    t.string   "image_file_file_path"
     t.string   "temp_file_key"
     t.boolean  "finished"
   end

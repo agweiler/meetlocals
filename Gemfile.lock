@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/hewrin/delayed_paperclip.git
-  revision: 5d77a13247cf60f5d0abc4e609a4052a03410d53
+  revision: dc26edbd65b234d2c43bcb89e291677abee2ab02
   specs:
     delayed_paperclip (2.9.1)
       paperclip (>= 3.3)

@@ -66,49 +66,65 @@
                   <%= f.hidden_field :price %>
       </div>
 
-      <div class="field">
-        <%= f.label :images %><br>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="field">
+      <%= f.label :image_1 %><br>
+      <% if @image_1.present? %>
         <br>
-        <div class="input-group">
-          <span class="input-group-btn">
-            <span class="btn btn-default upload-experience btn-file">
-              Browse<%= f.file_field(:images_1, multiple: false) %>
-            </span>
-          </span>
-          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
-        </div>
-      </div>
-
-      <div class="field">
-        <%= f.label :images %><br>
+          <%= image_tag @image_1.image_file.url(:medium)%>
         <br>
-        <div class="input-group">
-          <span class="input-group-btn">
-            <span class="btn btn-default upload-experience btn-file">
-              Browse<%= f.file_field(:images_2, multiple: false) %>
-            </span>
+      <% end %>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_1, multiple: false) %>
           </span>
-          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
-        </div>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
+    </div>
 
-      <div class="field">
-        <%= f.label :images %><br>
+    <div class="field">
+      <%= f.label :image_2 %><br>
+      <% if @image_2.present? %>
         <br>
-        <div class="input-group">
-          <span class="input-group-btn">
-            <span class="btn btn-default upload-experience btn-file">
-              Browse<%= f.file_field(:images_3, multiple: false) %>
-            </span>
+        <%= image_tag @image_2.image_file.url(:medium)%>
+        <br>
+      <% end %>
+
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_2, multiple: false) %>
           </span>
-          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
-        </div>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
+    </div>
 
-      <div class="actions">
-        <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
+    <div class="field">
+      <%= f.label :image_3 %><br>
+      <% if @image_3.present? %>
+        <br>
+          <%= image_tag @image_3.image_file.url(:medium)%>
+        <br>
+      <% end %>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_3, multiple: false) %>
+          </span>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
+    </div>
+  </div>
 
+  <div class = "row">
+    <div class="actions">
+      <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
     </div>
   </div>
 <% end %>

@@ -3,7 +3,7 @@ class Experience < ActiveRecord::Base
 	has_many :bookings, dependent: :destroy
 	has_many :images, as: :imageable, dependent: :destroy
 	has_many :testimonials, through: :bookings
-
+	has_many :exp_images, dependent: :destroy
 	scope :available, -> { where("date > ?", Date.today) }
 	scope :normal_events, -> { where(date:nil) }
 	scope :special_events, -> { where.not(date:nil).order(:date) }
