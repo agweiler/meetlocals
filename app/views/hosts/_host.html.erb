@@ -1,6 +1,6 @@
 <div class="col-md-4 col-sm-6">
   <div class="thumbnail" style = "margin-bottom:15px">
-    <%= link_to image_tag(host.experiences.first.exp_images.first.image_file.url(:medium)), experience_path(host.experiences.first) if host.experiences.first.images.present? %>
+    <%= link_to image_tag(host.experiences.first.exp_images.first.image_file.url(:medium)), experience_path(host.experiences.first) if host.experiences.first.exp_images.present? %>
 
     <div class="caption" style="background-color: #f3f3f3; height: 100%; padding:20px;">
       <div id="avataro">
