@@ -31,13 +31,20 @@ class Image < ActiveRecord::Base
 
   def queue_upload_to_s3
      if local_image.instance.imageable_type == "Experience" 
-
+      puts "#########################"
+      puts "Start Individual Image processing"
+      puts "#{Time.now}"
+      puts "#########################"
        if local_image_file_name == nil
          temp_file_key.gsub! /\s+/, '+'
          self.image_file_remote_url = temp_file_key
          @skip_callback = true
          save
        end
+       puts "#########################"
+       puts "End Individual Image processing"
+       puts "#{Time.now}"
+       puts "#########################"
     else
       # if local_image? && local_image_updated_at_changed?
         @id = local_image.instance.id
@@ -54,11 +61,19 @@ class Image < ActiveRecord::Base
   end
 
   def image_file_remote_url=(url_value)
+    puts "#########################"
+    puts "Start image_file_remote_url method"
+    puts "#{Time.now}"
+    puts "#########################"
     self.image_file = URI.parse(url_value)
     # Assuming url_value is http://example.com/photos/face.png
     # image_file_file_name == "face.png"
     # image_file_content_type == "image/png"
     @image_file_remote_url = url_value
+    puts "#########################"
+    puts "End image_file_remote_url method"
+    puts "#{Time.now}"
+    puts "#########################"
   end
 
 

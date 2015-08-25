@@ -66,7 +66,6 @@ class ExperiencesController < ApplicationController
     if @experience.save!
       redirect_to @experience, notice: 'Experience was successfully created.'
       #create image after parent-experience is saved
-
       @image_files.each_with_index do |img,index|
         if img.is_a? String
           new_img = @experience.exp_images.new
