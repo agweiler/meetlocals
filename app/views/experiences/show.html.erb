@@ -3,9 +3,9 @@
 </div>
 
 <div class="row" id="mealpanel">
-  <% @experience.images.limit(3).each_with_index do |image, index| %>
+  <% @images_for_experiences.each_with_index do |image, index| %>
     <div class="col-sm-4" style="padding:0px">
-      <%= image_tag image.image_file.url(:medium), id: index %>
+        <%= image_tag image.image_file.url(:medium), id: index %>
     </div>
   <% end %>
 </div>

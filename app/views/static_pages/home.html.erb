@@ -149,8 +149,8 @@
   <% @host_party.each do |experience| %>
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="thumbnail">
-        <%= link_to image_tag(experience.images.first.image_file.url(:host_party)),
-          experience if experience.images.present?%>
+        <%= link_to image_tag(experience.exp_images.first.image_file.url(:host_party)),
+          experience if experience.exp_images.present?%>
 
         <div id="thumbthumb" class="caption">
             <h3 class = "host_name"><%= experience.host.username %></h3>

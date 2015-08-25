@@ -66,25 +66,65 @@
                   <%= f.hidden_field :price %>
       </div>
 
-      <div class="field">
-        <%= f.label :images %><br>
-        <small>Please upload 3 images with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. Note: attempting to upload images larger than 4MB will redirect you to the homepage as the experience is created.</small>
+    </div>
+  </div>
+  <div class = "row">
+    <div class="field">
+      <%= f.label :image_1 %><br>
+      <% if @image_1.present? %>
         <br>
-        <div class="input-group">
-          <span class="input-group-btn">
-            <span class="btn btn-default upload-experience btn-file">
-              Browse<%= f.file_field(:images_array, multiple: true) %>
-            </span>
+          <%= image_tag @image_1.image_file.url(:medium)%>
+        <br>
+      <% end %>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_1, multiple: false) %>
           </span>
-          <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
-        </div>
-        <small><kbd>ctrl + click</kbd> to select multiple images.</small>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
+    </div>
 
-      <div class="actions">
-        <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
+    <div class="field">
+      <%= f.label :image_2 %><br>
+      <% if @image_2.present? %>
+        <br>
+        <%= image_tag @image_2.image_file.url(:medium)%>
+        <br>
+      <% end %>
+
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_2, multiple: false) %>
+          </span>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
+    </div>
 
+    <div class="field">
+      <%= f.label :image_3 %><br>
+      <% if @image_3.present? %>
+        <br>
+          <%= image_tag @image_3.image_file.url(:medium)%>
+        <br>
+      <% end %>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <span class="btn btn-default upload-experience btn-file">
+            Browse<%= f.file_field(:images_3, multiple: false) %>
+          </span>
+        </span>
+        <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
+      </div>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class="actions">
+      <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
     </div>
   </div>
 <% end %>
@@ -139,7 +179,7 @@ progressall: function (e, data) {
           text("Loading...");
       },
       done: function(e, data) {
-        // submitButton.prop('disabled', false);
+        submitButton.prop('disabled', false);
         progressBar.text("Uploading done");
 
         // extract key and generate URL from response
