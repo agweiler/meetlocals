@@ -13,7 +13,7 @@ class ExperiencesController < ApplicationController
   def show
 
   	@booking = Booking.new
-
+    @images_for_experiences = @experience.exp_images.limit(3).order(:image_number)
     if @experience.special_event?
       @endDate = @startDate = @experience.date.strftime('%F')
     else
