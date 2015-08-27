@@ -9,20 +9,20 @@
 
       <div class="field">
         <label for="experience_title">* Title</label><br>
-        <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: false, class: 'form-control', style: 'width: 75%' %>
+        <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
         <label for="experience_description">* Description</label>
-        <%= f.text_area :description, placeholder: "Let people know what it's about", required: false, class: 'form-control', rows: '3', style: 'width: 75%' %>
+        <%= f.text_area :description, placeholder: "Let people know what it's about", required: true, class: 'form-control', rows: '3', style: 'width: 75%' %>
       </div>
 
       <div class="field">
         <label for="experience_cuisine">* Cuisine</label>
-        <%= f.text_field :cuisine, class: 'form-control', style: 'width: 75%' %>
+        <%= f.text_field :cuisine, required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
         <%= f.label :beverages %><br>
-        <%= f.text_field :beverages, class: 'form-control', style: 'width: 75%' %>
+        <%= f.text_field :beverages, required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
         <label for="exprience_max_group_size">* Max Group Size</label><br>
@@ -30,17 +30,23 @@
           {required:true, class:'form-control', style:'width:20%'} %>
       </div>
 
-      <div class="field">
-        <%= f.label :host_style %><br>
-        <p><small> This field is limited to 60 characters.</small></p>
-        <%= f.text_area :host_style, placeholder: "Do you cook in front of them? Eat with them?", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
-      </div>
+      
       </br>
     </div>
 
     <div class="col-md-6">
+    <div class="field">
+        <%= f.label :host_style %><br>
+        <p><small> This field is limited to 60 characters.</small></p>
+        <%= f.text_area :host_style, placeholder: "Do you cook in front of them?", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
+      </div>
 
-    <%= f.label :date %><p><small> Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p>
+    <%= f.label :date %>
+
+    <!-- <p><small>Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
+
+    <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p>
+
       <div class="field form-inline">
         <%= f.date_select :date,
         {include_blank:true, use_short_month:true, order:[:month, :day, :year],
@@ -68,8 +74,10 @@
 
     </div>
   </div>
+  <hr>
+  <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
   <div class = "row">
-    <div class="field">
+    <div class="field col-md-4">
       <%= f.label :image_1 %><br>
       <% if @image_1.present? %>
         <br>
@@ -79,14 +87,14 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_1, multiple: false) %>
+            Browse<%= f.file_field(:images_1, multiple: false, required: true) %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
       </div>
     </div>
 
-    <div class="field">
+    <div class="field col-md-4">
       <%= f.label :image_2 %><br>
       <% if @image_2.present? %>
         <br>
@@ -104,7 +112,7 @@
       </div>
     </div>
 
-    <div class="field">
+    <div class="field col-md-4">
       <%= f.label :image_3 %><br>
       <% if @image_3.present? %>
         <br>
@@ -121,10 +129,10 @@
       </div>
     </div>
   </div>
-
+<hr>
   <div class = "row">
-    <div class="actions">
-      <%= f.submit "Create new experience", class: 'btn ', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:10px", remote: true ,id: "test" %>
+    <div class="actions exp_cta pad-top pad-bot" align="center">
+      <%= f.submit "Create new experience", class: 'btn', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:20px", remote: true ,id: "test" %>
     </div>
   </div>
 <% end %>
