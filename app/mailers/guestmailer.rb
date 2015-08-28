@@ -35,9 +35,16 @@ class Guestmailer < ApplicationMailer
   end
 
   def create_booking_request(host_id,booking_id,guest_id)
-  @guest = Guest.find guest_id
-  @booking = Booking.find booking_id
-  @host = Host.find host_id
-  mail(to: @guest.email, subject: "You have requested a booking")
+    @guest = Guest.find guest_id
+    @booking = Booking.find booking_id
+    @host = Host.find host_id
+    mail(to: @guest.email, subject: "You have requested a booking")
+  end
+
+  def host_cancel(guest_id,host_id,booking_id)
+    @guest = Guest.find guest_id
+    @host = Host.find host_id
+    @booking = Booking.find booking_id
+    mail(to: @guest.email, subject: "A host has canceled your booking")
   end
 end

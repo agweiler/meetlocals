@@ -115,7 +115,7 @@ Rails.application.routes.draw do
   get "/hook" => "bookings#hook"
 
   post 'messages' => 'messages#new'
-
+  post 'bookings/:id/cancel' => 'bookings#cancel_booking', as: :cancel_booking
   post 'bookings/:id/complete' => 'bookings#mark_completion', as: :mark_booking_completion
   # root 'emailapi#index'
   post 'emailapi/subscribe' => 'emailapi#subscribe'

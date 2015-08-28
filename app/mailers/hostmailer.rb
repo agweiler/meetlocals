@@ -32,4 +32,11 @@ class Hostmailer < ApplicationMailer
     @day = day
     mail(to: @host.email, subject: "Reminder! You have an upcoming event!")
   end
+
+  def guest_cancel(guest_id,host_id,booking_id)
+    @guest = Guest.find guest_id
+    @host = Host.find host_id
+    @booking = Booking.find booking_id
+    mail(to: @host.email, subject: "A guest has canceled your booking")
+  end
 end

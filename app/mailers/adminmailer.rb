@@ -14,4 +14,20 @@ class Adminmailer < ApplicationMailer
 		@admin = Admin.first
 		mail(to: @admin.email, subject: "A host has completed an experience")
 	end
+
+	def host_cancel(guest_id,host_id,booking_id)
+		@guest = Guest.find guest_id
+		@host = Host.find host_id
+		@booking = Booking.find booking_id
+		@admin = Admin.first
+		mail(to: @admin.email, subject: "A host has canceled a booking")
+	end
+
+	def guest_cancel(guest_id,host_id,booking_id)
+		@guest = Guest.find guest_id
+		@host = Host.find host_id
+		@booking = Booking.find booking_id
+		@admin = Admin.first
+		mail(to: @admin.email, subject: "A guest has canceled a booking")
+	end
 end

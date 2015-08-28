@@ -21,6 +21,7 @@ class Host < ActiveRecord::Base
   #  -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
   scope :from_state, -> (location) { where("state = ?", location) }
 
+
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
 
