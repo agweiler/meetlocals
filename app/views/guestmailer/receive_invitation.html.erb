@@ -6,7 +6,7 @@
   <body>
     <h1>Hello <%= @guest.username %></h1>
     <p>
-     The host <%= @host.first_name %> <%= @host.last_name %> has accepted your request for booking! Please complete payment at <%= link_to 'Meet the Danes',show_experience_url(@booking.experience) %> to confirm the booking and receive the host's address. 
+     The host <%= @host.first_name %> <%= @host.last_name %> has accepted your request for booking! Please complete payment at <%= link_to 'Meet the Danes',experience_booking_url(@booking.experience, @booking)%> to confirm the booking and receive the host's address. 
     
     </p>
 
