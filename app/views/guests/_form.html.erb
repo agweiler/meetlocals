@@ -15,51 +15,51 @@
       <div class="col-md-6">
 
         <div class="field">
-          <%= f.label :username %><br>
-          <%= f.text_field :username, class: "form-control" %>
+          <%= f.label :username %>*<br>
+          <%= f.text_field :username, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-            <%= f.label :title %><br>
-            <%= f.text_field :title, class: "form-control" %>
+            <%= f.label :title %>*<br>
+            <%= f.text_field :title, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-            <%= f.label :first_name %><br>
-            <%= f.text_field :first_name, class: "form-control" %>
+            <%= f.label :first_name %>*<br>
+            <%= f.text_field :first_name, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-          <%= f.label :last_name %><br>
-          <%= f.text_field :last_name, class: "form-control" %>
+          <%= f.label :last_name %>*<br>
+          <%= f.text_field :last_name, required: true, class: "form-control" %>
         </div>
 
          <div class="field">
-            <%= f.label :interests %><br>
-            <%= f.text_field :interests, class: "form-control" %>
+            <%= f.label :interests %>*<br>
+            <%= f.text_field :interests, required: true, class: "form-control" %>
         </div>
 
          <div class="field">
-            <%= f.label :allergies %><br>
-            <%= f.text_field :allergies, class: "form-control" %>
+            <%= f.label :allergies %>*<br>
+            <%= f.text_field :allergies, required: true, class: "form-control" %>
         </div>
       </div>
 
       <div class="col-md-6">
 
         <div class="field">
-            <%= f.label :languages %><br>
-            <%= f.text_field :languages, class: "form-control" %>
+            <%= f.label :languages %>*<br>
+            <%= f.text_field :languages, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-            <%= f.label :nationality %><br>
-            <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control'} %>
+            <%= f.label :nationality %>*<br>
+            <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control', required: true,} %>
         </div>
 
         <div class="field">
-            <%= f.label :country %>
-            <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control"} %>
+            <%= f.label :country %>*
+            <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control", required: true,} %>
 
         </div>
 
