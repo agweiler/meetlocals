@@ -1,6 +1,7 @@
 <div class="container">
     <div class="row" style="margin-bottom:70px">
-       <h2 style="text-align:center">Thanks for signing up, <%= current_guest.username %></br>Please complete your guest profile</h2>
+       <h2 style="text-align:center; color: #66a422" class="pad-top heads">Thanks for signing up <%= current_guest.username %>!</h2>
+       <p style="text-align:center" class="pad-bot pad-top"> Please complete the required (*) fields of your guest profile in order to start making bookings with Danish hosts. </p>
 
         <%= render 'form' %>
               
