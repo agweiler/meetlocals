@@ -119,9 +119,9 @@
                   <td><%= event.beverages %></td>
                   <td class="text-right">
                     <% if current_host == @host %>
-                      <%= link_to 'View', event, class: "btn btn-xs btn_admins fa fa-info", style: "color:#4b4b4b" %>
-                      <%= link_to 'Edit', edit_experience_path(event), class: "btn btn-xs btn_admins fa fa-pencil", style: "color:#4b4b4b"  %>
-                      <%= link_to 'Destroy', event, class:"btn btn-sm red",
+                      <%= link_to 'View', event, class: "btn btn-sm btn_admins_view fa fa-info", style: "color:#4b4b4b" %>
+                      <%= link_to 'Edit', edit_experience_path(event), class: "btn btn-sm btn_admins_edit fa fa-pencil", style: "color:#4b4b4b"  %>
+                      <%= link_to 'Delete', event, class:"btn btn-sm btn_admins_delete fa fa-trash-o",
                        style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
                     <% end %>
                   </td>
@@ -213,10 +213,10 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div>      <small>*Revenue generated is counted as total income from confirmed bookings.</small>
+
     </div>
   </div>
-  *Revenue generated is counted from total income from confirmed bookings
   <!--end bus intel counts-->
 
 

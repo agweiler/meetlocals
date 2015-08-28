@@ -363,12 +363,29 @@ float: right;
 
 }
 
-.btn_admins {
-  color:#b4b4b4;
+.btn_admins_view {
+  color:#fff !important;
   border-color: #eee;
-  background-color: #eee;
-  font-size: 12px !important;
-  padding: 5px;
+  background-color: #66a422;
+  font-size: 14px !important;
+  padding: 10px;
+
+}
+
+.btn_admins_edit {
+  color:#fff !important;
+  border-color: #eee;
+  background-color: #22A7F0;
+  font-size: 14px !important;
+  padding: 10px;
+
+}
+
+.btn_admins_delete {
+  background-color: #E74C3C;
+  border-color: #eee;
+  font-size: 14px !important;
+  padding: 10px;
 
 }
 
@@ -380,5 +397,9 @@ float: right;
 
 .exp_cta {
   margin-left: -30px;
+}
+
+.smalls {
+  font-size: 10px;
 }
 
