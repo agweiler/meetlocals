@@ -50,7 +50,11 @@
 
   <div class="actions" id="booking_create_button">
   <% if current_guest %>
-    <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
+    <% if @experience.special_event? == false %>
+      <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
+    <% else %>
+      <% submit_text = "BOOK NOW" %>
+    <% end %>
     <% if guest_signed_in? %>
       <%= f.submit submit_text, class:"btn btn-success" ,id:"ga" %>
     <% else %>
@@ -58,8 +62,10 @@
       class:"btn btn-warning " %>
     <% end %>
   <% elsif current_host %>
-    <% @action == "edit" ? submit_text = "COMPLETE RESPONSE" : submit_text = "SUGGEST DATE"%>
+    <% if @action == "edit" %> 
+    <% submit_text = "COMPLETE RESPONSE" %> 
     <%= f.submit submit_text, class:"btn btn-success" %>
+    <% end %>
 
 <!-- IF STATUS = CONFIRMED-->   
 <% if @booking.status == "confirmed" %>

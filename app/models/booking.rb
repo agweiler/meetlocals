@@ -40,7 +40,7 @@ class Booking < ActiveRecord::Base
 			guest_msg = "<p><b>Well done!</b> You have now created a booking request. Your potential host will get back to you as soon as possible.</p>"
 		when "invited"
 			host_msg = "<p><b>Well done!</b> You have accepted a booking request by sending an invitation.</br> Please wait for the guest to confirm booking. You will receive a notification by email.</p>"
-			guest_msg = "<p><b>Congratulations!</b> The host has accepted your booking request. Please complete payment by clicking 'Pay with Paypal'.</p>"
+			guest_msg = "<p><b>Congratulations!</b> The host has accepted your booking request. Please complete payment by clicking 'Checkout with Paypal'.</p>"
 		when "rejected"
 			host_msg = "<p><b>Oh no!</b> Unfortunately you had to reject this booking request.</p>"
 			guest_msg = "<p><b>Oh no!</b> Unfortunately the host had to reject this booking request.</p>"
@@ -109,7 +109,6 @@ class Booking < ActiveRecord::Base
 	# DO STUFF HERE MON
 	serialize :notification_params, Hash
 	def paypal_url(return_path)
-		self.update(status: "payment pending")
 		@experience = Experience.find(self.experience_id)
 		@api = PayPal::SDK::AdaptivePayments.new
 		# Build request object

@@ -135,7 +135,7 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= @experience.price %> per peson</td>
+          <td>DKK <%= @experience.price.round %> per peson</td>
           <td><%= @experience.max_group_size %> Max</td>
           <td><%= @experience.host_style%></td>
         </tr>
@@ -168,14 +168,17 @@
     <% if @host.longitude %><%= @host.longitude %><% else %>-135<% end %>
   </div>
 
-  <% if @host.experiences.special_events.present? %>
+<% if @experience.special_event? == false %>
+  <% if @host.experiences.special_events.present? && @host.next_host_party != nil %>
 
     <div class="row" id="specframe">
       <h2>HOST PARTY</h2>
+
         <p><%= @host.next_host_party.description %> </p>
         <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
     </div>
   <% end %>
+<% end %>
 
 
   <div class="row" id="testiframe">

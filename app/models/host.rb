@@ -172,12 +172,13 @@ class Host < ActiveRecord::Base
   end
 
   def next_host_party
-    self.experiences.special_events.each do |x|
-      if x.date > Time.now
-        return x
+    self.experiences.special_events.each do |event|
+      if event.date > Time.now
+        return event
       end
     end
-    return self.experiences.special_events[0].id
+  
+    return nil
 
   end
 end
