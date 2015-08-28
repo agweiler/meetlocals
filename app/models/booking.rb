@@ -68,6 +68,21 @@ class Booking < ActiveRecord::Base
 		save
 	end
 
+	def cancel(user_type)
+		status.replace("canceled")
+		guest_id = self.guest.id
+		host_id = self.experience.host_id
+		booking_id = self.id
+		if user_type == "Host"
+			Guestmailer.host_cancel(guest_id,host_id,booking_id).deliver_later
+			Adminmailer.host_cancel(guest_id,host_id,booking_id).deliver_later
+		elsif user_type == "Guest"
+			Hostmailer.guest_cancel(guest_id,host_id,booking_id).deliver_later
+			Adminmailer.guest_cancel(guest_id,host_id,booking_id).deliver_later
+		end
+		save
+	end
+
 	def check_finished?
 
 			time_in_seconds = Time.parse(self.experience.time.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds

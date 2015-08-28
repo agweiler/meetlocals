@@ -79,7 +79,11 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_1, multiple: false) %>
+            <% if @experience.has_images? %>
+              Browse<%= f.file_field(:images_1, multiple: false, required: false) %>
+            <% else %>
+              Browse<%= f.file_field(:images_1, multiple: false, required: true) %>
+            <% end %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>

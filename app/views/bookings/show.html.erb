@@ -45,14 +45,14 @@
     </div>
     </div>
 
-<div class="row" style="padding-top:10px; padding-bottom:10px;"><div class="col-xs-12"><p> There are 5 statuses. Requested, Invited, Rejected, Confirmed, Completed.</p> </div></div>
+<div class="row" style="padding-top:10px; padding-bottom:10px;"><div class="col-xs-12"><p> There are 6 statuses. Requested, Invited, Rejected, Confirmed, Canceled, Completed.</p> </div></div>
 
     <div>
       <p><strong>Status:</strong>
 
       <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
 
-      <% if @booking.status != "completed" && current_host == @booking.experience.host %>
+      <% if (@booking.status != "completed" || @booking.status != "payment pending" || @booking.status != "confirmed") && current_host == @booking.experience.host %>
         <%= link_to('RESPOND TO REQUEST', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;
   border-color: #4183D7;" ) %>
         <!-- <%= button_to %> -->
@@ -69,6 +69,10 @@
       <p>An additional 2.34% will be added to price.</p>
     <% end %>
 
+    <% if @booking.status == "confirmed" %>
+      <%= link_to "Cancel Booking", cancel_booking_path(@booking), id: 'cancel_link', method: :post, remote: true,class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;  border-color: #4183D7;" %>
+    <% end %>
+
 
 
 
@@ -80,7 +84,7 @@
 </p>
   </div>
 
-     <% if current_guest && @booking.status != "invite" && @booking.status != 'completed' %>
+     <% if current_guest && @booking.status == "requested" %>
         <%= link_to 'Edit your booking', edit_experience_booking_path(@experience, @booking), class:"btn btn-default edit-event-details"%>
       <% end %>
 

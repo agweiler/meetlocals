@@ -82,4 +82,8 @@ class Experience < ActiveRecord::Base
 	def available?
 		self.date.nil? || self.date > Date.today
 	end
+
+	def has_images?
+		self.exp_images.present?
+	end
 end

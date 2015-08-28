@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion, :cancel_booking]
   include ApplicationHelper
 
   # GET /bookings
@@ -99,38 +99,10 @@ class BookingsController < ApplicationController
   def update
     booking_params[:status].replace( Booking.update_status(booking_params[:status]) )
 
-    # starttime = Time.parse( params[:datetime] )
-
-    #moment.js foramt MMMM DD, YYYY
-
     booking_params['date(1i)'].replace( params[:booking]["date(1i)"] )
     booking_params['date(2i)'].replace( params[:booking]["date(2i)"] )
     booking_params['date(3i)'].replace( params[:booking]["date(3i)"] )
 
-    #commented out this part cause it seems like there is no params[:datetime]
-    #------------------------------------------------------------------
-    # starttime = DateTime.strptime(params[:datetime], '%B %d, %Y')
-
-    # booking_params['date(1i)'].replace( starttime.strftime('%Y') )
-    # booking_params['date(2i)'].replace( starttime.strftime('%m') )
-    # booking_params['date(3i)'].replace( starttime.strftime('%d') )
-    #-------------------------------------------------------------------
-
-    # booking_params['start_time(1i)'].replace( starttime.strftime('%Y') )
-    # booking_params['start_time(2i)'].replace( starttime.strftime('%m') )
-    # booking_params['start_time(3i)'].replace( starttime.strftime('%d') )
-    # booking_params['start_time(4i)'].replace( starttime.strftime('%H') )
-    # booking_params['start_time(5i)'].replace( starttime.strftime('%M') )
-    # # booking_params['start_time(6i)'].replace( starttime.strftime('%S') )
-    #
-    # endtime = starttime + @booking.experience.duration.hour
-    #
-    # booking_params['end_time(1i)'].replace( endtime.strftime('%Y') )
-    # booking_params['end_time(2i)'].replace( endtime.strftime('%m') )
-    # booking_params['end_time(3i)'].replace( endtime.strftime('%d') )
-    # booking_params['end_time(4i)'].replace( endtime.strftime('%H') )
-    # booking_params['end_time(5i)'].replace( endtime.strftime('%M') )
-    # # booking_params['start_time(6i)'].replace( endtime.strftime('%S') )
     @experience = Experience.find(params[:booking][:experience_id])
 
     respond_to do |format|
@@ -176,6 +148,12 @@ class BookingsController < ApplicationController
   def mark_completion
     @booking.mark_as_complete
 
+    respond_to :js
+  end
+
+  def cancel_booking
+    user_type = current_user.class.name
+    @booking.cancel(user_type)
     respond_to :js
   end
 

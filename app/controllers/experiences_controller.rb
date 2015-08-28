@@ -114,7 +114,7 @@ class ExperiencesController < ApplicationController
   # DELETE /experiences/1
   def destroy
     @experience.destroy
-    redirect_to experiences_url, notice: 'Experience was successfully destroyed.'
+    redirect_to @host, notice: 'Experience was successfully destroyed.'
   end
 
 
