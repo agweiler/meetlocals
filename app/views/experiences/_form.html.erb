@@ -76,6 +76,9 @@
   </div>
   <hr>
   <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
+  <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an experience without uploading all <strong>3 images</strong>.</small></p> 
+
+  <p class="pad-bot smalls">Note: attempting to upload images larger than 4MB will redirect you to the homepage as the experience is created.</p>
   <div class = "row">
     <div class="field col-md-4">
       <%= f.label :image_1 %><br>
@@ -105,7 +108,7 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_2, multiple: false) %>
+            Browse<%= f.file_field(:images_2, multiple: false, required: true) %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
@@ -122,7 +125,7 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_3, multiple: false) %>
+            Browse<%= f.file_field(:images_3, multiple: false, required: true) %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
