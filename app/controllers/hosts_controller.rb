@@ -104,7 +104,11 @@ class HostsController < ApplicationController
     if @host.images.present?
       @host.images.delete_all
     end
-    @host.destroy
+    @host.experiences do |exp|
+        exp.bookings.delete_all
+    end
+    @host.experiences.delete_all
+    @host.delete
     respond_to do |format|
       format.html { redirect_to hosts_url, notice: 'host was successfully destroyed.' }
       format.json { head :no_content }
