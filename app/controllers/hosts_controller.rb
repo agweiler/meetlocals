@@ -104,7 +104,7 @@ class HostsController < ApplicationController
     if @host.images.present?
       @host.images.delete_all
     end
-    @host.experiences do |exp|
+    @host.experiences.each do |exp|
         exp.bookings.delete_all
     end
     @host.experiences.delete_all

@@ -1,7 +1,7 @@
 class Hosts::RegistrationsController < Devise::RegistrationsController
 
   def destroy
-    resource.experiences do |exp|
+    resource.experiences.each do |exp|
         exp.bookings.delete_all
     end
     resource.experiences.delete_all
