@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   resources :hosts
 
   # devise_for :guests, controllers: { registrations: "guests/registrations" }
-  devise_for :guests, controllers:
-   { omniauth_callbacks: "guests/omniauth_callbacks" },
+  devise_for :guests, controllers: 
+   { omniauth_callbacks: "guests/omniauth_callbacks" ,sessions: "guests/sessions"},
    skip: [:registrations]
     as :guest do
       #modified paths
