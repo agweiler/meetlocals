@@ -60,6 +60,7 @@ class BookingsController < ApplicationController
 
   # POST /bookings
   def create
+    byebug
     # @experience = Experience.find(booking_params.delete(:experience_id).to_i)
     @experience = Experience.find(params[:booking][:experience_id])
     booking_params[:guest_id].replace(current_guest.id.to_s)
