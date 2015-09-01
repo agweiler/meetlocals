@@ -56,7 +56,7 @@
       <% submit_text = "BOOK NOW" %>
     <% end %>
     <% if guest_signed_in? %>
-      <%= f.submit submit_text, class:"btn btn-success" ,id:"ga" %>
+      <%= f.submit submit_text, class:"btn btn-success new_booking" ,id:"ga" %>
     <% else %>
       <%= link_to "SIGN UP", new_guest_registration_path,
       class:"btn btn-warning " %>
@@ -93,7 +93,7 @@ $(function () {
     // todayBtn: "linked",
     // calendarWeeks: true,
     // multidateSeparator: ",",
-    todayHighlight: true,
+    todayHighlight: false,
     multidate: false,
     datesDisabled: <%= raw (@host.bookings.confirmed_dates + @host.holidays_list).uniq.sort %>
   }).on('click', this, function(e){
@@ -119,13 +119,15 @@ $(function () {
   //   $("div.actions>input[type*=submit]").removeAttr('disabled', 'disabled');
   // });
 
-  $('#new_booking').submit(function(event){
+  $('.new_booking').submit(function(event){
+    var date = $('#datepick').datepicker('getDate');
     $('#booking_date').text($('#datepick').datepicker('getDate'));
-    if( $("input[name*=datetime]").val() == "" ){
+    if( date == null ){
       event.preventDefault();
-      $('small#date_error').text("Please specify booking date.");
+      $('small#date_error').text("Please specify booking date.").css("color", "red");
     }
   });
 
 });
+
 </script>

@@ -18,6 +18,9 @@ class ExperiencesController < ApplicationController
       @endDate = @startDate = @experience.date.strftime('%F')
     else
       @startDate = (Date.today + 4.days).strftime('%F')
+      @year = (Date.today + 4.days).year
+      @month = (Date.today + 4.days - 1.month).month 
+      @day = (Date.today + 4.days).day
       @endDate = (Date.today + 6.months).strftime('%F')
     end
 
