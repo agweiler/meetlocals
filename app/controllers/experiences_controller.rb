@@ -17,7 +17,7 @@ class ExperiencesController < ApplicationController
     if @experience.special_event?
       @endDate = @startDate = @experience.date.strftime('%F')
     else
-      @startDate = (Date.today + 5.days).strftime('%F')
+      @startDate = (Date.today + 4.days).strftime('%F')
       @endDate = (Date.today + 6.months).strftime('%F')
     end
 
