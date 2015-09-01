@@ -26,36 +26,23 @@ class GuestsController < ApplicationController
   # POST /guests
   # We don't seem to be using this...
   def create
-    # @guest = Guest.new
-
-    # @image_file = params[:guest].delete(:image_file)
-    # respond_to do |format|
-    #   if @guest.save
-    #     format.html { redirect_to guest, notice: 'Guest was successfully created.' }
-        
-    #     # Create image after parent-guest is saved
-    #     new_img = @guest.images.new
-    #     new_img.image_file = @image_file
-    #     new_img.caption = @image_file.original_filename
-    #     new_img.save!
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
   end
 
   # PATCH/PUT /guests/1
   def update
     @image_file = params[:guest].delete(:image_file)
     @guest.update(guest_params)
+    @guest.filled = true
     if @image_file.present?  
       if @guest.images.present?
         @guest.images.delete_all
       end
       @guest.images.create(local_image: @image_file, caption: @image_file.original_filename)
     end
-    respond_to do |format|
-      format.html { redirect_to edit_guest_profile, notice: 'Your guest profile was successfully updated.' }
+    if @guest.save
+      respond_to do |format| 
+        format.html { redirect_to edit_guest_profile, notice: 'Guest profile was successfully updated.' }
+      end
     end
   end
 
