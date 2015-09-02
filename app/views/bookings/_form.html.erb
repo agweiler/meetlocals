@@ -49,7 +49,7 @@
  <% end %>
 
   <div class="actions" id="booking_create_button">
-  <% if current_guest %>
+  <% if current_guest && current_guest.filled == true %>
     <% if @experience.special_event? == false %>
       <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
     <% else %>
@@ -63,16 +63,18 @@
     <% end %>
   <% elsif current_host %>
     <% if @action == "edit" %> 
-    <% submit_text = "COMPLETE RESPONSE" %> 
-    <%= f.submit submit_text, class:"btn btn-success" %>
+      <% submit_text = "COMPLETE RESPONSE" %> 
+      <%= f.submit submit_text, class:"btn btn-success" %>
     <% end %>
 
 <!-- IF STATUS = CONFIRMED-->   
-<% if @booking.status == "confirmed" %>
- <%= link_to 'Cancel Booking?', @booking,
-     method: :delete, data: { confirm: 'Are you sure?' },
-    class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
-  <% end %>
+    <% if @booking.status == "confirmed" %>
+      <%= link_to 'Cancel Booking?', @booking,
+      method: :delete, data: { confirm: 'Are you sure?' },
+      class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
+    <% end %>
+  <% elsif current_guest && current_guest.filled == false %>
+    <%= link_to "COMPLETE YOUR PROFILE BEFORE BOOKING", edit_guest_path(current_guest), class:"btn btn-danger", style:"color:white" %>
   <% else %>
     <%= link_to "LOGIN TO BOOK", new_guest_session_path, class:"btn btn-danger", style:"color:white" %>
   <% end %>
@@ -122,7 +124,8 @@ $(function () {
   $('.new_booking').submit(function(event){
     var date = $('#datepick').datepicker('getDate');
     $('#booking_date').text($('#datepick').datepicker('getDate'));
-    if( date == null ){
+    var book_type = $("input[type*=submit].new_booking#ga").val()
+    if( date == null && book_type != "BOOK NOW"){
       event.preventDefault();
       $('small#date_error').text("Please specify booking date.").css("color", "red");
     }
