@@ -41,18 +41,22 @@
         <%= f.text_area :host_style, placeholder: "Do you cook in front of them?", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
       </div>
 
-    <%= f.label :date %>
 
     <!-- <p><small>Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
 
-    <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p>
+<!--     <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
 
+    <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
+
+    <% else %>
+    <%= f.label :date %>
       <div class="field form-inline">
         <%= f.date_select :date,
         {include_blank:true, use_short_month:true, order:[:month, :day, :year],
         start_year: Date.today.year, end_year: Date.today.year.next},
-        {class:"form-control"} %>
+        {class:"form-control", required: true } %>
       </div>
+    <% end %>
 
 
       <div class="field" id="meal">
@@ -90,7 +94,11 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_1, multiple: false, required: true) %>
+            <% if @image_1.present? %>
+              Browse<%= f.file_field(:images_1, multiple: false, required: false) %>
+            <% else %>
+              Browse<%= f.file_field(:images_1, multiple: false, required: true) %>
+            <% end %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
@@ -108,7 +116,11 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_2, multiple: false, required: true) %>
+            <% if @image_2.present? %>
+              Browse<%= f.file_field(:images_2, multiple: false, required: false) %>
+            <% else %>
+              Browse<%= f.file_field(:images_2, multiple: false, required: true) %>
+            <% end %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>
@@ -125,7 +137,11 @@
       <div class="input-group">
         <span class="input-group-btn">
           <span class="btn btn-default upload-experience btn-file">
-            Browse<%= f.file_field(:images_3, multiple: false, required: true) %>
+            <% if @image_3.present? %>
+              Browse<%= f.file_field(:images_3, multiple: false, required: false) %>
+            <% else %>
+              Browse<%= f.file_field(:images_3, multiple: false, required: true) %>
+            <% end %>
           </span>
         </span>
         <input type="text" id="showfilename" class="form-control" placeholder="" readonly>

@@ -10,7 +10,7 @@ class HostsController < ApplicationController
 		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
-			@hosts = Host.where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
+			@hosts = Host.where(approved: true).where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
 
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
@@ -21,7 +21,7 @@ class HostsController < ApplicationController
 			@selected_group = params[:search][:max_group]
 			@selected_date = params[:search][:date]
 
-			@hosts = Host.search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
+			@hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
 		end
 
 		respond_to do |format|
@@ -92,10 +92,14 @@ class HostsController < ApplicationController
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
         Adminmailer.host_created(@host.id,params[:bank_number],params[:bank_name],params[:registration_number]).deliver_later
+        redirect_to create_host_success_path
+      else
+        redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.'
       end
-      respond_to do |format|
-        format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
-      end
+
+      # respond_to do |format|
+      #   format.html { redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' }
+      # end
     end
   end
 
