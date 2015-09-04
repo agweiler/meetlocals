@@ -41,6 +41,7 @@ class ExperiencesController < ApplicationController
     puts @s3_direct_post
     @experience = Experience.new
     @host = current_host
+    @action = request.filtered_parameters['action']
   end
 
   # GET /experiences/1/edit
@@ -65,7 +66,11 @@ class ExperiencesController < ApplicationController
     experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
     @experience = current_host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
     if @experience.save!
-      redirect_to @experience, notice: 'Experience was successfully created.'
+      if @host.approved == false
+        redirect_to create_exp_success_path
+      else
+        redirect_to @experience, notice: 'Experience was successfully updated.'
+      end
       #create image after parent-experience is saved
       @image_files.each_with_index do |img,index|
         if img.is_a? String
@@ -88,7 +93,11 @@ class ExperiencesController < ApplicationController
     @image_files << experience_params.delete(:images_3)
 
     if @experience.update(experience_params.except(:images_1,:images_2,:images_3,:days))
-      redirect_to @experience, notice: 'Experience was successfully updated.'
+      if @host.approved == false
+        redirect_to create_exp_success_path
+      else
+        redirect_to @experience, notice: 'Experience was successfully updated.'
+      end
 
       puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
       puts "#{Time.now}"

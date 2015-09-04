@@ -1,8 +1,8 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @hosts =  Host.joins(:experiences).uniq.limit(3)
-    @recent_events = Experience.normal_events.order(created_at: :desc).limit(3)
+    @hosts =  Host.where(approved: true).joins(:experiences).uniq.limit(3)
+    # @recent_events = Experience.normal_events.order(created_at: :desc).limit(3)
     @host_party = Experience.available.special_events.order(:date).limit(3)
   end
 

@@ -37,6 +37,10 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get "create_exp_success" => "static_pages#create_exp_success"
+
+  get "create_host_success" => "static_pages#create_host_success"
+
   get 'partners/bookings' => 'partners#bookings', as: :partner_bookings
 
   post 'parnters/bookings' => 'partners#create_booking', as: :create_booking

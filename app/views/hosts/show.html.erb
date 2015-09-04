@@ -17,7 +17,9 @@
       <div class="row" id="host_controls">
       	
   			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
-        <%= link_to "[ Create Experience ]", new_experience_path, class: "edit_profile" if @host.approved? %><br>
+        <%= link_to "[ Update Meal Profile ]", edit_experience_path(current_host.experiences.first), :class => "edit_profile" if current_host.experiences.first.present? %> <br>
+        <%= link_to "[ Create Meal Profile ]", new_experience_path, :class => "edit_profile" unless current_host.experiences.first.present? %>
+        <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" if current_host.host_approved?%><br>
   			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
           class:"edit_profile" %><br>
         <button class="btn btn-primary btn-xl" style="  background-color: #22A7F0;
@@ -166,10 +168,10 @@
               <td><%= event.beverages %></td>
               <td class="text-right">
                 <% if current_host == @host %>
-                  <%= link_to 'View', event, class: "btn btn-xs btn_admins fa fa-info", style: "color:#4b4b4b" %>
-                  <%= link_to 'Edit', edit_experience_path(event), class: "btn btn-xs btn_admins fa fa-pencil", style: "color:#4b4b4b"  %>
-                  <%= link_to 'Destroy', event, class:"btn btn-sm red",
-                   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
+                  <%= link_to 'View', event, class: "btn btn-sm btn_admins_view fa fa-info", style: "color:#4b4b4b" %>
+                  <%= link_to 'Edit', edit_experience_path(event), class: "btn btn-sm btn_admins_edit fa fa-pencil", style: "color:#4b4b4b"  %>
+                  <%= link_to 'Destroy', event, class:"btn btn-sm btn_admins_delete fa fa-trash-o",
+                       style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               </td>
             </tr>
