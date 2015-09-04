@@ -54,7 +54,7 @@
         <%= f.date_select :date,
         {include_blank:true, use_short_month:true, order:[:month, :day, :year],
         start_year: Date.today.year, end_year: Date.today.year.next},
-        {class:"form-control"} %>
+        {class:"form-control", require: true } %>
       </div>
     <% end %>
 
