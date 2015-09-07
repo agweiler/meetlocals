@@ -180,15 +180,19 @@
   <% end %>
 <% end %>
 
-
-  <div class="row" id="testiframe">
-    <h2>REVIEWS</h2>
-    <% @testimonials.each do |testimonial| %>
-      <%= content_tag 'h5', testimonial.title %>
-      <%= simple_format(testimonial.body) %>
-    <% end %>
-  </div>
+<!-- Testimonials section only shows if testimonials are present -->
+  <%if @host.testimonials.present?%>
+    <div class="row" id="testiframe">
+      <h2>REVIEWS</h2>
+      <% @testimonials.each do |testimonial| %>
+        <%= content_tag 'h5', testimonial.title %>
+        <%= simple_format(testimonial.body) %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+
+
 <% if flash[:notice] %>
 
 <script>
