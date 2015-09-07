@@ -1,3 +1,20 @@
-<h1>Meal Profile Success Page!!!!</h1>
-
 <!-- Some text here about how they have to wait for approval -->
+<div class="container">
+  <div class="col-md-10 col-md-offset-1 marge">
+
+    <h1 align="center" class="pad-bot">Congratulations on creating an experience!</h1>
+
+    <div class="green-border">
+        <%= image_tag ('https://s3.eu-central-1.amazonaws.com/wunderbird-images/wunderbird_thankyou2.jpg'), class: 'img-responsive' %>
+    </div>
+        <h3 align="center" class="pad-top-sm pad-bot-sm">If you are a first time host, a Meet The Danes representative must review your profile before it appears on the platform. You will be notified by email on approval.</h3>
+        <!-- <p class="text-justify"> </p> -->
+
+    <div align="center" class="pad-bot pad-top-sm">
+        <%= link_to "To Profile", root_path, class: "btn btn-sm success-cont btn-rj" %> 
+        <!-- Change to link to user profile path -->
+        <%= link_to "Back to Homepage", root_path, class: "btn btn-sm success-cont btn-rj" %>
+    </div>
+
+  </div>
+</div>

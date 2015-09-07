@@ -814,3 +814,30 @@ z-index: 1;
 .float-left {
   float: left;
 }
+
+.green-border {
+  border-color: #66a422;
+  border-width: 5px;
+  border-style: solid;
+}
+
+.success-cont {
+  width: 260px;
+}
+
+/*---------------------------------------------------------------------*/
+/*  1. BUTTON
+/*---------------------------------------------------------------------*/
+.btn.btn-rj {
+/*  background-color: #1abc9c;
+*/  color: #66a422;
+  border-color: #66a422;
+  text-transform: uppercase;
+}
+.btn.btn-rj:hover,
+.btn.btn-rj:focus {
+  color: #fff;
+  background-color: #66a422;
+    border-color: #66a422;
+
+}
