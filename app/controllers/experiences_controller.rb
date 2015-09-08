@@ -101,9 +101,6 @@ class ExperiencesController < ApplicationController
         redirect_to @experience, notice: 'Experience was successfully updated.'
       end
 
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "#{Time.now}"
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
       @image_files.each_with_index do |img, index|
         if img.is_a? String
           if @experience.exp_images.find_by(image_number: (index + 1)) != nil
@@ -115,9 +112,6 @@ class ExperiencesController < ApplicationController
           new_img.save!
         end
       end unless @image_files.nil?
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "#{Time.now}"
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
     else
         render :edit
     end

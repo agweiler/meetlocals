@@ -40,7 +40,7 @@
           <tr class="text-left">
 
             <td><%= booking.date.strftime('%b %d, %Y') %></td>
-            <td><%= experience.time.strftime('%I:%M %p') %></td>
+            <td><%= experience.time.in_time_zone.strftime('%I:%M %p') %></td>
 
             <% if guest_signed_in? %>
               <td><%= link_to "#{experience.host.username}", experience.host %></td>
