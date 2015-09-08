@@ -94,7 +94,6 @@ class ExperiencesController < ApplicationController
 
   # PATCH/PUT /experiences/1
   def update
-    byebug
     @image_files = []
     @image_files << experience_params.delete(:images_1)
     @image_files << experience_params.delete(:images_2)
