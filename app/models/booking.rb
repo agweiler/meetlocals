@@ -141,6 +141,7 @@ class Booking < ActiveRecord::Base
 	values = {
 	    business: "Meetdanes@meetdanes.com",
 	    cmd: "_xclick",
+	    currencyCode: "DKK",
 	    upload: 1,
 	    return: "#{Rails.application.secrets.app_host}#{return_path}",
 	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
