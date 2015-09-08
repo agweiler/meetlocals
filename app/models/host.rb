@@ -116,19 +116,19 @@ class Host < ActiveRecord::Base
   def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
-		 ['West region','Zeeland'],
-		 ['North region', 'Nordjylland'],
-		 ['Center region', 'Midtjylland'],
-		 ['South & Fyn', 'Syddanmark'],
-		 ['Copenhagen', 'Hovedstaden']]
+		 ['Zealand','Zeeland'],
+		 ['North Jutland', 'Nordjylland'],
+		 ['Mid Jutland', 'Midtjylland'],
+		 ['South Jutland & Fyn', 'Syddanmark'],
+		 ['Greater Copenhagen', 'Hovedstaden']]
 	end
 
   def location
-    hash = {'Zeeland' => 'West region',
-    'Nordjylland' => 'North region',
-    'Midtjylland' => 'Center region',
-    'Syddanmark' => 'South & Fyn',
-    'Hovedstaden' => 'Copenhagen'}
+    hash = {'Zeeland' => 'Zealand',
+    'Nordjylland' => 'North Jutland',
+    'Midtjylland' => 'Mid Jutland',
+    'Syddanmark' => 'South Jutland & Fyn',
+    'Hovedstaden' => 'Greater Copenhagen'}
 
     x = [self.suburb, hash[self.state], self.country].reject do |itm|
       itm.nil? || itm.empty?
