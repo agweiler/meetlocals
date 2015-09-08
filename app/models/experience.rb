@@ -15,11 +15,11 @@ class Experience < ActiveRecord::Base
 	def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
-		 ['West region','Zeeland'],
-		 ['North region', 'Nordjylland'],
-		 ['Center region', 'Midtjylland'],
-		 ['South & Fyn', 'Syddanmark'],
-		 ['Copenhagen', 'Hovedstaden']]
+		 ['Zealand','Zeeland'],
+		 ['North Jutland', 'Nordjylland'],
+		 ['Mid Jutland', 'Midtjylland'],
+		 ['South Jutland & Fyn', 'Syddanmark'],
+		 ['Greater Copenhagen', 'Hovedstaden']]
 	end
 
 	def self.get_all_location
