@@ -24,5 +24,10 @@ class StaticPagesController < ApplicationController
   def unknown_error
   end
 
+  def payment_success
+    if (request.request_method == "POST")
+      redirect_to payment_success_path
+    end
+  end
 
 end
