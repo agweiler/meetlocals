@@ -219,8 +219,6 @@ ActiveRecord::Schema.define(version: 20150901035028) do
     t.string   "local_image_content_type"
     t.integer  "local_image_file_size"
     t.datetime "local_image_updated_at"
-    t.string   "direct_upload_url"
-    t.string   "image_file_file_path"
     t.string   "temp_file_key"
     t.boolean  "finished"
   end

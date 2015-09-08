@@ -85,10 +85,10 @@ class Booking < ActiveRecord::Base
 
 	def check_finished?
 
-			time_in_seconds = Time.parse(self.experience.time.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds
+			time_in_seconds = Time.parse(self.experience.time.in_time_zone.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds
 			date = self.date.to_datetime
 			date_today = date + time_in_seconds
-			if Time.now > date_today
+			if Time.current > date_today
 				true
 			else
 				false

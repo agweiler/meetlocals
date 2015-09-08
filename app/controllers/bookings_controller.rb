@@ -132,7 +132,7 @@ class BookingsController < ApplicationController
   def destroy
     if current_user.class == Guest
       #subtracts number of days between current cancel date and booking date,turns it into an integer
-      if (@booking.date - Time.now.to_date).to_i > 5
+      if (@booking.date - Time.current.to_date).to_i > 5
         paypal_refund(current_user.email)
       end
     end

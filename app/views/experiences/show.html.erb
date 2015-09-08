@@ -4,7 +4,7 @@
 
 <div class="row" id="mealpanel">
   <% @images_for_experiences.each_with_index do |image, index| %>
-    <div class="col-sm-4" style="padding:0px">
+    <div class="col-sm-4" style="padding:1px">
         <%= image_tag image.image_file.url(:medium), id: index %>
     </div>
   <% end %>
@@ -84,8 +84,8 @@
         <tr>
           <td><%= @experience.max_group_size %> Max</td>
           <td>
-          <%= @experience.time.strftime('%I:%M %p') %> -
-          <%= (@experience.time +
+          <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
+          <%= (@experience.time.in_time_zone +
                 @experience.duration.hour).strftime('%I:%M %p') %>
           </td>
           <td>DKK <%= @experience.price.round %> per person</td>
@@ -180,15 +180,19 @@
   <% end %>
 <% end %>
 
-
-  <div class="row" id="testiframe">
-    <h2>REVIEWS</h2>
-    <% @testimonials.each do |testimonial| %>
-      <%= content_tag 'h5', testimonial.title %>
-      <%= simple_format(testimonial.body) %>
-    <% end %>
-  </div>
+<!-- Testimonials section only shows if testimonials are present -->
+  <%if @host.testimonials.present?%>
+    <div class="row" id="testiframe">
+      <h2>REVIEWS</h2>
+      <% @testimonials.each do |testimonial| %>
+        <%= content_tag 'h5', testimonial.title %>
+        <%= simple_format(testimonial.body) %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
+
+
 <% if flash[:notice] %>
 
 <script>

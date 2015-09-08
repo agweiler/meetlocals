@@ -64,7 +64,12 @@ class ExperiencesController < ApplicationController
     @image_files << experience_params.delete(:images_1)
     @image_files << experience_params.delete(:images_2)
     @image_files << experience_params.delete(:images_3)
-    experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
+
+    #set Host_Party prices if the date is not nil
+    experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s) if experience_params["date(3i)"] != nil
+
+    #set Regular prices if date is nil
+    experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s) if experience_params["date(3i)"] == nil
 
     @experience = current_host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
     if @experience.save!
@@ -101,9 +106,6 @@ class ExperiencesController < ApplicationController
         redirect_to @experience, notice: 'Experience was successfully updated.'
       end
 
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "#{Time.now}"
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
       @image_files.each_with_index do |img, index|
         if img.is_a? String
           if @experience.exp_images.find_by(image_number: (index + 1)) != nil
@@ -115,9 +117,6 @@ class ExperiencesController < ApplicationController
           new_img.save!
         end
       end unless @image_files.nil?
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "#{Time.now}"
-      puts "@@@@@@@@@@@@@@@@@@@@@@@@@"
     else
         render :edit
     end

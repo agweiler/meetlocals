@@ -15,11 +15,11 @@ class Experience < ActiveRecord::Base
 	def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
-		 ['West region','Zeeland'],
-		 ['North region', 'Nordjylland'],
-		 ['Center region', 'Midtjylland'],
-		 ['South & Fyn', 'Syddanmark'],
-		 ['Copenhagen', 'Hovedstaden']]
+		 ['Zealand','Zeeland'],
+		 ['North Jutland', 'Nordjylland'],
+		 ['Mid Jutland', 'Midtjylland'],
+		 ['South Jutland & Fyn', 'Syddanmark'],
+		 ['Greater Copenhagen', 'Hovedstaden']]
 	end
 
 	def self.get_all_location
@@ -29,7 +29,10 @@ class Experience < ActiveRecord::Base
 	end
 
   def max_number_in_group
-    return (1..self.max_group_size).to_a
+    	return (1..self.max_group_size).to_a if self.date != nil
+
+    	return (2..self.max_group_size).to_a if self.date == nil
+
   end
 
 	validates :title, :description, :cuisine, :max_group_size, :price,
@@ -57,10 +60,10 @@ class Experience < ActiveRecord::Base
 
 	def set_default_mealtime
 		if self.meal == 'Lunch'
-			self.time = Time.zone.local(2000, 01, 01, 12)
+			self.time = Time.zone.local(2000, 01, 01, 12).in_time_zone
 			self.duration = 2
 		elsif self.meal == 'Dinner'
-			self.time = Time.zone.local(2000, 01, 01, 19)
+			self.time = Time.zone.local(2000, 01, 01, 19).in_time_zone
 			self.duration = 3
 		end
 	end
