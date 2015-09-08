@@ -151,7 +151,7 @@ class Booking < ActiveRecord::Base
 	    quantity: self.group_size,
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
 	}
-	byebug
+	
 	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
 	end
 
