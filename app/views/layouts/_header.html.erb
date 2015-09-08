@@ -29,8 +29,8 @@
 						<span class= "caret"></span></a>
 						<ul class ="dropdown-menu" role="menu" style="">
 							<% if current_host %>
-								<li><%= link_to "Update your Meal Profile", edit_experience_path(current_host.experiences.first) if current_host.experiences.first.present?  %></li>
-								<li><%= link_to "Create your Meal Profile", new_experience_path unless current_host.experiences.first.present?  %></li>
+								<li><%= link_to "Update your Experience", edit_experience_path(current_host.experiences.first) if current_host.experiences.first.present?  %></li>
+								<li><%= link_to "Create your Experience", new_experience_path unless current_host.experiences.first.present?  %></li>
 								<li><%= link_to "Create Host Party", new_experience_path if current_host.host_approved? %></li>
 								<li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "Bookings", bookings_path %></li>

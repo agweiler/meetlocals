@@ -17,8 +17,8 @@
       <div class="row" id="host_controls">
       	
   			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
-        <%= link_to "[ Update Meal Profile ]", edit_experience_path(current_host.experiences.first), :class => "edit_profile" if current_host.experiences.first.present? %> <br>
-        <%= link_to "[ Create Meal Profile ]", new_experience_path, :class => "edit_profile" unless current_host.experiences.first.present? %>
+        <%= link_to "[ Update Experience ]", edit_experience_path(current_host.experiences.first), :class => "edit_profile" if current_host.experiences.first.present? %> <br>
+        <%= link_to "[ Create Experience ]", new_experience_path, :class => "edit_profile" unless current_host.experiences.first.present? %>
         <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" if current_host.host_approved?%><br>
   			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
           class:"edit_profile" %><br>
@@ -141,7 +141,7 @@
 <!-- Events title-->
 
   <div class="row" id="host_events">
-    <%= content_tag :h3, "#{@host.username}'s Meal Profile", class:"text-center title pad-bot" %>
+    <%= content_tag :h3, "#{@host.username}'s Experience", class:"text-center title pad-bot" %>
 <!-- End of events title -->
   <%= content_tag :h5, "<No Experiences for now>", class:"text-center" if @normal_events.empty? %>
 <!-- Hosts experiences listing -->

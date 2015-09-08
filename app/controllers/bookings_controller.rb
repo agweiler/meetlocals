@@ -166,9 +166,14 @@ class BookingsController < ApplicationController
     puts params
     puts "@@@@@@@@@@"
     # stat us = params[:payment_status]
-    status = params[:transaction]["0"][".status"]
-    id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
-    message = ""
+    status = params[:payment_status]
+    puts "@@@@@@@@@@"
+    puts status
+    puts "@@@@@@@@@@"
+    id = params[:invoice].scan(/\d+/)
+    puts "@@@@@@@@@@"
+    puts id
+    puts "@@@@@@@@@@"
     if status == "Completed"
       @booking = Booking.find id
       guest = @booking.guest
