@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get "payment_success" => "static_pages#payment_success"
+
   get "create_exp_success" => "static_pages#create_exp_success"
 
   get "create_host_success" => "static_pages#create_host_success"
