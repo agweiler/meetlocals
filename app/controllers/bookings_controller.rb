@@ -175,7 +175,9 @@ class BookingsController < ApplicationController
     puts id
     puts "@@@@@@@@@@"
     if status == "Completed"
-      @booking = Booking.find id
+      puts id
+      @booking = Booking.find(id.to_i)
+      @booking.inspect
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
