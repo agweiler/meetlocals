@@ -3,7 +3,10 @@ require 'open-uri'
 
 [
   { :meal => 'Lunch', :price => 450.00},
-   { :meal => 'Dinner', :price => 450.00}
+  { :meal => 'Dinner', :price => 450.00},
+  { :meal => 'Host_Party_Lunch', :price => 450.00},
+  { :meal => 'Host_Party_Dinner', :price => 450.00}
+
   ].each do |c|
   Price.create!(:meal => c[:meal], :price => c[:price])
 end
