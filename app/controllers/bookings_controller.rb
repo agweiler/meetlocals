@@ -170,7 +170,7 @@ class BookingsController < ApplicationController
     puts "@@@@@@@@@@"
     puts status
     puts "@@@@@@@@@@"
-    id = params[:invoice].scan(/\d+/)
+    id = params[:invoice].scan(/\d+/).first
     puts "@@@@@@@@@@"
     puts id
     puts "@@@@@@@@@@"
