@@ -32,7 +32,6 @@ class AdminsController < ApplicationController
 	end
 
 	def update
-		byebug
 		Admin.first.update(admin_params)
 		redirect_to(:back)
 	end
