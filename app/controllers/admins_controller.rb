@@ -31,9 +31,20 @@ class AdminsController < ApplicationController
 		redirect_to(:back)
 	end
 
+	def update
+		byebug
+		Admin.first.update(admin_params)
+		redirect_to(:back)
+	end
+
 	def approveuser
 		host = Host.find params[:format]
 		host.update(approved: true)
 		redirect_to "/"
 	end
+
+	private
+		def admin_params
+		  params.require(:admin).permit(:commision_percentage)
+		end
 end

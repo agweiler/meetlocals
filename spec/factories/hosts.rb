@@ -13,5 +13,6 @@ FactoryGirl.define do
 		f.approved true
 		f.max_group_size 10
 		f.phone "012-2322343"
+		f.revenue 0.00
 	end
 end
