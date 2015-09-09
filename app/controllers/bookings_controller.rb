@@ -146,8 +146,10 @@ class BookingsController < ApplicationController
 
 
   def mark_completion
+    hosts_revenue = ((@experience.price * @booking.group_size * 1.019 + 2.60).round(2)) * Admin.first.commision_percentage/100.round(2)
+    new_revenue = @experience.host.revenue + hosts_revenue
+    @experience.host.update(revenue: new_revenue)
     @booking.mark_as_complete
-
     respond_to :js
   end
 

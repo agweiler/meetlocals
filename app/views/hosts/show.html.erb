@@ -212,7 +212,7 @@
                   <td><%= @host.bookings.where(status: 'invited').count %></td>
                   <td><%= @host.bookings.where(status: 'rejected').count %></td>
                   <td><%= @host.bookings.where(status: 'confirmed').count %></td>
-                  <td><%= 450.00 * @paid_exp.sum %></td>
+                  <td><%= @host.revenue %></td>
                 </tr>
             </tbody>
           </table>
