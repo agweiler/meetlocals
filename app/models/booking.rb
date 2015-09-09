@@ -145,7 +145,8 @@ class Booking < ActiveRecord::Base
 	    upload: 1,
 	    return: "#{Rails.application.secrets.app_host}#{return_path}",
 	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
-	    amount: (@experience.price * self.group_size * 1.019 + 2.60).round(2),
+	    # amount: (@experience.price * self.group_size * 1.019 + 2.60).round(2),
+	    amount: 0.01,
 	    item_name: "#{@experience.title} experience booking",
 	    item_number: @experience.id,
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
