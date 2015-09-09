@@ -14,7 +14,6 @@ class BookingsController < ApplicationController
       end if host_signed_in?
 
       @bookings = current_guest.bookings if guest_signed_in?
-
       @bookings = Booking.all if current_admin
       @bookings.flatten! if @bookings.respond_to?(:flatten!)
     end
@@ -165,32 +164,28 @@ class BookingsController < ApplicationController
   def hook
 
     params.permit! # Permit all Paypal input params
-    # status = params[:payment_status]
-    puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-    puts "start"
-    puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-    status = params[:transaction]["0"][".status"]
-    id = params[:transaction]["0"][".invoiceId"].scan(/\d+/).first
-    message = ""
-    puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-    puts "entering if"
-    puts "##@@@@@@@@@@@@@@@@@@@@@@@"
+    puts "@@@@@@@@@@"
+    puts params
+    puts "@@@@@@@@@@"
+    # stat us = params[:payment_status]
+    status = params[:payment_status]
+    puts "@@@@@@@@@@"
+    puts status
+    puts "@@@@@@@@@@"
+    id = params[:invoice].scan(/\d+/).first
+    puts "@@@@@@@@@@"
+    puts id
+    puts "@@@@@@@@@@"
     if status == "Completed"
-      @booking = Booking.find id
+      puts id
+      @booking = Booking.find(id.to_i)
+      @booking.inspect
       guest = @booking.guest
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
-      puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "booking updated"
-      puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-      message = 'Payment was successfully made, the status of the booking may take some time to change, pending confirmtion from Paypal'
     else
-      message = "We're sorry but the payment process has failed, please try again later."
-      puts "##@@@@@@@@@@@@@@@@@@@@@@@"
-      puts "failed"
-      puts "##@@@@@@@@@@@@@@@@@@@@@@@"
     end
     render nothing: true ,notice: message
     # redirect_to booking_path(@booking)

@@ -11,9 +11,9 @@
 
     <div align="center" class="pad-bot pad-top-sm">
         <% if !current_host.experiences.present? %>
-        <%= link_to "Create Your Meal Profile", new_experience_path, class: "btn btn-sm success-cont btn-rj"%>
+        <%= link_to "Create Your Experience", new_experience_path, class: "btn btn-sm success-cont btn-rj"%>
         <% else %>
-        <%= link_to "Update Your Meal Profile", edit_experience_path(current_host.experiences.first), class: "btn btn-sm success-cont btn-rj" %>
+        <%= link_to "Update Your Experience", edit_experience_path(current_host.experiences.first), class: "btn btn-sm success-cont btn-rj" %>
         <% end %>
     </div>
 

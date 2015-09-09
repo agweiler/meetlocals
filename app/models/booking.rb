@@ -106,33 +106,52 @@ class Booking < ActiveRecord::Base
 		self.confirmed.map { |book| book.date.strftime('%F') }
 	end
 
-	# DO STUFF HERE MON
+	# Paypal with Adaptive Payments SDK
+	# serialize :notification_params, Hash
+	# def paypal_url(return_path)
+	# 	@experience = Experience.find(self.experience_id)
+	# 	@api = PayPal::SDK::AdaptivePayments.new
+	# 	# Build request object
+	# 	@pay = @api.build_pay({
+	#   	:actionType => "PAY",
+	#   	:cancelUrl => "http://gentle-inlet-1053.herokuapp.com/",
+	#   	:currencyCode => "DKK",
+	#   	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
+	#   	:receiverList => {
+	#     	:receiver => [{
+	#       	:amount => (@experience.price * self.group_size * 1.019 + 2.60).round(2) ,
+	#       	:email => "Meetdanes@meetdanes.com",
+	#       	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
+	#       	}],
+	#       },
+	#   	  :returnUrl => "#{Rails.application.secrets.app_host}#{return_path}"
+	#   	})
+	# 	@response = @api.pay(@pay)
+	#   if @response.success? && @response.payment_exec_status != "ERROR"
+	#     # @api.payment_url(@response)  # Url to complete payment
+	#     "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=" + @response.payKey
+	#   else
+	#     @response.error[0].message
+	#   end
+	# end
+
 	serialize :notification_params, Hash
 	def paypal_url(return_path)
-		@experience = Experience.find(self.experience_id)
-		@api = PayPal::SDK::AdaptivePayments.new
-		# Build request object
-		@pay = @api.build_pay({
-	  	:actionType => "PAY",
-	  	:cancelUrl => "http://gentle-inlet-1053.herokuapp.com/",
-	  	:currencyCode => "DKK",
-	  	:ipnNotificationUrl => "#{Rails.application.secrets.app_host}/hook",
-	  	:receiverList => {
-	    	:receiver => [{
-	      	:amount => (@experience.price * self.group_size * 1.019 + 2.60).round(2) ,
-	      	:email => "Meetdanes@meetdanes.com",
-	      	:invoiceId => "#{id}" + (0...8).map { (65 + rand(26)).chr }.join
-	      	}],
-	      },
-	  	  :returnUrl => "#{Rails.application.secrets.app_host}#{return_path}"
-	  	})
-		@response = @api.pay(@pay)
-	  if @response.success? && @response.payment_exec_status != "ERROR"
-	    # @api.payment_url(@response)  # Url to complete payment
-	    "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_ap-payment&paykey=" + @response.payKey
-	  else
-	    @response.error[0].message
-	  end
+	@experience = Experience.find(self.experience_id)
+	values = {
+	    business: "meetthedanes@gmail.com",
+	    cmd: "_xclick",
+	    currency_code: "DKK",
+	    upload: 1,
+	    return: "#{Rails.application.secrets.app_host}#{return_path}",
+	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
+	    amount: (@experience.price * self.group_size * 1.019 + 2.60).round(2),
+	    item_name: "#{@experience.title} experience booking",
+	    item_number: @experience.id,
+	    notify_url: "#{Rails.application.secrets.app_host}/hook"
+	}
+	
+	"#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
 	end
 
 	def paypal_refund(receiver)
