@@ -148,7 +148,6 @@ class Booking < ActiveRecord::Base
 	    amount: (@experience.price * self.group_size * 1.019 + 2.60).round(2),
 	    item_name: "#{@experience.title} experience booking",
 	    item_number: @experience.id,
-	    quantity: self.group_size,
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
 	}
 	
