@@ -4,7 +4,7 @@
 
 <div class="row" id="mealpanel">
   <% @images_for_experiences.each_with_index do |image, index| %>
-    <div class="col-sm-4" style="padding:1px">
+    <div class="col-sm-4" style="padding:2px">
         <%= image_tag image.image_file.url(:medium), id: index %>
     </div>
   <% end %>
