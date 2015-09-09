@@ -28,7 +28,7 @@ class AdminsController < ApplicationController
 		price = Price.find params[:format]
 		price.update(price: params[:price][:price])
 		Experience.where(meal: price.meal).update_all(price: params[:price][:price])
-		redirect_to "/"
+		redirect_to(:back)
 	end
 
 	def approveuser
