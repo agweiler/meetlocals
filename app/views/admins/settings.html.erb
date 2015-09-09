@@ -23,7 +23,7 @@
 		  <td><%= content_tag :span, "(#{new_user.email})" %></td>
 		  <td><%= link_to 'View', host_path(new_user), class:"btn btn-default btn-sm", style: "color: #fff" %>
 		  <%= f.submit "Approve User", class:'btn btn-primary btn-sm' %>
-		  <%= link_to 'Destroy', new_user, class:"btn btn-sm red",
+		  <%= link_to 'Reject User', new_user, class:"btn btn-sm red",
 		   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		 </div>
      </tr>
