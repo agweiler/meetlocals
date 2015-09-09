@@ -40,8 +40,7 @@ class Hostmailer < ApplicationMailer
     mail(to: @host.email, subject: "A guest has canceled your booking")
   end
 
-  def host_rejected(host_id)
-    @host = Host.find host_id
-    mail(to: @host.email, subject: "You have been rejected")
+  def host_rejected(email)
+    mail(to: email, subject: "You have been rejected")
   end
 end

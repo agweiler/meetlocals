@@ -105,6 +105,7 @@ class HostsController < ApplicationController
 
   # DELETE /hosts/1
   def destroy
+    email = @host.email
     if @host.images.present?
       @host.images.delete_all
     end
@@ -115,7 +116,7 @@ class HostsController < ApplicationController
     approved = @host.approved
     @host.delete
     if current_admin && approved == false
-      Hostmailer.host_rejected(@host.id).deliver_later  
+      Hostmailer.host_rejected(email).deliver_later  
       redirect_to admin_settings_path
     elsif current_admin && approved == true
       redirect_to admins_path
