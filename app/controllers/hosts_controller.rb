@@ -115,6 +115,7 @@ class HostsController < ApplicationController
     approved = @host.approved
     @host.delete
     if current_admin && approved == false
+      Hostmailer.host_rejected(@host.id).deliver_later  
       redirect_to admin_settings_path
     elsif current_admin && approved == true
       redirect_to admins_path
