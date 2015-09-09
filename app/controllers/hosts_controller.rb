@@ -78,7 +78,7 @@ class HostsController < ApplicationController
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       Hostmailer.host_approved(@host.id).deliver_later
-      redirect_to admin_settings_path
+      redirect_to(:back)
     else
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
@@ -112,10 +112,17 @@ class HostsController < ApplicationController
         exp.bookings.delete_all
     end
     @host.experiences.delete_all
+    approved = @host.approved
     @host.delete
-    respond_to do |format|
-      format.html { redirect_to hosts_url, notice: 'host was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_admin && approved == false
+      redirect_to admin_settings_path
+    elsif current_admin && approved == true
+      redirect_to admins_path
+    else
+      respond_to do |format|
+        format.html { redirect_to hosts_url, notice: 'host was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

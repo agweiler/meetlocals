@@ -10,9 +10,13 @@
 		  <%= content_tag :span, "(#{new_user.email})" %>
 		  <%= link_to 'VIEW', host_path(new_user), class:"btn btn-default btn-sm" %>
 		  <%= f.submit "Approve User", class:'form-control btn btn-primary btn-sm' %>
+		  <%= link_to 'Destroy', new_user, class:"btn btn-sm red",
+		   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
 		 </div>
 		 <br>
 		<% end %>
+
+
 	<% end %>
   </div>
 
