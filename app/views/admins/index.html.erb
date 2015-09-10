@@ -40,11 +40,18 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Username</th>
+            <th>Host ID#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>ZIP and Town</th>
+            <th>Region</th>
+            
+            <!-- <th>Username</th>
             <th>Email</th>
             <th>Country</th>
             <th>State</th>
-            <th>Suburb</th>
+            <th>Suburb</th> -->
             <th class="text-right">Actions</th>
           </tr>
         </thead>
@@ -52,11 +59,15 @@
         <tbody>
           <% @hosts.each do |host| %>
             <tr class="text-left">
-              <td><%= host.username %></td>
+              <td><%= host.id %></td>
+              <td><%= host.first_name %> <%= host.last_name %></td>
               <td><%= host.email %></td>
-              <td><%= host.country %></td>
-              <td><%= host.state %></td>
+              
+              <td><%= host.street_address %></td>
               <td><%= host.suburb %></td>
+              <td><%= host.state %>
+
+              
               <td class="text-right">
                 <%= link_to 'View', host, class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %>
                 <%= link_to 'Destroy', host, class:"btn btn-sm red",
@@ -80,10 +91,11 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>Guest ID#</th>
             <th>Username</th>
             <th>Email</th>
             <th>Country</th>
-            <th>nationality</th>
+            <th>Nationality</th>
             <th class="text-right">Actions</th>
           </tr>
         </thead>
@@ -91,6 +103,7 @@
         <tbody>
           <% @guests.each do |guest| %>
             <tr class="text-left">
+              <td><%= guest.id %></td>
               <td><%= guest.username %></td>
               <td><%= guest.email %></td>
               <td><%= guest.nationality %></td>
