@@ -12,7 +12,7 @@
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
-        <label for="experience_description">* Description</label>
+        <label for="experience_description">* Host Presentation</label>
         <%= f.text_area :description, placeholder: "Let people know what it's about", required: true, class: 'form-control', rows: '3', style: 'width: 75%' %>
       </div>
 
@@ -43,9 +43,9 @@
 
     <div class="col-md-6">
     <div class="field">
-        <%= f.label :host_style %><br>
+        <%= f.label :host_style, "I love making this kind of food" %><br>
         <p><small> This field is limited to 60 characters.</small></p>
-        <%= f.text_area :host_style, placeholder: "Do you cook in front of them?", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
+        <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
       </div>
 
 
@@ -73,11 +73,12 @@
               {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
 
-
+<div class="hide">
       <div class="field">
         <%= f.label :region %> <br>
         <%= f.select(:location, options_for_select(Experience.get_all_location, current_host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
+</div>
 
       <div class="field">
                   <%= f.hidden_field :price %>
@@ -89,7 +90,7 @@
   <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
   <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an experience without uploading all <strong>3 images</strong>.</small></p> 
 
-  <p class="pad-bot smalls">Note: attempting to upload images larger than 4MB may cause issues.</p>
+  <p class="pad-bot smalls">Note: attempting to upload images larger than 5MB in total may cause issues.</p>
   <div class = "row">
     <div class="field col-md-4">
       <%= f.label :image_1 %><br>

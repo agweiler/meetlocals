@@ -96,7 +96,7 @@
     <table class="table">
        <thead>
         <tr>
-          <th id = "hoststyle_title">HOST STYLE</th>
+          <th id = "hoststyle_title">I LOVE MAKING THIS KIND OF FOOD</th>
         </tr>
       </thead>
       <tbody>
@@ -111,7 +111,7 @@
     <table class="table">
        <thead>
         <tr>
-          <th id = "hoststyle_title">DESCRIPTION</th>
+          <th id = "hoststyle_title">HOST PRESENTATION</th>
         </tr>
       </thead>
       <tbody>
@@ -123,21 +123,25 @@
       </tbody>
     </table>
   </div>
-   <div class="row" id="specframe">
-    <h2>MEAL FORMAT</h2>
+   <div class="row" id="specframe77">
+    <h2>OTHER DETAILS</h2>
     <table class="table" id="menutab">
       <thead>
         <tr>
-          <th>PRICE</th>
-          <th>GROUP SIZE</th>
-          <th>HOST STYLE</th>
+          <th>INTERESTS</th>
+          <th>PETS</th>
+          <th>SMOKER?</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>DKK <%= @experience.price.round %> per peson</td>
-          <td><%= @experience.max_group_size %> Max</td>
-          <td><%= @experience.host_style%></td>
+          <td><%= @experience.host.interests %></td>
+          <td><%= @experience.host.pets %></td>
+          <% if @experience.host.smoker == false %>
+          <td>No</td>
+          <% else %>
+          <td>Yes </td>
+          <% end %>
         </tr>
       </tbody>
     </table>
