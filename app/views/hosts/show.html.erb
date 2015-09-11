@@ -51,10 +51,20 @@
         <p><span style="font-weight:600;">Occupation:</span> <%= @host.occupation %></p>
         <p><span style="font-weight:600;">Interests:</span> <%= @host.interests %></p>
 
-        <p><%= @host.smoker? %></p>
+        <p><span style="font-weight:600;">Smoker:</span>
+        <% if @host.smoker? %>  
+          <%= 'Yes' %>
+        <% else %>
+          <%= 'No' %>
+        <% end %>
+        </p>
         <p><span style="font-weight:600;">Pets:</span> <%= @host.pets %></p>
         <p><span style="font-weight:600;">Speaks:</span> <%= @host.languages %></p>
         <p><span style="font-weight:600;">Neighbourhood:</span> <%= @host.neighbourhood %></p>
+
+        <% if current_admin %>
+        <p><span style="font-weight:600;">Telephone:</span> <%= @host.phone %></p>
+        <% end %>
       <!-- </div> -->
 
       <!-- <div class="col-md-8 visible-md-block visible-lg-block">

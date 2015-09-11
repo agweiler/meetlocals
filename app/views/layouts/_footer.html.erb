@@ -3,7 +3,7 @@
   <div class="col-md-4 col-sm-4" style="text-align:left; padding:20px;">
     <p>SIGN UP TO OUR NEWSLETTER</p>
 
-    <%= form_tag('emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe") do -%>
+    <%= form_tag('/emailapi/subscribe', class: "form-inline", method: "post", id: "subscribe") do -%>
     <div class="input-group">
        <%= email_field(:email, :address, {class: "form-control", id: "email", placeholder: ""})%>
       <span class="input-group-btn">
