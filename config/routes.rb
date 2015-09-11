@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get "newsletter_success" => "static_pages#newsletter_success"
+
   post "payment_success" => "static_pages#payment_success"
 
   get "payment_success" => "static_pages#payment_success"

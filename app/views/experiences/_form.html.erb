@@ -43,9 +43,9 @@
 
     <div class="col-md-6">
     <div class="field">
-        <%= f.label :host_style, "I love making this kind of food" %><br>
-        <p><small> This field is limited to 60 characters.</small></p>
-        <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 60 %>
+        <%= f.label :host_style, "We love making this kind of food" %><br>
+        <!-- <p><small> This field is limited to 60 characters.</small></p> -->
+        <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 250 %>
       </div>
 
 
