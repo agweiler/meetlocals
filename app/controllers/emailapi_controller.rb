@@ -5,7 +5,7 @@ class EmailapiController < ApplicationController
     email = params[:email][:address]
     respond_to do |format|
       if is_a_valid_email?(email)
-        @list_id = "682ba11451"
+        @list_id = "997a154bb3"
         gb = Gibbon::API.new
 
         gb.lists.subscribe({
@@ -13,6 +13,7 @@ class EmailapiController < ApplicationController
           :email => {:email => email}
         })
         format.json { render json: {msg: "Please check your supplied email to confirm subscription!" }}
+        redirect_to newsletter_success_path
       else
         format.json { render json: {msg: "Invalid email" }}
       end
