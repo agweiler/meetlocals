@@ -13,7 +13,7 @@
       </div>
       <div class="field">
         <label for="experience_description">* Host Presentation</label>
-        <%= f.text_area :description, placeholder: "Let people know what it's about", required: true, class: 'form-control', rows: '3', style: 'width: 75%' %>
+        <%= f.text_area :description, placeholder: "Let people know who you are", required: true, class: 'form-control', rows: '3', style: 'width: 75%' %>
       </div>
 
       <div class="field">
@@ -55,6 +55,8 @@
 
     <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
 
+      <%= f.hidden_field :meal , value: "Dinner" %>
+
     <% else %>
     <%= f.label :date %>
       <div class="field form-inline">
@@ -63,8 +65,6 @@
         start_year: Date.today.year, end_year: Date.today.year.next},
         {class:"form-control", required: true } %>
       </div>
-    <% end %>
-
 
       <div class="field" id="meal">
         <%= f.label :meal %> <br>
@@ -72,6 +72,8 @@
               @experience.meal), {},
               {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
+    <% end %>
+
 
 <div class="hide">
       <div class="field">
