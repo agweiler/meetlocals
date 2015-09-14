@@ -115,7 +115,7 @@ class BookingsController < ApplicationController
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
           Guestmailer.reject_invitation(guest.id,@booking.id).deliver_later
         elsif booking_params[:status] == "completed"
-          Guestmailer.experience_completed(@bookingid,guest.id).deliver_later
+          Guestmailer.experience_completed(@booking.id,guest.id).deliver_later
           Adminmailer.experience_completed(host.id, guest.id).deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
