@@ -30,4 +30,11 @@ class Adminmailer < ApplicationMailer
 		@admin = Admin.first
 		mail(to: @admin.email, subject: "A guest has canceled a booking")
 	end
+
+	def payment_reminder(booking_id, host_id)
+		@host = Host.find host_id
+		@booking = Booking.find booking_id
+		@admin = Admin.first
+		mail(to: @admin.email, subject: "A host payment is pending")
+	end
 end
