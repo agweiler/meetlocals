@@ -80,7 +80,7 @@ class HostsController < ApplicationController
       Hostmailer.host_approved(@host.id).deliver_later
       redirect_to(:back)
     else
-      byebug
+
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
