@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       put 'guests' => 'devise/registrations#update'
       delete 'guests' => 'devise/registrations#destroy'
     end
-
+  resources :site_images
   resources :guests
   resources :authentications
   # get '/auth/:provider/callback' => 'authentications#create'

@@ -1,0 +1,20 @@
+<div class = "container" style = "padding-top: 100px; padding-bottom: 100px;"> 
+	<h1 class ="heads pad-bot" style="color: #66a422">Change the Images in "Meet The Hosts" in the Front Page</h1>
+
+	<table class= "table_site_images">
+		<tr>
+			<th>Image Number</th>
+			<th>Image</th>
+			<th>Image Name</th>
+			<th></th>
+		</tr>
+	<% @siteimages.each do |image| %>
+	  <tr>
+      <td><%= image.image_number %></td>
+      <td><%= image_tag(image.image_file.url, size: "310x180") %></td>
+      <td><%= image.name %></td>
+      <td><%= link_to "Edit Image", edit_site_image_path(image, :image_number => image.image_number) %></td>
+  	</tr>
+  	<% end %>
+		</table>
+</div>
