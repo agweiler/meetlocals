@@ -14,13 +14,6 @@ GIT
       paperclip (>= 3.3)
 
 GIT
-  remote: git://github.com/hewrin/devise-async.git
-  revision: 1d982b018961968cac11fd2fac1cd286c47d96a9
-  specs:
-    devise-async (0.10.1)
-      devise (~> 3.2)
-
-GIT
   remote: git://github.com/nerian/bootstrap-wysihtml5-rails.git
   revision: c2474e4ae5fab944704939c1b64f7378c21cf47d
   specs:
@@ -374,7 +367,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   delayed_paperclip!
   devise
-  devise-async!
   factory_girl_rails
   gibbon!
   guard-rspec

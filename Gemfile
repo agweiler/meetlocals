@@ -47,7 +47,7 @@ gem 'ratyrate'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-gem 'devise-async', git: "git://github.com/hewrin/devise-async.git"
+# gem 'devise-async', git: "git://github.com/hewrin/devise-async.git"
 gem "paperclip", "~> 4.2"
 
 # gem 'momentjs-rails', '>= 2.9.0'
