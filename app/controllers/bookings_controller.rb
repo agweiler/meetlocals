@@ -187,7 +187,7 @@ class BookingsController < ApplicationController
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
     end
-    render nothing: true ,notice: message
+    render nothing: true
     # redirect_to booking_path(@booking)
   end
 
