@@ -41,6 +41,10 @@ Rails.application.routes.draw do
 
   get "newsletter_success" => "static_pages#newsletter_success"
 
+  post "payment_failure" => "static_pages#payment_failure"
+
+  get "payment_failure" => "static_pages#payment_failure"
+
   post "payment_success" => "static_pages#payment_success"
 
   get "payment_success" => "static_pages#payment_success"
