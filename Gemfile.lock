@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: git://github.com/hewrin/devise-async.git
-  revision: 9fd0d1ff05beb055da0f893e28c64a8836b77d6c
+  revision: 1d982b018961968cac11fd2fac1cd286c47d96a9
   specs:
     devise-async (0.10.1)
       devise (~> 3.2)
