@@ -12,7 +12,7 @@
       Host Phone Number: <%= @host.phone %>
       Experience title: <%= @booking.experience.title %> </br>
       Date: <%= @booking.date %> </br>
-      Time: <%= @booking.start_time.strftime("%H:%M:%S") %> until <%= @booking.end_time.strftime("%H:%M:%S") %> </br>
+      Time: <%= @booking.start_time.in_time_zone.strftime("%H:%M:%S") %> until <%= @booking.end_time.in_time_zone.strftime("%H:%M:%S") %> </br>
       Address: <%= @host.street_address %> </br>
       ZIP Code and Town: <%= @host.suburb %> </br>
       State: <%= @host.state %> </br>
