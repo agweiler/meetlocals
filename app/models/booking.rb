@@ -139,7 +139,7 @@ class Booking < ActiveRecord::Base
 	def paypal_url(return_path)
 	@experience = Experience.find(self.experience_id)
 	values = {
-	    business: "meetthedanes@gmail.com",
+	    business: ENV['BUSINESS'],
 	    # business: "Meetdanes@meetdanes.com",
 	    cmd: "_xclick",
 	    currency_code: "DKK",

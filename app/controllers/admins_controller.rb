@@ -26,8 +26,13 @@ class AdminsController < ApplicationController
 
 	def changeprice
 		price = Price.find params[:format]
-		price.update(price: params[:price][:price])
-		Experience.where(meal: price.meal).update_all(price: params[:price][:price])
+		if price.meal.include? "Host_Party_"
+			price.meal.slice! "Host_Party_"
+			Experience.where.not(date: nil).where(meal: price.meal).update_all(price: params[:price][:price])
+		else	
+			price.update(price: params[:price][:price])
+			Experience.where(meal: price.meal).update_all(price: params[:price][:price])
+		end
 		redirect_to(:back)
 	end
 

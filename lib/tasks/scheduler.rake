@@ -30,6 +30,11 @@ task :completed_experience => :environment do
 	confirmed_booking = Booking.where(status: "confirmed")
 	confirmed_booking.each do |booking|
 		if booking.check_finished? == true
+			experience = booking.experience
+			host = experience.host
+			hosts_revenue = ((experience.price * booking.group_size * 1.019 + 2.60).round(2)) * Admin.first.commision_percentage/100.round(2)
+			new_revenue = host.revenue + hosts_revenue
+			host.update(revenue: new_revenue)
 			Guestmailer.experience_completed(booking.id,booking.guest.id).deliver_now
 			booking.update(status: "completed")
 		end

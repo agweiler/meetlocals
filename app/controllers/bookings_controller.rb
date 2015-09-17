@@ -75,7 +75,7 @@ class BookingsController < ApplicationController
     if @experience.meal == "Dinner"
       @booking.end_time = @experience.time + 3.hours
     elsif @experience.meal == "Lunch"
-      @booking.end_time = @experience.time + 4.hours
+      @booking.end_time = @experience.time + 2.hours
     end
     
     respond_to do |format|
