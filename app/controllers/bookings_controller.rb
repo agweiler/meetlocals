@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion, :cancel_booking]
   include ApplicationHelper
+  include BookingsHelper
 
   # GET /bookings
   def index
@@ -156,6 +157,12 @@ class BookingsController < ApplicationController
     user_type = current_user.class.name
     @booking.cancel(user_type)
     respond_to :js
+  end
+
+  def host_paid
+    @booking = Booking.find(params[:id])
+    @booking.update(host_paid: true)
+    redirect_to(:back)
   end
 
 
