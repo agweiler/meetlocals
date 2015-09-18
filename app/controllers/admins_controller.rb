@@ -18,10 +18,10 @@ class AdminsController < ApplicationController
 
 	def bookings_list
 		redirect_to "/" unless current_admin
-		@requested_bookings = Booking.where(status: "requested").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@invited_bookings = Booking.where(status: "invited").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@confirmed_bookings = Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-		@completed_bookings = Booking.where(status: "completed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+		@requested_bookings = Booking.where(status: "requested").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at).take(10)
+		@invited_bookings = Booking.where(status: "invited").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at).take(10)
+		@confirmed_bookings = Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid).take(10)
+		@completed_bookings = Booking.where(status: "completed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at).take(10)
 	end
 
 	def changeprice
@@ -45,6 +45,22 @@ class AdminsController < ApplicationController
 		host = Host.find params[:format]
 		host.update(approved: true)
 		redirect_to "/"
+	end
+
+	def all_requested
+		@requested_bookings = Booking.where(status: "requested").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+	end
+
+	def all_invited
+		@invited_bookings = Booking.where(status: "invited").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+	end
+
+	def all_confirmed
+		@confirmed_bookings = Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid)
+	end
+
+	def all_completed
+		@completed_bookings = Booking.where(status: "completed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
 	end
 
 	private

@@ -158,6 +158,12 @@ class BookingsController < ApplicationController
     respond_to :js
   end
 
+  def host_paid
+    @booking = Booking.find(params[:id])
+    @booking.update(host_paid: true)
+    redirect_to(:back)
+  end
+
 
   # Paypal sends this
   protect_from_forgery except: [:hook]
