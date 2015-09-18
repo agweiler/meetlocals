@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+	include AdminsHelper
 	def index
 		redirect_to "/" unless current_admin
 		@admins = Admin.all
@@ -44,13 +45,20 @@ class AdminsController < ApplicationController
 	def approveuser
 		host = Host.find params[:format]
 		host.update(approved: true)
-		redirect_to "/"
+		redirect_to(:back)
 	end
 
 	def booking_type_all
 		booking_type = "@#{params[:status]}_bookings"
 		instance_variable_set(booking_type , Booking.where(status: params[:status]).reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)) unless params[:status] == "confirmed"
 		instance_variable_set(booking_type , Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid)) if params[:status] == "confirmed"
+	end
+
+	def report
+		@bookings = Booking.where(status: "confirmed").where(date: params[:range].to_date..Date.today)
+		respond_to do |format|
+			format.csv { send_data convert_to_csv(@bookings)}
+		end
 	end
 
 	private
