@@ -7,14 +7,15 @@
     <h1>A new host has been created </h1>
     <p>
      A new host has been created to join the ranks of Meet the Danes. They are probably waiting patiently for your approval.
-     His/Her bank details are as follows, <br>
-     Bank Number = <%= @bank_number %> <br>
-     Bank Name = <%= @bank_name %>
-     Registration Number = <%= @registration_number %>
+     His/Her details are as follows, <br>
+     Name = <%= @host.first_name %> <%= @host.last_name %> <br>
+     Occupation = <%= @host.occupation %> <br>
+     Interests = <%= @host.interests %> <br>
+     Introduction = <%= @host.intro %>   
     </p>
 
     <p>
-      Go check him/her out at <%= link_to 'his profile' , host_url(@host) %>
+      Get more information about your host at <%= link_to 'his profile' , host_url(@host) %>
     </p>
    
 

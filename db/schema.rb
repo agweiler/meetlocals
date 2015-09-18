@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909032147) do
+ActiveRecord::Schema.define(version: 20150918024459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,9 @@ ActiveRecord::Schema.define(version: 20150909032147) do
     t.integer  "max_group_size"
     t.string   "phone"
     t.decimal  "revenue",                precision: 8, scale: 2, default: 0.0
+    t.string   "bank_name"
+    t.string   "bank_number"
+    t.string   "registration_number"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree
@@ -221,6 +224,8 @@ ActiveRecord::Schema.define(version: 20150909032147) do
     t.string   "local_image_content_type"
     t.integer  "local_image_file_size"
     t.datetime "local_image_updated_at"
+    t.string   "direct_upload_url"
+    t.string   "image_file_file_path"
     t.string   "temp_file_key"
     t.boolean  "finished"
   end
@@ -303,6 +308,22 @@ ActiveRecord::Schema.define(version: 20150909032147) do
   create_table "prices", force: :cascade do |t|
     t.string "meal"
     t.float  "price"
+  end
+
+  create_table "site_images", force: :cascade do |t|
+    t.string   "name"
+    t.string   "local_image_file_name"
+    t.string   "local_image_content_type"
+    t.integer  "local_image_file_size"
+    t.datetime "local_image_updated_at"
+    t.string   "image_file_file_name"
+    t.string   "image_file_content_type"
+    t.integer  "image_file_file_size"
+    t.datetime "image_file_updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "temp_file_key"
+    t.integer  "image_number"
   end
 
   create_table "testimonials", force: :cascade do |t|

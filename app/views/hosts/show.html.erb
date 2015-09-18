@@ -62,8 +62,11 @@
         <p><span style="font-weight:600;">Speaks:</span> <%= @host.languages %></p>
         <p><span style="font-weight:600;">Neighbourhood:</span> <%= @host.neighbourhood %></p>
 
-        <% if current_admin %>
+        <% if current_admin || @host == current_host %>
         <p><span style="font-weight:600;">Telephone:</span> <%= @host.phone %></p>
+        <p><span style="font-weight:600;">Account Number:</span> <%= @host.bank_number %></p>
+        <p><span style="font-weight:600;">Bank Name:</span> <%= @host.bank_name %></p>
+        <p><span style="font-weight:600;">Registration Number:</span> <%= @host.registration_number %></p>
         <% end %>
       <!-- </div> -->
 
