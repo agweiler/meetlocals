@@ -26,7 +26,7 @@
                 </td>
                 <td> 
                   <% if y = Experience.find_by(id: booking[2]) != nil %>
-                    <%= Experience.find(booking[2]).title %>
+                    <%= Experience.find(booking[2]).host.first_name %> <%= Experience.find(booking[2]).host.last_name %>
                   <% end %>
                 </td>
                 <td><%= booking[3] %></td>

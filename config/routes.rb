@@ -63,15 +63,9 @@ Rails.application.routes.draw do
 
   get 'admins/bookings' => 'admins#bookings_list', as: :admin_bookings_list
 
-  get 'admins/all_requested' => 'admins#all_requested'
+  get 'admins/booking_type_all' => 'admins#booking_type_all'
 
-  get 'admins/all_invited' => 'admins#all_invited'
-
-  get 'admins/all_confirmed' => 'admins#all_confirmed'
-
-  get 'admins/all_completed' => 'admins#all_completed'
-
-  get 'bookings/host_paid' => 'bookings#host_paid'
+  post 'bookings/:id/host_paid' => 'bookings#host_paid', as: :mark_host_paid
 
   patch '/price' => 'admins#changeprice'
 

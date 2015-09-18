@@ -47,20 +47,10 @@ class AdminsController < ApplicationController
 		redirect_to "/"
 	end
 
-	def all_requested
-		@requested_bookings = Booking.where(status: "requested").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-	end
-
-	def all_invited
-		@invited_bookings = Booking.where(status: "invited").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
-	end
-
-	def all_confirmed
-		@confirmed_bookings = Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid)
-	end
-
-	def all_completed
-		@completed_bookings = Booking.where(status: "completed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)
+	def booking_type_all
+		booking_type = "@#{params[:status]}_bookings"
+		instance_variable_set(booking_type , Booking.where(status: params[:status]).reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at)) unless params[:status] == "confirmed"
+		instance_variable_set(booking_type , Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid)) if params[:status] == "confirmed"
 	end
 
 	private

@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion, :cancel_booking]
   include ApplicationHelper
+  include BookingsHelper
 
   # GET /bookings
   def index

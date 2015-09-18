@@ -106,6 +106,7 @@ class Booking < ActiveRecord::Base
 		self.confirmed.map { |book| book.date.strftime('%F') }
 	end
 
+
 	# Paypal with Adaptive Payments SDK
 	# serialize :notification_params, Hash
 	# def paypal_url(return_path)
