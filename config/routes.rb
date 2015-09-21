@@ -65,6 +65,8 @@ Rails.application.routes.draw do
 
   get 'admins/booking_type_all' => 'admins#booking_type_all'
 
+  get 'report' => 'admins#report'
+
   post 'bookings/:id/host_paid' => 'bookings#host_paid', as: :mark_host_paid
 
   patch '/price' => 'admins#changeprice'
