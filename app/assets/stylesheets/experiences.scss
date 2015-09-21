@@ -288,6 +288,7 @@ float: right;
     font-family: $paragraph;
     font-size: 18px;
     margin-bottom: 0px;
+    color: #424242;
     /* color: $green_text; */
   }
 
@@ -310,6 +311,9 @@ float: right;
 #mealframe {
   background:#f9f9f9;
   padding-left: 25px;
+  p {
+    color: #424242;
+  }
 }
 
 #menuframe  {
@@ -322,6 +326,7 @@ float: right;
   height:500px;
   background-color:#fff;
   padding-left: 0px;
+  border-bottom: 5px solid #66a422;
 }
 
 #menutab {
@@ -424,6 +429,7 @@ background-color: #fff !important;
   text-align: center;
   font-size: 30px !important;
   line-height: 35px !important;
+  color: #424242;
 }
 
 #xtra-titlez {
@@ -437,12 +443,15 @@ background-color: #fff !important;
 
 #rowz {
   text-align: center !important;
+  color: #424242;
 }
 
 #menu-border {
-  border-color: #66a422;
+  border-top: 5px solid #66a422;
+  border-bottom: 5px solid #66a422;
+/*  border-color: #66a422;
   border-width: 5px;
-  border-style: solid;
+  border-style: solid;*/
 }
 
 .labelz {

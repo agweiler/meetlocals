@@ -33,4 +33,12 @@ class Adminmailer < ApplicationMailer
 		@admin = Admin.first
 		mail(to: @admin.email, subject: "A host payment is pending")
 	end
+
+	def guest_has_payed(guest_id,host_id,booking_id)
+		@guest = Guest.find guest_id
+		@host = Host.find host_id
+		@booking = Booking.find booking_id
+		@admin = Admin.first
+		mail(to: @admin.email, subject: "A guest has completed payment")
+	end	
 end
