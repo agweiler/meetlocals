@@ -29,7 +29,7 @@
       <!-- <h4 style="padding-top:20px;   padding-top: 20px; color: #000; font-size: 28px;font-weight: 600;" class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4> -->
 
-     <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",       class:"text-center" if @experience.special_event? %>
+     <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}", class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
   </div>
@@ -58,7 +58,7 @@
   </div>
 <div id="menu-border">
   <div class="row" style="" id="menuframe-menu">
-    <h2 align="center" class="pad-bot" style="text-decoration: underline">MENU</h2>
+    <h2 align="center" class="pad-bot">MENU</h2>
     <table class="table table-striped" id="menutab">
       <thead>
         <tr>
@@ -129,7 +129,7 @@
   </div>
   <br>
    <div class="row" id="specframe77" style="margin-top: -2px">
-    <h2 align="center" class="pad-bot" style="text-decoration: underline">OTHER DETAILS</h2>
+    <h2 align="center" class="pad-bot">OTHER DETAILS</h2>
     <table class="table table-striped" id="menutab">
       <thead>
         <tr>
@@ -240,3 +240,4 @@ $(function(){
   });
 });
 </script>
+
