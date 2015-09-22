@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @hosts =  Host.where(approved: true).joins(:experiences).uniq.limit(3)
+    @hosts = Host.where(approved: true).joins(:experiences).uniq.shuffle.take(3)
     # @recent_events = Experience.normal_events.order(created_at: :desc).limit(3)
     @host_party = Experience.available.special_events.order(:date).limit(3)
   end
@@ -24,11 +24,16 @@ class StaticPagesController < ApplicationController
   def unknown_error
   end
 
-  protect_from_forgery except: [:payment_success]
+  protect_from_forgery except: [:payment_success, :payment_failure]
   def payment_success
     if (request.request_method == "POST")
       redirect_to payment_success_path
     end
   end
 
+  def payment_failure
+    if (request.request_method == "POST")
+      redirect_to payment_failure_path
+    end
+  end
 end

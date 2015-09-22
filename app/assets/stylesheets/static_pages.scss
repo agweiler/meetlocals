@@ -786,7 +786,7 @@ z-index: 1;
 }
 
 .marge-left {
-  margin-left: 20px;
+  margin-left: 35px;
 }
 
 #press-content {
@@ -854,4 +854,20 @@ z-index: 1;
 
 .fix-col-width {
   width: 180px;
+}
+
+.find-host {
+  color:#fff; 
+  text-transform:uppercase; 
+  line-height: 35px;
+  text-align: center;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pad-btn {
+  margin-bottom: 50px;
+  margin-top: 40px;
 }

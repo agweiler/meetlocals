@@ -106,6 +106,7 @@ class Booking < ActiveRecord::Base
 		self.confirmed.map { |book| book.date.strftime('%F') }
 	end
 
+
 	# Paypal with Adaptive Payments SDK
 	# serialize :notification_params, Hash
 	# def paypal_url(return_path)
@@ -139,7 +140,8 @@ class Booking < ActiveRecord::Base
 	def paypal_url(return_path)
 	@experience = Experience.find(self.experience_id)
 	values = {
-	    business: "meetthedanes@gmail.com",
+	    business: ENV['BUSINESS'],
+	    # business: "Meetdanes@meetdanes.com",
 	    cmd: "_xclick",
 	    currency_code: "DKK",
 	    upload: 1,

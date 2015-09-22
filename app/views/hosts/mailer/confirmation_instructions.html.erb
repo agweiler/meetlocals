@@ -1,11 +1,50 @@
-<p>Welcome <%= @email %>!</p>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+		<style type="text/css">
+		p {
+		  font-family: "Arial";
+/*		  font-size: 11px;*/
+		}
 
-<p> You have made the excellent choice of registering as a host at Meet the Danes! </p>
+		h1 {
+		  font-family: "Arial";
+/*		  font-size: 14px;*/
+		}
+		</style>
+	</head>
+	<body>
+		<p>Welcome <%= @email %>!</p>
 
-<p> Once you've confirmed your account, you'll be ask to fill out your personal profile and create an experience. Please do this as thoroughly as possible.</p>
+		<p> You have made the excellent choice of registering as a host at Meet the Danes.</p>
 
-<p> <strong> You and your experience will be featured on site only after Meet the Danes approve them. You will be notified of approval or rejection via email. </strong></p>
+		<p> This is an outstanding opportunity to meet people from around the world. </p>
 
-<p> You can confirm your account email through the link below:</p>
+		<p> As a host you are expected to serve 3 courses – it might be Danish or Continental cuisine it's up to you. With the food you can serve wine or beer depending on the dish. </p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+		<p> As a host you will receive a payment of 60% of the total guest payment. The amount will be on your account 3 days before the event.</p>
+
+		<p>Please remember it’s optional – meaning it’s up to you if you want to reject or accept an invitation from a guest. We just want you to have a great experience.
+		Once you've confirmed your account, you'll be ask to fill out your personal profile and create an experience (event). Please do this as thoroughly as possible.</p>
+
+		<p><strong>Your profile and your experience will be featured on the site as soon as you have been approved by Meet the Danes. You will be notified of approval via email.</strong></p>
+
+		<p>You can confirm your account email through the link below:</p>
+
+		<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+	</body>
+</html>
+
+
+
+ 
+ 
+
+ 
+
+ 
+
+
+
+

@@ -37,6 +37,14 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get "newsletter_failure" => "static_pages#newsletter_failure"
+
+  get "newsletter_success" => "static_pages#newsletter_success"
+
+  post "payment_failure" => "static_pages#payment_failure"
+
+  get "payment_failure" => "static_pages#payment_failure"
+
   post "payment_success" => "static_pages#payment_success"
 
   get "payment_success" => "static_pages#payment_success"
@@ -54,6 +62,12 @@ Rails.application.routes.draw do
   get 'admins/settings' => 'admins#settings', as: :admin_settings
 
   get 'admins/bookings' => 'admins#bookings_list', as: :admin_bookings_list
+
+  get 'admins/booking_type_all' => 'admins#booking_type_all'
+
+  get 'report' => 'admins#report'
+
+  post 'bookings/:id/host_paid' => 'bookings#host_paid', as: :mark_host_paid
 
   patch '/price' => 'admins#changeprice'
 

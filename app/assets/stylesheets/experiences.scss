@@ -288,6 +288,7 @@ float: right;
     font-family: $paragraph;
     font-size: 18px;
     margin-bottom: 0px;
+    color: #424242;
     /* color: $green_text; */
   }
 
@@ -310,12 +311,22 @@ float: right;
 #mealframe {
   background:#f9f9f9;
   padding-left: 25px;
+  p {
+    color: #424242;
+  }
 }
 
 #menuframe  {
   height:400px;
   background-color:#fff;
   padding-left: 25px;
+}
+
+#menuframe-menu  {
+  height:500px;
+  background-color:#fff;
+  padding-left: 0px;
+  border-bottom: 5px solid #66a422;
 }
 
 #menutab {
@@ -356,8 +367,9 @@ float: right;
 
 #specframe77 {
   height:175px;
-  background:#f9f9f9;
-  padding-left: 3%;
+/*  background:#f9f9f9;
+padding-left: 3%; */
+background-color: #fff !important;
 }
 
 
@@ -399,6 +411,7 @@ float: right;
   padding-top: 10px;
   font-weight: bold;
   padding-bottom: 10px;
+  text-align: center;
 }
 
 .exp_cta {
@@ -409,3 +422,38 @@ float: right;
   font-size: 10px;
 }
 
+#titlez {
+  text-transform: none;
+  font-weight: 500 !important;
+  font-family: "Amatic SC", cursive !important;
+  text-align: center;
+  font-size: 30px !important;
+  line-height: 35px !important;
+  color: #424242;
+}
+
+#xtra-titlez {
+  text-transform: none;
+  font-weight: 500 !important;
+  font-family: "Amatic SC", cursive !important;
+  font-size: 30px !important;
+  line-height: 35px !important;
+  text-align: center;
+}
+
+#rowz {
+  text-align: center !important;
+  color: #424242;
+}
+
+#menu-border {
+  border-top: 5px solid #66a422;
+  border-bottom: 5px solid #66a422;
+/*  border-color: #66a422;
+  border-width: 5px;
+  border-style: solid;*/
+}
+
+.labelz {
+  font-weight: 600 !important;
+}

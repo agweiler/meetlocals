@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy, :mark_completion, :cancel_booking]
   include ApplicationHelper
+  include BookingsHelper
 
   # GET /bookings
   def index
@@ -75,7 +76,7 @@ class BookingsController < ApplicationController
     if @experience.meal == "Dinner"
       @booking.end_time = @experience.time + 3.hours
     elsif @experience.meal == "Lunch"
-      @booking.end_time = @experience.time + 4.hours
+      @booking.end_time = @experience.time + 2.hours
     end
     
     respond_to do |format|
@@ -115,7 +116,7 @@ class BookingsController < ApplicationController
           guest.notifications.create(content: "Booking Status Updated", type_of: "bookings", type_id: "#{@booking.id}", seen: false)
           Guestmailer.reject_invitation(guest.id,@booking.id).deliver_later
         elsif booking_params[:status] == "completed"
-          Guestmailer.experience_completed(@bookingid,guest.id).deliver_later
+          Guestmailer.experience_completed(@booking.id,guest.id).deliver_later
           Adminmailer.experience_completed(host.id, guest.id).deliver_later
         end
         format.html { redirect_to [@experience, @booking], notice: 'Booking was successfully updated.' }
@@ -158,6 +159,12 @@ class BookingsController < ApplicationController
     respond_to :js
   end
 
+  def host_paid
+    @booking = Booking.find(params[:id])
+    @booking.update(host_paid: true)
+    redirect_to(:back)
+  end
+
 
   # Paypal sends this
   protect_from_forgery except: [:hook]
@@ -184,10 +191,12 @@ class BookingsController < ApplicationController
       host = @booking.experience.host
       Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
+      Adminmailer.guest_has_payed(guest.id, host.id, @booking.id).deliver_later
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
     else
+      redirect_to payment_failure_path and return
     end
-    render nothing: true ,notice: message
+    render nothing: true
     # redirect_to booking_path(@booking)
   end
 

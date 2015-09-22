@@ -49,16 +49,16 @@
 
       <span id="status"> <b style="color:blue">"<%= @booking.status.capitalize %>"</b> </span> &nbsp;
 
-      <% if (@booking.status != "completed" || @booking.status != "payment pending" || @booking.status != "confirmed") && current_host == @booking.experience.host %>
+      <% if (@booking.status == "requested" || @booking.status == "invited") && current_host == @booking.experience.host %>
         <%= link_to('RESPOND TO REQUEST', edit_experience_booking_path(@experience, @booking), id:"update_link", class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;
   border-color: #4183D7;" ) %>
         <!-- <%= button_to %> -->
       <% end %>
 
-      <% if @booking.check_finished? && @booking.status == 'confirmed' %>
+<!--       <% if @booking.check_finished? && @booking.status == 'confirmed' %>
         <%= link_to "Mark as COMPLETE", mark_booking_completion_path(@booking), id: 'complete_link', method: :post, remote: true, class:"btn btn-primary btn-sm", style:"color:#fff;  background-color: #4183D7;
   border-color: #4183D7;" %>
-      <% end %>
+      <% end %> -->
     </div>
 
     <% if current_guest && @booking.status == "invited" %>

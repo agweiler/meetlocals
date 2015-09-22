@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :username %>
-    <%= f.text_field :username, value: @host.email_to_username, class: "form-control" %>
+    <%= f.text_field :username, value: @host.email_to_username, required: true, class: "form-control" %>
   </div>
 
   <%= f.label :image %><br>
@@ -27,45 +27,45 @@
   </div>
   <br>
 
-  <div class="field"
+  <div class="field">
     <%= f.label :title %>
-    <%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], {include_blank:""}, class: "form-control" %>
+    <%= f.select :title, [["Mr.", "Mr."], ["Miss","Miss"], ["Mrs.","Mrs."], ["Dr.", "Dr."]], {include_blank:""}, required: true, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name, class: "form-control" %>
+    <%= f.text_field :first_name, required: true,class: "form-control" %>
   </div>
 
    <div class="field">
     <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: "form-control" %>
+    <%= f.text_field :last_name,required: true, class: "form-control" %>
   </div>
 
    <div class="field">
     <%= f.label :phone %>
-    <%= f.text_field :phone, class: "form-control" %>
+    <%= f.text_field :phone, required: true,class: "form-control" %>
   </div>
-  <% if @host.approved == false %>
+
     <div class="field">
-      <strong>Bank Account Number</strong>
-      <%= text_field_tag 'bank_number' ,nil, class: 'form-control' %>
+      <%= f.label :bank_account %>
+      <%= f.text_field :bank_number,required: true, class: 'form-control' %>
     </div>
 
     <div class="field">
-      <strong>Bank Name</strong>
-      <%= text_field_tag 'bank_name', nil, class: 'form-control' %>
+      <%= f.label :bank_name %>
+      <%= f.text_field :bank_name, required: true, class: 'form-control' %>
     </div>
 
      <div class="field">
-      <strong>Registration Number</strong>
-      <%= text_field_tag 'registration_number', nil, class: 'form-control' %>
+      <%= f.label :registration_number  %>
+      <%= f.text_field :registration_number ,required: true,class: 'form-control' %>
     </div>
-  <% end %>
+
 
   <div class="field">
     <%= f.label :occupation %>
-    <%= f.text_field :occupation, class: "form-control" %>
+    <%= f.text_field :occupation,required: true, class: "form-control" %>
   </div>
 
   <!-- <div class="field">
@@ -77,7 +77,7 @@
 
   <div class="field">
     <%= f.label :interests %>
-    <%= f.text_area :interests, class: "form-control" %>
+    <%= f.text_area :interests,required: true, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -87,38 +87,38 @@
 <!--   We could also make pets a drop down list  -->
   <div class="field">
     <%= f.label :pets %>
-    <%= f.text_field :pets, class: "form-control" %>
+    <%= f.text_field :pets, required: true,class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :languages %>
-     <%= f.text_field :languages, class: "form-control" %>
+     <%= f.text_field :languages, required: true,class: "form-control" %>
   </div>
 
    <div class="field">
     <%= f.label :dob%> (Date of Birth) <br>
-    <%= f.date_select :dob, {:start_year => Date.today.year - 100, :end_year => Date.today.year}, {class:"form-control", style:"width:80px;display:inline"}%>
+    <%= f.date_select :dob, {:start_year => Date.today.year - 100, :end_year => Date.today.year}, {required: true,class:"form-control", style:"width:120px;display:inline"}%>
 
   </div>
 
   <div class="field">
     <%= f.label :country %>
-    <%= f.select :country, [["Denmark", "Denmark"]], {}, class: "form-control" %>
+    <%= f.select :country, [["Denmark", "Denmark"]], {}, required: true,class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :region %>
-    <%= f.select :state, Experience.get_all_location, {}, class:"form-control" %>
+    <%= f.select :state, Experience.get_all_location, {},required: true, class:"form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :suburb,"ZIP Code and Town" %>
-      <%= f.text_field :suburb, class: "form-control", placeholder: "e.g. 2770 Kastrup" %>
+      <%= f.text_field :suburb, required: true,class: "form-control", placeholder: "e.g. 2770 Kastrup" %>
   </div>
 
   <div class="field">
     <%= f.label :street_address %><br>
-    <%= f.text_field :street_address, class: "form-control" %>
+    <%= f.text_field :street_address,required: true, class: "form-control" %>
   </div>
 
   <div class="field">

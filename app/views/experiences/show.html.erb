@@ -29,7 +29,7 @@
       <!-- <h4 style="padding-top:20px;   padding-top: 20px; color: #000; font-size: 28px;font-weight: 600;" class="text-center">DKK <%= @experience.price.round %>
         <span>PER PERSON</span></h4> -->
 
-     <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}",       class:"text-center" if @experience.special_event? %>
+     <%= content_tag :p, "Host Party @ #{@experience.date.strftime('%b %d, %Y')}", class:"text-center" if @experience.special_event? %>
       <%= render 'bookings/form' %>
     </div>
   </div>
@@ -43,115 +43,120 @@
     <%= content_tag 'h1', @experience.title %>
 
     <%= content_tag 'p', "#{@host.location} (Age #{@host.age})" %>
+    <hr style="margin-top: -5px">
+    <label class="labelz">Intro:</label>
     <%= content_tag 'p', @host.intro %>
-    <%= content_tag 'p', "Speaks: #{@host.languages}" %>
 
-    <label>Neighbourhood:</label>
+    <label class="labelz">Speaks:</label>
+    <%= content_tag 'p', @host.languages %>
+
+    <label class="labelz">Neighbourhood:</label>
     <%= content_tag 'p', @host.neighbourhood %>
 
-    <label>Additional Information:</label>
+    <label class="labelz">Additional Information:</label>
     <%= content_tag 'p', @host.additional_info %>
   </div>
-
-  <div class="row" style="" id="menuframe">
-    <h2>MENU</h2>
-    <table class="table" id="menutab">
+<div id="menu-border">
+  <div class="row" style="" id="menuframe-menu">
+    <h2 align="center" class="pad-bot">MENU</h2>
+    <table class="table table-striped" id="menutab">
       <thead>
         <tr>
-          <th>MEAL</th>
-          <th>ALCOHOL SERVED</th>
-          <th>CUISINE</th>
+          <th id="titlez">Meal</th>
+          <th id="titlez">Alcohol Served</th>
+          <th id="titlez">Cuisine</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @experience.meal %></td>
-          <td><%= @experience.beverages %></td>
-          <td><%= @experience.cuisine %></td>
+          <td id="rowz"><%= @experience.meal %></td>
+          <td id="rowz"><%= @experience.beverages %></td>
+          <td id="rowz"><%= @experience.cuisine %></td>
         </tr>
       </tbody>
       </table>
 
-    <table class="table" id="menutab">
+    <table class="table table-striped" id="menutab">
        <thead>
         <tr>
-          <th>GROUP SIZE</th>
-          <th>TIME</th>
-          <th>PRICE</th>
+          <th id="titlez">Group size</th>
+          <th id="titlez">Time</th>
+          <th id="titlez">Price</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @experience.max_group_size %> Max</td>
-          <td>
+          <td id="rowz"><%= @experience.max_group_size %> Max</td>
+          <td id="rowz">
           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
           <%= (@experience.time.in_time_zone +
                 @experience.duration.hour).strftime('%I:%M %p') %>
           </td>
-          <td>DKK <%= @experience.price.round %> per person</td>
+          <td id="rowz">DKK <%= @experience.price.round %> per person</td>
         </tr>
       </tbody>
       </table>
 
-    <table class="table">
+    <table class="table table-striped">
        <thead>
         <tr>
-          <th id = "hoststyle_title">I LOVE MAKING THIS KIND OF FOOD</th>
+          <th id="xtra-titlez">We love making this kind of food</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>
+          <td align="center">
               <%= @experience.host_style if @experience.host_style %>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <table class="table">
+    <table class="table table-striped">
        <thead>
         <tr>
-          <th id = "hoststyle_title">HOST PRESENTATION</th>
+          <th id= "xtra-titlez">Host Presentation</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>
+          <td align="center" >
               <%= @experience.description if @experience.description %>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-   <div class="row" id="specframe77">
-    <h2>OTHER DETAILS</h2>
-    <table class="table" id="menutab">
+  <br>
+   <div class="row" id="specframe77" style="margin-top: -2px">
+    <h2 align="center" class="pad-bot">OTHER DETAILS</h2>
+    <table class="table table-striped" id="menutab">
       <thead>
         <tr>
-          <th>INTERESTS</th>
-          <th>PETS</th>
-          <th>SMOKER?</th>
+          <th id="titlez">Interests</th>
+          <th id="titlez">Pets</th>
+          <th id="titlez">Smoker?</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @experience.host.interests %></td>
-          <td><%= @experience.host.pets %></td>
+          <td id="rowz"><%= @experience.host.interests %></td>
+          <td id="rowz"><%= @experience.host.pets %></td>
           <% if @experience.host.smoker == false %>
-          <td>No</td>
+          <td id="rowz">No</td>
           <% else %>
-          <td>Yes </td>
+          <td id="rowz">Yes </td>
           <% end %>
         </tr>
       </tbody>
     </table>
   </div>
-
+</div>
 
 
 
   <%if @host.video_url.present?%>
-  <div class="row" id="menuframe">
+  <div class="row" id="menuframe" style="background-color: #f9f9f9;">
     <h2>VIDEO PRESENTATION</h2>
     <embed width="600" height="315" src=<%= "#{@host.video_url}"%> style="max-width: 600px; width: 95%;">
   </div>
@@ -176,7 +181,7 @@
   <% if @host.experiences.special_events.present? && @host.next_host_party != nil %>
 
     <div class="row" id="specframe">
-      <h2>HOST PARTY</h2>
+      <h2 class="center">HOST PARTY</h2>
 
         <p><%= @host.next_host_party.description %> </p>
         <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
@@ -187,7 +192,7 @@
 <!-- Testimonials section only shows if testimonials are present -->
   <%if @host.testimonials.present?%>
     <div class="row" id="testiframe">
-      <h2>REVIEWS</h2>
+      <h2 align="center">REVIEWS</h2>
       <% @testimonials.each do |testimonial| %>
         <%= content_tag 'h5', testimonial.title %>
         <%= simple_format(testimonial.body) %>
@@ -235,3 +240,4 @@ $(function(){
   });
 });
 </script>
+

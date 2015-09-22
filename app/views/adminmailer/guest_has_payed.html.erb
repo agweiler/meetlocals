@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>A guest has payed </h1>
+    <p>
+     A guest has payed for an experience
+     His/Her details are as follows <br>
+     Guest Name = <%= @guest.first_name %> <%= @guest.last_name %> <br>
+     Host Name = <%= @host.first_name %> <%= @host.last_name %> <br>
+     Booking Id = <%= @booking.id %>  
+    </p>
+  </body>
+</html>
