@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       delete 'guests' => 'devise/registrations#destroy'
     end
   resources :site_images
+  resources :static_texts
   resources :guests
   resources :authentications
   # get '/auth/:provider/callback' => 'authentications#create'
