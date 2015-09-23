@@ -128,8 +128,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :intro %>
-    <%= f.text_area :intro, class: "form-control", placeholder: "Tell users something about yourself and why you'd be a good host." %>
+    <%= f.label :host_presentation %>
+    <%= f.text_area :host_presentation, class: "form-control", placeholder: "Tell users something about yourself and why you'd be a good host." %>
   </div>
 
   <div class="field">
@@ -137,15 +137,7 @@
     <%= f.text_area :neighbourhood, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :additional_info %>
-    <%= f.text_area :additional_info, class: "form-control", placeholder: "Tell users why you've signed up as a host and what you hope to gain from the experience." %>
-  </div>
 
-
-   <!-- <div class="actions">
-   <%= f.submit %>
-   </div> -->
  <!--   This makes google maps work DO NOT COMMENT OUT or CHANGE IT -->
 
   <%= f.hidden_field :latitude, class: "form-control" %>
