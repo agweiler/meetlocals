@@ -36,7 +36,7 @@ class Booking < ActiveRecord::Base
 	def status_action
 		case self.status
 		when "requested"
-			host_msg = "<p><b>Congratulations!</b> You have just received a booking request from a potential guest.</br> Click 'Respond to request' to accept, reject or modify the request, or use the Chat interface to get more information.</p>"
+			host_msg = "<p><b>Congratulations!</b> You have just received a booking request from a potential guest.</br> Click 'Respond to request' to invite the guest, reject them or to modify the request, or use the Chat interface to get more information.</p>"
 			guest_msg = "<p><b>Well done!</b> You have now created a booking request. Your potential host will get back to you as soon as possible.</p>"
 		when "invited"
 			host_msg = "<p><b>Well done!</b> You have accepted a booking request by sending an invitation.</br> Please wait for the guest to confirm booking. You will receive a notification by email.</p>"
@@ -45,7 +45,7 @@ class Booking < ActiveRecord::Base
 			host_msg = "<p><b>Oh no!</b> Unfortunately you had to reject this booking request.</p>"
 			guest_msg = "<p><b>Oh no!</b> Unfortunately the host had to reject this booking request.</p>"
 		when "confirmed"
-			host_msg = "<p><b>Congratulations!</b> A guest has confirmed the booking by completing payment to Meet The Danes.</br> Please do not forget to click 'Mark as COMPLETE' to initiate funds transfer once the event is complete.</p>"
+			host_msg = "<p><b>Congratulations!</b> A guest has confirmed the booking by completing payment to Meet The Danes.</br> </p>"
 			guest_msg = "<p><b>Well done!</b> You have confirmed your booking by completing payment.</br> Have an excellent experience with Meet the Danes!</p>"
 		when "payment pending"
 			host_msg = "<p><b>Congratulations!</b> A guest is currently processing payment for the booking by to Meet The Danes.</br> Please note that booking status updates may require a moment to take effect.</p>"
