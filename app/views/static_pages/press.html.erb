@@ -1,10 +1,24 @@
-<h2 id="header_text" class="heads pad-top pad-bot" style="text-align: center; color:#66a422; font-size:70px;"> PRESS</h2>
+<div class="container pad-top pad-bot" id="post-index">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="heads" style="text-align: center; color:#66a422; font-size:70px;"> Press</h1>
+     </div>  
+  </div> 
 
-<div class="col-md-8 col-md-offset-2" id="press-content">
-<p>Meet the Danes Home Hosted Dinner program has become a big success and both journalists and guests from around the world who have participated in this special event consider it one of the most wonderful and interesting experiences they have had in Scandinavia.</p>
+  <div class="row">
+      <div class="col-md-12"><%= link_to "Create New Post", new_post_path(post_type: "press"), class: "blue btn btn-primary btn-xl pull-right marge-bot" if admin_signed_in? %>
+      </div>
+  </div>
 
-<p>In November 2002 Meet The Danes received “The Silver Otter Award from the British Guild of Travel Writers” – Best Overseas Tourism Project for our concept. In February 2004 we received the national Award – Best Initiative 2003 from “The Danish Tourism Council”.</p>
 
-<p>Meet the Danes has been in many television programs around the world. Recently in BBC Food.</p>
 
+  <div class="row" align="center">
+    <% @posts.each do |post| %>
+  	<div class="col-md-4 col-xs-6" id="post-card">
+      <%= content_tag :h3, link_to(post.title, post), class:'title' %>
+        <%= image_tag post.images.first.image_file.url(:blogthumb), style: "border-radius:5%" if post.images.present? %> 
+      <p><%= content_tag :p, post.created_at.strftime("%B %d, %Y") %></p>
+  	</div>
+    <% end %>
+  </div>
 </div>

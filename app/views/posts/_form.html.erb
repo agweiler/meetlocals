@@ -20,6 +20,7 @@
 
 	<%= f.label :body %><br>
 	<%= f.text_area :body, class: "form-control border-hitam wysihtml5 col-md-10", style: "width:100%; height: 200px" %><br>
+  <%= f.hidden_field :post_type, :value => "#{params[:post_type]}" if @action == 'new' %>
 	</br>
   </div>
 

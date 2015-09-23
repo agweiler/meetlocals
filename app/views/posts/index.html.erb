@@ -6,7 +6,7 @@
   </div> 
 
   <div class="row">
-      <div class="col-md-12"><%= link_to "Create New Post", new_post_path, class: "blue btn btn-primary btn-xl pull-right marge-bot" if admin_signed_in? %>
+      <div class="col-md-12"><%= link_to "Create New Post", new_post_path(post_type: "blog"), class: "blue btn btn-primary btn-xl pull-right marge-bot" if admin_signed_in? %>
       </div>
   </div>
 
