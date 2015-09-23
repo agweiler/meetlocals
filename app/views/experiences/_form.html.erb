@@ -11,14 +11,10 @@
         <label for="experience_title">* Title</label><br>
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
-      <div class="field">
-        <label for="experience_description">* Host Presentation</label>
-        <%= f.text_area :description, placeholder: "Let people know who you are", required: true, class: 'form-control', rows: '3', style: 'width: 75%' %>
-      </div>
 
       <div class="field">
         <label for="experience_cuisine">* Cuisine</label>
-        <%= f.text_field :cuisine, required: true, class: 'form-control', style: 'width: 75%' %>
+        <%= f.text_field :cuisine, placeholder: "Continental, Italien, Danish, Indian, etc. and please only allow 30 characters in the box", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
       <div class="field">
         <%= f.label :beverages %><br>
