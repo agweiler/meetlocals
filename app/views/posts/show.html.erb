@@ -18,6 +18,8 @@
 	  <!-- <%=  link_to 'Back to blog', blog_path %> -->
 
 	</div>
-<p align="center"><%= link_to 'Back to Blog', blog_path, class: 'btn btn-lg' %></p>
+
+<p align="center"><%= link_to 'Back to Blog', blog_path, class: 'btn btn-lg' if @post.post_type == "blog" %></p>
+<p align="center"><%= link_to 'Back to Press', press_path, class: 'btn btn-lg' if @post.post_type == "press" %></p>
 
 </div>

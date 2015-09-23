@@ -24,6 +24,10 @@ class StaticPagesController < ApplicationController
   def unknown_error
   end
 
+  def press
+    @posts = Post.where(post_type: "press").order('created_at DESC')
+  end
+
   protect_from_forgery except: [:payment_success, :payment_failure]
   def payment_success
     if (request.request_method == "POST")
