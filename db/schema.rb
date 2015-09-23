@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922055524) do
+ActiveRecord::Schema.define(version: 20150923024142) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,7 +93,6 @@ ActiveRecord::Schema.define(version: 20150922055524) do
 
   create_table "experiences", force: :cascade do |t|
     t.string   "title"
-    t.text     "description"
     t.float    "duration"
     t.string   "cuisine"
     t.integer  "max_group_size"
@@ -181,9 +181,7 @@ ActiveRecord::Schema.define(version: 20150922055524) do
     t.string   "title"
     t.string   "languages"
     t.string   "street_address"
-    t.text     "intro"
     t.text     "neighbourhood"
-    t.text     "additional_info"
     t.date     "dob"
     t.string   "video_url"
     t.string   "occupation"
@@ -197,6 +195,7 @@ ActiveRecord::Schema.define(version: 20150922055524) do
     t.string   "bank_name"
     t.string   "bank_number"
     t.string   "registration_number"
+    t.string   "host_presentation"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree
