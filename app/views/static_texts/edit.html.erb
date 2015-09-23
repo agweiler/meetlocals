@@ -1,0 +1,20 @@
+<div class = "container pad-top">
+
+  <h1>Edit your text here </h1>
+
+  <h3><%= @static_text.name %></h3>
+
+	<%= form_for @static_text, html: {multipart: true} do |f| %>
+  
+  <div class="field">
+    <%= f.label :text %>
+    <%= f.text_area :content, placeholder: "Insert your text here",  class: 'form-control', style: 'width: 75%' , cols: 20, rows: 10 ,value: @static_text.content %>
+  </div>
+    <div class = "row">
+      <div class="actions exp_cta pad-top pad-bot" align="center">
+        <%= f.submit "Update Text", class: 'btn', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:20px"%>
+      </div>
+    </div>
+	<% end %>
+
+</div>

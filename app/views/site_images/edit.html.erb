@@ -1,0 +1,28 @@
+<div class = "container">
+
+	<%= image_tag(@site_image.image_file.url, size: "620x360") %>
+
+	<%= form_for @site_image, html: {multipart: true} do |f| %>
+  
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: "This is just for your reference,doesn't affect anything",  class: 'form-control', style: 'width: 75%' , value: @site_image.name %>
+  </div>
+    <%= f.label :image %><br>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <span class="btn btn-default upload-profile btn-file">
+          Browse<%= f.file_field(:image_file,required: true )%>
+        </span>
+      </span>
+      <input type="text" class="form-control" readonly>
+    </div>
+    <%= f.hidden_field(:image_number, :value => @image_number) %>
+    <div class = "row">
+      <div class="actions exp_cta pad-top pad-bot" align="center">
+        <%= f.submit "Update Image", class: 'btn', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:20px"%>
+      </div>
+    </div>
+	<% end %>
+
+</div>

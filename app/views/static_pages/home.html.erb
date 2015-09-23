@@ -83,7 +83,8 @@
 
     <% if idx == 0 %>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
-        <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/mad2_MTD.jpg" />
+        <%= image_tag(SiteImage.where(image_number: 1).first.image_file.url(:main)) %>
+<!--         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/mad2_MTD.jpg" /> -->
       </div>
 
       <div class="col-md-3 col-sm-4 col-xs-12 recent-host" style="">
@@ -117,12 +118,15 @@
         <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) ,class:"para" %></p>
       </div>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
-        <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/hjerte_small_MTD.jpg" />
+
+        <%= image_tag(SiteImage.where(image_number: 2).first.image_file.url(:main)) %>
+<!--         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/Foto+mad+woco.jpg" /> -->
       </div>
     <% elsif idx == 2 %>
 
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
-        <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/mad3_MTD.jpg" />
+        <%= image_tag(SiteImage.where(image_number: 3).first.image_file.url(:main)) %>
+<!--         <img src="https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/mad3_MTD.jpg" /> -->
       </div>
 
       <div class="col-md-3 col-sm-4 col-xs-12 recent-host" style="">
