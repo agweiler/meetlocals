@@ -95,7 +95,7 @@
        
         <!-- <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
       <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>  
-    <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;" ></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) , class:"para" %></p>
+    <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;" ></i></sup>... <%= content_tag :quote, truncate(host.host_presentation, length: 50) , class:"para" %></p>
 
       </div>
 
@@ -115,7 +115,7 @@
 
         <!-- <p class="pad-top-sm" style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
         <p class="pad-bot-sm pad-top-sm"><%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %></p>
-        <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50) ,class:"para" %></p>
+        <p style="text-align: none"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.host_presentation, length: 50) ,class:"para" %></p>
       </div>
       <div class="col-md-6 col-sm-8 hidden-xs thumbnail slice">
 
@@ -137,7 +137,7 @@
         
         <!-- <p style="line-height: 1px;font-size: 20px; font-weight: 600;"></p> -->
         <%= link_to host.experiences.first.title, experience_path(host.experiences.first), class:"event-title" %><br>
-       <p style="text-align: none;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.experiences.first.description, length: 50), class:"para" %></p>
+       <p style="text-align: none;"><sup><i class="fa fa-quote-left" style="font-size:6px;"></i></sup>... <%= content_tag :quote, truncate(host.host_presentation, length: 50), class:"para" %></p>
       </div>
 
       <div class="col-md-3 hidden-sm hidden-xs box3 marge-left" >
