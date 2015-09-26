@@ -11,6 +11,12 @@
 		  <% end %>
 		</p>
 		<%= image_tag @post.images.first.image_file.url(:host_party), class:"img-responsive paddo" if @post.images.present? %>
+		<%if @post.video_url.present?%>
+		<div class="row" id="menuframe" style="background-color: #f9f9f9;">
+		  <h2>VIDEO PRESENTATION</h2>
+		  <embed width="600" height="315" src=<%= "#{@post.video_url}"%> style="max-width: 600px; width: 95%;">
+		</div>
+		<% end %>
 
 	 				
 		<p class="col-md-8 col-md-offset-2 post_content" id="post-content"><%= @post.body.html_safe %></p>

@@ -35,7 +35,7 @@ class Experience < ActiveRecord::Base
 
   end
 
-	validates :title, :description, :cuisine, :max_group_size, :price,
+	validates :title, :cuisine, :max_group_size, :price,
 	  presence: true
 
 	# validate :available_days_must_have_minimum_one_day
