@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		params[:post][:video_url].gsub!(/watch\?v=/,"embed/")
 		@image_file = params[:post].delete(:image_file)
 		@post = Post.new(post_params)
 		if @post.save
@@ -60,6 +61,6 @@ class PostsController < ApplicationController
 	private
 
 	def post_params
-		params.require(:post).permit(:title, :body, :image,:post_type)
+		params.require(:post).permit(:title, :body, :image,:post_type, :video_url)
 	end
 end
