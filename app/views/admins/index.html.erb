@@ -92,7 +92,7 @@
         <thead>
           <tr>
             <th>Guest ID#</th>
-            <th>Username</th>
+            <th>Full Name</th>
             <th>Email</th>
             <th>Country</th>
             <th>Nationality</th>
@@ -104,7 +104,7 @@
           <% @guests.each do |guest| %>
             <tr class="text-left">
               <td><%= guest.id %></td>
-              <td><%= guest.username %></td>
+              <td><%= guest.first_name %> <%= guest.last_name %></td>
               <td><%= guest.email %></td>
               <td><%= guest.nationality %></td>
               <td><%= guest.country %></td>
