@@ -10,7 +10,9 @@ class HostsController < ApplicationController
 		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
-			@hosts = Host.where(approved: true).where("id IN (?)", Experience.pluck('host_id').uniq).order('random()').paginate(page: params[:page], per_page: limit_per_page)
+			@hosts = Host.where(approved: true)
+       .where("experiences_count > 0").order('random()')
+       .paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
 
 			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
@@ -117,7 +119,7 @@ class HostsController < ApplicationController
     approved = @host.approved
     @host.delete
     if current_admin && approved == false
-      Hostmailer.host_rejected(email).deliver_later  
+      Hostmailer.host_rejected(email).deliver_later
       redirect_to admin_settings_path
     elsif current_admin && approved == true
       redirect_to admins_path

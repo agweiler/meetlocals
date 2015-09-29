@@ -92,9 +92,10 @@ class Host < ActiveRecord::Base
       host_in = " AND hosts.id IN(#{free_hosts.join(',')})"
     end
 
-    # Host.where( age + loc + group + host_in ).order('random()')
+    Host.where( age + loc + group + host_in )
+        .where(approved:true).where("experiences_count > 0").order('random()')
     # removed random here
-    Host.joins(:experiences).where(age + loc + host_in + group).uniq
+    # Host.joins(:experiences).where(age + loc + host_in + group).uniq
   end
 
   def age
@@ -156,6 +157,10 @@ class Host < ActiveRecord::Base
     self.approved
   end
 
+  def self.reset_experiences_counter
+    Host.ids.each { |id| Host.reset_counters(id, :experiences) }
+  end
+
   def set_holiday(dates)
     self.holidays.destroy_all
     return true if dates.blank?
@@ -177,7 +182,7 @@ class Host < ActiveRecord::Base
         return event
       end
     end
-  
+
     return nil
 
   end

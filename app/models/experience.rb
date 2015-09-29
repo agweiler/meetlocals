@@ -1,5 +1,5 @@
 class Experience < ActiveRecord::Base
-	belongs_to :host
+	belongs_to :host, counter_cache: true
 	has_many :bookings, dependent: :destroy
 	has_many :images, as: :imageable, dependent: :destroy
 	has_many :testimonials, through: :bookings
