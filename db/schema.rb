@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929024659) do
+ActiveRecord::Schema.define(version: 20150929052242) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +200,7 @@ ActiveRecord::Schema.define(version: 20150929024659) do
     t.string   "bank_number"
     t.string   "registration_number"
     t.string   "host_presentation"
+    t.integer  "experiences_count"
   end
 
   add_index "hosts", ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true, using: :btree
@@ -227,8 +229,6 @@ ActiveRecord::Schema.define(version: 20150929024659) do
     t.string   "local_image_content_type"
     t.integer  "local_image_file_size"
     t.datetime "local_image_updated_at"
-    t.string   "direct_upload_url"
-    t.string   "image_file_file_path"
     t.string   "temp_file_key"
     t.boolean  "finished"
   end
