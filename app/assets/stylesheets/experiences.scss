@@ -447,8 +447,7 @@ background-color: #fff !important;
 }
 
 #menu-border {
-  border-top: 5px solid #66a422;
-  border-bottom: 5px solid #66a422;
+
 /*  border-color: #66a422;
   border-width: 5px;
   border-style: solid;*/
@@ -456,4 +455,13 @@ background-color: #fff !important;
 
 .labelz {
   font-weight: 600 !important;
+}
+.border_bottom {
+    border-bottom: 5px solid #66a422;
+}
+
+.border_top {
+  border: solid;
+  border-top: 5px solid #66a422;
+
 }

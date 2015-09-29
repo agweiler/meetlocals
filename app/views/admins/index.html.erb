@@ -92,10 +92,10 @@
         <thead>
           <tr>
             <th>Guest ID#</th>
-            <th>Username</th>
+            <th>Full Name</th>
             <th>Email</th>
+            <th>Number of Guests</th>
             <th>Country</th>
-            <th>Nationality</th>
             <th class="text-right">Actions</th>
           </tr>
         </thead>
@@ -104,9 +104,9 @@
           <% @guests.each do |guest| %>
             <tr class="text-left">
               <td><%= guest.id %></td>
-              <td><%= guest.username %></td>
+              <td><%= guest.first_name %> <%= guest.last_name %></td>
               <td><%= guest.email %></td>
-              <td><%= guest.nationality %></td>
+              <td><%= guest.number_of_guests %></td>
               <td><%= guest.country %></td>
               <td class="text-right">
                 <%= link_to 'View', guest, class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %>

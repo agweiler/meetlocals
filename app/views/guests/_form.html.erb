@@ -34,6 +34,11 @@
           <%= f.text_field :last_name, required: true, class: "form-control" %>
         </div>
 
+        <div class="field">
+          <%= f.label :profession %><br />
+          <%= f.text_field :profession , class: "form-control"%>
+        </div>
+
          <div class="field">
             <%= f.label :interests %>*<br>
             <%= f.text_field :interests, required: true, class: "form-control" %>
@@ -43,14 +48,16 @@
             <%= f.label :allergies %>*<br>
             <%= f.text_field :allergies, required: true, class: "form-control" %>
         </div>
-      </div>
 
-      <div class="col-md-6">
 
         <div class="field">
             <%= f.label :languages %>*<br>
             <%= f.text_field :languages, required: true, class: "form-control" %>
         </div>
+
+      </div>
+
+      <div class="col-md-6">
 
         <div class="field">
             <%= f.label :nationality %>*<br>
@@ -60,12 +67,26 @@
         <div class="field">
             <%= f.label :country %>*
             <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control", required: true,} %>
-
         </div>
 
         <div class="field">
-            <%= f.label :province %><br>
-            <%= f.text_field :province, class: "form-control" %>
+          <%= f.label :number_of_adults %><br />
+          <%= f.select :no_of_adults, options_for_select(0..10), {}, class:"form-control", required: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :number_of_children %><br />
+          <%= f.select :no_of_children, options_for_select(0..10), {}, class:"form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :age_of_adults %><br />
+          <%= f.text_field :age_of_adults, class:"form-control", placeholder: "Give a range from youngest to eldest", required: true%>
+        </div>
+
+        <div class="field">
+          <%= f.label :age_of_children %><br />
+          <%= f.text_field :age_of_children, class:"form-control", placeholder: "Give a range from youngest to eldest" %>
         </div>
 
         <div class="field">

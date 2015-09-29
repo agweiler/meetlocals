@@ -37,7 +37,7 @@
 </div>
 
 <div class="col-md-8" id="mealinfo">
-  <div class="row" id="mealframe">
+  <div class="row border_bottom " id="mealframe">
     <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins pull-right" if current_host == @experience.host%>
 
     <%= content_tag 'h1', @experience.title %>
@@ -92,7 +92,8 @@
           <%= (@experience.time.in_time_zone +
                 @experience.duration.hour).strftime('%I:%M %p') %>
           </td>
-          <td id="rowz">DKK <%= @experience.price.round %> per person</td>
+          <td id="rowz">DKK <%= @experience.price.round %> per person <br> Children from 0-7 years, free of charge 
+          <br>Children from 8-13, half price</td>
         </tr>
       </tbody>
       </table>
@@ -111,24 +112,9 @@
         </tr>
       </tbody>
     </table>
-
-    <table class="table table-striped">
-       <thead>
-        <tr>
-          <th id= "xtra-titlez">Host Presentation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td align="center" >
-              <%= @host.host_presentation if @host.host_presentation %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
   <br>
-   <div class="row" id="specframe77" style="margin-top: -2px">
+   <div class="row border-bottom" id="specframe77" style="margin-top: -2px; border-bottom: 5px solid #66a422 !important;">
     <h2 align="center" class="pad-bot">OTHER DETAILS</h2>
     <table class="table table-striped" id="menutab">
       <thead>
@@ -156,13 +142,13 @@
 
 
   <%if @host.video_url.present?%>
-  <div class="row" id="menuframe" style="background-color: #f9f9f9;">
+  <div class="row " id="menuframe" style="background-color: #f9f9f9;">
     <h2>VIDEO PRESENTATION</h2>
     <embed width="600" height="315" src=<%= "#{@host.video_url}"%> style="max-width: 600px; width: 95%;">
   </div>
   <% end %>
 
-  <div class="row" id="menuframe">
+  <div class="row border-top" id="menuframe">
    <h2>MAP</h2>
    <div id="map-canvas" style="float:left; max-width: 750px; width: 95%;"></div>
   </div>
