@@ -27,6 +27,10 @@
 				<%= @guest.title %> <%= @guest.first_name %> <%= @guest.last_name %>
 			</div>
 			<div class="field">
+				<strong>Profession: </strong>
+				<%= @guest.profession %> 
+			</div>
+			<div class="field">
 				<strong>Languages: </strong>
 				<%= @guest.languages %>
 			</div>
@@ -46,18 +50,28 @@
 				<strong>Country: </strong>
 				<%= @guest.country %>
 			</div>
-			<div class="field pad-bot">
-				<strong>Province: </strong>
-				<%= @guest.province %>
-			</div>
 			<div class="field">
 				<strong>About: </strong>
 				<div class="pad-top">
 				<%= simple_format(@guest.about) %>
 				</div>
 			</div>
-			
-
+			<div class="field">
+				<strong>Number of Adults: </strong>
+				<%= @guest.no_of_adults %>
+			</div>
+			<div class="field">
+				<strong>Number of Children: </strong>
+				<%= @guest.no_of_children %>
+			</div>
+			<div class="field">
+				<strong>Age of Adults: </strong>
+				<%= @guest.age_of_adults %>
+			</div>
+			<div class="field">
+				<strong>Age of Children: </strong>
+				<%= @guest.age_of_children %>
+			</div>
 		</div>
 
 	</div>

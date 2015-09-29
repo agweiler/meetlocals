@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923024142) do
-
+ActiveRecord::Schema.define(version: 20150929024659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,10 +133,14 @@ ActiveRecord::Schema.define(version: 20150923024142) do
     t.string   "languages"
     t.string   "nationality"
     t.string   "country"
-    t.string   "province"
     t.text     "interests"
     t.string   "allergies"
     t.boolean  "filled",                 default: false, null: false
+    t.string   "profession"
+    t.integer  "no_of_adults",           default: 0
+    t.integer  "no_of_children",         default: 0
+    t.string   "age_of_adults"
+    t.string   "age_of_children"
   end
 
   add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true, using: :btree
