@@ -133,10 +133,14 @@ ActiveRecord::Schema.define(version: 20150929052242) do
     t.string   "languages"
     t.string   "nationality"
     t.string   "country"
-    t.string   "province"
     t.text     "interests"
     t.string   "allergies"
     t.boolean  "filled",                 default: false, null: false
+    t.string   "profession"
+    t.integer  "no_of_adults",           default: 0
+    t.integer  "no_of_children",         default: 0
+    t.string   "age_of_adults"
+    t.string   "age_of_children"
   end
 
   add_index "guests", ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true, using: :btree
@@ -224,6 +228,8 @@ ActiveRecord::Schema.define(version: 20150929052242) do
     t.string   "local_image_content_type"
     t.integer  "local_image_file_size"
     t.datetime "local_image_updated_at"
+    t.string   "direct_upload_url"
+    t.string   "image_file_file_path"
     t.string   "temp_file_key"
     t.boolean  "finished"
   end
