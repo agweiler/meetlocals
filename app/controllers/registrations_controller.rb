@@ -18,6 +18,10 @@ class RegistrationsController < Devise::RegistrationsController
      	end
    end
 
+   def update_resource(resource, params)
+     @guest.update_attributes(params.except(:current_password))
+   end
+
    private
 
      def build_resource(*args)
