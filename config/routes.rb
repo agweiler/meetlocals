@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :hosts
 
   # devise_for :guests, controllers: { registrations: "guests/registrations" }
-  devise_for :guests, controllers:
+  devise_for :guests, controllers: 
    { omniauth_callbacks: "guests/omniauth_callbacks" ,sessions: "guests/sessions"},
    skip: [:registrations]
     as :guest do
@@ -20,13 +20,12 @@ Rails.application.routes.draw do
       get 'guests/sign_up' => 'registrations#new', as: 'new_guest_registration'
       get 'guests/edit' => 'registrations#edit',
        as: 'edit_guest_registration'
-       
-      patch 'guests' => 'registrations#update'
-      put   'guests' => 'registrations#update'
 
       #original devise paths
       get 'guests/cancel' => 'devise/registrations#cancel',
        as: 'cancel_guest_registration'
+      patch 'guests' => 'devise/registrations#update'
+      put 'guests' => 'devise/registrations#update'
       delete 'guests' => 'devise/registrations#destroy'
     end
   resources :site_images
