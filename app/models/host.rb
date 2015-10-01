@@ -33,33 +33,13 @@ class Host < ActiveRecord::Base
     ['Age', '20-35', '36-50', '51-65', '66+']
   end
 
-  # def self.search_by_age(low, high) # 20, 35
-  #   high ||= 200
-  #   young = Date.today.year - low.to_i #20 -> 1995
-  #   old = Date.today.year - high.to_i #35 -> 1980
-  #
-  #   lower_range = Date.new(  old, 01, 01 ) #1980.1.1
-  #   upper_range = Date.new(young, 12, 31 ) #1995.12.31
-  #
-  #   # between [ >=] 1980.1.1 and [<= ] 1995.12.31
-  #   Host.where('dob >= ? AND dob <= ?', lower_range, upper_range)
-  # end
-
-  # def self.search(low, high, loc) #low_age, high_age, location
-  #   high ||= 200
-  #   young = Date.today.year - low.to_i #20 -> 1995
-  #   old = Date.today.year - high.to_i #35 -> 1980
-  #
-  #   lower_range = Date.new(  old, 01, 01 ) #1980.1.1
-  #   upper_range = Date.new(young, 12, 31 ) #1995.12.31
-  #
-  #   loc == "All" ? loc = '' : loc = "AND state = '#{loc}'"
-  #
-  #   # between [ >=] 1980.1.1 and [<= ] 1995.12.31
-  #   # Host.where('dob >= ? AND dob <= ? ?', lower_range, upper_range, loc)
-  #   sql = "dob >= '#{lower_range}' AND dob <= '#{upper_range}' " + loc
-  #   Host.where(sql)
-  # end
+  def self.dob_ranges
+    [Date.new(1800)                 .. Date.today,
+     Date.new(Date.today.year - 35) .. Date.new((Date.today.year - 20), 12, 31),
+     Date.new(Date.today.year - 50) .. Date.new((Date.today.year - 36), 12, 31),
+     Date.new(Date.today.year - 65) .. Date.new((Date.today.year - 51), 12, 31),
+     Date.new(1800)                 .. Date.new((Date.today.year - 66), 12, 31)]
+  end
 
   def self.search(low, high, loc, group, date) #low_age, high_age, etc..
     high ||= 200 #66+
@@ -92,10 +72,40 @@ class Host < ActiveRecord::Base
       host_in = " AND hosts.id IN(#{free_hosts.join(',')})"
     end
 
-    Host.where( age + loc + group + host_in )
-        .where(approved:true).where("experiences_count > 0").order('random()')
+    # Host.where( age + loc + group + host_in )
+    #     .where(approved:true).where("experiences_count > 0").order('random()')
     # removed random here
-    # Host.joins(:experiences).where(age + loc + host_in + group).uniq
+    Host.joins(:experiences).where(age + loc + host_in + group).uniq
+  end
+
+  def self.search_by( params = {} )
+    unlist = []
+    unlist << :id if params[:date].blank?
+    unlist << :dob if params[:age_range] == "Age"
+    unlist << :state if params[:location] == "Location"
+    unlist << :max_group_size if params[:max_group] == "Guests"
+
+    unless params[:date].blank?
+      host_list = Host.in_holiday(params[:date]).pluck('hosts.id') +
+                  Host.has_booking(params[:date]).pluck('hosts.id')
+    end
+
+    date_ranges = Host.age_ranges.zip(Host.dob_ranges).to_h[params[:age_range]]
+
+    Host.where(dob: date_ranges) #filter age_range
+        .where(state: params[:location])
+        .where("max_group_size >= ?", params[:max_group].to_i)
+        .where.not(id: host_list.to_a.uniq) #filter out unavailable dates
+        .unscope(where: unlist) #unscoping array
+        .where(approved:true).where("experiences_count > 0").order('random()')
+  end
+
+  def self.refresh_max_group_size
+    Host.all.find_each do |host|
+      max_size = host.experiences.normal_events.maximum(:max_group_size)
+      host.update(max_group_size: max_size)
+      puts "Host ##{host.id}: max_group_size:#{host.max_group_size}"
+    end
   end
 
   def age

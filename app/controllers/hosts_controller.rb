@@ -3,8 +3,6 @@ class HostsController < ApplicationController
 	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
   def index
-		# age = params[:search][:age]
-		# Host.search_by_age(20, 40)
 		limit_per_page = 3
 		session[:seed] ||= rand(10).round(2) / 10
 		Host.connection.execute("select setseed(#{session[:seed]})")
@@ -14,16 +12,15 @@ class HostsController < ApplicationController
        .where("experiences_count > 0").order('random()')
        .paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
+      assign_search_inputs!
 
-			age_range = /(\d+)\W?(\d+)?/.match(params[:search][:age_range])
-			age_range ||= [nil, 0, 200]
-			@selected_age = age_range[0]
+			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
+			# age_range ||= [nil, 0, 200]
+      # debugger
 
-			@selected_location = params[:search][:location]
-			@selected_group = params[:search][:max_group]
-			@selected_date = params[:search][:date]
-
-			@hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
+			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
+      @hosts = Host.search_by(search_params)
+                   .paginate(page:params[:page], per_page: limit_per_page)
 		end
 
 		respond_to do |format|
@@ -177,6 +174,17 @@ class HostsController < ApplicationController
     def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude,
        :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number)
+    end
+
+    def search_params
+      params.require(:search).permit(:date, :age_range, :max_group, :location)
+    end
+
+    def assign_search_inputs!
+      @selected_age = search_params[:age_range]
+      @selected_location = search_params[:location]
+      @selected_group = search_params[:max_group]
+      @selected_date = search_params[:date]
     end
 
 end
