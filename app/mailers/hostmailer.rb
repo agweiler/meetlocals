@@ -4,7 +4,7 @@ class Hostmailer < ApplicationMailer
     @host = Host.find host_id
     @booking = Booking.find booking_id
     @guest = Guest.find guest_id
-    mail(to: @host.email, subject: "Hurray! You have received a booking request")
+    mail(to: @host.email, subject: "You have received a booking request from Meet the Danes")
   end
 
   def payment_completion(host_id, booking_id)
@@ -30,7 +30,7 @@ class Hostmailer < ApplicationMailer
     @booking = Booking.find booking_id
     @host = Host.find host_id
     @day = day
-    mail(to: @host.email, subject: "Reminder! You have an upcoming event!")
+    mail(to: @host.email, subject: "Reminder! You have an upcoming event with Meet The Danes.")
   end
 
   def guest_cancel(guest_id,host_id,booking_id)

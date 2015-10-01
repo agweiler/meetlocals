@@ -6,7 +6,12 @@
   <body>
     <h1> <%= @guest.username %> has canceled your booking </h1>
     <p>
-        We're sorry but <%= @guest.username %> has had to cancel his/her event with you. 
+
+       <p> We're sorry but <%= @guest.username %> has had to cancel his/her event with you.</p>
+        <p> See the canceled booking details <%= link_to 'here', booking_url(@booking) %> </p>
+        <p>Kind regards</p>
+        <p>Meet the Danes</p>
+
     </p>
   </body>
 </html>

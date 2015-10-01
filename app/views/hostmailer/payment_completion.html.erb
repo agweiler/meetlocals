@@ -6,6 +6,8 @@
   <body> 
     <h1>Hello <%= @host.first_name %>. Congratulations! User: <%= @guest.username %> has completed payment for the experience: <%= @booking.experience.title %>.</h1>
 
+    <p>See your guest details: <%= link_to 'here' ,  guest_url(@guest)  %></p>
+
     <p>Payment from Meet the Danes will occur three days before the event.</p>
 
     <!--INSET SCREENSHOT OF BOOKING LINK HERE-->   

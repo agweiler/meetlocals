@@ -6,14 +6,16 @@
   <body>
     <h1>You have a big day coming up!</h1>
     <p>
-      You have a booking scheduled in <%= @day %> day/s, better start preparing!
+      You have a booking scheduled in <%= @day %> day/s. The event with your guest is just around the corner and we wish you a very pleasant evening together. 
+
     </p>
 
     <p> 
       Just as a reminder, your booking is with <% @booking.guest.first_name %> <% @booking.guest.last_name %>  
-      You can confirm by going to your account via <%= link_to 'Hosts Sign-in Page' , new_host_session_url  %> 
+      You can check here: <%= link_to 'here' ,  guest_url(@guest)  %>
     </p>
-    <p>Thanks for using Meet the Danes and have a great day!</p>
+    <p>Kind regards</p>
+    <p>Meet the Danes</p>
 
   </body>
 </html>
