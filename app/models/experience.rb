@@ -12,6 +12,9 @@ class Experience < ActiveRecord::Base
 
 	before_save :set_default_mealtime, :as_special_event
 
+	after_save :update_max_group_size_to_host
+	after_destroy :update_max_group_size_to_host
+
 	def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
@@ -88,5 +91,11 @@ class Experience < ActiveRecord::Base
 
 	def has_images?
 		self.exp_images.present?
+	end
+
+	def update_max_group_size_to_host
+		max_size = Experience.normal_events.where(host_id: host_id)
+												  .maximum(:max_group_size)
+		self.host.update(max_group_size: max_size.to_i)
 	end
 end
