@@ -90,6 +90,6 @@ private
 
 	# Never trust parameters from the scary internet, only allow the white list through.
   def guest_params
-    params.require(:guest).permit(:username, :email, :password, :password_confirmation, :about, :remember_me, :image_file, :first_name, :last_name, :title, :languages, :nationality, :country, :interests, :allergies, :no_of_adults, :no_of_children, :age_of_adults,:age_of_children, :profession)
+    params.require(:guest).permit(:username, :email, :password, :password_confirmation, :about, :remember_me, :image_file, :first_name, :last_name, :title, :languages, :nationality, :country, :interests, :allergies, :profession)
   end
 end

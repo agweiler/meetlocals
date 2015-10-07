@@ -69,25 +69,6 @@
             <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control", required: true,} %>
         </div>
 
-        <div class="field">
-          <%= f.label :number_of_adults %><br />
-          <%= f.select :no_of_adults, options_for_select(0..10), {}, class:"form-control", required: true %>
-        </div>
-
-        <div class="field">
-          <%= f.label :number_of_children %><br />
-          <%= f.select :no_of_children, options_for_select(0..10), {}, class:"form-control" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :age_of_adults %><br />
-          <%= f.text_field :age_of_adults, class:"form-control", placeholder: "Give a range from youngest to eldest", required: true%>
-        </div>
-
-        <div class="field">
-          <%= f.label :age_of_children %><br />
-          <%= f.text_field :age_of_children, class:"form-control", placeholder: "Give a range from youngest to eldest" %>
-        </div>
 
         <div class="field">
           <%= f.label :about %><br />
