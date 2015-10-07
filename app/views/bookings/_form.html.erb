@@ -31,8 +31,13 @@
 
 
   <div class="field">
-    <%= f.label :group_size %>
-    <%= f.select :group_size, options_for_select(@experience.max_number_in_group, @booking.group_size), {}, class:"form-control" %>
+    <%= f.label :number_of_adults%>
+    <%= f.select :no_of_adults, options_for_select(@experience.max_number_in_group, @booking.no_of_adults), {}, class:"form-control" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :number_of_children%> (Age 7-13)
+    <%= f.select :no_of_children, options_for_select(0..10, @booking.no_of_children), {}, class:"form-control" %>
   </div>
 
   <div class="field" id="private_field">
@@ -42,7 +47,7 @@
   <% if current_guest %>
   <div class="field">
     <%= f.label :additional_information %>
-    <%= f.text_area :add_info, placeholder: "Add any relevant info here, eg. Number of kids" ,class: "form-control" %>
+    <%= f.text_area :add_info, placeholder: "Add any relevant info here, eg. Number of children under the age of 7" ,class: "form-control" %>
   </div>
  <% elsif current_host %>
     <%= @booking.add_info %>

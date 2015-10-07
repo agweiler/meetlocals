@@ -16,9 +16,9 @@ class Guest < ActiveRecord::Base
     self.notifications.all
   end
 
-  def number_of_guests
-    self.no_of_adults + self.no_of_children
-  end
+  # def number_of_guests
+  #   self.no_of_adults + self.no_of_children
+  # end
 
   def apply_omniauth(omniauth)
     self.email = omniauth['info']['email'] if email.blank?
