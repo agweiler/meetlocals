@@ -83,7 +83,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
       if @experience.host.approved == false
-        Adminmailer.host_created(@host.id).deliver_later
+        Adminmailer.host_created(@current_host.id).deliver_later
         redirect_to create_exp_success_path
       else
         redirect_to @experience, notice: 'Experience was successfully updated.'
