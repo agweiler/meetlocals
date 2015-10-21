@@ -4,15 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello <%= @guest.username %></h1>
+    <h1>Dear <%= @guest.username %></h1>
     <p>
-     The host <%= @host.first_name %> <%= @host.last_name %> has accepted your request for booking! Please complete payment at <%= link_to 'Meet the Danes',experience_booking_url(@booking.experience, @booking)%> to confirm the booking and receive the host's address. 
+     The host <%= @host.first_name %> <%= @host.last_name %> has accepted your request for booking! Please complete payment at <%= link_to 'Meet the Danes',experience_booking_url(@booking.experience, @booking)%> to confirm the booking and receive the host's address and other details regarding your dinner.
     
     </p>
 
-    <p> Studies show that just anticipating an event increases your happiness, Build your anticipation and increase your happiness free of charge by looking at the experience again, just go back to <%= link_to 'Meet the Danes',show_experience_url(@booking.experience) %> </p>
+    <p> Thousands of visitors have met our hosting families and got a very personal, unique and unforgettable experience. Now it’s your turn!</p>
     
-    <p>Thanks for using Meet the Danes and have a great day!</p>
+    <p>Thank you for using Meet the Danes. We wish you a great experience.
+
+</p>
 
   </body>
 </html>

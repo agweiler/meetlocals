@@ -40,10 +40,6 @@
     <%= f.select :no_of_children, options_for_select(0..10, @booking.no_of_children), {}, class:"form-control" %>
   </div>
 
-  <div class="field" id="private_field">
-   <%= f.check_box :is_private, {disabled: !!@experience.date }%>
-   <%= f.label :is_private, value:'private event' %>
-  </div>
   <% if current_guest %>
   <div class="field">
     <%= f.label :additional_information %>
