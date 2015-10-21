@@ -4,13 +4,13 @@ class Guestmailer < ApplicationMailer
     @guest = Guest.find guest_id
     @booking = Booking.find booking_id
     @host = Host.find host_id
-    mail(to: @guest.email, subject: "Your booking status has been changed")
+    mail(to: @guest.email, subject: "Your dinner request has been accepted")
   end
 
     def reject_invitation(guest_id,booking_id)
     @guest = Guest.find guest_id
     @booking = Booking.find booking_id
-    mail(to: @guest.email, subject: "Sorry, they can't make it work")
+    mail(to: @guest.email, subject: "Sorry, the host can't make it work")
   end
 
   def payment_confirmed(guest_id,booking_id,host_id)
@@ -18,7 +18,7 @@ class Guestmailer < ApplicationMailer
     @booking = Booking.find booking_id
     @host = Host.find host_id
     @google_map = "https://www.google.com/maps/place/#{@host.street_address} #{@host.suburb} #{@host.state}"
-    mail(to: @guest.email, subject: "You have confirmed payment by paying us")
+    mail(to: @guest.email, subject: "Details regarding your Meet the Danes event")
   end
 
   def experience_completed(booking_id,guest_id)
@@ -32,7 +32,7 @@ class Guestmailer < ApplicationMailer
     @booking = Booking.find booking_id
     @message = Message.find message_id
     @host = Host.find host_id
-    mail(to: @guest.email, subject: "You got mail!")
+    mail(to: @guest.email, subject: "You have a mail from your Meet the Danes host")
   end
 
   def create_booking_request(host_id,booking_id,guest_id)

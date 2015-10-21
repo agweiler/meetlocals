@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi there <%= @guest.username %>! You have created a booking for <%= @booking.experience.title %> by <%= @host.first_name %> <%= @host.last_name %>! </h1>
+    <h1>Dear <%= @guest.username %>. You have created a booking for <%= @booking.experience.title %> by <%= @host.first_name %> <%= @host.last_name %>! </h1>
     
     <p>
         <%= @host.first_name %> <%= @host.last_name %> should get in touch with you soon,
@@ -15,7 +15,7 @@
     <p>
       For a shortcut to loggin in, follow <%= link_to 'Meet the Danes' , new_guest_session_url %>.
     </p>
-    <p>Thanks for using Meet the Danes and have a great day!</p>
+    <p>Thank you for using Meet the Danes. We hope you will have a great experience</p>
 
   </body>
 </html>
