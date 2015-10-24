@@ -22,7 +22,7 @@ module AdminsHelper
 			one_booking << book.host_paid
 			row << one_booking
 		end
-		CSV.generate(headers: true) do |csv|
+		CSV.generate(headers: true, :col_sep => "\t") do |csv|
 			csv << attributes
 			row.each do |one_row|
 				csv << one_row 
