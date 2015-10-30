@@ -13,7 +13,7 @@ class AdminsController < ApplicationController
 	
 	def settings
 		redirect_to "/" unless current_admin
-		@prices = Price.all
+		@prices = Price.all.order(:id)
 		@hosts = Host.where(approved: false)
 	end
 
@@ -28,8 +28,9 @@ class AdminsController < ApplicationController
 	def changeprice
 		price = Price.find params[:format]
 		if price.meal.include? "Host_Party_"
-			price.meal.slice! "Host_Party_"
-			Experience.where.not(date: nil).where(meal: price.meal).update_all(price: params[:price][:price])
+			meal = price.meal.slice "Host_Party_"
+			price.update(price: params[:price][:price])
+			Experience.where.not(date: nil).where(meal: meal).update_all(price: params[:price][:price])
 		else	
 			price.update(price: params[:price][:price])
 			Experience.where(meal: price.meal).update_all(price: params[:price][:price])
