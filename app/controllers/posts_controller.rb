@@ -43,8 +43,10 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id])
 
 		if @post.update(params[:post].permit(:title, :body))
-			@post.images.delete_all
-			@post.images.create(local_image: @image_file, caption: @image_file.original_filename)
+			if !@image_file.nil?
+				@post.images.delete_all
+				@post.images.create(local_image: @image_file, caption: @image_file.original_filename)
+			end
 			redirect_to @post
 		else
 			render 'edit'

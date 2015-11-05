@@ -10,7 +10,7 @@
 	<% @static_text.each do |text| %>
 	  <tr>
       <td><%= text.name %></td>
-      <td><%= text.content %></td>
+      <td><%= text.content.html_safe %></td>
       <td><%= link_to "Edit Text", edit_static_text_path(text) %></td>
   	</tr>
   	<% end %>

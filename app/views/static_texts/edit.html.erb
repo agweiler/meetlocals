@@ -8,7 +8,7 @@
   
   <div class="field">
     <%= f.label :text %>
-    <%= f.text_area :content, placeholder: "Insert your text here",  class: 'form-control', style: 'width: 75%' , cols: 20, rows: 10 ,value: @static_text.content %>
+    <%= f.text_area :content, placeholder: "Insert your text here",  class: 'form-control wysihtml5', style: 'width: 75%' , cols: 20, rows: 10 ,value: @static_text.content %>
   </div>
     <div class = "row">
       <div class="actions exp_cta pad-top pad-bot" align="center">
@@ -18,3 +18,13 @@
 	<% end %>
 
 </div>
+<script type="text/javascript">
+  $(function(){
+
+    $('.wysihtml5').each(function(i, elem) {
+      $(elem).wysihtml5();
+    });
+
+    $('.glyphicon-picture').parent().attr('style', 'display:none');
+  });
+</script>
