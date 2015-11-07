@@ -71,6 +71,13 @@ background-size: contain;
   border-radius: 0;
 }
 
+#location_box {
+  width: 200px;
+  // width:110%;
+  overflow:hidden;
+
+}
+
 #search_box{
 
 	.square_box{
@@ -200,6 +207,7 @@ hgroup h3{
 		color: #fff;
 		text-transform: uppercase;
     }
+
 }
 
 @media screen and (max-width: 998px) {
@@ -214,7 +222,16 @@ hgroup h3{
     }
 }
 
+
 @media (max-width: 1042px) {
+
+
+    .box2 {
+
+      background-position: 35px 190px;
+    }
+
+
     .navbar-header {
         float: none;
     }
