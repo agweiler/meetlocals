@@ -130,7 +130,8 @@ class Host < ActiveRecord::Base
 		 ['Zealand','Zeeland'],
 		 ['North Jutland', 'Nordjylland'],
 		 ['Mid Jutland', 'Midtjylland'],
-		 ['South Jutland & Fyn', 'Syddanmark'],
+		 ['South Jutland', 'Syddanmark'],
+     ['Fyn','Funen'],
 		 ['Greater Copenhagen', 'Hovedstaden']]
 	end
 
