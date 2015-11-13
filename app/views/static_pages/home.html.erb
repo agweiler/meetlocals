@@ -168,8 +168,8 @@
 
          <!--  <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a></p> -->
           <div class="row" style="position: absolute; bottom: 0; padding: 10px; width:100%;">
-            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar col-xs-6", style:" color:#b4b4b4; line-height: 50px;" %>
-           <div class="col-xs-6" style="color:#b4b4b4;   text-align: right;"> <span><i class="fa fa-arrow-left"></i> </span><span><%= link_to 'Book Now', experience, class: "btn btn-danger", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %></span></div>
+            <%= content_tag :span, experience.date.strftime(" %B %d, %Y"), class:"fa fa-calendar col-xs-6 date-resize", style:" color:#b4b4b4; line-height: 50px;" %>
+           <div class="col-xs-6 padding-top-255" style="color:#b4b4b4;   text-align: right;"> <span><i class="fa fa-arrow-left"></i> </span><span><%= link_to 'Book Now', experience, class: "btn btn-danger smaller-btn ", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %></span></div>
           </div>
         </div>
       </div>

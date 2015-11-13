@@ -18,14 +18,14 @@
       {selected: @selected_age}, {class:"form-control square_box"} %>
   </div>
 
-  <div class="input-group col-sm-2 col-xs-12 selectParent">
+  <div class="input-group col-sm-2 col-xs-12 selectParent" id = "location">
     <%= select :search, :max_group, (["Guests"] + (1..10).to_a),
       {selected: @selected_group}, {class:"form-control square_box"} %>
   </div>
 
   <div class="input-group col-sm-2 col-xs-12 selectParent">
     <%= select :search, :location, Host.get_location,
-      {selected: @selected_location}, {class:"form-control square_box"} %>
+      {selected: @selected_location}, {class:"form-control square_box location-box", id: "location-box"} %>
   </div>
 <!-- add the id = location_box to make the width longer -->
   <div class="input-group">
