@@ -209,11 +209,10 @@ and (max-device-width : 667px)
   }
 
   .padding-top-255 {
-    padding-top: 255px !important;
+    padding-top: 280px !important;
   }
 
   .date-resize {
-    line-height: 15px !important;
     font-size: 14px !important;
     padding-top: 260px !important;
   }
@@ -235,9 +234,6 @@ and (max-device-width : 667px)
 		color: #fff;
 		text-transform: uppercase;
     }
-  .date-resize {
-    line-height: 30px !important;
-  }
 }
 
 @media screen and (max-width: 998px) {
