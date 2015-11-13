@@ -147,14 +147,14 @@
 
   <%if @host.video_url.present?%>
   <div class="row " id="menuframe" style="background-color: #f9f9f9;">
-    <h2 style = "padding-top: 50px;">VIDEO PRESENTATION</h2>
+    <h2>VIDEO PRESENTATION</h2>
     <embed width="600" height="315" src=<%= "#{@host.video_url}"%> style="max-width: 600px; width: 95%;">
   </div>
   <% end %>
 
   <div class="row border-top" id="menuframe">
    <h2>MAP</h2>
-   <div id="map-canvas" style="float:left; max-width: 750px; width: 95%;"></div>
+   <div id="map-canvas" style="float:left; max-width: 750px; width: 95%; margin-bottom: 20px;"></div>
   </div>
 
 
