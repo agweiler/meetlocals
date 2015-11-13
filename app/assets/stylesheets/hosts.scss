@@ -84,7 +84,11 @@ padding:50px;
 	}
 }
 
-
+#location-box {
+	background-position: right center;
+	background-origin: content-box;
+	width: 165px;
+}
 #holiday_calendar{
 
 	background-color: #eee;
