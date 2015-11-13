@@ -219,6 +219,12 @@ and (max-device-width : 667px)
   }
 }
 
+@media screen and (max-width: 350px) {
+  .resize-small-pic {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 798px) {
 	hgroup h3 {
 		position:relative;
