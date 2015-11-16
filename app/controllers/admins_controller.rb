@@ -56,9 +56,11 @@ class AdminsController < ApplicationController
 	end
 
 	def report
-		@bookings = Booking.where(status: "confirmed").where(date: params[:range].to_date..Date.today + 1.month)
+		start_date = params[:start_date].values.join("-").to_date
+		end_date = params[:end_date].values.join("-").to_date
+		@bookings = Booking.where(status: "confirmed").where(date: start_date..end_date)
 		respond_to do |format|
-			format.csv { send_data convert_to_csv(@bookings), filename: "Report from #{params[:range].to_date} to #{Date.today}.csv"}
+			format.csv { send_data convert_to_csv(@bookings), filename: "Report from #{start_date} to #{end_date}.csv" }
 		end
 	end
 
