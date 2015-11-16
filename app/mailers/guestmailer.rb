@@ -17,7 +17,7 @@ class Guestmailer < ApplicationMailer
     @guest = Guest.find guest_id
     @booking = Booking.find booking_id
     @host = Host.find host_id
-    @google_map = "https://www.google.com/maps/place/#{@host.street_address} #{@host.suburb} #{@host.state}"
+    @google_map = "https://www.google.com/maps/place/#{@host.street_address} #{@host.suburb}"
     mail(to: @guest.email, subject: "Details regarding your Meet the Danes event")
   end
 

@@ -99,4 +99,20 @@ class Experience < ActiveRecord::Base
 												  .maximum(:max_group_size)
 		self.host.update(max_group_size: max_size.to_i)
 	end
+
+	def is_host_party?(action,host)
+		if action == "new"
+			if host.approved == true
+				true
+			else
+				false
+			end
+		elsif action == "edit"
+			if self.date != nil
+				true
+			else
+				false
+			end
+		end
+	end
 end
