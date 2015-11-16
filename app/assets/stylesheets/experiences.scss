@@ -325,7 +325,7 @@ float: right;
 }
 
 #menuframe-menu  {
-  height:500px;
+  height:auto;
   background-color:#fff;
   padding-left: 0px;
   border-bottom: 5px solid #66a422;
@@ -357,7 +357,6 @@ float: right;
   height:250px;
   background:#f9f9f9;
   padding-left: 3%;
-
 }
 
 #specframe1 {
@@ -368,10 +367,8 @@ float: right;
 }
 
 #specframe77 {
-  height:175px;
-/*  background:#f9f9f9;
-padding-left: 3%; */
-background-color: #fff !important;
+  height:auto;
+  background-color: #fff !important;
 }
 
 

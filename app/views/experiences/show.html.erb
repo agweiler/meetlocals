@@ -106,7 +106,6 @@
       </thead>
       <tbody>
         <tr>
-
           <td align="left">
             <%= @experience.special_event? ? @host.host_presentation : @experience.host_style  %>
           </td>
@@ -114,8 +113,7 @@
       </tbody>
     </table>
   </div>
-  <br>
-   <div class="row border-bottom" id="specframe77" style="margin-top: -2px; margin-bottom:20px;">
+   <div class="row border-bottom" id="specframe77" style="margin-bottom:20px;">
     <h2 align="center" class="pad-bot">OTHER DETAILS</h2>
     <table class="table table-striped" id="menutab">
       <thead>
@@ -144,7 +142,7 @@
 
   <%if @host.video_url.present?%>
   <div class="row " id="menuframe" style="background-color: #f9f9f9;">
-    <h2>VIDEO PRESENTATION</h2>
+    <h2 style = "margin-top: 0px;">VIDEO PRESENTATION</h2>
     <embed width="600" height="315" src=<%= "#{@host.video_url}"%> style="max-width: 600px; width: 95%;">
   </div>
   <% end %>
