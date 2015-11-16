@@ -44,12 +44,8 @@
 
     <%= content_tag 'p', "#{@host.location} (Age #{@host.age})" %>
     <hr style="margin-top: -5px">
-    <label class="labelz">Host Presentation:</label>
-    <% if @experience.date == nil %>
-      <%= content_tag 'p', @host.host_presentation %>
-    <% else %>
-      <%= content_tag 'p', @experience.host_style %>
-    <% end %>
+    <label class="labelz"><%= @experience.special_event? ? "Host Party Presentation:" : "Host Presentation:" %></label>
+      <%= content_tag 'p', @experience.special_event? ? @experience.host_style : @host.host_presentation %>
 
     <label class="labelz">Speaks:</label>
     <%= content_tag 'p', @host.languages %>
@@ -105,20 +101,19 @@
     <table class="table table-striped">
        <thead>
         <tr>
-          <th id="xtra-titlez">We love making this kind of food</th>
+          <th id="xtra-titlez"><%= @experience.special_event? ? "Host Presentation:" : "We love making this kind of food:" %></th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td align="center">
-              <%= @experience.host_style if @experience.host_style %>
+          <td align="left">
+            <%= @experience.special_event? ? @host.host_presentation : @experience.host_style  %>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <br>
-   <div class="row border-bottom" id="specframe77" style="margin-top: -2px; margin-bottom:20px;">
+   <div class="row border-bottom" id="specframe77" style="margin-bottom:20px;">
     <h2 align="center" class="pad-bot">OTHER DETAILS</h2>
     <table class="table table-striped" id="menutab">
       <thead>
@@ -147,7 +142,7 @@
 
   <%if @host.video_url.present?%>
   <div class="row " id="menuframe" style="background-color: #f9f9f9;">
-    <h2>VIDEO PRESENTATION</h2>
+    <h2 style = "margin-top: 0px;">VIDEO PRESENTATION</h2>
     <embed width="600" height="315" src=<%= "#{@host.video_url}"%> style="max-width: 600px; width: 95%;">
   </div>
   <% end %>
@@ -172,7 +167,7 @@
 
     <div class="row" id="specframe">
       <h2 class="center">HOST PARTY</h2>
-      <p><%= @host.host_presentation %> </p>
+      <p><%= @host.next_host_party.host_style %> </p>
         <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
     </div>
   <% end %>

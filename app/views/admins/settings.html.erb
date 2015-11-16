@@ -78,20 +78,24 @@
   </div>
 
   <div class = "col-md-offset-2 col-md-8 pad-bot">
-    <h2 class="text-center">Download Daily Report</h2>
-    <hr>
-      <%= link_to "Download", report_path(format: "csv", range: Date.today..Date.today) %>
-  </div>
+    <h2 class="text-center">Download Reports</h2>
+    <div>
+      <%= form_tag("/report", method: "get", format: "csv") do %>
+        <%= label_tag(:start_date, "Start Date") %> <br>
+          <%= select_date Date.today, 
+          {prefix: "start_date",use_short_month:true, order:[:day, :month, :year],
+          start_year: 2015, end_year: Date.today.year.next},
+          {required: true } %> <br><br>
 
-  <div class = "col-md-offset-2 col-md-8 pad-bot">
-    <h2 class="text-center">Download Weekly Report</h2>
-    <hr>
-      <%= link_to "Download", report_path(format: "csv", range: 1.week.ago..Date.today) %>
-  </div>
+          <%= label_tag(:end_date, "End Date") %> <br>
+            <%= select_date Date.today, 
+            {prefix: "end_date", use_short_month:true, order:[:day, :month, :year],
+            start_year: 2015, end_year: Date.today.year.next},
+            { required: true } %><br>
+            <%= hidden_field_tag("format", value = "csv") %>
+          <%= submit_tag "Get Reports" %>
+      <% end %>
 
-  <div class = "col-md-offset-2 col-md-8 pad-bot">
-    <h2 class="text-center">Download Monthly Report</h2>
-    <hr>
-      <%= link_to "Download", report_path(format: "csv", range: 1.month.ago..Date.today) %>
+    </div>
   </div>
 </div>

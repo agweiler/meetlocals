@@ -127,12 +127,12 @@ class Host < ActiveRecord::Base
   def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
+     ['Greater Copenhagen', 'Hovedstaden'],
 		 ['Zealand','Zeeland'],
 		 ['North Jutland', 'Nordjylland'],
 		 ['Mid Jutland', 'Midtjylland'],
 		 ['South Jutland', 'Syddanmark'],
-     ['Fyn','Funen'],
-		 ['Greater Copenhagen', 'Hovedstaden']]
+     ['Fyn','Funen']]
 	end
 
   def location
