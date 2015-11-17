@@ -197,6 +197,15 @@ hgroup h3{
   letter-spacing: -1px;
 ;}
 
+
+@media only screen and (max-width: 515px) {
+.para {
+  text-align: initial;
+}
+
+}
+
+
 @media only screen 
 and (min-device-width : 300px) 
 and (max-device-width : 667px) 

@@ -91,7 +91,7 @@
   <!-- Events title-->
  
  <% if current_admin || @host == current_host %>
-  <div class="row" id="special_events">
+  <div class="row table-responsive" id="special_events">
       <%= content_tag :h3, "#{@host.username}'s Host Parties", class:"text-center title pad-bot" %>
     <!-- End of events title -->
       <%= content_tag :h5, "<No Host Parties for now>", class:"text-center" if @special_events.available.empty? %>
@@ -139,7 +139,7 @@
 
   <!-- Events title-->
 
-    <div class="row" id="host_events">
+    <div class="row table-responsive" id="host_events">
       <%= content_tag :h3, "#{@host.username}'s Experience", class:"text-center title pad-bot" %>
   <!-- End of events title -->
     <%= content_tag :h5, "<No Experiences for now>", class:"text-center" if @normal_events.empty? %>
@@ -186,7 +186,7 @@
     </div>
 
   <!-- Business Intelligence Counts -->
-  <div class="row" id="special_events">
+  <div class="row table-responsive" id="special_events">
       <%= content_tag :h3, "#{@host.username}'s Key Statistics", class:"text-center title pad-bot" %>
     <!-- End of events title -->
       
