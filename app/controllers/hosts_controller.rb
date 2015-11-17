@@ -1,4 +1,5 @@
 class HostsController < ApplicationController
+    require 'pp'
     include ImagesHelper
 	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
@@ -20,6 +21,9 @@ class HostsController < ApplicationController
 			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
       @hosts = Host.search_by(search_params)
                    .paginate(page:params[:page], per_page: limit_per_page).uniq
+      puts "_______________________________"
+      pp(@hosts)
+      puts "_______________________________"
 		end
 
 		respond_to do |format|
