@@ -97,7 +97,7 @@ class Host < ActiveRecord::Base
         .where("max_group_size >= ?", params[:max_group].to_i)
         .where.not(id: host_list.to_a.uniq) #filter out unavailable dates
         .unscope(where: unlist) #unscoping array
-        .where(approved:true).where("experiences_count > 0").order('random()')
+        .where(approved:true).where("experiences_count > 0")
   end
 
   def self.refresh_max_group_size

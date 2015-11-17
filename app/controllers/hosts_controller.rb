@@ -9,11 +9,10 @@ class HostsController < ApplicationController
 
     if (request.request_method == 'GET')
 			@hosts = Host.where(approved: true)
-       .where("experiences_count > 0").order('random()')
+       .where("experiences_count > 0")
        .paginate(page: params[:page], per_page: limit_per_page)
 		elsif (request.request_method == 'POST')
       assign_search_inputs!
-
 			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
 			# age_range ||= [nil, 0, 200]
       # debugger
