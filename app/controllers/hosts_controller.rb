@@ -20,10 +20,10 @@ class HostsController < ApplicationController
 
 			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
       @hosts = Host.search_by(search_params)
-                   .paginate(page:params[:page], per_page: limit_per_page).uniq
+                   # .paginate(page:params[:page], per_page: limit_per_page).uniq
       @all_hosts = Host.search_by(search_params)
       puts "_______________________________"
-      pp(@all_hosts)
+      pp(@hosts)
       puts "_______________________________"
 		end
 
