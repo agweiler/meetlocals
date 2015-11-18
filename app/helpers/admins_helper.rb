@@ -1,7 +1,7 @@
 module AdminsHelper
 
 	def convert_to_csv(bookings)
-		attributes = %w{event_date booking_ID guest_name guest_id num_of_adult_for_event num_of_children_for_event host_name host_id host_address host_zip_and_town host_email host_phone host_account_number price_paid host_paid?}
+		attributes = %w{event_date booking_ID guest_name guest_id num_of_adult_for_event num_of_children_for_event host_name host_id host_address host_zip_and_town host_email host_phone host_account_number registration_number price_paid host_paid?}
 		row = []
 		bookings.each do |book|
 			one_booking = []
@@ -18,6 +18,7 @@ module AdminsHelper
 			one_booking << book.experience.host.email
 			one_booking << book.experience.host.phone
 			one_booking << book.experience.host.bank_number
+			one_booking << book.experience.host.registration_number
 			one_booking << book.experience.price
 			one_booking << book.host_paid
 			row << one_booking
