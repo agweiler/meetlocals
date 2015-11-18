@@ -1,4 +1,5 @@
 class HostsController < ApplicationController
+    require 'pp'
     include ImagesHelper
 	  before_action :set_host, only: [:show, :edit, :update, :destroy, :update_host_profile, :update_holiday]
 
@@ -10,17 +11,14 @@ class HostsController < ApplicationController
     if (request.request_method == 'GET')
 			@hosts = Host.where(approved: true)
        .where("experiences_count > 0").order('random()')
-
 		elsif (request.request_method == 'POST')
       assign_search_inputs!
-
 			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
 			# age_range ||= [nil, 0, 200]
       # debugger
 
 			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
       @hosts = Host.search_by(search_params)
-
 		end
 
 		respond_to do |format|

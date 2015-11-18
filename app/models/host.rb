@@ -92,12 +92,12 @@ class Host < ActiveRecord::Base
 
     date_ranges = Host.age_ranges.zip(Host.dob_ranges).to_h[params[:age_range]]
 
-    Host.where(dob: date_ranges) #filter age_range
-        .where(state: params[:location])
-        .where("max_group_size >= ?", params[:max_group].to_i)
+    Host.where(dob: date_ranges).uniq #filter age_range
+        .where(state: params[:location]).uniq
+        .where("max_group_size >= ?", params[:max_group].to_i).uniq
         .where.not(id: host_list.to_a.uniq) #filter out unavailable dates
-        .unscope(where: unlist) #unscoping array
-        .where(approved:true).where("experiences_count > 0").order('random()')
+        .unscope(where: unlist).uniq #unscoping array
+        .where(approved:true).where("experiences_count > 0").uniq
   end
 
   def self.refresh_max_group_size
