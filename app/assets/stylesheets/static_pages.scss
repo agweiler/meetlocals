@@ -200,7 +200,9 @@ hgroup h3{
 
 @media only screen and (max-width: 515px) {
 .para {
-  text-align: initial;
+  padding: 10px !important; 
+  text-align: left !important; 
+  font-size: 19px !important;
 }
 
 }
