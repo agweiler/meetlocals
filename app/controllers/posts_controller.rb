@@ -15,7 +15,6 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		byebug
 		params[:post][:video_url].gsub!(/watch\?v=/,"embed/") if params[:post][:video_url] != nil
 		@image_file = params[:post].delete(:image_file)
 		@post = Post.new(post_params)
