@@ -11,6 +11,12 @@ gem 'autoprefixer-rails'
 gem 'paypal-sdk-adaptivepayments'
 # Use pg as the database for Active Record
 gem 'pg'
+# memory profiler
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof' # ruby 2.1+ only
+gem 'memory_profiler'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
