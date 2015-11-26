@@ -24,6 +24,14 @@ class StaticPagesController < ApplicationController
   def unknown_error
   end
 
+  def sign_in_as_guest
+  end
+
+  def redirect_to_guest_signup
+    sign_out current_host
+    redirect_to new_guest_registration_path
+  end
+
   def press
     @posts = Post.where(post_type: "press").order('created_at DESC')
   end

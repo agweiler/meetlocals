@@ -29,7 +29,7 @@
       <% end %>
     </div>
 
-
+  
   <div class="field">
     <%= f.label :number_of_adults%>
     <%= f.select :no_of_adults, options_for_select(@experience.max_number_in_group, @booking.no_of_adults), {}, class:"form-control" %>
@@ -51,28 +51,31 @@
 
   <div class="actions" id="booking_create_button">
   <% if current_guest && current_guest.filled == true %>
+
     <% if @experience.special_event? == false %>
       <% @action == "edit" ? submit_text = "UPDATE BOOKING" : submit_text = "SUGGEST DATE"%>
     <% else %>
       <% submit_text = "BOOK NOW" %>
     <% end %>
+
     <% if guest_signed_in? %>
       <%= f.submit submit_text, class:"btn btn-success new_booking" ,id:"ga" %>
     <% else %>
-      <%= link_to "SIGN UP", new_guest_registration_path,
-      class:"btn btn-warning " %>
+      <%= link_to "SIGN UP", new_guest_registration_path,class:"btn btn-warning " %>
     <% end %>
-  <% elsif current_host %>
+  <% elsif current_host == @experience.host.id %>
     <% if @action == "edit" %> 
       <% submit_text = "COMPLETE RESPONSE" %> 
       <%= f.submit submit_text, class:"btn btn-success" %>
     <% end %>
+    <% elsif current_host %>
+      <% if params[:action] == "show" && params[:controller] == "experiences" %>
+        <%= link_to 'Book Now', sign_in_as_guest_path, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %> 
+      <% end %>
 
 <!-- IF STATUS = CONFIRMED-->   
     <% if @booking.status == "confirmed" %>
-      <%= link_to 'Cancel Booking?', @booking,
-      method: :delete, data: { confirm: 'Are you sure?' },
-      class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
+      <%= link_to 'Cancel Booking?', @booking,method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
     <% end %>
   <% elsif current_guest && current_guest.filled == false %>
     <%= link_to "COMPLETE YOUR PROFILE BEFORE BOOKING", edit_guest_path(current_guest), class:"btn btn-danger", style:"color:white" ,:target => '_blank'%>

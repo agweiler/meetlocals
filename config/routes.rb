@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   get "create_host_success" => "static_pages#create_host_success"
 
+  get "sign_in_as_guest" => "static_pages#sign_in_as_guest"
+
   get 'partners/bookings' => 'partners#bookings', as: :partner_bookings
 
   post 'parnters/bookings' => 'partners#create_booking', as: :create_booking
@@ -108,6 +110,8 @@ Rails.application.routes.draw do
   get 'experiences/:id/bookings/new' => 'bookings#new'
 
   get '/blog' => 'posts#index'
+
+  post 'redirect_to_guest' => 'static_pages#redirect_to_guest_signup'
 
   post 'hosts_search' => "hosts#index"
 
