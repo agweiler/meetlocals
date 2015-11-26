@@ -63,7 +63,7 @@
     <% else %>
       <%= link_to "SIGN UP", new_guest_registration_path,class:"btn btn-warning " %>
     <% end %>
-  <% elsif current_host == @experience.host.id %>
+  <% elsif current_host == @experience.host %>
     <% if @action == "edit" %> 
       <% submit_text = "COMPLETE RESPONSE" %> 
       <%= f.submit submit_text, class:"btn btn-success" %>

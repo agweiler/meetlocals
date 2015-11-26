@@ -170,6 +170,7 @@
       <p><%= @host.next_host_party.host_style %> </p>
         <% if current_host %>
           <%= link_to 'Book Now', @host.next_host_party, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %>
+        <% elsif current_host == @experience.host %>
         <% else %>
           <%= link_to 'Book Now', sign_in_as_guest_path, class: "btn btn-danger btn-lg", style: "color:#fff; text-transform:uppercase; line-height: 35px;" %> 
         <% end %>     
