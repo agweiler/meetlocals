@@ -111,6 +111,8 @@ Rails.application.routes.draw do
 
   get '/blog' => 'posts#index'
 
+  post 'redirect_to_guest' => 'static_pages#redirect_to_guest_signup'
+
   post 'hosts_search' => "hosts#index"
 
   get 'hosts_search' => "hosts#index"
