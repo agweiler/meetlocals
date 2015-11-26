@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_rack_mini_profiler
   def check_rack_mini_profiler
-    if current_admin?
+    if current_admin
       if params[:rmp]
         Rack::MiniProfiler.authorize_request
       end
