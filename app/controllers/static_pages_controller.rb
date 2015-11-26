@@ -24,6 +24,9 @@ class StaticPagesController < ApplicationController
   def unknown_error
   end
 
+  def sign_in_as_guest
+  end
+
   def press
     @posts = Post.where(post_type: "press").order('created_at DESC')
   end
