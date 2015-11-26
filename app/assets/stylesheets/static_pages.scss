@@ -307,6 +307,18 @@ and (max-device-width : 667px)
     }
 }
 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+
+  .resize-small-pic {
+    width: 80%;
+    height: auto;
+  }
+
+}
+
 hgroup .connect{
 	color:#66a422;
 }

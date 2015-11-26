@@ -16,7 +16,7 @@
     <% @posts.each do |post| %>
   	<div class="col-md-4 col-xs-6" id="post-card">
       <%= content_tag :h3, link_to(post.title, post), class:'title' %>
-        <%= image_tag post.images.first.image_file.url(:blogthumb), style: "border-radius:5%" if post.images.present? %> 
+        <%= image_tag post.images.first.image_file.url(:blogthumb), style: "border-radius:5%", class: "resize-small-pic" if post.images.present? %> 
       <p><%= content_tag :p, post.created_at.strftime("%B %d, %Y") %></p>
   	</div>
     <% end %>
