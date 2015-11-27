@@ -12,11 +12,19 @@
   <div class="row">
     <div class="col-md-12" style="text-align:center; background-color: #ffffff;">
       <h1 class="heads text-center" style="color:#66a422; font-size:70px;">How to be a host</h1>
-      <p class="para text-center" style="padding: 50px;" >
+      <p class="para text-center" style="padding: 50px; margin-bottom: 0px;" >
         <%= StaticText.find(2).content.html_safe %>
       </p>
     </div>
   </div> 
+  <%if @static_text.video_url.present?%>
+  <div class="row " id="menuframe" style = "margin-bottom: 25px;">
+    <div class = "inner_video">
+      <h2 style = "margin-top: 0px; color: #66a422;", class = "heads">VIDEO PRESENTATION</h2>
+      <embed width="600" height="315" src=<%= "#{@static_text.video_url}"%> style="max-width: 600px; width: 95%;">
+    </div>
+  </div>
+  <% end %>
   <div style="clear:both;"></div>
 </div>
 <br><br>
