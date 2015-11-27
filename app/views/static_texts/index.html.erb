@@ -5,12 +5,14 @@
 		<tr>
 			<th>Name</th>
 			<th>Content</th>
+			<th>Video Url</th>
 			<th></th>
 		</tr>
 	<% @static_text.each do |text| %>
 	  <tr>
       <td><%= text.name %></td>
       <td><%= text.content.html_safe %></td>
+      <td><embed width="400" height="215" src=<%= "#{text.video_url}" if text.video_url.present?%>></td>
       <td><%= link_to "Edit Text", edit_static_text_path(text) %></td>
   	</tr>
   	<% end %>
