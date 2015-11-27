@@ -319,6 +319,12 @@ and (orientation : landscape) {
 
 }
 
+@media only screen and (max-device-width : 392px) {
+  .margin-bottom-60 {
+    margin-bottom: 60px; 
+  }
+}
+
 hgroup .connect{
 	color:#66a422;
 }
@@ -938,3 +944,11 @@ z-index: 1;
   margin-bottom: 50px;
   margin-top: 40px;
 }
+
+.inner_video {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  }

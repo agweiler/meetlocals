@@ -27,6 +27,10 @@ class StaticPagesController < ApplicationController
   def sign_in_as_guest
   end
 
+  def how_to_be_a_host
+    @static_text = StaticText.find(2)
+  end
+
   def redirect_to_guest_signup
     sign_out current_host
     redirect_to new_guest_registration_path
