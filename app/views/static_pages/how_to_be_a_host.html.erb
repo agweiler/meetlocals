@@ -13,13 +13,7 @@
     <div class="col-md-12" style="text-align:center; background-color: #ffffff;">
       <h1 class="heads text-center" style="color:#66a422; font-size:70px;">How to be a host</h1>
       <p class="para text-center" style="padding: 50px;" >
-        Meet the Danes is a unique opportunity to meet new people from other countries. So if you like to cook and want to host a dinner, now is the time to seize the opportunity for an exciting and different experience! <br><br>
-
-        At the dinner event there must be a minimum of 2 adult hosts present in addition to the guests that visit you. The two hosts can be living together, neighbours, friends, or anything else. As an host you get paid an amount per adult guest and an amount per child. The amount will appear on the confirmation email you get after you have signed up and be seen in your personal Meet The Danes profile.<br><br>
-
-        Dinner will ideally be inspired by "Danish" cuisine so that guests experience something special for Denmark. It does not have to be an enormous feast - we suggest that you make a good and presentable meal that you would serve if you would otherwise have guests. <br><br>
-
-        The menu should consist of 3 dishes. For inspiration, a starter might include: herring, salmon, soup and the like. A main could be chicken, fish, roast, hamburgers, meatballs, etc. A dessert could be ice cream, homemade cake or classic currant pudding with cream. We recommend each dinner be served with beer or wine and water, and after the food is served coffee or tea. This is just for inspiration - you decide what you want to serve! <br><br>
+        <%= StaticText.find(2).content.html_safe %>
       </p>
     </div>
   </div> 
@@ -27,7 +21,7 @@
 </div>
 <br><br>
 
-<div class="row" style="background: url('assets/open_sandwich.jpg') -500px;">
+<div class="row" style="background: url('assets/open_sandwich.jpg') 10px -500px; background-size: cover;background-repeat: no-repeat;">
   <div style="text-align:center; min-height: 300px;   color: #fff;">
     <p class="heads" style="padding: 60px; text-transform: uppercase; font-size:70px; color:#fff;"></p>
     <% unless current_host %>
