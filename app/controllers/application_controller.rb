@@ -3,14 +3,12 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   include SessionHelper
 
-  before_filter :check_rack_mini_profiler
-  def check_rack_mini_profiler
-    if current_admin
-      if params[:rmp]
-        Rack::MiniProfiler.authorize_request
-      end
-    end
-  end
+  # before_filter :check_rack_mini_profiler
+  # def check_rack_mini_profiler
+  #   if current_admin
+  #       Rack::MiniProfiler.authorize_request
+  #   end
+  # end
 
   protected
 
