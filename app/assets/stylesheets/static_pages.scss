@@ -228,6 +228,13 @@ and (max-device-width : 667px)
     font-size: 14px !important;
     padding-top: 260px !important;
   }
+  #post-content {
+    text-align: left;
+  }
+
+  #guest {
+    margin-bottom: 55px;
+  }
 }
 
 @media screen and (max-width: 350px) {
@@ -323,6 +330,19 @@ and (orientation : landscape) {
   .margin-bottom-60 {
     margin-bottom: 60px; 
   }
+}
+
+@media only screen and (min-device-width : 650px) {
+  .inner_video {
+    width:800px; 
+    margin:0 auto;
+    // width: 100%;
+    // height: auto;
+    // margin: 0 auto;
+    // padding: 10px;
+    // position: relative;
+    }
+
 }
 
 hgroup .connect{
@@ -945,10 +965,3 @@ z-index: 1;
   margin-top: 40px;
 }
 
-.inner_video {
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  padding: 10px;
-  position: relative;
-  }
