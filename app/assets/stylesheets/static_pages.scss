@@ -197,6 +197,17 @@ hgroup h3{
   letter-spacing: -1px;
 ;}
 
+.span-or {
+  display: block;
+  margin: 20px;
+}
+
+@media( min-width: 768px ) {
+  .span-or {
+    display: inline-block;
+  }
+}
+
 
 @media only screen and (max-width: 515px) {
 .para {
