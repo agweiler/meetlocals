@@ -21,4 +21,5 @@ class Guests::SessionsController < Devise::SessionsController
 	  yield resource if block_given?
 	  respond_with(resource, serialize_options(resource))
 	end
+
 end
