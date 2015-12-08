@@ -78,9 +78,9 @@
       <%= link_to 'Cancel Booking?', @booking,method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger', style:'color:white' if @action == 'edit' %>
     <% end %>
   <% elsif current_guest && current_guest.filled == false %>
-    <%= link_to "COMPLETE YOUR PROFILE BEFORE BOOKING", edit_guest_path(current_guest), class:"btn btn-danger", style:"color:white" ,:target => '_blank'%>
+    <%= link_to "COMPLETE YOUR PROFILE BEFORE BOOKING", edit_guest_path(current_guest), class:"btn btn-danger", style:"color:white" %>
   <% else %>
-    <%= link_to "LOGIN TO BOOK", new_guest_session_path, class:"btn btn-danger", style:"color:white",:target => '_blank' %>
+    <%= link_to "LOGIN TO BOOK", new_guest_session_path, class:"btn btn-danger", style:"color:white" %>
   <% end %>
 
   </div>

@@ -40,8 +40,10 @@ class GuestsController < ApplicationController
       @guest.images.create(local_image: @image_file, caption: @image_file.original_filename)
     end
     if @guest.save
+      redirect_location = session[:host_page] || guest_path(@guest)
+      session.delete(:host_page)
       respond_to do |format| 
-        format.html { redirect_to edit_guest_profile, notice: 'Guest profile was successfully updated.' }
+        format.html { redirect_to redirect_location, notice: 'Guest profile was successfully updated.' }
       end
     end
   end
