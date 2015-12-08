@@ -92,7 +92,7 @@ $green_text: darkGreen;
   border-radius: 1%;
   border: 1px solid #fff;
   padding: 20px;
-  text-align: justify;
+  text-align: left;
 }
 
 #post-index {
@@ -117,4 +117,9 @@ $green_text: darkGreen;
 
 .marge-top {
   margin-top: 10px;
+}
+
+.center_form {
+  width: 50%;
+  margin: 0 auto;
 }

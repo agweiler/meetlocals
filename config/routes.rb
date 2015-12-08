@@ -16,6 +16,8 @@ Rails.application.routes.draw do
    skip: [:registrations]
     as :guest do
       #modified paths
+      
+      get 'guest/sign_in' => 'sessions#guest_sign_in'
       post 'guests' => 'registrations#create', as: 'guest_registration'
       get 'guests/sign_up' => 'registrations#new', as: 'new_guest_registration'
       get 'guests/edit' => 'registrations#edit',

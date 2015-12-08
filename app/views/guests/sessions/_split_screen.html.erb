@@ -1,0 +1,62 @@
+  <div class="col-md-6 pad-top">
+    <div class = "col-md-10">
+      <div class = "row">
+        <h2 class="heads" style="text-align:center; color:#66a422; font-size:70px;">For Hosts</h2>
+      </div>
+      <div class = "row">
+        <p class = "pad-top">If you are a <strong>Host</strong> or would like to apply to be one please apply or sign in below:</p>
+        <div class="actions" style="text-align:center">
+          <div class ="pad-top float-left">Sign up as a Host: <%= link_to "SIGN UP", new_host_registration_path, :class => 'btn btn-success green-btn-host' %></div>
+          <div class = "text-center">
+            <div class ="pad-top float-left">Log in as a Host: <%= link_to "LOGIN", new_host_session_path, :class => 'btn btn-success green-btn-host' %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="col-md-6 pad-top">
+      <h2 class="heads" style="text-align:center; color:#66a422; font-size:70px;">Guest Login</h2>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        </div>
+
+        </br>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="field" >
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end -%>
+
+        <div class="actions" style="text-align:center">
+
+          <%= f.submit "Log in", class: "btn btn-green", style:"color: #fff; text-transform: uppercase;font-size: 15px; padding-left: 30px !important;
+  padding-right: 30px !important; background: #66a422 !important;" %>
+          </br></br>
+
+          <div class="text-center">
+            <%= link_to guest_omniauth_authorize_path(:facebook),
+             class:"btn btn-success", style:"color:white" do-%>
+                <i class="fa fa-facebook-official fa-lg"></i>
+                Log in with Facebook ?
+            <% end %>
+            <br><br>
+          </div>
+
+          <%= render "guests/shared/links" %>
+        </div>
+      <% end %>
+    <!-- ending else statement -->
+  </div>
