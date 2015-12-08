@@ -29,20 +29,15 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		# @image_file = params[:post].delete(:image_file)
-		# @post = Post.new(post_params)
-		# if @image_file.present?
-		# 	@post.images.delete_all
-		# end
-		# @post.images.create(local_image: @image_file, caption: @image_file.original_filename)
 		@post = Post.find(params[:id])
 	end
 
 	def update
+		params[:post][:video_url].gsub!(/watch\?v=/,"embed/") if params[:post][:video_url] != nil
 		@image_file = params[:post].delete(:image_file)
 		@post = Post.find(params[:id])
 
-		if @post.update(params[:post].permit(:title, :body))
+		if @post.update(params[:post].permit(:title, :body, :video_url))
 			if !@image_file.nil?
 				@post.images.delete_all
 				@post.images.create(local_image: @image_file, caption: @image_file.original_filename)
@@ -55,9 +50,12 @@ class PostsController < ApplicationController
 
 	def destroy
 		@post = Post.find(params[:id])
+		type = @post.post_type
 		@post.destroy
 
-		redirect_to posts_path
+		redirect_to blog_path if type == "blog"
+		redirect_to press_path if type == "press"
+
 	end
 
 	private
