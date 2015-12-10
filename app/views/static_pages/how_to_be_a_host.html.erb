@@ -17,7 +17,7 @@
     <%if @static_text.video_url.present?%>
     <div class = "container-fluid">
       <div class="row" id="menuframe" style = "margin-bottom: 25px;">
-        <div class = "col-md-12"> 
+        <div class = "col-md-12" style= "margin-bottom: 40px;"> 
             <h1 style = "margin-top: 0px; color: #66a422;", class = "heads text-center">VIDEO PRESENTATION</h1>
             <div class = "inner_video">
               <embed width="600" height="315" src=<%= "#{@static_text.video_url}"%> style="max-width: 600px; width: 95%;">

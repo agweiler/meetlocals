@@ -71,7 +71,9 @@ Rails.application.routes.draw do
 
   get 'admins/booking_type_all' => 'admins#booking_type_all'
 
-  get 'report' => 'admins#report'
+  get '/confirmed_report' => 'admins#confirmed_report'
+
+  get '/completed_report' => 'admins#completed_report'
 
   post 'bookings/:id/host_paid' => 'bookings#host_paid', as: :mark_host_paid
 

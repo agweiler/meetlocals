@@ -18,7 +18,6 @@ class PartnersController < ApplicationController
 	end
 
 	def create_booking
-	
 		x = 1
 		grp_size = []
 		hosts = []
@@ -33,7 +32,17 @@ class PartnersController < ApplicationController
 			end
 			x = x + 1
 		end
-		
+	end
 
+	def destroy
+    @partner = Partner.find params[:id]
+  	if @partner.images.present?
+      @partner.images.delete_all
+    end
+    @partner.destroy
+    respond_to do |format|
+      format.html { redirect_to partners_url, notice: 'Partner was successfully deleted.' }
+      format.json { head :no_content }
+    end
 	end
 end
