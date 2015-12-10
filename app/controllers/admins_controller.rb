@@ -78,7 +78,6 @@ class AdminsController < ApplicationController
 			end_date = temp_date 
 		end
 		@bookings = Booking.where(status: "completed").where(date: start_date..end_date)
-		byebug
 		respond_to do |format|
 			format.csv { send_data convert_to_csv(@bookings), filename: "Report from #{start_date} to #{end_date}.csv" }
 		end

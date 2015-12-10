@@ -6,7 +6,6 @@ if defined?(ActionMailer)
     def confirmation_instructions(record, token, opts={})
     	if record.class == Host
     		@commision = Admin.first.commision_percentage
-    		byebug
     	end
       @token = token
       devise_mail(record, :confirmation_instructions, opts)
