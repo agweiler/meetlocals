@@ -8,6 +8,11 @@
       <h3 class="host_name" style="margin-top: 5px;"><%= link_to partner.username,  partner_path(partner) %></h3> 
       <label> Address: </label> <span><%= partner.address %></span><br>
        <label> Contact Info: </label> <span><%= partner.contact_info %></span>
+       <% if current_admin %>
+        <br>
+         <%= link_to 'Delete', partner, class:"btn btn-sm red",
+          style:"color:#fff; float: right;", method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
     </div>
   </div>
 </div>

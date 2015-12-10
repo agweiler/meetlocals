@@ -55,10 +55,29 @@ class AdminsController < ApplicationController
 		instance_variable_set(booking_type , Booking.where(status: "confirmed").reverse_order.pluck(:id,:guest_id,:experience_id,:date,:group_size,:created_at,:host_paid)) if params[:status] == "confirmed"
 	end
 
-	def report
+	def confirmed_report
 		start_date = params[:start_date].values.join("-").to_date
 		end_date = params[:end_date].values.join("-").to_date
+		if start_date > end_date
+			temp_date = start_date
+			start_date = end_date
+			end_date = temp_date 
+		end
 		@bookings = Booking.where(status: "confirmed").where(date: start_date..end_date)
+		respond_to do |format|
+			format.csv { send_data convert_to_csv(@bookings), filename: "Report from #{start_date} to #{end_date}.csv" }
+		end
+	end
+
+	def completed_report
+		start_date = params[:start_date].values.join("-").to_date
+		end_date = params[:end_date].values.join("-").to_date
+		if start_date > end_date
+			temp_date = start_date
+			start_date = end_date
+			end_date = temp_date 
+		end
+		@bookings = Booking.where(status: "completed").where(date: start_date..end_date)
 		respond_to do |format|
 			format.csv { send_data convert_to_csv(@bookings), filename: "Report from #{start_date} to #{end_date}.csv" }
 		end
