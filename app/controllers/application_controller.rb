@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :redirect_if_old
   include SessionHelper
 
   # before_filter :check_rack_mini_profiler
@@ -12,11 +13,15 @@ class ApplicationController < ActionController::Base
 
   protected
 
-	def configure_permitted_parameters
-	  devise_parameter_sanitizer.for(:sign_up) << :username
-	end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
+  end
 
- 
+  def redirect_if_old
+    if request.host == "meetthedanes.dk"
+      redirect_to "#{request.protocol}meetthedanes.com#{request.fullpath}", :status => :moved_permanently  
+    end
+  end
 
  def after_sign_in_path_for(resource_or_scope)
     case resource_or_scope
