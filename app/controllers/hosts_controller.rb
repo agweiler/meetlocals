@@ -111,6 +111,7 @@ class HostsController < ApplicationController
         exp.bookings.delete_all
     end
     @host.experiences.delete_all
+    @host.notifications.delete_all
     approved = @host.approved
     @host.delete
     if current_admin && approved == false
@@ -120,7 +121,7 @@ class HostsController < ApplicationController
       redirect_to admins_path
     else
       respond_to do |format|
-        format.html { redirect_to hosts_url, notice: 'host was successfully destroyed.' }
+        format.html { redirect_to admins_url, notice: 'host was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
