@@ -37,7 +37,7 @@ class StaticPagesController < ApplicationController
   end
 
   def press
-    @posts = Post.where(post_type: "press").order('created_at DESC')
+    @posts = Post.where(post_type: "press").order('created_at DESC').includes(:images)
   end
 
   protect_from_forgery except: [:payment_success, :payment_failure]
