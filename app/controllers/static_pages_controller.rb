@@ -1,9 +1,10 @@
 class StaticPagesController < ApplicationController
 
   def home
-    @hosts = Host.where(approved: true).joins(:experiences).uniq.shuffle.take(3)
+    @hosts = Host.where(approved: true).includes(:images).joins(:experiences).uniq.shuffle.take(3)
     # @recent_events = Experience.normal_events.order(created_at: :desc).limit(3)
-    @host_party = Experience.available.special_events.order(:date).limit(3)
+    @host_party = Experience.available.special_events.order(:date).limit(3).includes(:exp_images)
+  
   end
 
   def how_it_works
