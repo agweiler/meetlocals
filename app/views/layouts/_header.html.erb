@@ -16,11 +16,11 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class ="nav navbar-nav navbar-right" style="margin-top:10px;">
 
-				<li><%= link_to "FIND A HOST", hosts_path %></li>
-				<li><%= link_to "BE A HOST", how_to_be_a_host_path %></li>
-				<li><%= link_to "HOW IT WORKS", how_it_works_path %></li>
-				<li><%= link_to "PARTNER", partners_path %></li>
-				<li><%= link_to "BLOG", blog_path %></li>
+				<li><%= link_to "FIND A HOST", hosts_path , class: "create-highlight" %></li>
+				<li><%= link_to "BE A HOST", how_to_be_a_host_path , class: "create-highlight" %></li>
+				<li><%= link_to "HOW IT WORKS", how_it_works_path , class: "create-highlight" %></li>
+<!-- 				<li><%= link_to "PARTNER", partners_path %></li> -->
+				<li><%= link_to "BLOG", blog_path , class: "create-highlight" %></li>
 				
 
 				<% if current_user %>
@@ -43,7 +43,7 @@
 								<li><%= link_to "Edit Site Texts", static_texts_path %></li>
 								<li><%= link_to "Analytics", admin_analytics_path %></li>
 					      <li><%= link_to "Settings", admin_settings_path %></li>
-					      <li><%= link_to "Create New Partner" , new_partner_registration_path %> </li>
+<!-- 					      <li><%= link_to "Create New Partner" , new_partner_registration_path %> </li> -->
 							<% end %>
 
 							<% if current_guest %>
@@ -59,7 +59,7 @@
 				<% else %>
 
 
-					<li><%= link_to "SIGN IN", new_guest_session_path %></li>
+					<li><%= link_to "SIGN IN", new_guest_session_path ,class: "create-highlight"%></li>
 					<li><%= link_to "SIGN UP", new_guest_registration_path, :class => 'green-btn' %></li>
 				<% end %>
 				<% if current_host || current_guest %>
