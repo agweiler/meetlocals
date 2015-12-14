@@ -5,7 +5,7 @@ class Host < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :experiences, dependent: :destroy
   has_many :images, as: :imageable
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_many :bookings, dependent: :destroy
   has_many :bookings, through: :experiences
   has_many :testimonials, dependent: :destroy

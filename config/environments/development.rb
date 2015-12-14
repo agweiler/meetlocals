@@ -45,6 +45,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+  end
+
 
   config.action_mailer.smtp_settings = {
      :address => "smtp.mandrillapp.com",

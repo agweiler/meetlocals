@@ -5,7 +5,7 @@ class Guest < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings, dependent: :destroy
   has_many :images, as: :imageable
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   has_many :authentications, dependent: :destroy
   devise :omniauthable, :omniauth_providers => [:facebook]
