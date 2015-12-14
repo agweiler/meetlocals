@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127030125) do
+ActiveRecord::Schema.define(version: 20151214081516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,9 @@ ActiveRecord::Schema.define(version: 20151127030125) do
     t.integer  "no_of_children",      default: 0
   end
 
+  add_index "bookings", ["experience_id"], name: "index_bookings_on_experience_id", using: :btree
+  add_index "bookings", ["guest_id"], name: "index_bookings_on_guest_id", using: :btree
+
   create_table "countries", force: :cascade do |t|
     t.string   "name"
     t.string   "iso_two_letter_code"
@@ -110,6 +113,8 @@ ActiveRecord::Schema.define(version: 20151127030125) do
     t.string   "mealset"
     t.date     "date"
   end
+
+  add_index "experiences", ["host_id"], name: "index_experiences_on_host_id", using: :btree
 
   create_table "guests", force: :cascade do |t|
     t.string   "username",               default: "",    null: false
@@ -274,6 +279,9 @@ ActiveRecord::Schema.define(version: 20151127030125) do
     t.integer  "guest_id"
   end
 
+  add_index "notifications", ["guest_id", "type_of"], name: "index_notifications_on_guest_id_and_type_of", using: :btree
+  add_index "notifications", ["host_id", "type_of"], name: "index_notifications_on_host_id_and_type_of", using: :btree
+
   create_table "partners", force: :cascade do |t|
     t.string   "username"
     t.string   "address"
@@ -308,6 +316,8 @@ ActiveRecord::Schema.define(version: 20151127030125) do
     t.string   "video_url"
     t.string   "post_type"
   end
+
+  add_index "posts", ["post_type"], name: "index_posts_on_post_type", using: :btree
 
   create_table "prices", force: :cascade do |t|
     t.string "meal"
