@@ -17,9 +17,14 @@
       <div class="row" id="host_controls">
       	
   			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
-        <%= link_to "[ Update Experience ]", edit_experience_path(current_host.experiences.first), :class => "edit_profile" if current_host.experiences.first.present? %> <br>
-        <%= link_to "[ Create Experience ]", new_experience_path, :class => "edit_profile" unless current_host.experiences.first.present? %>
-        <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" if current_host.host_approved?%><br>
+        <% if current_host.experiences.first.present? %>
+          <%= link_to "[ Update Experience ]", edit_experience_path(current_host.experiences.first), :class => "edit_profile"%> <br>
+        <% else %>
+          <%= link_to "[ Create Experience ]", new_experience_path, :class => "edit_profile" %><br>
+        <% end %>
+        <% if current_host.host_approved? %>
+          <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" %><br>
+        <% end %>
   			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
           class:"edit_profile" %><br>
         <button class="btn btn-primary btn-xl" style="  background-color: #22A7F0;
