@@ -128,8 +128,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :host_presentation %>
-    <%= f.text_area :host_presentation, class: "form-control", placeholder: "Make a short presentation about who the guest will meet in your home and why you enjoy to be a host" %>
+    <%= f.label :host_presentation %> <br>
+
+     <p style="font-size: 12px"><i>*Copy and pasting from MS Word will require you to right-click to "Paste and Match Style".</i></p>
+    <%= f.text_area :host_presentation, class: "form-control wysihtml5 ", placeholder: "Make a short presentation about who the guest will meet in your home and why you enjoy to be a host" %>
   </div>
 
   <div class="field">
@@ -148,3 +150,15 @@
   </div>
 
 <% end %>
+
+<script type="text/javascript">
+$(function(){
+
+  $('.wysihtml5').each(function(i, elem) {
+    $(elem).wysihtml5();
+  });
+
+  $('.glyphicon-picture').parent().attr('style', 'display:none');
+});
+
+</script>

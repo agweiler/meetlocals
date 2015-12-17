@@ -82,7 +82,7 @@
       <!-- <div class="col-md-12"> -->
         <p>
           <span style="font-weight:600;">Host Presentation:</span><br>
-          <%= @host.host_presentation %>
+          <%= @host.host_presentation.try(:html_safe) %>
         </p>
     </div>
     <!-- End host major details -->

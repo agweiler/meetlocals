@@ -45,7 +45,7 @@
     <%= content_tag 'p', "#{@host.location} (Age #{@host.age})" %>
     <hr style="margin-top: -5px">
     <label class="labelz"><%= @experience.special_event? ? "Host Party Presentation:" : "Host Presentation:" %></label>
-      <%= content_tag 'p', @experience.special_event? ? @experience.host_style : @host.host_presentation %>
+      <%= content_tag 'p', @experience.special_event? ? @experience.host_style : @host.host_presentation.try(:html_safe) %>
 
     <label class="labelz">Speaks:</label>
     <%= content_tag 'p', @host.languages %>

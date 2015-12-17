@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 	end
 
 	def new
+		@post_type = params[:post_type]
 		@action = request.filtered_parameters['action']
 		@post = Post.new
 	end
@@ -15,6 +16,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
+		@post_type = params[:post][:post_type]
 		params[:post][:video_url].gsub!(/watch\?v=/,"embed/") if params[:post][:video_url] != nil
 		@image_file = params[:post].delete(:image_file)
 		@post = Post.new(post_params)
@@ -24,6 +26,7 @@ class PostsController < ApplicationController
 			end
 			redirect_to @post
 		else
+			@action = "new"
 			render 'new'
 		end
 	end
