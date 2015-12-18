@@ -3,4 +3,11 @@ class Post < ActiveRecord::Base
 	validates :title, presence: true
 	validates :body,  presence: true
 	has_many :images, as: :imageable
+	before_save :sanitize
+
+	private
+
+	def sanitize
+		self.body = Sanitize.fragment(self.body, :elements => ['br'])
+	end
 end
