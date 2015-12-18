@@ -1,7 +1,7 @@
 desc "One-off Post Sanitizing"
 task :sanitize_post => :environment do
 	Post.all.each do |post|
-		post.update(body: Sanitize.fragment(self.body, :elements => ['br'])
+		post.update(body: Sanitize.fragment(self.body, :elements => ['br']))
 	end
 end
 
