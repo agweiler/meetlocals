@@ -1,11 +1,9 @@
 desc "One-off Post Sanitizing"
 task :sanitize_post => :environment do
 	Post.all.each do |post|
-		post.update(body: Sanitize.fragment(self.body, :elements => ['br']))
+		post.update(body: Sanitize.fragment(post.body, :elements => ['br']))
 	end
 end
-
-
 
 desc "This task is called by the Heroku scheduler add-on"
 task :reminder_one_day_before => :environment do
