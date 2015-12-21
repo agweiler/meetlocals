@@ -8,6 +8,6 @@ class Post < ActiveRecord::Base
 	private
 
 	def sanitize
-		self.body = Sanitize.fragment(self.body, :elements => ['br'])
+		self.body = Sanitize.fragment(self.body, :elements => ['br','b','i','strong','u','small'])
 	end
 end
