@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_old
     puts "#{request.host}"
     if ENV['APP_HOST'] == "meet-the-danes.herokuapp.com" && request.host != "www.meetthedanes.com"
+      puts "DOES IT GO HERE!"
       redirect_to "#{request.protocol}meetthedanes.com#{request.fullpath}", :status => :moved_permanently  
     end
   end
