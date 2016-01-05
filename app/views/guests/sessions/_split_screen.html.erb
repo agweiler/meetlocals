@@ -8,7 +8,7 @@
         <div class="actions" style="text-align:center">
           <div class ="pad-top float-left">Sign up as a Host: <%= link_to "SIGN UP", new_host_registration_path, :class => 'btn btn-success green-btn-host' %></div>
           <div class = "text-center">
-            <div class ="pad-top float-left" style = "margin-left: 25px;">Log in as a Host: <%= link_to "LOGIN", new_host_session_path, :class => 'btn btn-success green-btn-host' %></div>
+            <div class ="pad-top float-left" style = "margin-left: 25px;">Sign In as a Host: <%= link_to "SIGN IN", new_host_session_path, :class => 'btn btn-success green-btn-host' %></div>
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
   
 
   <div class="col-md-6 pad-top">
-      <h2 class="heads" style="text-align:center; color:#3071a9; font-size:70px;">Guest Login</h2>
+      <h2 class="heads" style="text-align:center; color:#3071a9; font-size:70px;">Guest Sign In</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
@@ -42,7 +42,7 @@
 
         <div class="actions" style="text-align:center">
 
-          <%= f.submit "Log in", class: "btn btn-primary", style:"color: #fff; text-transform: uppercase;font-size: 15px; padding-left: 30px !important;
+          <%= f.submit "Sign In", class: "btn btn-primary", style:"color: #fff; text-transform: uppercase;font-size: 15px; padding-left: 30px !important;
   padding-right: 30px !important;" %>
           </br></br>
 
@@ -50,7 +50,7 @@
             <%= link_to guest_omniauth_authorize_path(:facebook),
              class:"btn btn-primary", style:"color:white" do-%>
                 <i class="fa fa-facebook-official fa-lg"></i>
-                Log in with Facebook ?
+                Sign In with Facebook ?
             <% end %>
             <br><br>
           </div>
