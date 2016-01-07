@@ -22,7 +22,9 @@
 	    <td><%= content_tag :strong, new_user.username %></td>
 		  <td><%= content_tag :span, "(#{new_user.email})" %></td>
 		  <td><%= link_to 'View', host_path(new_user), class:"btn btn-default btn-sm", style: "color: #fff" %>
-		      <%= f.submit "Approve User", class:'btn btn-primary btn-sm' %>
+          <% if new_user.experiences.count == 0 %>
+		        <%= f.submit "Approve User", class:'btn btn-primary btn-sm' %>
+          <% end %>
 		  <%= link_to 'Reject User', new_user, class:"btn btn-sm red",
 		   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		 </div>
