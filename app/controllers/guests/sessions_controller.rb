@@ -13,6 +13,7 @@ class Guests::SessionsController < Devise::SessionsController
 	end
 
 	def new
+		@split = params[:split]
 		if request.referrer
 			session[:host_page] = request.referrer if request.referrer.include? "experiences"
 		end

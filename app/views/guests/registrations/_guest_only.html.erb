@@ -1,0 +1,50 @@
+   <div class="col-md-12 pad-top">
+    <h2 class="heads" style="text-align: center; color:#3071a9; font-size:70px;">Sign up as a Guest</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {multipart: true} ) do |f| %>
+      <% flash[:alert] = devise_error_messages! if devise_error_messages! %>
+      <div class="field center_form">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, class: "form-control" %>
+      </div>
+
+      <div class="field center_form">
+        <%= f.label :email %><br />
+        <%= f.email_field :email,
+         autofocus: true, class: "form-control" %>
+      </div>
+
+      <div class="field center_form">
+        <%= f.label :password %>
+        <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="field center_form">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+
+    </br>
+
+      <div class="actions" style="text-align:center">
+        <%= f.submit "Sign up", class: "btn btn-primary", style: "", id: "guest_signup" %>
+        </br></br>
+
+        <div class="text-center ">
+          <%= link_to guest_omniauth_authorize_path(:facebook),
+           class:"btn btn-primary", style:"color:white" do-%>
+              <i class="fa fa-facebook-official fa-lg"></i>
+              Sign up with Facebook ?
+          <% end %>
+          <br><br>
+        </div>
+
+        <%= render "guests/shared/links" %>
+      </div>
+
+    <% end %>
+
+  </div>

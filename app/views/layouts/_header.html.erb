@@ -58,8 +58,8 @@
 				<% else %>
 
 
-					<li><%= link_to "SIGN IN", new_guest_session_path ,class: "create-highlight"%></li>
-					<li><%= link_to "SIGN UP", new_guest_registration_path, :class => 'green-btn' %></li>
+					<li><%= link_to "SIGN IN", new_guest_session_path(:split => true) ,class: "create-highlight"  %></li>
+					<li><%= link_to "SIGN UP", new_guest_registration_path(:split => true) , :class => 'green-btn' ,:split => true %></li>
 				<% end %>
 				<% if current_host || current_guest %>
 				

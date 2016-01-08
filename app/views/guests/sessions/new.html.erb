@@ -3,12 +3,12 @@
     <div class="col-md-8 col-md-offset-2">
       <%= render 'no_host_login' %>
     </div>
-  <% elsif request.referrer.try(:include?, "how_it_works") %>
+  <% elsif @split  %>
 
-    <%= render 'guest_only' %>
+  <%= render 'split_screen' %>
+ 
   <% else %>
-
-    <%= render 'split_screen' %>
+  <%= render 'guest_only' %>
 
   <% end %>
 </div>

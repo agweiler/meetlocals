@@ -4,6 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
     super
     session[:omniauth] = nil unless @guest.new_record?
   end
+  def new
+    
+    @split = params[:split]
+    super
+  end
 
  	protected
 
