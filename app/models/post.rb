@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   :elements => ['br','b','i','strong','u','small','a'],
 
   :attributes => {
-    'a'    => ['href', 'title'],
+    'a'    => ['href', 'title','target'],
   })
 	end
 end
