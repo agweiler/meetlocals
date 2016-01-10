@@ -9,8 +9,7 @@ class HostsController < ApplicationController
 		Host.connection.execute("select setseed(#{session[:seed]})")
 
     if (request.request_method == 'GET')
-			@hosts = Host.where(approved: true)
-       .where("experiences_count > 0").order('random()').includes(:images)
+			@hosts = Host.where(approved: true).order('random()').includes(:images)
 		elsif (request.request_method == 'POST')
       assign_search_inputs!
 			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
