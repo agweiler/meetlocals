@@ -46,16 +46,12 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/1/edit
   def edit
-    if host_signed_in?
-      redirect_to '/' unless current_host.id == @experience.host_id
+      redirect_to '/' unless current_admin  || current_host.id == @experience.host_id
       @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
       @image_1 = @experience.exp_images.find_by(image_number: 1)
       @image_2 = @experience.exp_images.find_by(image_number: 2)
       @image_3 = @experience.exp_images.find_by(image_number: 3)
       @action = request.filtered_parameters['action']
-    else
-      redirect_to '/hosts/sign_in'
-    end
   end
 
   # POST /experiences
