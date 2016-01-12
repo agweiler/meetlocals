@@ -38,7 +38,9 @@
 
 <div class="col-md-8" id="mealinfo">
   <div class="row border_bottom " id="mealframe">
-    <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins pull-right" if current_host == @experience.host%>
+    <% if current_host == @experience.host || current_admin %>
+      <%= link_to 'Edit', edit_experience_path(@experience), class: "btn btn-warning btn-sm btn_admins pull-right" %>
+    <% end %>
 
     <%= content_tag 'h1', @experience.title %>
 

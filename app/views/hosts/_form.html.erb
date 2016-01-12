@@ -112,8 +112,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :suburb,"ZIP Code and Town" %>
-      <%= f.text_field :suburb, required: true,class: "form-control", placeholder: "e.g. 2770 Kastrup" %>
+    <%= f.label :suburb,"Town" %>
+      <%= f.text_field :suburb, required: true,class: "form-control", placeholder: "e.g. Kastrup" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zip,"ZIP Code" %>
+      <%= f.text_field :zip, required: true,class: "form-control", placeholder: "e.g. 2770" %>
   </div>
 
   <div class="field">

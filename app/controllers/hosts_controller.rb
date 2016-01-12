@@ -127,7 +127,7 @@ class HostsController < ApplicationController
   end
 
   def edit_host_profile # Edit profile page
-  	if current_host == nil
+  	if current_host == nil || current_admin == nil
   	  deny_access_host
     else
       @host = Host.find(params[:id])
@@ -170,7 +170,7 @@ class HostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
-      params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude,
+      params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :zip,
        :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number)
     end
 

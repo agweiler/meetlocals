@@ -39,8 +39,9 @@ function geocode() {
   var country = $('#host_country').val();
   var state = $('#host_state').val();
   var suburb = $('#host_suburb').val();
+  var zip = $('#host_zip').val();
   var street_address = $('#host_street_address').val();
-  address = street_address + " " + suburb + " " + state + " " + country
+  address = street_address + " " + zip + " " + suburb + " " + state + " " + country
 	if (geocoder) {
 		geocoder.geocode({ 'address': address }, function (results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
