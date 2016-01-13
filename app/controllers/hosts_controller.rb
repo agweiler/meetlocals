@@ -76,7 +76,6 @@ class HostsController < ApplicationController
       Hostmailer.host_approved(@host.id).deliver_later
       redirect_to(:back)
     else
-
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
@@ -89,7 +88,8 @@ class HostsController < ApplicationController
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
 
-        redirect_to create_host_success_path
+        redirect_to create_host_success_path if current_host
+        redirect_to admins_path, notice: "Update has been successful" if current_admin
       else
         redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.'
       end
