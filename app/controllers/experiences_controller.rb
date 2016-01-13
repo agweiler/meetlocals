@@ -35,12 +35,12 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences/new
   def new
-    redirect_to '/hosts/sign_in' unless host_signed_in?
+    redirect_to '/hosts/sign_in' unless current_admin  || current_host
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
     puts "#########################"
     puts @s3_direct_post
     @experience = Experience.new
-    @host = current_host
+    @host = current_host || Host.find(params[:host_id])
     @action = request.filtered_parameters['action']
   end
 
@@ -56,36 +56,41 @@ class ExperiencesController < ApplicationController
 
   # POST /experiences
   def create
-    @image_files = []
-    @image_files << experience_params.delete(:images_1)
-    @image_files << experience_params.delete(:images_2)
-    @image_files << experience_params.delete(:images_3)
+    @host = Host.find(params[:experience][:host_id])
+    if @host.experiences.normal_events.count == 0
+      @image_files = []
+      @image_files << experience_params.delete(:images_1)
+      @image_files << experience_params.delete(:images_2)
+      @image_files << experience_params.delete(:images_3)
 
-    #set Host_Party prices if the date is not nil
-    experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s) if experience_params["date(3i)"] != nil
+      #set Host_Party prices if the date is not nil
+      experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s) if experience_params["date(3i)"] != nil
 
-    #set Regular prices if date is nil
-    experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s) if experience_params["date(3i)"] == nil
+      #set Regular prices if date is nil
+      experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s) if experience_params["date(3i)"] == nil
 
-    @experience = current_host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
-    if @experience.save!
-      #create image after parent-experience is saved
-      @image_files.each_with_index do |img,index|
-        if img.is_a? String
-          new_img = @experience.exp_images.new
-          new_img.temp_file_key = img
-          new_img.image_number = index.to_i + 1
-          new_img.save!
+      @experience = @host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
+      if @experience.save!
+        #create image after parent-experience is saved
+        @image_files.each_with_index do |img,index|
+          if img.is_a? String
+            new_img = @experience.exp_images.new
+            new_img.temp_file_key = img
+            new_img.image_number = index.to_i + 1
+            new_img.save!
+          end
+        end unless @image_files.nil?
+        if @experience.host.approved == false
+          Adminmailer.host_created(@host.id).deliver_later
+          redirect_to create_exp_success_path
+        else
+          redirect_to @experience, notice: 'Experience was successfully updated.'
         end
-      end unless @image_files.nil?
-      if @experience.host.approved == false
-        Adminmailer.host_created(@current_host.id).deliver_later
-        redirect_to create_exp_success_path
       else
-        redirect_to @experience, notice: 'Experience was successfully updated.'
+         redirect_to new_experience_path
       end
     else
-       redirect_to new_experience_path
+      redirect_to "/", notice: "You have already created an Experience"
     end
   end
 

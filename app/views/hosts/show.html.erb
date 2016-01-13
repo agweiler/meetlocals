@@ -20,7 +20,7 @@
         <% if @host.experiences.first.present? %>
           <%= link_to "[ Update Experience ]", edit_experience_path(@host.experiences.first), :class => "edit_profile"%> <br>
         <% else %>
-          <%= link_to "[ Create Experience ]", new_experience_path, :class => "edit_profile" %><br>
+          <%= link_to "[ Create Experience ]", new_experience_path(:host_id => @host.id), :class => "edit_profile" %><br>
         <% end %>
         <% if @host.host_approved? %>
           <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" %><br>

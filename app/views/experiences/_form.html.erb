@@ -9,7 +9,7 @@
 
       <div class="field">
 
-        <%= f.label :title, @experience.is_host_party?(params[:action],@experience.host) ? "*Host Party Title" : "*Title" %>
+        <%= f.label :title, @experience.is_host_party?(params[:action],@host) ? "*Host Party Title" : "*Title" %>
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
 
@@ -21,7 +21,7 @@
         <%= f.label :beverages %><br>
         <%= f.text_field :beverages, required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
-      <% if (@action == "edit" && @experience.date == nil) || @experience.host.approved == false%>
+      <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
        <div class="field">
           <label for="exprience_max_group_size">* Max Group Size</label><br>
           <%= f.select :max_group_size, options_for_select(2..10, @experience.max_group_size), {},
@@ -39,7 +39,7 @@
     </div>
     <div class="col-md-6">
     <div class="field">
-        <%= f.label :host_style, @experience.is_host_party?(params[:action],@experience.host) ? "Host Party Presentation" : "We love making this kind of food" %><br>
+        <%= f.label :host_style, @experience.is_host_party?(params[:action],@host) ? "Host Party Presentation" : "We love making this kind of food" %><br>
         <!-- <p><small> This field is limited to 60 characters.</small></p> -->
         <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 250 %>
       </div>
@@ -49,7 +49,7 @@
 
 <!--     <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
 
-    <% if (@action == "edit" && @experience.date == nil) || @experience.host.approved == false%>
+    <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
 
       <%= f.hidden_field :meal , value: "Dinner" %>
 
@@ -74,7 +74,7 @@
 <div class="hide">
       <div class="field">
         <%= f.label :region %> <br>
-        <%= f.select(:location, options_for_select(Experience.get_all_location, @experience.host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
+        <%= f.select(:location, options_for_select(Experience.get_all_location, @host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
 </div>
 
@@ -155,6 +155,7 @@
     </div>
   </div>
 <hr>
+  <%= f.hidden_field :host_id, :value => @host.id %>
   <div class = "row">
     <div class="actions exp_cta pad-top pad-bot" align="center">
       <%= f.submit "Update my experience", class: 'btn', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:20px", remote: true ,id: "test" %>
