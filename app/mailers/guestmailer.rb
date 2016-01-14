@@ -23,7 +23,7 @@ class Guestmailer < ApplicationMailer
 
   def experience_completed(booking_id,guest_id)
     @guest = Guest.find guest_id
-    @booking = Booking.find booking_id
+    # @booking = Booking.find booking_id
     mail(to: @guest.email, subject: "You just had a wonderful time! Why don't you tell people?")
   end
 
