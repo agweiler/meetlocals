@@ -109,7 +109,7 @@
       <tbody>
         <tr>
           <td align="left">
-            <%= @experience.special_event? ? @host.host_presentation : @experience.host_style  %>
+            <%= @experience.special_event? ? @host.host_presentation.try(:html_safe) : @experience.host_style  %>
           </td>
         </tr>
       </tbody>
