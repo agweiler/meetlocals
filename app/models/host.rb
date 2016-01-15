@@ -113,7 +113,13 @@ class Host < ActiveRecord::Base
     # dob = self.dob
     # return nil if dob.nil?
     # now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-    Date.today.year - dob.year unless dob.nil?
+    unless dob.nil?
+      today = Date.today
+      age = today.year - dob.year 
+      age -= 1 if today.month < dob.month
+      age -= 1 if today.month == dob.month && today.day < dob.day
+    end 
+    age
   end
 
   def free?(date)
