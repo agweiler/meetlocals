@@ -21,6 +21,7 @@ class Host < ActiveRecord::Base
   #  -> (date) { joins(:holidays).where("holidays.date <> ?", date) }
   scope :from_state, -> (location) { where("state = ?", location) }
 
+  before_save :sanitize
 
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
@@ -202,5 +203,14 @@ class Host < ActiveRecord::Base
 
     return nil
 
+  end
+
+  def sanitize
+    self.host_presentation = Sanitize.fragment(self.host_presentation,
+    :elements => ['br','b','i','strong','u','small','a'],
+
+      :attributes => {
+    'a'    => ['href', 'title','target'],
+    })
   end
 end

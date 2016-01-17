@@ -71,7 +71,6 @@ class HostsController < ApplicationController
   # PATCH/PUT /hosts/1
   def update
     # this commit param apparently is the name of the f.submit button
-    puts params
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       Hostmailer.host_approved(@host.id).deliver_later
@@ -93,10 +92,11 @@ class HostsController < ApplicationController
         redirect_to create_host_success_path if current_host
         redirect_to admins_path, notice: "Update has been successful" if current_admin
       else
-        puts current_host
-        puts current_admin
-        redirect_to edit_host_profile, notice: 'Your host profile was successfully updated.' if current_host
-        redirect_to admins_path, notice: "Update has been successful" if current_admin
+        if current_host
+          redirect_to host_path(@host), notice: 'Your host profile was successfully updated.'
+        else
+          redirect_to admins_path, notice: "Update has been successful"
+        end
       end
     end
   end
