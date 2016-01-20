@@ -158,7 +158,7 @@ Rails.application.routes.draw do
 
   #301 redirects:
 
-  get '/geusts-2', to: redirect('/how_it_works')
+  get '/guests-2', to: redirect('/how_it_works')
   get '/vaerts-tilmelding/', to: redirect('/how_to_be_a_host')
   get '/news/', to: redirect('/blog')
 
