@@ -156,6 +156,12 @@ Rails.application.routes.draw do
 
   get 'notifications/all' => 'notifications#all', as: :all_notifications
 
+  #301 redirects:
+
+  get '/geusts-2', to: redirect('/how_it_works')
+  get '/vaerts-tilmelding/', to: redirect('/how_to_be_a_host')
+  get '/news/', to: redirect('/blog')
+
   resources :multidinners
 
   resources :experiences
