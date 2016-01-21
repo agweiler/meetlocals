@@ -128,7 +128,7 @@ class HostsController < ApplicationController
   end
 
   def edit_host_profile # Edit profile page
-  	if current_host == nil || current_admin == nil
+  	if current_host == nil && current_admin == nil
   	  deny_access_host
     else
       @host = Host.find(params[:id])
