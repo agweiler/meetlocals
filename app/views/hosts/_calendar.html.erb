@@ -17,7 +17,7 @@
   <div class="row text-center">
   <%= form_for :holiday, remote:true do |f| %>
     <%= f.hidden_field :dates %>
-    <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-xl btn-danger' if @host == current_host %>
+    <%= f.submit 'Update Holiday', data:{confirm:'Are you sure?'}, class:'btn btn-xl btn-danger' %>
   <% end %>
   </div>
 </div>
