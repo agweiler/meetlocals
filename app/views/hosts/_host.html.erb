@@ -2,14 +2,14 @@
   <div class="thumbnail" style = "margin-bottom:15px">
     <%= link_to image_tag(host.experiences.first.exp_images.first.image_file.url(:medium)), experience_path(host.experiences.first) if host.experiences.first.exp_images.present? %>
 
-    <div class="caption" style="background-color: #f3f3f3; height: 203px; padding:20px;">
+    <div class="caption" style="background-color: #f3f3f3; height: 245px; padding:20px;">
       <div id="avataro">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb), class: "img-circle"), experience_path(host.experiences.first) if host.images.present? %>
       </div>
 
          <h3 class = "host_name"><%= host.username %></h3>
 
-      <p class="nas"> <%= link_to host.experiences.first.title, experience_path(host.experiences.first) %> </p>
+      <p class="nas"> <%= link_to truncate(host.experiences.first.title, length: 50), experience_path(host.experiences.first) %> </p>
 
         <div>
         <label>Age:</label>
