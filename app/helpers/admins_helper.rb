@@ -14,7 +14,7 @@ module AdminsHelper
 			one_booking << "#{book.experience.host.first_name} #{book.experience.host.last_name}"
 			one_booking << book.experience.host.id
 			one_booking << book.experience.host.street_address
-			one_booking << "#{book.experience.host.zip book.experience.host.suburb}"
+			one_booking << "#{book.experience.host.zip} #{book.experience.host.suburb}"
 			one_booking << book.experience.host.email
 			one_booking << book.experience.host.phone
 			one_booking << book.experience.host.bank_number

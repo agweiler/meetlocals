@@ -2,7 +2,7 @@
   <div class="thumbnail" style = "margin-bottom:15px">
     <%= link_to image_tag(host.experiences.first.exp_images.first.image_file.url(:medium)), experience_path(host.experiences.first) if host.experiences.first.exp_images.present? %>
 
-    <div class="caption" style="background-color: #f3f3f3; height: 203px; padding:20px;">
+    <div class="caption" style="background-color: #f3f3f3; height: 245px; padding:20px;">
       <div id="avataro">
         <%= link_to image_tag(host.images.first.image_file.url(:thumb), class: "img-circle"), experience_path(host.experiences.first) if host.images.present? %>
       </div>
