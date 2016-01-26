@@ -25,16 +25,18 @@ class BookingsController < ApplicationController
     
     if host_signed_in?
       Notification.where(host_id: current_user.id, type_id: @booking.id).update_all(seen: true) if Notification.find_by(host_id: current_user.id,type_id: @booking.id).present?
+      @chat = "guest"
       unless current_host.id == @experience.host_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's host"
       end
     elsif guest_signed_in?
-
+      @chat = "host"
       Notification.where(guest_id: current_user.id, type_id: @booking.id).update_all(seen: true) if Notification.find_by(guest_id: current_user.id, type_id: @booking.id).present?
       unless current_guest.id == @booking.guest_id
         redirect_to '/bookings', notice: "You are not logged in as the booking's guest"
       end
     elsif admin_signed_in?
+      @chat = "host/guest"
       # puts "Viewing booking #{@booking.id}, status: #{@booking.payment_status}"
     else
       deny_access_guest
