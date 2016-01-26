@@ -87,7 +87,7 @@
     </div>
     <!-- End host major details -->
   </div>
-  <% if @host == current_host %>
+  <% if current_admin || @host == current_host %>
   <div class="row">
     <%= render 'calendar' %>
   </div>
