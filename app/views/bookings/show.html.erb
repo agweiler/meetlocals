@@ -69,7 +69,7 @@
 
     <% if current_guest && @booking.status == "invited" %>
       <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(payment_success_path)  %></br></br>
-      <p><strong>An additional 1.019% + 2.6 DKK will be added to price.</strong></p>
+      <p><strong>An additional 3.9% + 2.6 DKK will be added to price.</strong></p>
     <% end %>
 
     <% if @booking.status == "confirmed" %>
