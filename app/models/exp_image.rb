@@ -21,7 +21,6 @@ class ExpImage < ActiveRecord::Base
 
  validates_attachment :image_file, content_type: { content_type: ["image/jpeg", "image/gif", "image/png", ".png"] }
  after_commit :queue_upload_to_s3, on: [:create, :update], unless: :skip_callback
-
  process_in_background :image_file, processing_image_url: 'missing_image.jpeg'
 
  def queue_upload_to_s3
@@ -49,7 +48,7 @@ class ExpImage < ActiveRecord::Base
  end
 
 
-   def skip_callback
-     @skip_callback
-   end
+ def skip_callback
+   @skip_callback
+ end
 end

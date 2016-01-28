@@ -183,13 +183,18 @@
     var barContainer = $("<div class='progress'></div>").append(progressBar);
 
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
-
+    
     fileInput.after(barContainer);
+
     fileInput.fileupload({
       add: function (e, data) {
             fd["Content-Type"] = data.files[0].type;
+            data.files[0].name = data.files[0].name.replace(/[^\x00-\x7F]/g, "a");
+            fd.key = fd.key.replace(/\$\{filename\}/, data.files[0].name);
+            fd.key = fd.key.replace(/[^\x00-\x7F]/g, "a");
+            // fd.key = fd.key.replace(/ /g,"+");
             data.formData = fd;
-             data.submit();
+            data.submit();
            },
       fileInput:       fileInput,
       url:             'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/',
@@ -215,10 +220,10 @@ progressall: function (e, data) {
       done: function(e, data) {
         submitButton.prop('disabled', false);
         progressBar.text("Uploading done");
-
         // extract key and generate URL from response
         var key   = $(data.jqXHR.responseXML).find("Key").text();
-        // key = key.replace(/ /g,"_");
+         // key = key.replace(/ /g,"+");
+         key = key.replace(/[^\x00-\x7F]/g, "a");
         var url   = 'https://s3-ap-southeast-1.amazonaws.com/mtdimagesdev/' + key;
 
 
