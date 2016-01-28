@@ -92,7 +92,8 @@
           <td id="rowz">
           <%= @experience.time.in_time_zone.strftime('%I:%M %p') %> -
           <%= (@experience.time.in_time_zone +
-                @experience.duration.hour).strftime('%I:%M %p') %>
+                @experience.duration.hour).strftime('%I:%M %p') %> <br>
+                or arrange otherwise <br>with your host
           </td>
           <td id="rowz">DKK <%= @experience.price.round %> per person <br> Children from 0-7 years, free of charge 
           <br>Children from 8-13, half price</td>
