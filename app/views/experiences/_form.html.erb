@@ -24,13 +24,13 @@
       <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
        <div class="field">
           <label for="exprience_max_group_size">* Max Group Size</label><br>
-          <%= f.select :max_group_size, options_for_select(2..10, @experience.max_group_size), {},
+          <%= f.select :max_group_size, options_for_select(2..15, @experience.max_group_size), {},
           {required:true, class:'form-control', style:'width:20%'} %>
        </div>
       <% else %>
       <div class="field">
          <label for="exprience_max_group_size">* Max Group Size</label><br>
-         <%= f.select :max_group_size, options_for_select(1..10, @experience.max_group_size), {},
+         <%= f.select :max_group_size, options_for_select(1..15, @experience.max_group_size), {},
          {required:true, class:'form-control', style:'width:20%'} %>
       </div>
       <% end %>

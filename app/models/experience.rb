@@ -64,11 +64,11 @@ class Experience < ActiveRecord::Base
 
 	def set_default_mealtime
 		if self.meal == 'Lunch'
-			self.time = Time.zone.local(2000, 01, 01, 12).in_time_zone
-			self.duration = 2
-		elsif self.meal == 'Dinner'
-			self.time = Time.zone.local(2000, 01, 01, 19).in_time_zone
+			self.time = Time.zone.local(2000, 01, 01, 11).in_time_zone
 			self.duration = 3
+		elsif self.meal == 'Dinner'
+			self.time = Time.zone.local(2000, 01, 01, 18, 30).in_time_zone
+			self.duration = 3.5
 		end
 	end
 
