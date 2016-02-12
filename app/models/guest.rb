@@ -32,4 +32,14 @@ class Guest < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+
+  def age
+    unless dob.nil?
+      today = Date.today
+      age = today.year - dob.year 
+      age -= 1 if today.month < dob.month
+      age -= 1 if today.month == dob.month && today.day < dob.day
+    end 
+    age
+  end
 end
