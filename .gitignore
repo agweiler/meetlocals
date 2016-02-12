@@ -22,3 +22,5 @@
 
 # Ignore secret
 /config/secret.yml
+
+/vendor/bundle/*

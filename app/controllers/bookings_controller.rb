@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
 
   # GET /bookings/1
   def show # Limited to only certain people
-    
+
     if host_signed_in?
       Notification.where(host_id: current_user.id, type_id: @booking.id).update_all(seen: true) if Notification.find_by(host_id: current_user.id,type_id: @booking.id).present?
       @chat = "guest"
@@ -80,7 +80,7 @@ class BookingsController < ApplicationController
     elsif @experience.meal == "Lunch"
       @booking.end_time = @experience.time + 2.hours
     end
-    
+
     respond_to do |format|
       if @booking.save
         host = @booking.experience.host
