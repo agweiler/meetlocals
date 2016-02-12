@@ -76,9 +76,9 @@ class BookingsController < ApplicationController
     @booking = @experience.bookings.new(booking_params)
     @booking.start_time = @experience.time
     if @experience.meal == "Dinner"
-      @booking.end_time = @experience.time + 3.hours
+      @booking.end_time = @experience.time + 3.5.hours
     elsif @experience.meal == "Lunch"
-      @booking.end_time = @experience.time + 2.hours
+      @booking.end_time = @experience.time + 3.hours
     end
 
     respond_to do |format|

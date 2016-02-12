@@ -15,3 +15,14 @@ task :change_meal_time => :environment do
 		end
 	end
 end
+
+desc "Changing the Booking Times"
+task :change_booking_time => :environment do
+	Booking.all.each do |booking|
+		if booking.experience.meal == "Lunch"
+			booking.update(start_time: booking.experience.time, end_time: booking.experience.time + 3.hours)
+		elsif booking.experience.meal == "Dinner"
+			booking.update(start_time: booking.experience.time, end_time: booking.experience.time + 3.5.hours)
+		end
+	end
+end
