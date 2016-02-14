@@ -45,10 +45,10 @@ class Adminmailer < ApplicationMailer
 	def email_to_hosts(host_id,params)
 		host = Host.find host_id
 		@body = params[:body]
-		if params[:file]
-			file_type = File.extname(params[:file].tempfile)
-			mail.attachments["#{params[:file_name]}#{file_type}"] = File.read(params[:file].tempfile)
-		end
-		mail(to: "hewrin@hotmail.com", subject: "#{params[:title]}")
+		# if params[:file]
+		# 	file_type = File.extname(params[:file].tempfile)
+		# 	mail.attachments["#{params[:file_name]}#{file_type}"] = File.read(params[:file].tempfile)
+		# end
+		mail(to: host.email, subject: "#{params[:title]}")
 	end
 end

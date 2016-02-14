@@ -149,10 +149,6 @@
             <%= label_tag(:body, "Body") %> <br> 
               <%= text_area_tag :body , "", class: 'form-control' ,rows: 20 %>
               <br>
-              <%= label_tag(:file_name, "File Name") %> <br> 
-                <%= text_field_tag :file_name , "", class: 'form-control', placeholder: "This will be the name of the attached file"%>
-              <label for="file">File to Upload</label> <%= file_field_tag "file" %>
-              <br>
             <%= submit_tag "Send Email" %>
           <% end %>
         </div>
