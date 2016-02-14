@@ -83,6 +83,14 @@ class AdminsController < ApplicationController
 		end
 	end
 
+	def send_email
+		hosts_id = Host.all.pluck(:id)
+		hosts_id.each do |id|
+			Adminmailer.email_to_hosts(id,params).deliver_later
+		end
+		redirect_to admin_settings_path
+	end
+
 	private
 		def admin_params
 		  params.require(:admin).permit(:commision_percentage)
