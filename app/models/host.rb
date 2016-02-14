@@ -23,8 +23,28 @@ class Host < ActiveRecord::Base
 
   before_save :sanitize
 
+  filterrific(
+    available_filters: [
+      :search_query
+    ]
+  )
+    scope :search_query, lambda { |query|
+      return nil  if query.blank?
+
+    query = query.downcase
+
+     where(
+         "LOWER(hosts.first_name) ~ '#{query}' OR LOWER(hosts.last_name) ~ '#{query}'"
+    )
+
+  }
+
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
 
   def email_to_username
   	email.gsub(/@.*/, "").capitalize

@@ -93,6 +93,19 @@ class AdminsController < ApplicationController
 		redirect_to admin_settings_path
 	end
 
+	def all_hosts
+		@filterrific = initialize_filterrific(
+		  Host,
+		  params[:filterrific]
+		) or return
+		@hosts = @filterrific.find.page(params[:page])
+
+		respond_to do |format|
+		  format.html
+		  format.js
+		end
+	end
+
 	private
 		def admin_params
 		  params.require(:admin).permit(:commision_percentage)

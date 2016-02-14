@@ -1,0 +1,51 @@
+<div id="filterrific_results">
+    <div class="container-fluid">
+    <div class="row" >
+      <div class="col-md-12">
+        <h1 class="heads" style="color:#66a422;" >Listing Hosts</h1>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Host ID#</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>ZIP and Town</th>
+              <th>Region</th>
+              
+              <!-- <th>Username</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>State</th>
+              <th>Suburb</th> -->
+              <th class="text-right">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @hosts.each do |host| %>
+              <tr class="text-left">
+                <td><%= host.id %></td>
+                <td><%= host.first_name %> <%= host.last_name %></td>
+                <td><%= host.email %></td>
+                
+                <td><%= host.street_address %></td>
+                <td><%= host.zip %> <%= host.suburb %></td>
+                <td><%= host.state %>
+
+                
+                <td class="text-right">
+                  <%= link_to 'View', host, class:"btn btn-sm btn-primary", style:"color:#fff; background-color:#4183D7; border:#4183D7;" %>
+                  <%= link_to 'Destroy', host, class:"btn btn-sm red",
+                   style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
