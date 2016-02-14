@@ -49,6 +49,6 @@ class Adminmailer < ApplicationMailer
 			file_type = File.extname(params[:file].tempfile)
 			mail.attachments["#{params[:file_name]}#{file_type}"] = File.read(params[:file].tempfile)
 		end
-		mail(to: host.email, subject: "#{params[:title]}")
+		mail(to: "hewrin@hotmail.com", subject: "#{params[:title]}")
 	end
 end

@@ -84,10 +84,12 @@ class AdminsController < ApplicationController
 	end
 
 	def send_email
-		hosts_id = Host.all.pluck(:id)
-		hosts_id.each do |id|
+		# hosts_id = Host.all.pluck(:id)
+		# hosts_id.each do |id|
+		# 	Adminmailer.email_to_hosts(id,params).deliver_later
+		# end
+		id = 2
 			Adminmailer.email_to_hosts(id,params).deliver_later
-		end
 		redirect_to admin_settings_path
 	end
 
