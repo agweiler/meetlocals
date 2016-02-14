@@ -42,9 +42,13 @@ class Adminmailer < ApplicationMailer
 		mail(to: @admin.email, subject: "A guest has completed payment")
 	end	
 
-	def email_to_hosts(host_id,body,title)
-		@host = Host.find host_id
-		@body = body
-		mail(to: @host.email, subject: "#{title}")
+	def email_to_hosts(host_id,params)
+		host = Host.find host_id
+		@body = params[:body]
+		if params[:file]
+			file_type = File.extname(params[:file].tempfile)
+			mail.attachments["#{params[:file_name]}#{file_type}"] = File.read(params[:file].tempfile)
+		end
+		mail(to: host.email, subject: "#{params[:title]}")
 	end
 end
