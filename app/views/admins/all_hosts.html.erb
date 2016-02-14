@@ -1,0 +1,22 @@
+<div id="listinghost" style="background:#f9f9f9;">
+<%= form_for_filterrific @filterrific do |f| %>
+  <div style = "padding-top:20px;">
+    Search
+    <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+    <%= f.text_field(
+      :search_query,
+      class: 'filterrific-periodically-observed',
+      placeholder: "Search Host Names"
+    ) %>
+    <%= f.submit 'Filter' %>
+  </div>
+
+  <%# add an automated spinner to your form when the list is refreshed %>
+
+  <%= render_filterrific_spinner %>
+<% end %>
+<%= render(
+  partial: 'admins/list',
+  locals: { hosts: @hosts }
+) %>
+</div>

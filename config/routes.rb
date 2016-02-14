@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  get 'all_hosts' => 'admins#all_hosts'
+
   post "send_email" => 'admins#send_email'
 
   get "newsletter_failure" => "static_pages#newsletter_failure"

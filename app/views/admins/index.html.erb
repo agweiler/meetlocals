@@ -78,8 +78,10 @@
         </tbody>
       </table>
     </div>
+    <%= will_paginate @hosts %>
   </div>
 </div>
+<%= link_to "View All Hosts", all_hosts_path %>
 </div>
 
 <div id="listingguests">
@@ -116,6 +118,7 @@
         </tbody>
       </table>
     </div>
+    <%= will_paginate @guests %>
   </div>
 </div>
 </div>

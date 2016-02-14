@@ -21,6 +21,7 @@
 //= require bootstrap-wysihtml5/wysihtml5x-toolbar.js
 //= require bootstrap-wysihtml5/handlebars.runtime.min.js
 //= require bootstrap-wysihtml5/minimum
+//= require filterrific/filterrific-jquery
 //= require_tree
 //= require hosts
 //= require experiences
