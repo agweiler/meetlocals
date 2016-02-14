@@ -3,8 +3,10 @@ class AdminsController < ApplicationController
 	def index
 		redirect_to "/" unless current_admin
 		@admins = Admin.all
-		@guests = Guest.all
-		@hosts = Host.all
+		# @guests = Guest.all
+		@guests = Guest.paginate(:page => params[:page], :per_page => 10)
+		# @hosts = Host.all
+		@hosts = Host.paginate(:page => params[:page], :per_page => 10)
 	end
 
 	def analytics
