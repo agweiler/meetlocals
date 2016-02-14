@@ -41,6 +41,8 @@ Rails.application.routes.draw do
 
   devise_for :admins
 
+  post "send_email" => 'admins#send_email'
+
   get "newsletter_failure" => "static_pages#newsletter_failure"
 
   get "newsletter_success" => "static_pages#newsletter_success"

@@ -41,4 +41,10 @@ class Adminmailer < ApplicationMailer
 		@admin = Admin.first
 		mail(to: @admin.email, subject: "A guest has completed payment")
 	end	
+
+	def email_to_hosts(host_id,body,title)
+		@host = Host.find host_id
+		@body = body
+		mail(to: @host.email, subject: "#{title}")
+	end
 end
