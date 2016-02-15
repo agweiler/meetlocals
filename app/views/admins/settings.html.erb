@@ -112,7 +112,7 @@
   <div class = "col-md-offset-2 col-md-8 pad-bot">
     <h2 class="text-center">Download Past Completed Bookings Report</h2>
     <div>
-      <%= form_tag("/confirmed_report", method: "get", format: "csv") do %>
+      <%= form_tag("/completed_report", method: "get", format: "csv") do %>
         <%= label_tag(:start_date, "Start Date") %> <br>
           <%= select_date Date.today, 
           {prefix: "start_date",use_short_month:true, order:[:day, :month, :year],
