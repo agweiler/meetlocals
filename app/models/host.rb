@@ -172,7 +172,7 @@ class Host < ActiveRecord::Base
 		 ['North Jutland', 'Nordjylland'],
 		 ['Mid Jutland', 'Midtjylland'],
 		 ['South Jutland', 'Syddanmark'],
-     ['Fyn','Funen']]
+     ['Island of Funen','Funen']]
 	end
 
   def location
