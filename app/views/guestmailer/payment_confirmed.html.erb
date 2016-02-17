@@ -15,10 +15,15 @@
       Time: <%= @booking.start_time.in_time_zone.strftime("%I:%M %p") %> until <%= @booking.end_time.in_time_zone.strftime("%I:%M %p") %> </br>
       Address: <%= @host.street_address %> </br>
       ZIP Code and Town: <%= @host.zip %> <%= @host.suburb %> </br>
-      State: <%= @host.state %> </br>
+      State: <%= @host.state_to_english %> </br>
     </p>
     <p>
-      For a handy map to help you get there, please click <%= link_to "Here", @google_map %>
+      To help you get to the host with Public Transport and Travel planner:
+      please click <%= "Here" , http://www.rejseplanen.dk %>
+
+    </p>
+    <p>
+      For a handy map to help you get there, please click <%= link_to "Here", @google_map %> <br>
 
       You can review your bookings in your Account Profile via <%= link_to 'Meet the Danes', new_guest_session_url %> 
     </p>
