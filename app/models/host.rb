@@ -41,6 +41,23 @@ class Host < ActiveRecord::Base
 
   # removed uniqueness constraint
   # validates_uniqueness_of :username - not needed because of devise validatable
+  def state_to_english
+    state = self.state
+    case state
+      when "Hovedstaden"
+        return "Greater Copenhagen"
+      when "Zeeland"
+        return "Zealand"
+      when "Nordjylland"
+        return "North Jutland"
+      when "Midtjylland"
+        return "Mid Jutland"
+      when "Syddanmark"
+        return "South Jutland"
+      when "Funen"
+        return "Island of Funen"
+    end
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"
