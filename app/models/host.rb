@@ -39,8 +39,6 @@ class Host < ActiveRecord::Base
 
   }
 
-  # removed uniqueness constraint
-  # validates_uniqueness_of :username - not needed because of devise validatable
   def state_to_english
     state = self.state
     case state
@@ -167,20 +165,25 @@ class Host < ActiveRecord::Base
   def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
+     ['Copenhagen City', 'Copenhagen City'],
      ['Greater Copenhagen', 'Hovedstaden'],
 		 ['Zealand','Zeeland'],
 		 ['North Jutland', 'Nordjylland'],
 		 ['Mid Jutland', 'Midtjylland'],
 		 ['South Jutland', 'Syddanmark'],
-     ['Island of Funen','Funen']]
+     ['Island of Funen','Funen'],
+     ['Island Bornholm','Island Bornholm']]
 	end
 
   def location
     hash = {'Zeeland' => 'Zealand',
     'Nordjylland' => 'North Jutland',
     'Midtjylland' => 'Mid Jutland',
-    'Syddanmark' => 'South Jutland & Fyn',
-    'Hovedstaden' => 'Greater Copenhagen'}
+    'Syddanmark' => 'South Jutland',
+    'Island of Funen' => 'Funen',
+    'Hovedstaden' => 'Greater Copenhagen',
+    'Copenhagen City' => 'Copenhagen City',
+    'Island Bornholm' => 'Island Bornholm'}
 
     x = [self.suburb, hash[self.state], self.country].reject do |itm|
       itm.nil? || itm.empty?
