@@ -54,6 +54,10 @@ class Host < ActiveRecord::Base
         return "South Jutland"
       when "Funen"
         return "Island of Funen"
+      when "City of Copenhagen"
+        return "City of Copenhagen"
+      when "Island of Bornholm"
+        return "Island of Bornholm"
     end
   end
 
@@ -165,14 +169,14 @@ class Host < ActiveRecord::Base
   def self.get_location
   	# ["Region","Zeeland", "Nordjylland", "Midtjylland","Syddanmark", "Hovedstaden"]
 		[['Location','Location'],
-     ['Copenhagen City', 'Copenhagen City'],
+     ['City of Copenhagen', 'City of Copenhagen'],
      ['Greater Copenhagen', 'Hovedstaden'],
 		 ['Zealand','Zeeland'],
 		 ['North Jutland', 'Nordjylland'],
 		 ['Mid Jutland', 'Midtjylland'],
 		 ['South Jutland', 'Syddanmark'],
      ['Island of Funen','Funen'],
-     ['Island Bornholm','Island Bornholm']]
+     ['Island of Bornholm','Island of Bornholm']]
 	end
 
   def location
