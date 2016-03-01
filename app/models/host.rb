@@ -61,6 +61,16 @@ class Host < ActiveRecord::Base
     end
   end
 
+  def state_to_english_for_admin
+    state = self.state
+    case state
+      when "Hovedstaden"
+        return "Greater Copenhagen"
+      else
+        return state
+    end
+  end
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

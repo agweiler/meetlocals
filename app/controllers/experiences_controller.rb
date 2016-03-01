@@ -19,7 +19,7 @@ class ExperiencesController < ApplicationController
       @endDate = @startDate = @experience.date.strftime('%F')
     else
       @startDate = (Date.today + 4.days).strftime('%F')
-      @endDate = (Date.today + 6.months).strftime('%F')
+      @endDate = (Date.today + 13.months).strftime('%F')
     end
 
     # @testimonials = @experience.bookings.map { |booking| booking.testimonial }.compact
