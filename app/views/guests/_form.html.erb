@@ -15,43 +15,43 @@
       <div class="col-md-6">
 
         <div class="field">
-          <%= f.label :username %>*<br>
+          <%= f.label :username %> <span class="red-asterix">*</span><br>
           <%= f.text_field :username, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-            <%= f.label :title %>*<br>
+            <%= f.label :title %> <span class="red-asterix">*</span><br>
             <%= f.text_field :title, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-            <%= f.label :first_name %>*<br>
+            <%= f.label :first_name %> <span class="red-asterix">*</span><br>
             <%= f.text_field :first_name, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-          <%= f.label :last_name %>*<br>
+          <%= f.label :last_name %> <span class="red-asterix">*</span><br>
           <%= f.text_field :last_name, required: true, class: "form-control" %>
         </div>
 
         <div class="field">
-          <%= f.label :profession %><br />
+          <%= f.label :profession %> (Optional)<br />
           <%= f.text_field :profession , class: "form-control"%>
         </div>
 
          <div class="field">
-            <%= f.label :interests %>*<br>
+            <%= f.label :interests %> <span class="red-asterix">*</span><br>
             <%= f.text_field :interests, required: true, class: "form-control" %>
         </div>
 
          <div class="field">
-            <%= f.label :allergies %>*<br>
+            <%= f.label :allergies %> <span class="red-asterix">*</span><br>
             <%= f.text_field :allergies, required: true, class: "form-control" %>
         </div>
 
 
         <div class="field">
-            <%= f.label :languages %>*<br>
+            <%= f.label :languages %> <span class="red-asterix">*</span><br>
             <%= f.text_field :languages, required: true, class: "form-control" %>
         </div>
 
@@ -60,32 +60,27 @@
       <div class="col-md-6">
 
         <div class="field">
-            <%= f.label :nationality %>*<br>
+            <%= f.label :nationality %> <span class="red-asterix">*</span><br>
             <%= f.collection_select :nationality, Nationality.all, :name, :name, {include_blank:""}, {class:'form-control', required: true,} %>
         </div>
 
         <div class="field">
-            <%= f.label :country %>*
+            <%= f.label :country %> <span class="red-asterix">*</span>
             <%= f.collection_select :country, Country.all,:name, :name, {include_blank:""}, {class:"form-control", required: true,} %>
         </div>
 
          <div class="field">
-          <%= f.label :dob%> (Date of Birth) <br>
+          <%= f.label :dob%> (Date of Birth) <span class="red-asterix">*</span> <br>
           <%= f.date_select :dob, {:start_year => Date.today.year - 100, :end_year => Date.today.year}, {required: true,class:"form-control", style:"width:120px;display:inline"}%>
         </div>
 
         <div class="field">
-          <%= f.label :about %><br />
+          <%= f.label :about %> (Optional)<br />
           <%= f.text_area :about , class: "form-control"%>
         </div>
 
-        <!-- <div class="field">
-          <%= f.label :image %><br>
-          <%= f.file_field(:image_file) %>
-        </div> -->
-
         <div class="">
-          <%= f.label :image %><br>
+          <%= f.label :image %> (Optional)<br>
           <div class="input-group">
             <span class="input-group-btn">
               <span class="btn btn-default upload-profile btn-file">
@@ -94,6 +89,10 @@
             </span>
             <input type="text" class="form-control" readonly>
           </div>
+        </div>
+        <br>
+        <div>
+          <small><span class="red-asterix">*</span> Indicates a required field</small>
         </div>
       </div>
     </div>
