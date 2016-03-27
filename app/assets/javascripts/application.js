@@ -16,6 +16,7 @@
 //= require jquery.ui.widget
 //= require z.jquery.fileupload
 //= require jquery.raty.js
+//= require cocoon
 //= require jquery-readyselector
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/wysihtml5x-toolbar.js

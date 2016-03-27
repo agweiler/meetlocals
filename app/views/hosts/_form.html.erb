@@ -153,6 +153,14 @@
     <input name="commit" value="Update Host" type="submit" style="display: none" class="form-control">
   </div>
 
+  <fieldset id="project-users">
+  <ol>
+  <%= f.fields_for :experience do |experience| %>
+  <%= render 'init_exp', f: experience %>
+  <% end %>
+  </ol>
+
+
 <% end %>
 
 <script type="text/javascript">

@@ -12,11 +12,6 @@ class HostsController < ApplicationController
 			@hosts = Host.where(approved: true).order('random()').includes(:images)
 		elsif (request.request_method == 'POST')
       assign_search_inputs!
-			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
-			# age_range ||= [nil, 0, 200]
-      # debugger
-
-			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
       @hosts = Host.search_by(search_params).includes(:images)
 		end
 
@@ -43,6 +38,8 @@ class HostsController < ApplicationController
   end
 
   def edit
+    @experience = Experience.new
+     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
   end
 
   # POST /hosts
@@ -71,6 +68,7 @@ class HostsController < ApplicationController
   # PATCH/PUT /hosts/1
   def update
     # this commit param apparently is the name of the f.submit button
+    
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       Hostmailer.host_approved(@host.id).deliver_later
@@ -172,7 +170,7 @@ class HostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :zip,
-       :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number)
+       :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number,experiences_attributes: [:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3, :_destroy])
     end
 
     def search_params
