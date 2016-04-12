@@ -1,12 +1,12 @@
 
-<h1 class="heads" style="color:#66a422;">Experience Info</h1>
+<h1 class="heads" style="color:#66a422;">Description of your event</h1>
 <%= form_for @experience, html: {multipart: true, class: "directUpload" } do |f| %>
   <!-- <% flash[:alert] = @experience.errors.full_messages if @experience.errors.any?%> -->
 <% @experience.errors.count > 3 ? flash[:alert] = "Please fill out all the required fields." : flash[:alert] = @experience.errors.full_messages %>
 
       <div class="field">
 
-        <%= f.label :title, @experience.is_host_party?(params[:action],@host) ? "*Host Party Title" : "*Title" %>
+        <%= f.label :Event_title, @experience.is_host_party?(params[:action],@host) ? "*Host Party Title" : "*Title" %>
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
 
@@ -51,8 +51,8 @@
   <hr>
 </div>
 
-  <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
-  <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an experience without uploading all <strong>3 images</strong>.</small></p> 
+  <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Upload three pictures giving the impression of your events </h1>
+  <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an event without uploading all <strong>3 images</strong>.</small></p> 
 
   <p class="pad-bot smalls">Note: attempting to upload images larger than 4MB in total may cause timeout issues.</p>
   <div class = "row directUpload">
@@ -134,7 +134,7 @@
 
   $(function(){
        if( window.location.pathname.indexOf("edit") >= 0 ){
-      $('#showfilename').val('Browse to replace current experience images').attr('style','color:red');
+      $('#showfilename').val('Browse to replace current event images').attr('style','color:red');
       $('input[type*=submit]').val('Update Experience')
     }
   })
