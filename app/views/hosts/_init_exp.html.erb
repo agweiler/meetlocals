@@ -1,11 +1,8 @@
 
-<div class="container">
+<h1 class="heads" style="color:#66a422;">Experience Info</h1>
 <%= form_for @experience, html: {multipart: true, class: "directUpload" } do |f| %>
   <!-- <% flash[:alert] = @experience.errors.full_messages if @experience.errors.any?%> -->
 <% @experience.errors.count > 3 ? flash[:alert] = "Please fill out all the required fields." : flash[:alert] = @experience.errors.full_messages %>
-
-  <div class="row">
-    <div class="col-md-6">
 
       <div class="field">
 
@@ -36,13 +33,11 @@
       <% end %>
       
       </br>
-    </div>
-    <div class="col-md-6">
     <div class="field">
         <%= f.label :host_style, @experience.is_host_party?(params[:action],@host) ? "Host Party Presentation" : "We love making this kind of food" %><br>
         <!-- <p><small> This field is limited to 60 characters.</small></p> -->
         <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 250 %>
-      </div>
+    </div>
 
 
     <!-- <p><small>Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
@@ -71,25 +66,21 @@
     <% end %>
 
 
-<div class="hide">
+    <div class="hide">
       <div class="field">
         <%= f.label :region %> <br>
         <%= f.select(:location, options_for_select(Experience.get_all_location, @host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
+    </div>
+    <%= f.hidden_field :price %>
+  <hr>
 </div>
 
-      <div class="field">
-                  <%= f.hidden_field :price %>
-      </div>
-
-    </div>
-  </div>
-  <hr>
   <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
   <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an experience without uploading all <strong>3 images</strong>.</small></p> 
 
   <p class="pad-bot smalls">Note: attempting to upload images larger than 4MB in total may cause timeout issues.</p>
-  <div class = "row">
+  <div class = "row directUpload">
     <div class="field col-md-4">
       <%= f.label :image_1 %><br>
       <% if @image_1.present? %>
@@ -103,7 +94,7 @@
             <% if @image_1.present? %>
               Browse<%= f.file_field(:images_1, multiple: false, required: false) %>
             <% else %>
-              Browse<%= f.file_field(:images_1, multiple: false, required: false) %>
+              Browse<%= f.file_field(:images_1, multiple: false, required: true) %>
             <% end %>
           </span>
         </span>
@@ -125,7 +116,7 @@
             <% if @image_2.present? %>
               Browse<%= f.file_field(:images_2, multiple: false, required: false) %>
             <% else %>
-              Browse<%= f.file_field(:images_2, multiple: false, required: false) %>
+              Browse<%= f.file_field(:images_2, multiple: false, required: true) %>
             <% end %>
           </span>
         </span>
@@ -146,7 +137,7 @@
             <% if @image_3.present? %>
               Browse<%= f.file_field(:images_3, multiple: false, required: false) %>
             <% else %>
-              Browse<%= f.file_field(:images_3, multiple: false, required: false) %>
+              Browse<%= f.file_field(:images_3, multiple: false, required: true) %>
             <% end %>
           </span>
         </span>
@@ -156,11 +147,13 @@
   </div>
 <hr>
   <%= f.hidden_field :host_id, :value => @host.id %>
-  <div class = "row">
-
+  <div class="actions">
+    <button type="button" name="geocoder" onclick="geocode()" class="btn btn-primary">Update my Profile!</button>
+    <input name="commit" value="Update Host" type="submit" style="display: none" class="form-control">
   </div>
 <% end %>
-</div>
+
+
 
 <script type="text/javascript">
 
@@ -242,7 +235,6 @@ progressall: function (e, data) {
       }
     });
   });
-
 </script>
 
 <!-- Limit chars for text area -->

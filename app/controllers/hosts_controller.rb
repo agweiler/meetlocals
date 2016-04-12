@@ -42,29 +42,6 @@ class HostsController < ApplicationController
      @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
   end
 
-  # POST /hosts
-  # We don't seem to be using this...
-  def create
-    # @host = Host.new(host_detail_params)
-
-    # @image_file = params[:host].delete(:image_file)
-
-    # respond_to do |format|
-    #   if @host.save
-    #     format.html { redirect_to host, notice: 'host was successfully created.' }
-
-    #     # Create image after parent-host is saved
-    #     new_img = @host.images.new
-    #     new_img.image_file = @image_file
-    #     new_img.caption = @image_file.original_filename
-    #     new_img.save!
-    #     new_img.update(imageable:@host)
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
-  end
-
   # PATCH/PUT /hosts/1
   def update
     # this commit param apparently is the name of the f.submit button
@@ -83,10 +60,25 @@ class HostsController < ApplicationController
         end
         Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
+
+      @image_files = []
+      @image_files << experience_params.delete(:images_1)
+      @image_files << experience_params.delete(:images_2)
+      @image_files << experience_params.delete(:images_3)
+
+      @image_files.each_with_index do |img, index|
+        if img.is_a? String
+          if @experience.exp_images.find_by(image_number: (index + 1)) != nil
+            @experience.exp_images.find_by(image_number: (index + 1)).delete
+          end
+          new_img = @experience.exp_images.new
+          new_img.temp_file_key = img
+          new_img.image_number = index.to_i + 1
+          new_img.save!
+        end
+      end unless @image_files.nil?
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
-        puts current_host
-        puts current_admin
         redirect_to create_host_success_path if current_host
         redirect_to admins_path, notice: "Update has been successful" if current_admin
       else
@@ -171,6 +163,10 @@ class HostsController < ApplicationController
     def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :zip,
        :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number,experiences_attributes: [:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3, :_destroy])
+    end
+
+    def experience_params
+      params.require(:experience).permit(:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3)
     end
 
     def search_params
