@@ -33,13 +33,11 @@ class HostsController < ApplicationController
     end
   end
 
-  def new
-    @host = Host.new
-  end
 
   def edit
+    deny_access_host if current_host == nil && current_admin == nil
     @experience = Experience.new
-     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
   end
 
   # PATCH/PUT /hosts/1
@@ -114,14 +112,6 @@ class HostsController < ApplicationController
         format.html { redirect_to admins_url, notice: 'host was successfully destroyed.' }
         format.json { head :no_content }
       end
-    end
-  end
-
-  def edit_host_profile # Edit profile page
-  	if current_host == nil && current_admin == nil
-  	  deny_access_host
-    else
-      @host = Host.find(params[:id])
     end
   end
 
