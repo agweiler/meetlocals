@@ -183,7 +183,7 @@ debugger;
     var barContainer = $("<div class='progress'></div>").append(progressBar);
 
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
-    
+      debugger;
     fileInput.after(barContainer);
 
     fileInput.fileupload({

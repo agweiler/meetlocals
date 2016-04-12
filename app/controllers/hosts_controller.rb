@@ -36,14 +36,18 @@ class HostsController < ApplicationController
 
   def edit
     deny_access_host if current_host == nil && current_admin == nil
-    @experience = Experience.new
+    @experience = current_host.experiences.find_or_initialize_by(date: nil)
+    if @experience.id
+      @image_1 = @experience.exp_images.find_by(image_number: 1)
+      @image_2 = @experience.exp_images.find_by(image_number: 2)
+      @image_3 = @experience.exp_images.find_by(image_number: 3)
+    end
     @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
   end
 
   # PATCH/PUT /hosts/1
   def update
     # this commit param apparently is the name of the f.submit button
-    
     if params[:commit] == "Approve User"
       @host.update(approved: true)
       Hostmailer.host_approved(@host.id).deliver_later
@@ -52,29 +56,33 @@ class HostsController < ApplicationController
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
+
       if @image_file.present?
         if @host.images.present?
           @host.images.delete_all
         end
         Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
+        @experience = current_host.experiences.find_or_initialize_by(date: nil)
+        @image_files = []
+        @image_files << params[:imageNumber0]
+        @image_files << params[:imageNumber1]
+        @image_files << params[:imageNumber2]
+        experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
+        if @experience.update(experience_params.except(:days))
 
-      @image_files = []
-      @image_files << experience_params.delete(:images_1)
-      @image_files << experience_params.delete(:images_2)
-      @image_files << experience_params.delete(:images_3)
-
-      @image_files.each_with_index do |img, index|
-        if img.is_a? String
-          if @experience.exp_images.find_by(image_number: (index + 1)) != nil
-            @experience.exp_images.find_by(image_number: (index + 1)).delete
-          end
-          new_img = @experience.exp_images.new
-          new_img.temp_file_key = img
-          new_img.image_number = index.to_i + 1
-          new_img.save!
+          @image_files.each_with_index do |img, index|
+            if img.is_a? String
+              if @experience.exp_images.find_by(image_number: (index + 1)) != nil
+                @experience.exp_images.find_by(image_number: (index + 1)).delete
+              end
+              new_img = @experience.exp_images.new
+              new_img.temp_file_key = img
+              new_img.image_number = index.to_i + 1
+              new_img.save!
+            end
+          end unless @image_files.nil?
         end
-      end unless @image_files.nil?
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
         redirect_to create_host_success_path if current_host
@@ -156,7 +164,7 @@ class HostsController < ApplicationController
     end
 
     def experience_params
-      params.require(:experience).permit(:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3)
+      params.require(:experience).permit(:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset)
     end
 
     def search_params

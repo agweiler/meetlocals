@@ -39,32 +39,7 @@
         <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 250 %>
     </div>
 
-
-    <!-- <p><small>Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
-
-<!--     <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
-
-    <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
-
       <%= f.hidden_field :meal , value: "Dinner" %>
-
-    <% else %>
-    <%= f.label :date %>
-      <div class="field form-inline">
-        <%= f.date_select :date,
-        {include_blank:true, use_short_month:true, order:[:month, :day, :year],
-        start_year: Date.today.year, end_year: Date.today.year.next},
-        {class:"form-control", required: true } %>
-      </div>
-
-      <div class="field" id="meal">
-        <%= f.label :meal %> <br>
-        <%= f.select(:meal, options_for_select(Experience.get_meals,
-              @experience.meal), {},
-              {required: true, class: 'form-control', style:"width:50%"}) %>
-      </div>
-    <% end %>
-
 
     <div class="hide">
       <div class="field">
@@ -165,16 +140,15 @@
   })
 </script>
 <script>
-  $('.directUpload').find("input:file").each(function(i, elem) {
 
+  $('.directUpload').find("input:file").each(function(i, elem) {
     var fileInput    = $(elem);
-    var form         = $(fileInput.parents('form:first'));
+    var form         = $('form:first');
     var submitButton = form.find('input[type="submit"]');
     var progressBar  = $("<div class='bar'></div>");
     var barContainer = $("<div class='progress'></div>").append(progressBar);
-
+    var counter = i;
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
-    
     fileInput.after(barContainer);
 
     fileInput.fileupload({
@@ -219,10 +193,9 @@ progressall: function (e, data) {
 
 
         // create hidden field
-        var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
+        var input = $("<input />", { type:'hidden', name: "imageNumber" + i, value: url })
 
         form.append(input);
-
 
       },
 
