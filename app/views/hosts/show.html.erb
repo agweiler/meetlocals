@@ -15,15 +15,11 @@
 
       <% if @host == current_host || current_admin %>
       <div class="row" id="host_controls">
-      	
   			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
-        <% if @host.experiences.first.present? %>
-          <%= link_to "[ Update Experience ]", edit_experience_path(@host.experiences.first), :class => "edit_profile"%> <br>
-        <% else %>
-          <%= link_to "[ Create Experience ]", new_experience_path(:host_id => @host.id), :class => "edit_profile" %><br>
-        <% end %>
         <% if @host.host_approved? %>
+
           <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" %><br>
+        <% else %>
         <% end %>
   			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
           class:"edit_profile" %><br>
@@ -145,7 +141,7 @@
   <!-- Events title-->
 
     <div class="row table-responsive" id="host_events">
-      <%= content_tag :h3, "#{@host.username}'s Experience", class:"text-center title pad-bot" %>
+      <%= content_tag :h3, "#{@host.username}'s Event", class:"text-center title pad-bot" %>
   <!-- End of events title -->
     <%= content_tag :h5, "<No Experiences for now>", class:"text-center" if @normal_events.empty? %>
   <!-- Hosts experiences listing -->
@@ -176,9 +172,6 @@
                 <td class="text-right">
                   <% if current_host == @host || current_admin %>
                     <%= link_to 'View', event, class: "btn btn-sm btn_admins_view fa fa-info", style: "color:#4b4b4b" %>
-                    <%= link_to 'Edit', edit_experience_path(event), class: "btn btn-sm btn_admins_edit fa fa-pencil", style: "color:#4b4b4b"  %>
-                    <%= link_to 'Delete', event, class:"btn btn-sm btn_admins_delete fa fa-trash-o",
-                         style:"color:#fff", method: :delete, data: { confirm: 'Are you sure?' } %>
                   <% end %>
                 </td>
               </tr>

@@ -49,11 +49,6 @@
 
 <!--     <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
 
-    <% if (@action == "edit" && @experience.date == nil) || @host.approved == false%>
-
-      <%= f.hidden_field :meal , value: "Dinner" %>
-
-    <% else %>
     <%= f.label :date %>
       <div class="field form-inline">
         <%= f.date_select :date,
@@ -68,8 +63,6 @@
               @experience.meal), {},
               {required: true, class: 'form-control', style:"width:50%"}) %>
       </div>
-    <% end %>
-
 
 <div class="hide">
       <div class="field">
@@ -79,7 +72,7 @@
 </div>
 
       <div class="field">
-                  <%= f.hidden_field :price %>
+         <%= f.hidden_field :price %>
       </div>
 
     </div>

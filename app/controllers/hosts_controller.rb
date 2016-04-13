@@ -88,6 +88,7 @@ class HostsController < ApplicationController
         end
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
+        Adminmailer.host_created(@host.id).deliver_later
         redirect_to create_host_success_path if current_host
         redirect_to admins_path, notice: "Update has been successful" if current_admin
       else

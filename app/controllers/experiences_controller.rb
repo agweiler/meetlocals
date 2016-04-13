@@ -76,12 +76,8 @@ class ExperiencesController < ApplicationController
           new_img.save!
         end
       end unless @image_files.nil?
-      if @experience.host.approved == false
-        Adminmailer.host_created(@host.id).deliver_later
-        redirect_to create_exp_success_path
-      else
-        redirect_to @experience, notice: 'Experience was successfully updated.'
-      end
+
+      redirect_to @experience, notice: 'Experience was successfully updated.'
     else
        redirect_to new_experience_path
     end
@@ -93,13 +89,10 @@ class ExperiencesController < ApplicationController
     @image_files << experience_params.delete(:images_1)
     @image_files << experience_params.delete(:images_2)
     @image_files << experience_params.delete(:images_3)
-
+    experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s)
+    
     if @experience.update(experience_params.except(:images_1,:images_2,:images_3,:days))
-      if @host.approved == false
-        redirect_to create_exp_success_path
-      else
-        redirect_to @experience, notice: 'Experience was successfully updated.'
-      end
+      redirect_to @experience, notice: 'Experience was successfully updated.'
 
       @image_files.each_with_index do |img, index|
         if img.is_a? String
@@ -113,7 +106,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
     else
-        render :edit
+      render :edit
     end
   end
 
