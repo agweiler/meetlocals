@@ -7,6 +7,7 @@ class BookingsController < ApplicationController
   def index
     if no_one_signed_in?
       deny_access_host
+      return
     else
       @bookings = []
 

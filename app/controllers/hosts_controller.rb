@@ -35,7 +35,10 @@ class HostsController < ApplicationController
 
 
   def edit
-    deny_access_host if current_host == nil && current_admin == nil
+    if no_one_signed_in?
+      deny_access_host
+      return
+    end
     @experience = current_host.experiences.find_or_initialize_by(date: nil)
     if @experience.id
       @image_1 = @experience.exp_images.find_by(image_number: 1)
