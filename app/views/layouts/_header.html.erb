@@ -55,9 +55,23 @@
 					</li>
 				<% else %>
 
+					<li class ="dropdown">
+						<a href="#" class="dropdown-toggle orange-btn" data-toggle="dropdown" role="button" aria-expanded="true">Guest
+						<span class= "caret"></span></a>
+						<ul class ="dropdown-menu" role="menu" style="">
+								<li><%= link_to "LOG IN", new_guest_session_path  %></li>
+					      <li><%= link_to "SIGN UP", new_guest_registration_path %></li>
+						</ul>
+					</li>
+					<li class ="dropdown">
+						<a href="#" class="dropdown-toggle green-btn" data-toggle="dropdown" role="button" aria-expanded="true">Host
+						<span class= "caret"></span></a>
+						<ul class ="dropdown-menu" role="menu" style="">
+								<li><%= link_to "LOG IN", new_host_session_path  %></li>
+					      <li><%= link_to "SIGN UP", new_host_registration_path %></li>
+						</ul>
+					</li>
 
-					<li><%= link_to "SIGN IN", new_guest_session_path(:split => true) ,class: "create-highlight"  %></li>
-					<li><%= link_to "SIGN UP", new_guest_registration_path(:split => true) , :class => 'green-btn' ,:split => true %></li>
 				<% end %>
 				<% if current_host || current_guest %>
 				

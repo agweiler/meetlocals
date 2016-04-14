@@ -80,7 +80,7 @@
   <% elsif current_guest && current_guest.filled == false %>
     <%= link_to "COMPLETE YOUR PROFILE BEFORE BOOKING", edit_guest_path(current_guest), class:"btn btn-danger", style:"color:white" %>
   <% else %>
-    <%= link_to "SIGN IN TO BOOK", new_guest_registration_path, class:"btn btn-danger", style:"color:white" %>
+    <%= link_to "LOG IN TO BOOK", new_guest_registration_path, class:"btn btn-danger", style:"color:white" %>
   <% end %>
 
   </div>

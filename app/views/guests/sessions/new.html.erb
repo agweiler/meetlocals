@@ -3,12 +3,9 @@
     <div class="col-md-8 col-md-offset-2">
       <%= render 'no_host_login' %>
     </div>
-  <% elsif @split  %>
-
-  <%= render 'split_screen' %>
- 
   <% else %>
-  <%= render 'guest_only' %>
 
+  <%= render 'guest_only' %>
+  
   <% end %>
 </div>
