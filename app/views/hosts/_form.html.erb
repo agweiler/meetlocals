@@ -1,4 +1,4 @@
-<%= form_for @host, html: {multipart: true} do |f| %>
+<%= form_for @host, html: {multipart: true } do |f| %>
   <% if @host.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@host.errors.count, "error") %> prohibited this host from being saved:</h2>
@@ -16,7 +16,7 @@
     <%= f.text_field :username, value: @host.username, required: true, class: "form-control" %>
   </div>
 
-  <%= f.label :image %><br>
+  <%= f.label :"Insert_a_Host_profile_picture" %><br>
   <div class="input-group">
     <span class="input-group-btn">
       <span class="btn btn-default upload-profile btn-file">
@@ -67,13 +67,6 @@
     <%= f.label :occupation %>
     <%= f.text_field :occupation,required: true, class: "form-control" %>
   </div>
-
-  <!-- <div class="field">
-    <label for="exprience_max_group_size">* Max Group Size</label>
-    <small>(Don't want a hundred guests now do we?)</small><br>
-    <%= f.select :max_group_size, options_for_select(1..10, @host.max_group_size), {},
-      {required:true, class:'form-control', style:'width:20%'} %>
-  </div> -->
 
   <div class="field">
     <%= f.label :interests %>
@@ -148,13 +141,15 @@
 
   <%= f.hidden_field :latitude, class: "form-control" %>
   <%= f.hidden_field :longitude, class: "form-control" %>
-  <div class="actions">
-    <button type="button" name="geocoder" onclick="geocode()" class="btn btn-primary">Update my Profile!</button>
-    <input name="commit" value="Update Host" type="submit" style="display: none" class="form-control">
-  </div>
+
+  <%= f.fields_for :experience do |experience| %>
+    <%= render 'init_exp', f: experience %>
+  <% end %>
+
+
+
 
 <% end %>
-
 <script type="text/javascript">
 $(function(){
 

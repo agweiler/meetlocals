@@ -54,43 +54,32 @@ class ExperiencesController < ApplicationController
       @action = request.filtered_parameters['action']
   end
 
-  # POST /experiences
+  # This is now solely for Host Parties
   def create
     @host = Host.find(params[:experience][:host_id])
-    if @host.experiences.normal_events.count == 0
-      @image_files = []
-      @image_files << experience_params.delete(:images_1)
-      @image_files << experience_params.delete(:images_2)
-      @image_files << experience_params.delete(:images_3)
 
-      #set Host_Party prices if the date is not nil
-      experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s) if experience_params["date(3i)"] != nil
+    @image_files = []
+    @image_files << experience_params.delete(:images_1)
+    @image_files << experience_params.delete(:images_2)
+    @image_files << experience_params.delete(:images_3)
 
-      #set Regular prices if date is nil
-      experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s) if experience_params["date(3i)"] == nil
 
-      @experience = @host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
-      if @experience.save!
-        #create image after parent-experience is saved
-        @image_files.each_with_index do |img,index|
-          if img.is_a? String
-            new_img = @experience.exp_images.new
-            new_img.temp_file_key = img
-            new_img.image_number = index.to_i + 1
-            new_img.save!
-          end
-        end unless @image_files.nil?
-        if @experience.host.approved == false
-          Adminmailer.host_created(@host.id).deliver_later
-          redirect_to create_exp_success_path
-        else
-          redirect_to @experience, notice: 'Experience was successfully updated.'
+    experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s)
+    @experience = @host.experiences.new(experience_params.except(:images_1,:images_2,:images_3,:days))
+    if @experience.save!
+      #create image after parent-experience is saved
+      @image_files.each_with_index do |img,index|
+        if img.is_a? String
+          new_img = @experience.exp_images.new
+          new_img.temp_file_key = img
+          new_img.image_number = index.to_i + 1
+          new_img.save!
         end
-      else
-         redirect_to new_experience_path
-      end
+      end unless @image_files.nil?
+
+      redirect_to @experience, notice: 'Experience was successfully updated.'
     else
-      redirect_to "/", notice: "You have already created an Experience"
+       redirect_to new_experience_path
     end
   end
 
@@ -100,13 +89,10 @@ class ExperiencesController < ApplicationController
     @image_files << experience_params.delete(:images_1)
     @image_files << experience_params.delete(:images_2)
     @image_files << experience_params.delete(:images_3)
-
+    experience_params[:price].replace((Price.find_by meal: "Host_Party_#{experience_params[:meal]}").price.to_s)
+    
     if @experience.update(experience_params.except(:images_1,:images_2,:images_3,:days))
-      if @host.approved == false
-        redirect_to create_exp_success_path
-      else
-        redirect_to @experience, notice: 'Experience was successfully updated.'
-      end
+      redirect_to @experience, notice: 'Experience was successfully updated.'
 
       @image_files.each_with_index do |img, index|
         if img.is_a? String
@@ -120,7 +106,7 @@ class ExperiencesController < ApplicationController
         end
       end unless @image_files.nil?
     else
-        render :edit
+      render :edit
     end
   end
 

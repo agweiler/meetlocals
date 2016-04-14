@@ -17,7 +17,7 @@ class RegistrationsController < Devise::RegistrationsController
      	when :guest, Guest
      	  edit_guest_profile_path(resource)
      	when :host, Host
-     	  edit_host_profile_path(resource)
+     	  edit_host_path(resource)
      	else
      	  super
      	end

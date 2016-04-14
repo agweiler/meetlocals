@@ -12,11 +12,6 @@ class HostsController < ApplicationController
 			@hosts = Host.where(approved: true).order('random()').includes(:images)
 		elsif (request.request_method == 'POST')
       assign_search_inputs!
-			# age_range = /(\d+)\W?(\d+)?/.match(search_params[:age_range])
-			# age_range ||= [nil, 0, 200]
-      # debugger
-
-			# @hosts = Host.where(approved: true).search(age_range[1], age_range[2], @selected_location, @selected_group, @selected_date).paginate(page:params[:page], per_page: limit_per_page)
       @hosts = Host.search_by(search_params).includes(:images)
 		end
 
@@ -38,34 +33,20 @@ class HostsController < ApplicationController
     end
   end
 
-  def new
-    @host = Host.new
-  end
 
   def edit
-  end
+    if no_one_signed_in?
+      deny_access_host
+      return
+    end
 
-  # POST /hosts
-  # We don't seem to be using this...
-  def create
-    # @host = Host.new(host_detail_params)
-
-    # @image_file = params[:host].delete(:image_file)
-
-    # respond_to do |format|
-    #   if @host.save
-    #     format.html { redirect_to host, notice: 'host was successfully created.' }
-
-    #     # Create image after parent-host is saved
-    #     new_img = @host.images.new
-    #     new_img.image_file = @image_file
-    #     new_img.caption = @image_file.original_filename
-    #     new_img.save!
-    #     new_img.update(imageable:@host)
-    #   else
-    #     format.html { render :new }
-    #   end
-    # end
+    @experience = @host.experiences.find_or_initialize_by(date: nil)
+    if @experience.id
+      @image_1 = @experience.exp_images.find_by(image_number: 1)
+      @image_2 = @experience.exp_images.find_by(image_number: 2)
+      @image_3 = @experience.exp_images.find_by(image_number: 3)
+    end
+    @s3_direct_post = S3_BUCKET.presigned_post(key: "uploads/#{SecureRandom.uuid}/${filename}", success_action_status: 201,  acl: :public_read).where(:content_type).starts_with("")
   end
 
   # PATCH/PUT /hosts/1
@@ -76,19 +57,40 @@ class HostsController < ApplicationController
       Hostmailer.host_approved(@host.id).deliver_later
       redirect_to(:back)
     else
+      @host = current_host || Host.find(params[:id])
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
+
       if @image_file.present?
         if @host.images.present?
           @host.images.delete_all
         end
         Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
+        @experience = @host.experiences.find_or_initialize_by(date: nil)
+        @image_files = []
+        @image_files << params[:imageNumber0]
+        @image_files << params[:imageNumber1]
+        @image_files << params[:imageNumber2]
+        experience_params[:price].replace((Price.find_by meal: experience_params[:meal]).price.to_s)
+        if @experience.update(experience_params.except(:days))
+
+          @image_files.each_with_index do |img, index|
+            if img.is_a? String
+              if @experience.exp_images.find_by(image_number: (index + 1)) != nil
+                @experience.exp_images.find_by(image_number: (index + 1)).delete
+              end
+              new_img = @experience.exp_images.new
+              new_img.temp_file_key = img
+              new_img.image_number = index.to_i + 1
+              new_img.save!
+            end
+          end unless @image_files.nil?
+        end
       # this is so email will be sent only while admin needs to know
       if @host.approved == false
-        puts current_host
-        puts current_admin
+        Adminmailer.host_created(@host.id).deliver_later
         redirect_to create_host_success_path if current_host
         redirect_to admins_path, notice: "Update has been successful" if current_admin
       else
@@ -124,14 +126,6 @@ class HostsController < ApplicationController
         format.html { redirect_to admins_url, notice: 'host was successfully destroyed.' }
         format.json { head :no_content }
       end
-    end
-  end
-
-  def edit_host_profile # Edit profile page
-  	if current_host == nil && current_admin == nil
-  	  deny_access_host
-    else
-      @host = Host.find(params[:id])
     end
   end
 
@@ -172,7 +166,11 @@ class HostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def host_params
       params.require(:host).permit(:username, :email, :password, :password_confirmation, :country, :state, :image_file, :occupation, :interests, :smoker,:pets, :suburb, :latitude, :zip,
-       :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number)
+       :longitude, :title, :first_name, :last_name, :languages, :street_address, :host_presentation, :neighbourhood, :dob, :video_url, :phone,:registration_number, :bank_name, :bank_number,experiences_attributes: [:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset, :images_1, :images_2, :images_3, :_destroy])
+    end
+
+    def experience_params
+      params.require(:experience).permit(:id, :title, :location, :datefrom, :dateto, :duration, :cuisine, :beverages, :max_group_size, :host_style, :available_days, :date, :price, :time, :meal, :mealset)
     end
 
     def search_params

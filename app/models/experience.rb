@@ -6,6 +6,7 @@ class Experience < ActiveRecord::Base
 	has_many :exp_images, dependent: :destroy
 	scope :available, -> { where("date > ?", Date.today) }
 	scope :normal_events, -> { where(date:nil) }
+	scope :main_event, -> { where(date:nil).first }
 	scope :special_events, -> { where.not(date:nil).order(:date) }
 	scope :special_events_dates,
 	 -> { where.not(date:nil).pluck(:date).map {|date| date.strftime('%F') } }

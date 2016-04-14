@@ -1,15 +1,12 @@
 
-<div class="container">
+<h1 class="heads" style="color:#66a422;">Description of your event</h1>
 <%= form_for @experience, html: {multipart: true, class: "directUpload" } do |f| %>
   <!-- <% flash[:alert] = @experience.errors.full_messages if @experience.errors.any?%> -->
 <% @experience.errors.count > 3 ? flash[:alert] = "Please fill out all the required fields." : flash[:alert] = @experience.errors.full_messages %>
 
-  <div class="row">
-    <div class="col-md-6">
-
       <div class="field">
 
-        <%= f.label :title, @experience.is_host_party?(params[:action],@host) ? "*Host Party Title" : "*Title" %>
+        <%= f.label :Event_title, @experience.is_host_party?(params[:action],@host) ? "*Host Party Title" : "*Title" %>
         <%= f.text_field :title, placeholder: "eg. Ameristralian Brunch", required: true, class: 'form-control', style: 'width: 75%' %>
       </div>
 
@@ -36,53 +33,29 @@
       <% end %>
       
       </br>
-    </div>
-    <div class="col-md-6">
     <div class="field">
         <%= f.label :host_style, @experience.is_host_party?(params[:action],@host) ? "Host Party Presentation" : "We love making this kind of food" %><br>
         <!-- <p><small> This field is limited to 60 characters.</small></p> -->
         <%= f.text_area :host_style, placeholder: "Tell us about your style of cooking and hosting.", class: 'form-control', style: 'width: 74%', :onkeyup => "DjCheckMaxlength(this);", :maxlength => 250 %>
-      </div>
+    </div>
 
+      <%= f.hidden_field :meal , value: "Dinner" %>
 
-    <!-- <p><small>Filling in this field will create a 'Host Party', which is a single date event suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
-
-<!--     <p><small>ONLY fill out the following if you would like to create a HOST PARTY. These are single date events suitable for celebrations such as Christmas. By leaving it empty, the event will be open and you can choose to accept or reject a date suggested by users.</small></p> -->
-
-    <%= f.label :date %>
-      <div class="field form-inline">
-        <%= f.date_select :date,
-        {include_blank:true, use_short_month:true, order:[:month, :day, :year],
-        start_year: Date.today.year, end_year: Date.today.year.next},
-        {class:"form-control", required: true } %>
-      </div>
-
-      <div class="field" id="meal">
-        <%= f.label :meal %> <br>
-        <%= f.select(:meal, options_for_select(Experience.get_meals,
-              @experience.meal), {},
-              {required: true, class: 'form-control', style:"width:50%"}) %>
-      </div>
-
-<div class="hide">
+    <div class="hide">
       <div class="field">
         <%= f.label :region %> <br>
         <%= f.select(:location, options_for_select(Experience.get_all_location, @host.state), {}, {required: false, class: 'form-control', style:"width:50%"}) %>
       </div>
+    </div>
+    <%= f.hidden_field :price %>
+  <hr>
 </div>
 
-      <div class="field">
-         <%= f.hidden_field :price %>
-      </div>
-
-    </div>
-  </div>
-  <hr>
-  <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Image Uploads </h1>
-  <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an experience without uploading all <strong>3 images</strong>.</small></p> 
+  <h1 class="heads text-center pad-bot" style="color:#66a422; margin-left: -30px"> Upload three pictures giving the impression of your events </h1>
+  <p class=""><small> Please upload <strong>3 images</strong> with aspect ratio of close to 1:1 (i.e. square) and resolution of atleast 600*600 for optimal results. You will not be able to complete creating an event without uploading all <strong>3 images</strong>.</small></p> 
 
   <p class="pad-bot smalls">Note: attempting to upload images larger than 4MB in total may cause timeout issues.</p>
-  <div class = "row">
+  <div class = "row directUpload">
     <div class="field col-md-4">
       <%= f.label :image_1 %><br>
       <% if @image_1.present? %>
@@ -149,34 +122,33 @@
   </div>
 <hr>
   <%= f.hidden_field :host_id, :value => @host.id %>
-  <div class = "row">
-    <div class="actions exp_cta pad-top pad-bot" align="center">
-      <%= f.submit "Update my experience", class: 'btn', style: "color: #fff; text-transform: uppercase;font-size: 15px;  background:#66a422 !important; padding:20px", remote: true ,id: "test" %>
-    </div>
+  <div class="actions">
+    <button type="button" name="geocoder" onclick="geocode()" class="btn btn-primary">Update my Profile!</button>
+    <input name="commit" value="Update Host" type="submit" style="display: none" class="form-control">
   </div>
 <% end %>
-</div>
+
+
 
 <script type="text/javascript">
 
   $(function(){
        if( window.location.pathname.indexOf("edit") >= 0 ){
-      $('#showfilename').val('Browse to replace current experience images').attr('style','color:red');
+      $('#showfilename').val('Browse to replace current event images').attr('style','color:red');
       $('input[type*=submit]').val('Update Experience')
     }
   })
 </script>
 <script>
+
   $('.directUpload').find("input:file").each(function(i, elem) {
-debugger;
     var fileInput    = $(elem);
-    var form         = $(fileInput.parents('form:first'));
+    var form         = $('form:first');
     var submitButton = form.find('input[type="submit"]');
     var progressBar  = $("<div class='bar'></div>");
     var barContainer = $("<div class='progress'></div>").append(progressBar);
-
+    var counter = i;
     var fd = <%= @s3_direct_post.fields.to_json.html_safe %>
-      debugger;
     fileInput.after(barContainer);
 
     fileInput.fileupload({
@@ -221,10 +193,9 @@ progressall: function (e, data) {
 
 
         // create hidden field
-        var input = $("<input />", { type:'hidden', name: fileInput.attr('name'), value: url })
+        var input = $("<input />", { type:'hidden', name: "imageNumber" + i, value: url })
 
         form.append(input);
-
 
       },
 
@@ -237,7 +208,6 @@ progressall: function (e, data) {
       }
     });
   });
-
 </script>
 
 <!-- Limit chars for text area -->

@@ -6,15 +6,11 @@
     <div class="green-border">
         <%= image_tag ('https://s3-ap-southeast-1.amazonaws.com/mtdimages/carouselpictures/greg_thankyou.jpg'), class: 'img-responsive' %>
     </div>
-        <h3 align="center" class="pad-top-sm pad-bot-sm">Thanks for signing up as a host. In order to complete your registration, please continue by creating or updating your Experience. </h3>
+        <h3 align="center" class="pad-top-sm pad-bot-sm">Thanks for signing up as a host. </h3>
         <!-- <p class="text-justify">  </p> -->
 
     <div align="center" class="pad-bot pad-top-sm">
-        <% if !current_host.experiences.present? %>
-        <%= link_to "Create Your Experience", new_experience_path, class: "btn btn-sm success-cont bold-button btn-rj"%>
-        <% else %>
-        <%= link_to "Update Your Experience", edit_experience_path(current_host.experiences.first), class: "btn btn-sm success-cont bold-button btn-rj" %>
-        <% end %>
+        <%= link_to "View Profile", host_path(current_host), class: "btn btn-sm success-cont bold-button btn-rj"%>
     </div>
 
   </div>
