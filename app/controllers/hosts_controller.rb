@@ -39,7 +39,8 @@ class HostsController < ApplicationController
       deny_access_host
       return
     end
-    @experience = current_host.experiences.find_or_initialize_by(date: nil)
+
+    @experience = @host.experiences.find_or_initialize_by(date: nil)
     if @experience.id
       @image_1 = @experience.exp_images.find_by(image_number: 1)
       @image_2 = @experience.exp_images.find_by(image_number: 2)
@@ -56,6 +57,7 @@ class HostsController < ApplicationController
       Hostmailer.host_approved(@host.id).deliver_later
       redirect_to(:back)
     else
+      @host = current_host || Host.find(params[:id])
       params[:host][:video_url].gsub!(/watch\?v=/,"embed/")
       @image_file = params[:host].delete(:image_file)
       @host.update(host_params.except(:image_file))
@@ -66,7 +68,7 @@ class HostsController < ApplicationController
         end
         Image.create(local_image: @image_file, caption: @image_file.original_filename, imageable: @host)
       end
-        @experience = current_host.experiences.find_or_initialize_by(date: nil)
+        @experience = @host.experiences.find_or_initialize_by(date: nil)
         @image_files = []
         @image_files << params[:imageNumber0]
         @image_files << params[:imageNumber1]
