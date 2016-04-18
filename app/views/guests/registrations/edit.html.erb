@@ -11,7 +11,7 @@
              class:"btn btn-primary form-control",
              style:"background:#3B5998;color:white" do-%>
                 <i class="fa fa-facebook-official fa-lg"></i>
-                Enable Sign In via Facebook
+                Enable Log In via Facebook
             <% end %>
           <% else %>
             <% for authentication in @authentications %>
@@ -21,7 +21,7 @@
                 disabled: !current_guest.encrypted_password?,
                 style:"background:#983b59;color:white" do-%>
                 <i class="fa fa-facebook-official fa-lg"></i>
-                Remove Sign In via Facebook
+                Remove Log In via Facebook
               <% end %>
             <% end %>
           <% end %>

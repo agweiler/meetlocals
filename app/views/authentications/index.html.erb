@@ -2,7 +2,7 @@
 
 <% if @authentications && current_user %>
  <% unless @authentications.empty? %>
-  <p><strong>You can sign in to this account using:</strong></p>
+  <p><strong>You can Log In to this account using:</strong></p>
    <div class="authentications">
     <% for authentication in @authentications %>
      <div class="authentication">
@@ -16,9 +16,9 @@
      <div class="clear"></div>
     </div>
    <% end %>
-   <p><strong>Add another service to sign in with:</strong></p>
+   <p><strong>Add another service to Log In with:</strong></p>
   <% else %>
-  <p><strong>Sign in through one of these services:</strong></p>
+  <p><strong>Log In through one of these services:</strong></p>
 <% end %>
 
 <a href="guests/auth/facebook" class="auth_provider">Facebook</a>

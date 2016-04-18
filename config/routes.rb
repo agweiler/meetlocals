@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :partners, controllers: { registrations: "partners/registrations" }
 
 
-  devise_for :hosts, controllers: { registrations: "hosts/registrations" }
+  devise_for :hosts, controllers: { registrations: "hosts/registrations", sessions: "hosts/sessions" }
   resources :hosts
 
   # devise_for :guests, controllers: { registrations: "guests/registrations" }
