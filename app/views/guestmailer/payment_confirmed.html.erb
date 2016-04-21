@@ -10,7 +10,7 @@
       Host name: <%= @host.first_name %> <%= @host.last_name %> </br>
       Host Email: <%= @host.email %> <br>
       Host Phone Number: <%= @host.phone %> <br>
-      Experience title: <%= @booking.experience.title %> </br>
+      Event title: <%= @booking.experience.title %> </br>
       Date: <%= @booking.date %> </br>
       Time: <%= @booking.start_time.in_time_zone.strftime("%I:%M %p") %> until <%= @booking.end_time.in_time_zone.strftime("%I:%M %p") %> </br>
       Address: <%= @host.street_address %> </br>

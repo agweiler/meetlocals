@@ -18,9 +18,17 @@
 
     <h3 class= "heads-tm"> Event Details </h3>
     <div>
-      <p><strong>Host by:</strong>
-      <%= link_to @experience.host.username, host_path(@experience.host) %></p>
-
+      <% if current_guest %>
+        <p><strong>Host by:</strong>
+        <%= link_to @experience.host.username, host_path(@experience.host) %></p>
+      <% elsif current_host %>
+        <p><strong>Guest:</strong>
+        <%= link_to @booking.guest.username, guest_path(@booking.guest) %></p>  
+      <% else %>
+        <p><strong>Participants:</strong> <br>
+        Host  <%= link_to @experience.host.username, host_path(@experience.host) %> <br>
+        Guest   <%= link_to @booking.guest.username, guest_path(@booking.guest) %></p> 
+      <% end %>
       <p><strong>Date:</strong>
       <%= @booking.date.strftime('%b %d, %Y (%A)')  %></p>
 
