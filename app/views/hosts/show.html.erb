@@ -18,7 +18,7 @@
   			<%= link_to "[ Edit Profile ]", edit_host_path, :class => "edit_profile" %><br>
         <% if @host.host_approved? %>
 
-          <%= link_to "[ Create Host Party ]", new_experience_path, class: "edit_profile" %><br>
+          <%= link_to "[ Create Host Party ]", new_experience_path(:host_id => @host.id), class: "edit_profile" %><br>
         <% else %>
         <% end %>
   			<%= link_to "[ Account Settings ]" , edit_host_registration_path,
