@@ -200,7 +200,6 @@
                   <th>Invitations Sent</th>
                   <th>Enquiries Rejected</th>
                   <th>Bookings Confirmed</th>
-                  <th>Events Completed</th>
                   <th>Revenue Generated (DKK)</th>
                 </tr>
               </thead>
@@ -210,14 +209,13 @@
                     <td><%= @host.bookings.where(status: 'requested').count %></td>
                     <td><%= @host.bookings.where(status: 'invited').count %></td>
                     <td><%= @host.bookings.where(status: 'rejected').count %></td>
-                    <td><%= @host.bookings.where(status: 'confirmed').count %></td>
-                    <td><%= @host.bookings.where(status: 'completed').count %></td>
+                    <td><%= @host.bookings.where(status: 'confirmed').count + @host.bookings.where(status: 'completed').count %></td>
                     <td><%= @host.revenue %></td>
                   </tr>
               </tbody>
             </table>
           </div>
-        </div>      <small>*Revenue generated is counted as total income from confirmed bookings.</small>
+        </div>      <small>*Revenue generated is counted as total income from completed events.</small>
 
       </div>
     </div>
