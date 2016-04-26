@@ -4,15 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @guest.username %>! </h1>
+    <h1><strong>Hi <%= @guest.username %>!</strong> </h1>
     <p>
       Thank you for booking an event with Meet the Danes. We hope you enjoyed meeting the Host and had a really nice and interesting time together. 
     </p> 
     <p>
-      It would be very helpful for other tourists and it would support Meet the Danes if you write a review at <%= link_to 'TripAdvisor' , "https://www.tripadvisor.dk/Attraction_Review-g1572420-d8743799-Reviews-Meet_the_Danes-Bronshoej_Copenhagen_Region_Zealand.html" %> and maybe <%= link_to 'Facebook' , "www.facebook.com/meetdanes" %>. 
-    </p>
-    <p>
-      Also, it would be great if you could let us know how you heard about Meet The Danes in the first place by filling out <%= link_to 'this form', "https://docs.google.com/forms/d/14GKvHl6iEWpteUlLhybVEVv-gcyjJYCxe35zJp7LpCA/viewform" %>.
+      It would be very helpful for other tourists and it would support Meet the Danes if you write a review at <%= link_to 'TripAdvisor' , "https://www.tripadvisor.dk/Attraction_Review-g1572420-d8743799-Reviews-Meet_the_Danes-Bronshoej_Copenhagen_Region_Zealand.html" %>. 
     </p>
     <p>Thanks for using <%= link_to 'Meet The Danes', "http://www.meetthedanes.com/" %> and have a great day!</p>
   </body>
