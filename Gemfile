@@ -9,6 +9,7 @@ gem "less-rails"
 gem 'bootstrap-sass', '3.2.0'
 gem 'autoprefixer-rails'
 gem 'paypal-sdk-adaptivepayments'
+gem 'stripe'
 # Use pg as the database for Active Record
 gem 'pg'
 # memory profiler

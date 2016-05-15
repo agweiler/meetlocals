@@ -196,10 +196,11 @@ class BookingsController < ApplicationController
       Hostmailer.payment_completion(host.id, @booking.id).deliver_later
       Adminmailer.guest_has_payed(guest.id, host.id, @booking.id).deliver_later
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
+      redirect_to payment_success_path and return
     else
       redirect_to payment_failure_path and return
     end
-    render nothing: true
+    #render nothing: true
     # redirect_to booking_path(@booking)
   end
 
