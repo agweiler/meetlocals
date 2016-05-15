@@ -86,7 +86,6 @@ class Booking < ActiveRecord::Base
 	end
 
 	def check_finished?
-
 			time_in_seconds = Time.parse(self.experience.time.in_time_zone.strftime("%I:%M:%S %p")).seconds_since_midnight.seconds
 			date = self.date.to_datetime
 			date_today = date + time_in_seconds
@@ -95,7 +94,6 @@ class Booking < ActiveRecord::Base
 			else
 				false
 			end
-
 	end
 
 #Here we need to make this trigger the booking status as complete, rather than render a "complete" button.
@@ -112,6 +110,9 @@ class Booking < ActiveRecord::Base
 		self.group_size = self.no_of_adults + self. no_of_children
 	end
 
+	def total_price
+	  self.experience.price * self.group_size
+	end
 
 	# Paypal with Adaptive Payments SDK
 	# serialize :notification_params, Hash

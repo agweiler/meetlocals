@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   resources :static_texts
   resources :guests
   resources :authentications
+
+  resources :charges 
   # get '/auth/:provider/callback' => 'authentications#create'
   # get '/guests/authentications' => 'authentications#index'
 
