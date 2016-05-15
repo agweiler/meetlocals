@@ -111,7 +111,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def total_price
-	  self.experience.price * self.group_size
+	  (@experience.price * self.no_of_adults) + (@experience.price/2 * self.no_of_children)
 	end
 
 	# Paypal with Adaptive Payments SDK
@@ -154,7 +154,7 @@ class Booking < ActiveRecord::Base
 	    upload: 1,
 	    return: "#{Rails.application.secrets.app_host}#{return_path}",
 	    invoice: "#{id}" + (0...8).map { (65 + rand(26)).chr }.join,
-	    amount: (((@experience.price * self.no_of_adults) + (@experience.price/2 * self.no_of_children)) * 1.039 + 2.60).round(2),
+	    amount: ((self.total_price) * 1.039 + 2.60).round(2),
 	    item_name: "#{@experience.title} experience booking",
 	    item_number: @experience.id,
 	    notify_url: "#{Rails.application.secrets.app_host}/hook"
