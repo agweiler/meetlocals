@@ -104,5 +104,5 @@ group :test do
   gem 'shoulda-matchers', '~> 2.8.0'
 end
 
-gem 'puma_worker_killer'
+
 gem 'rails_12factor', group: :production
