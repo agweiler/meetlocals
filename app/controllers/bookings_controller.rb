@@ -42,7 +42,7 @@ class BookingsController < ApplicationController
     else
       deny_access_guest
     end
-    @messages = @booking.messages.all
+    @messages = @booking.messages.all.order(:created_at)
     @message = Message.new
   end
 
