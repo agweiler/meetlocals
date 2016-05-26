@@ -103,7 +103,7 @@
       <div class="modal-body">
         <div class = "row">
           <div class = "col-md-6">
-            <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(payment_success_path)  %></br></br>
+            <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %></br></br>
             <p><strong>For payment with Paypal, an additional 3.9% + 2.6 DKK will be added to price.</strong></p>
           </div>
           <div class = "col-md-6">
