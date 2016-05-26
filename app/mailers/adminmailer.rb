@@ -1,6 +1,7 @@
 class Adminmailer < ApplicationMailer
 	def host_created(host_id)
 		@host = Host.find host_id
+		@admin = Admin.first
 		mail(to: @admin.email, subject: "A new host,#{@host.first_name} #{@host.last_name} has been created!")
 	end
 
