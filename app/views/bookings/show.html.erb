@@ -70,7 +70,7 @@
       <% end %>
     </div>
 
-    <% if current_guest && @booking.status == "invited" %>
+    <% if current_guest && @booking.status == "invited" || current_admin %>
        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Click Here to Pay</button>
     <% end %>
 
@@ -102,12 +102,9 @@
       </div>
       <div class="modal-body">
         <div class = "row">
-          <div class = "col-md-6">
-            <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(payment_success_path)  %></br></br>
+          <div class = "col-md-12">
+            <%= link_to image_tag("https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-small.png"), @booking.paypal_url(booking_path(@booking))  %></br></br>
             <p><strong>For payment with Paypal, an additional 3.9% + 2.6 DKK will be added to price.</strong></p>
-          </div>
-          <div class = "col-md-6">
-            <%= render "charges/new" %>
           </div>
         </div>
       </div>

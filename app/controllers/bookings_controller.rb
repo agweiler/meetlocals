@@ -192,15 +192,17 @@ class BookingsController < ApplicationController
       @booking.inspect
       guest = @booking.guest
       host = @booking.experience.host
-      Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
-      Hostmailer.payment_completion(host.id, @booking.id).deliver_later
-      Adminmailer.guest_has_payed(guest.id, host.id, @booking.id).deliver_later
+      if ENV['PAYPAL_HOST'] = "https://www.paypal.com"
+        Guestmailer.payment_confirmed(guest.id, @booking.id,host.id).deliver_later
+        Hostmailer.payment_completion(host.id, @booking.id).deliver_later
+        Adminmailer.guest_has_payed(guest.id, host.id, @booking.id).deliver_later
+      end
       @booking.update_attributes notification_params: params, status: "confirmed", transaction_id: params[:txn_id], purchased_at: Time.now
-      redirect_to payment_success_path and return
+      flash[:notice] = "Payment has been completed! An email will be sent to your inbox"
     else
-      redirect_to payment_failure_path and return
+      flash[:notice] = "We're sorry but the payment has failed."
     end
-    #render nothing: true
+    render nothing: true
     # redirect_to booking_path(@booking)
   end
 
