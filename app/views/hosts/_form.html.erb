@@ -20,7 +20,12 @@
   <div class="input-group">
     <span class="input-group-btn">
       <span class="btn btn-default upload-profile btn-file">
-        Browse<%= f.file_field(:image_file, required: true) %>
+        <% if @host.images.present? %>
+          Browse<%= f.file_field(:image_file) %>
+        <% else %>
+          Browse<%= f.file_field(:image_file, required: true) %>
+        <% end %>
+ 
       </span>
     </span>
     <input type="text" class="form-control" readonly>
