@@ -31,7 +31,7 @@ $(function(){
     handler.open({
        name: "Meet the Danes",
        description: "<%= (@experience.title) %>",
-       amount: "<%= (@booking.total_price) * 100 %>",
+       amount: "<%= ((@booking.total_price) * 100) * (1.02) + 180 %>",
        currency: "DKK"
     });
     e.preventDefault();

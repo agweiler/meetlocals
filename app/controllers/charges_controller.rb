@@ -3,7 +3,7 @@ class ChargesController < ApplicationController
   end
 
   def create
-    @amount = params[:charges_info][:price].to_i * 100
+    @amount = (params[:charges_info][:price].to_i * 100) * (2/100) + 1.8
     @booking = Booking.find params[:charges_info][:booking_id]
     @experience = @booking.experience
     customer = Stripe::Customer.create(
