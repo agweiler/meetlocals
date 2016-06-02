@@ -31,7 +31,7 @@ $(function(){
     handler.open({
        name: "Meet the Danes",
        description: "<%= (@experience.title) %>",
-       amount: "<%= ((@booking.total_price) * 100) * (1.02) + 180 %>",
+       amount: "<%= ((params[:charges_info][:price].to_i * 100) * (2/100) + 2).to_i %>",
        currency: "DKK"
     });
     e.preventDefault();
