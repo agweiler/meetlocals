@@ -5,7 +5,7 @@
 
     <%= f.hidden_field :stripeToken, id:'stripeToken' %>
     <%= f.hidden_field :stripeEmail, id:'stripeEmail' %>
-    <%= f.hidden_field :price, value:@booking.total_price %>
+    <%= f.hidden_field :price, value:@booking.total_price * 100) * (1.02) + 200 %>
     <%= f.hidden_field :booking_id, value:@booking.id %>
 
   </article>
