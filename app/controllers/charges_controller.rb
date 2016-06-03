@@ -4,6 +4,8 @@ class ChargesController < ApplicationController
 
   def create
     puts params[:charges_info][:price].to_i
+    puts "@@@@@"
+    puts params
     @amount = ((params[:charges_info][:price].to_i * 100) * (2/100) + 2).to_i
     puts "@@@@@"
     puts @amount
