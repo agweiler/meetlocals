@@ -6,7 +6,7 @@ class ChargesController < ApplicationController
     puts params[:charges_info][:price].to_i
     puts "@@@@@"
     puts params
-    @amount = ((params[:charges_info][:price].to_i * 100) * (2/100) + 2).to_i
+    @amount = ((params[:charges_info][:price].to_i * 100) * (102/100) + 2).to_i
     puts "@@@@@"
     puts @amount
     @booking = Booking.find params[:charges_info][:booking_id]
